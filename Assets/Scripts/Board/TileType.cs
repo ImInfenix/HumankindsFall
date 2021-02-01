@@ -12,7 +12,12 @@
     /// <param name="associatedTileInTilemap">The associated tile</param>
     public TileType(UnityEngine.Tilemaps.Tile associatedTileInTilemap)
     {
-        _isAccessible = true;
+        _isAccessible = associatedTileInTilemap != null;
         _blocksLineOfSight = false;
+    }
+
+    public override string ToString()
+    {
+        return $"isAccessible : {IsAccessible} blocksLineOfSight : {BlocksLineOfSight}";
     }
 }

@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class Cell
 {
-    public Vector3Int Position { get { return _position; } }
-    private Vector3Int _position;
+    public Vector3Int TileMapPosition { get { return _tileMapPosition; } }
+    private Vector3Int _tileMapPosition;
+    public Vector3 WorldPosition { get { return _worldPosition; } }
+    private Vector3 _worldPosition;
     public TileType Type { get { return _type; } }
     private TileType _type;
 
@@ -22,9 +24,10 @@ public class Cell
     public Cell BottomLeft { get { return _bottomLeft; } }
     private Cell _bottomLeft;
 
-    public Cell(Vector3Int positionInBoard, UnityEngine.Tilemaps.Tile associatedTileInTilemap)
+    public Cell(Vector3Int positionInBoard, Vector3 worldPosition, UnityEngine.Tilemaps.Tile associatedTileInTilemap)
     {
-        _position = positionInBoard;
+        _tileMapPosition = positionInBoard;
+        _worldPosition = worldPosition;
         _type = new TileType(associatedTileInTilemap);
     }
 
@@ -33,12 +36,13 @@ public class Cell
         return false;
     }
 
-    public Cell GetLeft()
+    public Cell[] GetAllNeighbours()
     {
-        return null;
+        Cell[] neighbours = { Left, TopLeft, TopRight, Right, BottomRight, BottomLeft    };
+        return neighbours;
     }
 
-    public void SetNeighbors(Cell left, Cell topLeft, Cell topRight, Cell right, Cell bottomRight, Cell bottomLeft)
+    public void SetNeighbours(Cell left, Cell topLeft, Cell topRight, Cell right, Cell bottomRight, Cell bottomLeft)
     {
         _left = left;
         _topLeft = topLeft;
@@ -50,6 +54,6 @@ public class Cell
 
     public override string ToString()
     {
-        return $"Cell at {Position} has neighbours Left {Left?.Position} TopLeft {(TopLeft?.Position)} TopRight {(TopRight?.Position)} Right {(Right?.Position)} BottomRight {(BottomRight?.Position)} BottomLeft {(BottomLeft?.Position)}";
+        return $"Cell tilemap position: {TileMapPosition}, world position: {WorldPosition}, neighbours: Left {Left?.TileMapPosition} TopLeft {(TopLeft?.TileMapPosition)} TopRight {(TopRight?.TileMapPosition)} Right {(Right?.TileMapPosition)} BottomRight {(BottomRight?.TileMapPosition)} BottomLeft {(BottomLeft?.TileMapPosition)}\nProperties: {Type}";
     }
 }
