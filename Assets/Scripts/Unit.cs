@@ -17,9 +17,9 @@ public class Unit : MonoBehaviour
         Mage
     }
 
-    public Race race;
-    public Class clas;
-    // public Object attack;
+    protected Race race;
+    protected Class clas;
+    // protected Object attack; A voir comment on implémente les attaques
 
     protected int maxLife;
     protected int life;
