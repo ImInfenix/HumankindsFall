@@ -7,7 +7,6 @@ public class Board : MonoBehaviour
 {
     [SerializeField]
     private Tilemap tilemap;
-
     public Vector2Int tileToInspect;
 
     private Cell[,] board;
@@ -48,6 +47,19 @@ public class Board : MonoBehaviour
         try
         {
             Vector2Int positionInBoard = new Vector2Int(tilemapPosition.x, tilemapPosition.y) + boardOrigin;
+            return board[positionInBoard.x, positionInBoard.y];
+        }
+        catch (System.IndexOutOfRangeException)
+        {
+            return null;
+        }
+    }
+
+    public Cell GetCellOffset(Vector3Int tilemapPosition)
+    {
+        try
+        {
+            Vector2Int positionInBoard = new Vector2Int(tilemapPosition.x - 4, tilemapPosition.y - 3) + boardOrigin;
             return board[positionInBoard.x, positionInBoard.y];
         }
         catch (System.IndexOutOfRangeException)

@@ -6,6 +6,7 @@ public class Cell
 {
     public Vector3Int TileMapPosition { get { return _tileMapPosition; } }
     private Vector3Int _tileMapPosition;
+
     public Vector3 WorldPosition { get { return _worldPosition; } }
     private Vector3 _worldPosition;
     public TileType Type { get { return _type; } }
@@ -29,6 +30,12 @@ public class Cell
         _tileMapPosition = positionInBoard;
         _worldPosition = worldPosition;
         _type = new TileType(associatedTileInTilemap);
+    }
+
+    public Vector3Int TileMapPositionOffset()
+    {
+        Vector3Int vectorProv = new Vector3Int(_tileMapPosition.x + 4, _tileMapPosition.y + 3, _tileMapPosition.z);
+        return vectorProv;
     }
 
     public bool IsOccupied()
