@@ -59,7 +59,7 @@ public class Board : MonoBehaviour
     {
         try
         {
-            Vector2Int positionInBoard = new Vector2Int(tilemapPosition.x - 4, tilemapPosition.y - 3) + boardOrigin;
+            Vector2Int positionInBoard = new Vector2Int(tilemapPosition.x - Mathf.FloorToInt(SizeX/2), tilemapPosition.y - Mathf.FloorToInt(SizeY / 2)) + boardOrigin;
             return board[positionInBoard.x, positionInBoard.y];
         }
         catch (System.IndexOutOfRangeException)
@@ -96,7 +96,7 @@ public class Board : MonoBehaviour
                 int currentIndex = j * boardSize.x + i;
                 Vector3Int currentTilePosition = tilesPositions[currentIndex];
                 Tile associatedTileInTilemap = (Tile)tilemap.GetTile(currentTilePosition);
-                board[i, j] = new Cell(currentTilePosition, tilemap.CellToWorld(currentTilePosition), associatedTileInTilemap);
+                board[i, j] = new Cell(currentTilePosition, tilemap.CellToWorld(currentTilePosition), associatedTileInTilemap, Size);
             }
         }
     }

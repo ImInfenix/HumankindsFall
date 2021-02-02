@@ -29,6 +29,9 @@ public class Unit : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndD
     public Vector3Int currentPosition;
     public Cell currentCell;
 
+    //debug test positions
+    public int xTarget, yTarget;
+    bool pathCreated;
 
     // Start is called before the first frame update
     void Start()
@@ -46,12 +49,29 @@ public class Unit : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndD
         damage = raceStats.damage + classStat.damage;
         range = classStat.range;
 
-        thisTransform = transform;
+        print("longueur : " + board.SizeX);
+        print("hauteur : " + board.SizeY);
+        print("offset x : " + Mathf.FloorToInt(board.SizeX/2));
+        print("offset y : " + Mathf.FloorToInt(board.SizeY/2));
 
-        setPosition(board.GetCell(new Vector3Int(-3, -2, 0)));
-        List<Cell> path = createPath(board.GetCell(new Vector3Int(1, 1, 0)));
-        path.Reverse();
-        StartCoroutine(MoveFollowingPath(path));
+        thisTransform = transform;
+        setPosition(board.GetCell(new Vector3Int(0, 0, 0)));
+        pathCreated = false;
+    }
+
+    private void Update()
+    {
+        //if the unit is not following a path yet and has a target cell different from their current cell
+        if (!pathCreated && (xTarget != currentPosition.x || yTarget != currentPosition.y))
+        {
+            pathCreated = true;
+            //get the path from the end to the start
+            List<Cell> path = createPath(board.GetCell(new Vector3Int(xTarget, yTarget, 0)));
+            //reverse to start from the first cell
+            path.Reverse();
+            //start the coroutine to go through the path
+            StartCoroutine(MoveFollowingPath(path));
+        }
     }
 
     //follow a path represented by a list of cells to cross
@@ -61,7 +81,10 @@ public class Unit : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndD
         {
             yield return new WaitForSeconds(0.6f);
             setPosition(cell);
+            print(cell.TileMapPositionOffset());
         }
+
+        pathCreated = false;
     }
 
     //set the position of the unit in a cell
@@ -94,6 +117,8 @@ public class Unit : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndD
             }
         }
 
+        print("local board x :" + localBoard.Length);
+
         (int x, int y) currentCellPosition = (currentCell.TileMapPositionOffset().x, currentCell.TileMapPositionOffset().y);
 
         //On ajoute la cell où se trouve actuelle notre personnage au front d'exploration avec un coût de 0
@@ -124,7 +149,7 @@ public class Unit : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndD
             print("La liste à l'étape " + debugSafetyCount);
             foreach((int x, int y) localCellProv in explorationList)
             {
-                print("(x,y) : " + localBoard[localCellProv.x, localCellProv.y].thisCell.TileMapPositionOffset().x + "," + localBoard[localCellProv.x, localCellProv.y].thisCell.TileMapPositionOffset().y);
+                print("(x,y) : " + localBoard[localCellProv.x, localCellProv.y].thisCell.TileMapPosition.x + "," + localBoard[localCellProv.x, localCellProv.y].thisCell.TileMapPosition.y);
             }
 
             //Search for the closest cell in the exploration list
@@ -142,7 +167,7 @@ public class Unit : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndD
             localBoard[localClosestCell.x, localClosestCell.y].isMarked = true;
             explorationList.RemoveAt(closestIndex);
 
-            print("La case marquer : " + localBoard[localClosestCell.x, localClosestCell.y].thisCell.TileMapPositionOffset().x + "," + localBoard[localClosestCell.x, localClosestCell.y].thisCell.TileMapPositionOffset().y);
+            print("La case marquée : " + localBoard[localClosestCell.x, localClosestCell.y].thisCell.TileMapPosition.x + "," + localBoard[localClosestCell.x, localClosestCell.y].thisCell.TileMapPosition.y);
 
             //if the cell we are explorating is the target cell, return the path to this cell
             if (localBoard[localClosestCell.x, localClosestCell.y].thisCell == targetCell)
@@ -153,7 +178,7 @@ public class Unit : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndD
                 do
                 {
                     //add the previous cell of the path to the list, then go to this cell
-                    print("postion (x,y) : " + localBoard[localClosestCell.x, localClosestCell.y].thisCell.TileMapPositionOffset().x + "," + localBoard[localClosestCell.x, localClosestCell.y].thisCell.TileMapPositionOffset().y);
+                    print("postion (x,y) : " + localBoard[localClosestCell.x, localClosestCell.y].thisCell.TileMapPosition.x + "," + localBoard[localClosestCell.x, localClosestCell.y].thisCell.TileMapPosition.y);
                     arrayCellPath.Add(localBoard[localClosestCell.x, localClosestCell.y].thisCell);
                     localClosestCell = (localBoard[localClosestCell.x, localClosestCell.y].previousCell.TileMapPositionOffset().x, localBoard[localClosestCell.x, localClosestCell.y].previousCell.TileMapPositionOffset().y);
                 }
@@ -161,20 +186,23 @@ public class Unit : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndD
                 return arrayCellPath;
             }
 
-            //Add all neighbours of the closest cell to the explorationList
+            //Get all the neighbours of the cell we are explorating
             Cell[] arrayCell = localBoard[localClosestCell.x, localClosestCell.y].thisCell.GetAllNeighbours();
 
             print("Flag");
-            ///foreach (Cell cellNeighbour in arrayCell)
-            //{
+
+            //go through all the neighbours of the cell
             for(int i = 0; i < arrayCell.Length; i++)
             {
                 Cell cellNeighbour = arrayCell[i];
-                //print("erreur sur la case: " + cellNeighbourPosition.x + "," + cellNeighbourPosition.y);
+                //if the neighbour cell exists and is not already marked
                 if (cellNeighbour != null && !localBoard[cellNeighbour.TileMapPositionOffset().x, cellNeighbour.TileMapPositionOffset().y].isMarked)
                 {
+                    print("voisin : " + cellNeighbour.TileMapPosition);
                     (int x, int y) cellNeighbourPosition = (cellNeighbour.TileMapPositionOffset().x, cellNeighbour.TileMapPositionOffset().y);
 
+                    //if the cost of the neighbour is bigger than the cost of this cell + 1,
+                    //it means that there is a shorter path than the one the neighbour knows which
                     if (localBoard[cellNeighbourPosition.x, cellNeighbourPosition.y].cost > localBoard[localClosestCell.x, localClosestCell.y].cost + 1)
                     {
                         localBoard[cellNeighbourPosition.x, cellNeighbourPosition.y].cost = localBoard[localClosestCell.x, localClosestCell.y].cost + 1;
