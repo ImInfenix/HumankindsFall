@@ -7,6 +7,8 @@ public class Cell
     public Vector3Int TileMapPosition { get { return _tileMapPosition; } }
     private Vector3Int _tileMapPosition;
 
+    private bool isOccupied = false;
+
     private Vector2Int _boardSize;
 
     public Vector3 WorldPosition { get { return _worldPosition; } }
@@ -41,9 +43,14 @@ public class Cell
         return vectorProv;
     }
 
-    public bool IsOccupied()
+    public bool GetIsOccupied()
     {
-        return false;
+        return isOccupied;
+    }
+
+    public void SetIsOccupied(bool b)
+    {
+        isOccupied = b;
     }
 
     public Cell[] GetAllNeighbours()
