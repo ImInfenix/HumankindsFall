@@ -138,4 +138,11 @@ public class Board : MonoBehaviour
                     Gizmos.DrawSphere(c.WorldPosition, .2f);
         }
     }
+
+    public void SetTileColour(Color colour, Vector3Int position)
+    {
+        tilemap.SetTileFlags(position, TileFlags.None);
+
+        tilemap.SetColor(position, colour);
+    }
 }

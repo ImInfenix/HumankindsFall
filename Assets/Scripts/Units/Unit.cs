@@ -14,6 +14,8 @@ public class Unit : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndD
     private Race race;
     private Class clas;
 
+    private static int infVal = 1000;
+
     [SerializeField] private int maxLife = 100;
     [SerializeField] private int currentLife;
     private int maxMana;
@@ -30,15 +32,15 @@ public class Unit : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndD
     public Cell currentCell = null;
 
 
-    private List<Cell> path;
+    private List<Cell> path = null;
 
     //debug test positions
     public Vector3Int initialPos;
     private Vector3Int targetPos;
-    [SerializeField] private Unit targetUnit;
-    [SerializeField] private int targetDistance;
-    private bool hasTarget;
-    private bool isActing;
+    [SerializeField] private Unit targetUnit = null;
+    [SerializeField] private int targetDistance = infVal;
+    private bool hasTarget = false;
+    private bool isActing = false;
     //private bool canAttack;
     string targetTag = "UnitAlly";
 
@@ -84,12 +86,13 @@ public class Unit : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndD
 
     private void Update()
     {
+        //findTarget();
         checkDeath();
 
-        if (!hasTarget)
+        /*if (!hasTarget)
         {
             findTarget();
-        }
+        }*/
 
         //if the unit is not following a path yet and has a target cell different from their current cell
         if (!isActing)
@@ -98,7 +101,7 @@ public class Unit : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndD
             //path = createPath(board.GetCell(new Vector3Int(targetPos.x, targetPos.y, 0)));
 
             //if the target is not yet in range of attack
-            if (targetDistance > range)
+            if (targetDistance > range && targetUnit != null && path != null)
             {
                 //--- DEBUG DISPLAY PATH ---
                 string cellsPath = "";
@@ -114,17 +117,10 @@ public class Unit : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndD
                 //isActing = true;
 
                 //start the coroutine to move to the next cell of the path
-                if(path != null)
-                {
-                    StartCoroutine(MoveToCell(path[0]));
-                }
-                else
-                {
-                    print("Attention une unité n'a pas de chemin ! :'(");
-                }
+                StartCoroutine(MoveToCell(path[0]));
 
             }
-            else if(targetUnit != null)
+            else if(targetDistance <= range && targetUnit != null && path != null)
             {
                 StartCoroutine(AttackTarget());
             }
@@ -149,11 +145,14 @@ public class Unit : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndD
 
     IEnumerator MoveToCell(Cell cell)
     {
-        isActing = true;
-        yield return new WaitForSeconds(moveSpeed);
-        setPosition(cell);
-        //print(cell.TileMapPositionOffset());
-        isActing = false;
+        if (cell.GetIsOccupied() == false)
+        {
+            isActing = true;
+            setPosition(cell);
+            yield return new WaitForSeconds(moveSpeed);
+            //print(cell.TileMapPositionOffset());
+            isActing = false;
+        }
     }
 
     IEnumerator AttackTarget()
@@ -176,6 +175,7 @@ public class Unit : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndD
             currentCell.SetIsOccupied(false);
         }
         currentCell = cell;
+        //board[][]
         currentCell.SetIsOccupied(true);
         currentPosition = currentCell.TileMapPosition;
         worldPosition = new Vector3(currentCell.WorldPosition.x, currentCell.WorldPosition.y, 0);
@@ -319,7 +319,7 @@ public class Unit : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndD
                         }
 
                         //print("cellNeighbour.GetIsOccupied() : " + cellNeighbour.GetIsOccupied());
-                        if (!localBoard[cellNeighbourPosition.x, cellNeighbourPosition.y].isExplorationList && (!cellNeighbour.GetIsOccupied() || cellNeighbour == targetCell))
+                        if (!localBoard[cellNeighbourPosition.x, cellNeighbourPosition.y].isExplorationList && (cellNeighbour.GetIsOccupied() == false || cellNeighbour == targetCell))
                         {
                             explorationList.Add((cellNeighbourPosition.x, cellNeighbourPosition.y));
                             localBoard[cellNeighbourPosition.x, cellNeighbourPosition.y].isExplorationList = true;
@@ -355,32 +355,17 @@ public class Unit : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndD
     //find a target unit and get the position target
     private int findTarget()
     {
+        targetDistance = infVal;
+        targetUnit = null;
+        hasTarget = false;
+        path = null;
+
         //get the list of possible targets, i.e. units the opposing team
         GameObject[] targetList = GameObject.FindGameObjectsWithTag(targetTag);
 
         //if there is at least one opponent alive
         if (targetList.Length > 0)
         {
-            //if the unit has no target unit, take the first target of the list
-            if (!hasTarget || targetUnit == null)
-            {
-                targetUnit = targetList[0].GetComponent<Unit>();
-                targetPos = targetUnit.getPosition();
-                path = createPath(board.GetCell(new Vector3Int(targetPos.x, targetPos.y, 0)));
-
-                if(path != null)
-                {
-                    targetDistance = createPath(board.GetCell(new Vector3Int(targetPos.x, targetPos.y, 0))).Count;
-                }
-                else
-                {
-                    targetDistance = 1000;
-                }
-
-                hasTarget = true;
-            }
-
-
             //check every possible target in the list
             foreach (GameObject possibleTarget in targetList)
             {
@@ -392,33 +377,20 @@ public class Unit : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndD
                     int possibleTargetDistance = pathProv.Count;
 
                     //if there is an opponent closer than the current target
-                    if (path == null || possibleTargetDistance < targetDistance)
+                    if (possibleTargetDistance < targetDistance)
                     {
                         //change the target position with the new opponents's position
                         targetUnit = possibleTarget.GetComponent<Unit>();
                         targetPos = targetUnit.getPosition();
+                        path = pathProv;
+                        hasTarget = true;
+                        targetDistance = path.Count;
                     }
                 }
             }
-
-            if (path != null)
-            {
-                path = createPath(board.GetCell(new Vector3Int(targetPos.x, targetPos.y, 0)));
-                targetDistance = path.Count;
-            }
-            else
-            {
-                targetDistance = 1000;
-            }
-
-            return targetDistance;
-        }
-        else
-        {
-            hasTarget = false;
         }
 
-        return -1;
+        return targetDistance;
     }
 
     private void OnDrawGizmosSelected()
@@ -426,7 +398,7 @@ public class Unit : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndD
         if (Application.isPlaying)
         {
             Gizmos.color = Color.red;
-            if (targetUnit == null || currentCell == null || !hasTarget)
+            if (targetUnit == null || currentCell == null || hasTarget == false)
                 return;
 
             Gizmos.DrawLine(transform.position, targetUnit.transform.position);

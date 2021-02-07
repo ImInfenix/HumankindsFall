@@ -48,9 +48,14 @@ public class Cell
         return isOccupied;
     }
 
-    public void SetIsOccupied(bool b)
+    public void SetIsOccupied(bool isOccupied)
     {
-        isOccupied = b;
+        this.isOccupied = isOccupied;
+
+        if (isOccupied)
+            GameObject.Find("Board").GetComponent<Board>().SetTileColour(Color.red, _tileMapPosition);
+        else
+            GameObject.Find("Board").GetComponent<Board>().SetTileColour(Color.green, _tileMapPosition);
     }
 
     public Cell[] GetAllNeighbours()
