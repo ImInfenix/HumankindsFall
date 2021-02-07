@@ -19,7 +19,7 @@ public class RaceStat : ScriptableObject
     public int maxMana;
     public int mana;
     public int armor;
-    public int moveSpeed;
+    public float moveSpeed;
     public float attackSpeed;
     public int damage;
 }

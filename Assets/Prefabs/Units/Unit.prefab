@@ -95,7 +95,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35af1456534f2714f92ab0481c3738e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  race: 0
-  clas: 0
+  raceStats: {fileID: 11400000, guid: 5d54e759c0ac4f14b8c1c172e4cad577, type: 2}
+  classStat: {fileID: 11400000, guid: 1bfdba91039434f47a5db49ef4005d27, type: 2}
+  maxLife: 100
+  currentLife: 0
+  moveSpeed: 0.6
+  attackSpeed: 0.6
+  damage: 10
+  range: 1
   board: {fileID: 0}
   currentPosition: {x: 0, y: 0, z: 0}
+  initialPos: {x: 0, y: 0, z: 0}
+  targetUnit: {fileID: 0}
+  targetDistance: 1000

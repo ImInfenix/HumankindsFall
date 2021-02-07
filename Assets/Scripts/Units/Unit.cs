@@ -16,32 +16,28 @@ public class Unit : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndD
 
     private static int infVal = 1000;
 
-    [SerializeField] private int maxLife = 100;
+    private int maxLife;
     [SerializeField] private int currentLife;
     private int maxMana;
     private int mana;
     private int armor;
-    [SerializeField] private float moveSpeed = 0.6f;
-    [SerializeField] private float attackSpeed = 0.6f;
-    [SerializeField] private int damage = 10;
-    [SerializeField] private int range = 1;
+    private float moveSpeed;
+    private float attackSpeed;
+    private int damage;
+    private int range;
 
     public Board board;
     private Vector3 worldPosition;
     public Vector3Int currentPosition;
     public Cell currentCell = null;
-
-
     private List<Cell> path = null;
 
-    //debug test positions
     public Vector3Int initialPos;
     private Vector3Int targetPos;
-    [SerializeField] private Unit targetUnit = null;
-    [SerializeField] private int targetDistance = infVal;
+    private Unit targetUnit = null;
+    private int targetDistance = infVal;
     private bool hasTarget = false;
     private bool isActing = false;
-    //private bool canAttack;
     string targetTag = "UnitAlly";
 
 
@@ -52,7 +48,7 @@ public class Unit : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndD
         clas = classStat.clas;
 
         maxLife = raceStats.maxLife + classStat.maxLife;
-        life = maxLife;
+        currentLife = maxLife;
         maxMana = raceStats.maxMana + classStat.maxMana;
         mana = raceStats.mana + classStat.mana;
         armor = raceStats.armor + classStat.armor;
@@ -61,14 +57,6 @@ public class Unit : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndD
         damage = raceStats.damage + classStat.damage;
         range = classStat.range;
 
-        /*
-        print("longueur : " + board.SizeX);
-        print("hauteur : " + board.SizeY);
-        print("offset x : " + Mathf.FloorToInt(board.SizeX/2));
-        print("offset y : " + Mathf.FloorToInt(board.SizeY/2));
-        */
-
-        currentLife = maxLife;
 
         //canAttack = true;
         hasTarget = false;
@@ -97,31 +85,15 @@ public class Unit : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndD
         //if the unit is not following a path yet and has a target cell different from their current cell
         if (!isActing)
         {
-            //get the path
-            //path = createPath(board.GetCell(new Vector3Int(targetPos.x, targetPos.y, 0)));
-
             //if the target is not yet in range of attack
             if (targetDistance > range && targetUnit != null && path != null)
             {
-                //--- DEBUG DISPLAY PATH ---
-                string cellsPath = "";
-                foreach (Cell cell in path)
-                {
-                    cellsPath += cell.TileMapPosition + " ";
-                }
-                print("path : " + cellsPath);
-                print("targetDistance : " + targetDistance);
-                print("range : " + range);
-
-                //get the target to follow
-                //isActing = true;
-
                 //start the coroutine to move to the next cell of the path
                 StartCoroutine(MoveToCell(path[0]));
-
             }
             else if(targetDistance <= range && targetUnit != null && path != null)
             {
+                //start the coroutine to attack the target
                 StartCoroutine(AttackTarget());
             }
 
@@ -159,9 +131,6 @@ public class Unit : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndD
     {
         isActing = true;
         targetUnit.takeDamage(damage);
-
-        //--- DEBUG DISPLAY ATTACK ---
-        print("attacking target at position " + targetPos);
 
         yield return new WaitForSeconds(attackSpeed);
         isActing = false;
@@ -230,13 +199,6 @@ public class Unit : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndD
         explorationList.Add((currentCellPosition.x, currentCellPosition.y));
         localBoard[currentCellPosition.x, currentCellPosition.y].isExplorationList = true;
 
-
-        //(Cell thisCell, bool isMarked, bool isExplorationList, float cost, Cell previousCell) truc = explorationList[0];
-        //truc.cost = (float)52;
-        //print("Le cost truc : " + truc.cost);
-        //print("Le cost explorationList : " + explorationList[0].cost);
-        //explorationList[0].isMarked = true;
-
         //determines the path to the target cell by explorating neighbour cells of a cell in the exploration list
         bool continueSearch = true;
         int debugSafetyCount = 0;
@@ -253,12 +215,6 @@ public class Unit : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndD
                 int closestIndex = 0;
 
 
-                /*print("La liste à l'étape " + debugSafetyCount);
-                foreach((int x, int y) localCellProv in explorationList)
-                {
-                    print("(x,y) : " + localBoard[localCellProv.x, localCellProv.y].thisCell.TileMapPosition.x + "," + localBoard[localCellProv.x, localCellProv.y].thisCell.TileMapPosition.y);
-                }*/
-
                 //Search for the closest cell in the exploration list
                 for (int i = 1; i < explorationList.Count; i++)
                 {
@@ -274,31 +230,26 @@ public class Unit : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndD
                 localBoard[localClosestCell.x, localClosestCell.y].isMarked = true;
                 explorationList.RemoveAt(closestIndex);
 
-                //print("La case marquée : " + localBoard[localClosestCell.x, localClosestCell.y].thisCell.TileMapPosition.x + "," + localBoard[localClosestCell.x, localClosestCell.y].thisCell.TileMapPosition.y);
-
                 //if the cell we are explorating is the target cell, return the path to this cell
                 if (localBoard[localClosestCell.x, localClosestCell.y].thisCell == targetCell)
                 {
                     continueSearch = false;
-                    //print("C'est fini");
+
                     do
                     {
                         //add the previous cell of the path to the list, then go to this cell
-                        //print("postion (x,y) : " + localBoard[localClosestCell.x, localClosestCell.y].thisCell.TileMapPosition.x + "," + localBoard[localClosestCell.x, localClosestCell.y].thisCell.TileMapPosition.y);
                         arrayCellPath.Add(localBoard[localClosestCell.x, localClosestCell.y].thisCell);
                         localClosestCell = (localBoard[localClosestCell.x, localClosestCell.y].previousCell.TileMapPositionOffset().x, localBoard[localClosestCell.x, localClosestCell.y].previousCell.TileMapPositionOffset().y);
                     }
                     while (localBoard[localClosestCell.x, localClosestCell.y].previousCell != null); //while there are previous cells existing in the path
                                                                                                      //reverse to start from the first cell
                     arrayCellPath.Reverse();
-                    print("arrayCellPath : " + arrayCellPath);
+
                     return arrayCellPath;
                 }
 
                 //Get all the neighbours of the cell we are explorating
                 Cell[] arrayCell = localBoard[localClosestCell.x, localClosestCell.y].thisCell.GetAllNeighbours();
-
-                //print("Flag");
 
                 //go through all the neighbours of the cell
                 for (int i = 0; i < arrayCell.Length; i++)
@@ -307,7 +258,6 @@ public class Unit : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndD
                     //if the neighbour cell exists and is not already marked
                     if (cellNeighbour != null && !localBoard[cellNeighbour.TileMapPositionOffset().x, cellNeighbour.TileMapPositionOffset().y].isMarked)
                     {
-                        //print("voisin : " + cellNeighbour.TileMapPosition);
                         (int x, int y) cellNeighbourPosition = (cellNeighbour.TileMapPositionOffset().x, cellNeighbour.TileMapPositionOffset().y);
 
                         //if the cost of the neighbour is bigger than the cost of this cell + 1,
@@ -318,7 +268,6 @@ public class Unit : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndD
                             localBoard[cellNeighbourPosition.x, cellNeighbourPosition.y].previousCell = localBoard[localClosestCell.x, localClosestCell.y].thisCell;
                         }
 
-                        //print("cellNeighbour.GetIsOccupied() : " + cellNeighbour.GetIsOccupied());
                         if (!localBoard[cellNeighbourPosition.x, cellNeighbourPosition.y].isExplorationList && (cellNeighbour.GetIsOccupied() == false || cellNeighbour == targetCell))
                         {
                             explorationList.Add((cellNeighbourPosition.x, cellNeighbourPosition.y));
@@ -329,28 +278,10 @@ public class Unit : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndD
             }
         }
         while (continueSearch && debugSafetyCount < 100); //while we haven't found the path to the target cell
-        //print("debugSafetyCount : " + debugSafetyCount);
+
         return null;
-
-    public void OnDrag(PointerEventData eventData)
-    {
-        throw new System.NotImplementedException();
     }
 
-    public void OnEndDrag(PointerEventData eventData)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public void OnBeginDrag(PointerEventData eventData)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        throw new System.NotImplementedException();
-    }
 
     //find a target unit and get the position target
     private int findTarget()
@@ -393,18 +324,6 @@ public class Unit : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndD
         return targetDistance;
     }
 
-    private void OnDrawGizmosSelected()
-    {
-        if (Application.isPlaying)
-        {
-            Gizmos.color = Color.red;
-            if (targetUnit == null || currentCell == null || hasTarget == false)
-                return;
-
-            Gizmos.DrawLine(transform.position, targetUnit.transform.position);
-        }
-    }
-
     private void checkDeath()
     {
         if(currentLife <= 0)
@@ -417,5 +336,37 @@ public class Unit : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndD
     public void takeDamage(int damage)
     {
         currentLife -= damage;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if (Application.isPlaying)
+        {
+            Gizmos.color = Color.red;
+            if (targetUnit == null || currentCell == null || hasTarget == false)
+                return;
+
+            Gizmos.DrawLine(transform.position, targetUnit.transform.position);
+        }
+    }
+    
+    public void OnDrag(PointerEventData eventData)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        throw new System.NotImplementedException();
     }
 }

@@ -55,7 +55,7 @@ public class Cell
         if (isOccupied)
             GameObject.Find("Board").GetComponent<Board>().SetTileColour(Color.red, _tileMapPosition);
         else
-            GameObject.Find("Board").GetComponent<Board>().SetTileColour(Color.green, _tileMapPosition);
+            GameObject.Find("Board").GetComponent<Board>().SetTileColour(Color.white, _tileMapPosition);
     }
 
     public Cell[] GetAllNeighbours()

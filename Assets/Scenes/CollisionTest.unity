@@ -302,6 +302,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
+      propertyPath: classStat
+      value: 
+      objectReference: {fileID: 11400000, guid: 1bfdba91039434f47a5db49ef4005d27,
+        type: 2}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
+      propertyPath: raceStats
+      value: 
+      objectReference: {fileID: 11400000, guid: 5d54e759c0ac4f14b8c1c172e4cad577,
+        type: 2}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
       propertyPath: attackSpeed
       value: 0.5
       objectReference: {fileID: 0}
@@ -680,7 +692,7 @@ PrefabInstance:
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: damage
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
@@ -689,9 +701,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
+      propertyPath: classStat
+      value: 
+      objectReference: {fileID: 11400000, guid: 1bfdba91039434f47a5db49ef4005d27,
+        type: 2}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
       propertyPath: moveSpeed
       value: 0.7
       objectReference: {fileID: 0}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
+      propertyPath: raceStats
+      value: 
+      objectReference: {fileID: 11400000, guid: 5d54e759c0ac4f14b8c1c172e4cad577,
+        type: 2}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: initialPos.x
@@ -810,7 +834,7 @@ PrefabInstance:
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: damage
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
@@ -819,9 +843,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
+      propertyPath: classStat
+      value: 
+      objectReference: {fileID: 11400000, guid: 1bfdba91039434f47a5db49ef4005d27,
+        type: 2}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
       propertyPath: moveSpeed
       value: 0.7
       objectReference: {fileID: 0}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
+      propertyPath: raceStats
+      value: 
+      objectReference: {fileID: 11400000, guid: 5d54e759c0ac4f14b8c1c172e4cad577,
+        type: 2}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: initialPos.x
