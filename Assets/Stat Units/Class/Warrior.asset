@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Warrior
   m_EditorClassIdentifier: 
   clas: 0
-  maxLife: 25
-  maxMana: 0
+  maxLife: 125
+  maxMana: 100
   mana: 0
-  armor: 10
-  moveSpeed: 0
-  attackSpeed: 0
-  damage: 0
+  armor: 100
+  moveSpeed: 25
+  attackSpeed: 1
+  damage: 10
   range: 1

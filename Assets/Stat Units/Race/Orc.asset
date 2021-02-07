@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Orc
   m_EditorClassIdentifier: 
   race: 0
-  maxLife: 100
-  maxMana: 100
+  maxLife: 25
+  maxMana: 0
   mana: 0
-  armor: 100
-  moveSpeed: 25
-  attackSpeed: 1
-  damage: 10
+  armor: 0
+  moveSpeed: 0
+  attackSpeed: 0
+  damage: 5
