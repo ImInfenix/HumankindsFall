@@ -40,6 +40,8 @@ public class Unit : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndD
     private bool isActing = false;
     string targetTag = "UnitAlly";
 
+    public HealthbarHandler healthBar;
+
 
     // Start is called before the first frame update
     void Start()
@@ -57,6 +59,7 @@ public class Unit : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndD
         damage = raceStats.damage + classStat.damage;
         range = classStat.range;
 
+        healthBar.SetHealth(maxLife, currentLife);
 
         //canAttack = true;
         hasTarget = false;
@@ -110,11 +113,11 @@ public class Unit : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndD
         {
             yield return new WaitForSeconds(moveSpeed);
             setPosition(cell);
-            //print(cell.TileMapPositionOffset());
         }
         isActing = false;
     }
 
+    //move to a given cell
     IEnumerator MoveToCell(Cell cell)
     {
         if (cell.GetIsOccupied() == false)
@@ -122,18 +125,45 @@ public class Unit : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndD
             isActing = true;
             setPosition(cell);
             yield return new WaitForSeconds(moveSpeed);
-            //print(cell.TileMapPositionOffset());
             isActing = false;
         }
     }
 
+    //attack the current target
     IEnumerator AttackTarget()
     {
         isActing = true;
+
+        StartCoroutine(AttackAnimation());
+
         targetUnit.takeDamage(damage);
 
         yield return new WaitForSeconds(attackSpeed);
         isActing = false;
+    }
+
+    //move the sprite toward the target for a short time
+    IEnumerator AttackAnimation()
+    {
+        //get the position where the sprite will be placed during the attack
+        Vector3 targetWorldPosition = targetUnit.getCell().WorldPosition;
+        Vector3 attackDirection = targetWorldPosition - worldPosition;
+        attackDirection.Normalize();
+        attackDirection /= 8;
+
+        transform.position = worldPosition + attackDirection;
+
+        //set the animation time to be fast, and faster than the attack speed
+        float animationTime = 0.2f;
+        if (attackSpeed <= 0.2f)
+        {
+            animationTime = attackSpeed / 2;
+        }
+
+        yield return new WaitForSeconds(0.2f);
+
+        //place the sprite back to its original position
+        transform.position = worldPosition;
     }
 
     //set the position of the unit in a cell
@@ -336,6 +366,7 @@ public class Unit : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndD
     public void takeDamage(int damage)
     {
         currentLife -= damage;
+        healthBar.SetHealth(currentLife);
     }
 
     private void OnDrawGizmosSelected()
