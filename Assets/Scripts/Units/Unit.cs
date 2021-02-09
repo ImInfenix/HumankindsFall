@@ -70,9 +70,11 @@ public class Unit : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndD
             //it should target enemy units
             targetTag = "UnitEnemy";
 
+        GameManager.instance.AddUnit(this);
+
     }
 
-    private void Update()
+    public void UpdateUnit()
     {
         //findTarget();
         checkDeath();
@@ -368,5 +370,10 @@ public class Unit : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndD
     public void OnPointerDown(PointerEventData eventData)
     {
         throw new System.NotImplementedException();
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.instance.RemoveUnit(this);
     }
 }
