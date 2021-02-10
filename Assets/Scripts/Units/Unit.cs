@@ -4,12 +4,10 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 
-public class Unit : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
+public class Unit : MonoBehaviour
 {
     public RaceStat raceStats;
     public ClassStat classStat;
-
-    private Transform thisTransform;
 
     private Race race;
     private Class clas;
@@ -23,6 +21,11 @@ public class Unit : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndD
     private float attackSpeed;
     private int damage;
     private int range;
+
+    private bool moving;
+
+    private float startPosX;
+    private float startPosY;
 
 
     // Start is called before the first frame update
@@ -40,32 +43,42 @@ public class Unit : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndD
         attackSpeed = raceStats.attackSpeed + classStat.attackSpeed;
         damage = raceStats.damage + classStat.damage;
         range = classStat.range;
-
-        thisTransform = transform;
     }
 
     protected virtual void move()
     {
 
     }
-
-    public void OnDrag(PointerEventData eventData)
+    private void UpdateDragDrop()
     {
-        throw new System.NotImplementedException();
+        if(moving)
+        {
+            Vector3 mousePos;
+            mousePos = Input.mousePosition;
+            mousePos = Camera.main.ScreenToWorldPoint(mousePos);
+
+            this.gameObject.transform.localPosition = new Vector3(mousePos.x - startPosX, mousePos.y - startPosY, this.gameObject.transform.localPosition.z);
+        }
     }
 
-    public void OnEndDrag(PointerEventData eventData)
+    private void OnMouseDown()
     {
-        throw new System.NotImplementedException();
+        if(Input.GetMouseButtonDown(0))
+        {
+            Vector3 mousePos;
+            mousePos = Input.mousePosition;
+            mousePos = Camera.main.ScreenToWorldPoint(mousePos);
+
+            startPosX = mousePos.x - this.transform.localPosition.x;
+            startPosY = mousePos.y - this.transform.localPosition.y;
+
+            moving = true;
+        }
     }
 
-    public void OnBeginDrag(PointerEventData eventData)
+    private void OnMouseUp()
     {
-        throw new System.NotImplementedException();
+        moving = false;
     }
 
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        throw new System.NotImplementedException();
-    }
 }
