@@ -416,4 +416,9 @@ public class Unit : MonoBehaviour
         moving = false;
     }
 
+    private void OnDestroy()
+    {
+        GameManager.instance.RemoveUnit(this);
+    }
+
 }
