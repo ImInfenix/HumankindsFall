@@ -52,7 +52,10 @@ public class GameManager : MonoBehaviour
     {
         if (gamestate == GameState.Placement)
         {
-
+            foreach (Unit unit in units)
+            {
+                unit.UpdateDragDrop();
+            }
         }
         else if (gamestate == GameState.Combat)
         {

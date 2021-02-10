@@ -384,7 +384,7 @@ public class Unit : MonoBehaviour
             Gizmos.DrawLine(transform.position, targetUnit.transform.position);
         }
     }
-    private void UpdateDragDrop()
+    public void UpdateDragDrop()
     {
         if(moving)
         {
