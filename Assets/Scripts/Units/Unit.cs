@@ -68,7 +68,6 @@ public class Unit : MonoBehaviour
         hasTarget = false;
         isActing = false;
 
-        thisTransform = transform;
         setPosition(board.GetCell(new Vector3Int(initialPos.x, initialPos.y, 0)));
 
         //if the unit is an ally unit
