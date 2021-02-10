@@ -6,6 +6,11 @@ public class Cell
 {
     public Vector3Int TileMapPosition { get { return _tileMapPosition; } }
     private Vector3Int _tileMapPosition;
+
+    private bool isOccupied = false;
+
+    private Vector2Int _boardSize;
+
     public Vector3 WorldPosition { get { return _worldPosition; } }
     private Vector3 _worldPosition;
     public TileType Type { get { return _type; } }
@@ -24,16 +29,35 @@ public class Cell
     public Cell BottomLeft { get { return _bottomLeft; } }
     private Cell _bottomLeft;
 
-    public Cell(Vector3Int positionInBoard, Vector3 worldPosition, UnityEngine.Tilemaps.Tile associatedTileInTilemap)
+    public Cell(Vector3Int positionInBoard, Vector3 worldPosition, UnityEngine.Tilemaps.Tile associatedTileInTilemap, Vector2Int boardSize)
     {
         _tileMapPosition = positionInBoard;
         _worldPosition = worldPosition;
         _type = new TileType(associatedTileInTilemap);
+        _boardSize = boardSize;
     }
 
-    public bool IsOccupied()
+    public Vector3Int TileMapPositionOffset()
     {
-        return false;
+        Vector3Int vectorProv = new Vector3Int(_tileMapPosition.x + Mathf.FloorToInt(_boardSize.x/2), _tileMapPosition.y + Mathf.FloorToInt(_boardSize.y/2), _tileMapPosition.z);
+        return vectorProv;
+    }
+
+    public bool GetIsOccupied()
+    {
+        return isOccupied;
+    }
+
+    public void SetIsOccupied(bool isOccupied)
+    {
+        this.isOccupied = isOccupied;
+
+        /*
+        if (isOccupied)
+            GameObject.Find("Board").GetComponent<Board>().SetTileColour(Color.red, _tileMapPosition);
+        else
+            GameObject.Find("Board").GetComponent<Board>().SetTileColour(Color.white, _tileMapPosition);
+        */
     }
 
     public Cell[] GetAllNeighbours()
