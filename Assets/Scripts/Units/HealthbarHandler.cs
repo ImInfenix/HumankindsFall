@@ -9,11 +9,11 @@ public class HealthbarHandler : MonoBehaviour
     public Slider slider;
     private Vector3 offset = new Vector3(0,0.3f,0);
 
-    public Camera camera;
+    public Camera attachedCamera;
 
     void Start()
     {
-        camera = Camera.main;
+        attachedCamera = Camera.main;
         UpdatePosition();
     }
 
@@ -25,7 +25,7 @@ public class HealthbarHandler : MonoBehaviour
 
     private void UpdatePosition()
     {
-        slider.transform.position = camera.WorldToScreenPoint(transform.parent.position + offset);
+        slider.transform.position = attachedCamera.WorldToScreenPoint(transform.parent.position + offset);
     }
 
     public void SetHealth(int health, int maxHealth)
