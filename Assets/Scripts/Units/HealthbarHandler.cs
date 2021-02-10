@@ -9,7 +9,25 @@ public class HealthbarHandler : MonoBehaviour
     public Slider slider;
     private Vector3 offset = new Vector3(0,0.3f,0);
 
-    // Start is called before the first frame update
+    public Camera camera;
+
+    void Start()
+    {
+        camera = Camera.main;
+        UpdatePosition();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        UpdatePosition();
+    }
+
+    private void UpdatePosition()
+    {
+        slider.transform.position = camera.WorldToScreenPoint(transform.parent.position + offset);
+    }
+
     public void SetHealth(int health, int maxHealth)
     {
         slider.maxValue = maxHealth;
@@ -19,11 +37,5 @@ public class HealthbarHandler : MonoBehaviour
     public void SetHealth(int health)
     {
         slider.value = health;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        slider.transform.position = Camera.main.WorldToScreenPoint(transform.parent.position + offset);
     }
 }
