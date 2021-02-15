@@ -25,6 +25,7 @@ public class Unit : MonoBehaviour
     private int range;
 
     private bool moving;
+    private bool canMove;
     public Board board;
     private Vector3 worldPosition;
     public Vector3Int currentPosition;
@@ -33,6 +34,9 @@ public class Unit : MonoBehaviour
 
     private float startPosX;
     private float startPosY;
+
+    private int iStartPosX;
+    private int iStartPosY;
 
 
     public Vector3Int initialPos;
@@ -81,6 +85,9 @@ public class Unit : MonoBehaviour
 
     public void UpdateUnit()
     {
+
+        canMove = false;
+
         //findTarget();
         checkDeath();
 
@@ -386,7 +393,8 @@ public class Unit : MonoBehaviour
     }
     public void UpdateDragDrop()
     {
-        if(moving)
+        canMove = true;
+        if (moving)
         {
             Vector3 mousePos;
             mousePos = Input.mousePosition;
@@ -398,22 +406,48 @@ public class Unit : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if(Input.GetMouseButtonDown(0))
+        if(canMove && race != Race.Humans)
         {
-            Vector3 mousePos;
-            mousePos = Input.mousePosition;
-            mousePos = Camera.main.ScreenToWorldPoint(mousePos);
+            if (Input.GetMouseButtonDown(0))
+            {
+                Vector3 mousePos;
+                mousePos = Input.mousePosition;
+                mousePos = Camera.main.ScreenToWorldPoint(mousePos);
 
-            startPosX = mousePos.x - this.transform.localPosition.x;
-            startPosY = mousePos.y - this.transform.localPosition.y;
+                startPosX = mousePos.x - this.transform.localPosition.x;
+                startPosY = mousePos.y - this.transform.localPosition.y;
 
-            moving = true;
-        }
+                iStartPosX = (int)Mathf.Round(mousePos.x);
+                iStartPosY = (int)Mathf.Round(mousePos.y);
+
+                moving = true;
+            }
+        } 
     }
 
     private void OnMouseUp()
     {
-        moving = false;
+        if(canMove && race != Race.Humans)
+        {
+            Vector3 mousePos;
+            mousePos = Input.mousePosition;
+            mousePos = Camera.main.ScreenToWorldPoint(mousePos);
+            
+            int posX = (int)Mathf.Round(mousePos.x-(1/2));
+            int posY = (int)Mathf.Round(mousePos.y + (1 / 2));
+
+            if(board.GetCell(new Vector3Int(posX, posY, 0)) == null)
+            {
+                setPosition(board.GetCell(new Vector3Int(iStartPosX, iStartPosY, 0)));
+            }
+            else
+            {
+                setPosition(board.GetCell(new Vector3Int(posX, posY, 0)));
+            }
+
+            moving = false;
+        }
+       
     }
 
     private void OnDestroy()
