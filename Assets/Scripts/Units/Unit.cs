@@ -127,10 +127,43 @@ public class Unit : MonoBehaviour
         if (cell.GetIsOccupied() == false)
         {
             isActing = true;
-            setPosition(cell);
+            occupyNewCell(cell);
+            StartCoroutine(MoveAnimation(cell));
+            //setPosition(cell);
             yield return new WaitForSeconds(moveSpeed);
             isActing = false;
         }
+    }
+
+    IEnumerator MoveAnimation(Cell cell)
+    {
+        //set the speed of the animation (distance at each Vector3.Lerp)
+        float speed = 0.1f;
+
+        //if the unit is moving too fast, inscrease the animation speed
+        if (moveSpeed <= 0.2)
+            speed = 0.2f;
+
+        //set the maximum number of movement in the animation
+        float maxRefresh = 1 / speed;
+
+        //time to wait between every movement
+        float refreshRate = 0.01f;
+
+        int numberOfRefresh = 0;
+
+        //while the unit is not arrived at the target position and the max number of movement is not reached
+        while (transform.position != cell.WorldPosition && numberOfRefresh < maxRefresh)
+        {
+            transform.position = Vector3.Lerp(transform.position, cell.WorldPosition, speed);
+            numberOfRefresh++;
+            yield return new WaitForSeconds(refreshRate);
+        }
+
+        setPosition(cell);
+        print("stop");
+
+        yield return null;
     }
 
     //attack the current target
@@ -158,10 +191,10 @@ public class Unit : MonoBehaviour
         transform.position = worldPosition + attackDirection;
 
         //set the animation time to be fast, and faster than the attack speed
-        float animationTime = 0.2f;
-        if (attackSpeed <= 0.2f)
+        float animationTime = 0.3f;
+        if (attackSpeed <= 0.3f)
         {
-            animationTime = attackSpeed / 2;
+            animationTime = 2 * attackSpeed / 3;
         }
 
         yield return new WaitForSeconds(0.2f);
@@ -170,16 +203,21 @@ public class Unit : MonoBehaviour
         transform.position = worldPosition;
     }
 
-    //set the position of the unit in a cell
-    public void setPosition(Cell cell)
+    private void occupyNewCell(Cell cell)
     {
         if (currentCell != null)
         {
             currentCell.SetIsOccupied(false);
         }
+
         currentCell = cell;
-        //board[][]
         currentCell.SetIsOccupied(true);
+    }
+
+    //set the position of the unit in a cell
+    public void setPosition(Cell cell)
+    {
+        currentCell = cell;
         currentPosition = currentCell.TileMapPosition;
         worldPosition = new Vector3(currentCell.WorldPosition.x, currentCell.WorldPosition.y, 0);
         transform.position = worldPosition;
