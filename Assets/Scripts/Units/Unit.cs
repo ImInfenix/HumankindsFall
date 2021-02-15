@@ -23,6 +23,7 @@ public class Unit : MonoBehaviour
     private float attackSpeed;
     private int damage;
     private int range;
+    [SerializeField] private string unitName;
 
     private bool moving;
     public Board board;
@@ -41,7 +42,7 @@ public class Unit : MonoBehaviour
     private int targetDistance = infVal;
     private bool hasTarget = false;
     private bool isActing = false;
-    string targetTag = "UnitAlly";
+    private string targetTag = "UnitAlly";
 
     public HealthbarHandler healthBar;
 
@@ -49,8 +50,24 @@ public class Unit : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //get all RaceStat and ClassStat scriptableObject
+        RaceStat[] races = (RaceStat[]) Resources.FindObjectsOfTypeAll(typeof(RaceStat));
+        ClassStat[] classes = (ClassStat[]) Resources.FindObjectsOfTypeAll(typeof(ClassStat));
+
+        //select a random RaceStat
+        int randomRaceIndex = Random.Range(0, races.Length);
+        raceStats = races[randomRaceIndex];
+
+        //select a random ClassStat
+        int randomClassIndex = Random.Range(0, classes.Length);
+        classStat = classes[randomClassIndex];
+
         race = raceStats.race;
         clas = classStat.clas;
+
+        string[] possibleNames = raceStats.unitNames;
+        int randomNameIndex = Random.Range(0, possibleNames.Length);
+        unitName = possibleNames[randomNameIndex];
 
         maxLife = raceStats.maxLife + classStat.maxLife;
         currentLife = maxLife;
@@ -76,7 +93,6 @@ public class Unit : MonoBehaviour
             targetTag = "UnitEnemy";
 
         GameManager.instance.AddUnit(this);
-
     }
 
     public void UpdateUnit()
@@ -161,7 +177,6 @@ public class Unit : MonoBehaviour
         }
 
         setPosition(cell);
-        print("stop");
 
         yield return null;
     }

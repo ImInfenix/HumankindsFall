@@ -20,3 +20,9 @@ MonoBehaviour:
   moveSpeed: 0
   attackSpeed: 0
   damage: 5
+  unitNames:
+  - Brurokk
+  - Gromug
+  - Zovak
+  - Rhul
+  - Agvur
