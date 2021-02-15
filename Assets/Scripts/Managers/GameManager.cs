@@ -59,14 +59,28 @@ public class GameManager : MonoBehaviour
         }
         else if (gamestate == GameState.Combat)
         {
+            string resolution = units[0].gameObject.tag;
+            bool tousEgaux = true;
             foreach (Unit unit in units)
             {
                 unit.UpdateUnit();
+                tousEgaux = tousEgaux && unit.CompareTag(resolution);
+                
             }
+            if (tousEgaux)
+            {
+                gamestate = GameState.Resolution;
+                if (resolution == "UnitEnemy")
+                    ResolutionPhaseHandler.instance.ChangeText("DEFAITE");
+                if (resolution == "UnitAly")
+                    ResolutionPhaseHandler.instance.ChangeText("VICTOIRE");
+                ResolutionPhaseHandler.instance.Show();
+            }
+            
         }
         else if (gamestate == GameState.Resolution)
         {
-
+            
         }
         
     }
