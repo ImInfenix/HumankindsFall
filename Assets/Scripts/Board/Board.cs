@@ -22,6 +22,11 @@ public class Board : MonoBehaviour
         Initialize(tilemap);
     }
 
+    private void Start()
+    {
+        //StartCoroutine(LateStart(0.5f));
+    }
+
     public void Initialize(Tilemap tilemap)
     {
         tilemap.CompressBounds();
@@ -144,5 +149,18 @@ public class Board : MonoBehaviour
         tilemap.SetTileFlags(position, TileFlags.None);
 
         tilemap.SetColor(position, colour);
+    }
+
+    IEnumerator LateStart(float waitTime)
+    {
+        /*yield return new WaitForSeconds(waitTime);
+        List<Unit> listUnit = PathfindingTool.unitsInRadius(board[0,0], 3, "UnitAlly");
+        print("Le nombre d'unités : " + listUnit.Count);*/
+
+        yield return new WaitForSeconds(waitTime);
+        List<Cell> listCells = PathfindingTool.cellsInRadius(board[3, 3], 2);
+        print("Le nombre de cases : " + listCells.Count);
+
+        
     }
 }

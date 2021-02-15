@@ -10,6 +10,7 @@ public class Cell
     private bool isOccupied = false;
 
     private Vector2Int _boardSize;
+    private Unit currentUnit = null;
 
     public Vector3 WorldPosition { get { return _worldPosition; } }
     private Vector3 _worldPosition;
@@ -60,6 +61,16 @@ public class Cell
         */
     }
 
+    public void SetCurrentUnit(Unit unit)
+    {
+        currentUnit = unit;
+    }
+
+    public Unit GetCurrentUnit()
+    {
+        return currentUnit;
+    }
+
     public Cell[] GetAllNeighbours()
     {
         Cell[] neighbours = { Left, TopLeft, TopRight, Right, BottomRight, BottomLeft    };
@@ -79,5 +90,10 @@ public class Cell
     public override string ToString()
     {
         return $"Cell tilemap position: {TileMapPosition}, world position: {WorldPosition}, neighbours: Left {Left?.TileMapPosition} TopLeft {(TopLeft?.TileMapPosition)} TopRight {(TopRight?.TileMapPosition)} Right {(Right?.TileMapPosition)} BottomRight {(BottomRight?.TileMapPosition)} BottomLeft {(BottomLeft?.TileMapPosition)}\nProperties: {Type}";
+    }
+
+    public void SetRed()
+    {
+        GameObject.Find("Board").GetComponent<Board>().SetTileColour(Color.red, _tileMapPosition);
     }
 }
