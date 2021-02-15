@@ -35,10 +35,6 @@ public class Unit : MonoBehaviour
     private float startPosX;
     private float startPosY;
 
-    private int iStartPosX;
-    private int iStartPosY;
-
-
     public Vector3Int initialPos;
     private Vector3Int targetPos;
     private Unit targetUnit = null;
@@ -417,9 +413,6 @@ public class Unit : MonoBehaviour
                 startPosX = mousePos.x - this.transform.localPosition.x;
                 startPosY = mousePos.y - this.transform.localPosition.y;
 
-                iStartPosX = (int)Mathf.Round(mousePos.x);
-                iStartPosY = (int)Mathf.Round(mousePos.y);
-
                 moving = true;
             }
         } 
@@ -433,12 +426,12 @@ public class Unit : MonoBehaviour
             mousePos = Input.mousePosition;
             mousePos = Camera.main.ScreenToWorldPoint(mousePos);
             
-            int posX = (int)Mathf.Round(mousePos.x-(1/2));
-            int posY = (int)Mathf.Round(mousePos.y + (1 / 2));
+            int posX = (int)Mathf.Round(mousePos.x);
+            int posY = (int)Mathf.Round(mousePos.y);
 
             if(board.GetCell(new Vector3Int(posX, posY, 0)) == null)
             {
-                setPosition(board.GetCell(new Vector3Int(iStartPosX, iStartPosY, 0)));
+                setPosition(board.GetCell(new Vector3Int(currentPosition.x, currentPosition.y, 0)));
             }
             else
             {
