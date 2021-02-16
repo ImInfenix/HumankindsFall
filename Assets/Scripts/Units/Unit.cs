@@ -429,7 +429,7 @@ public class Unit : MonoBehaviour
             int posX = (int)Mathf.Round(mousePos.x);
             int posY = (int)Mathf.Round(mousePos.y);
 
-            if(board.GetCell(new Vector3Int(posX, posY, 0)) == null)
+            if(board.GetCell(new Vector3Int(posX, posY, 0)) == null || board.GetCell(new Vector3Int(posX, posY, 0)).GetIsOccupied() == true)
             {
                 setPosition(board.GetCell(new Vector3Int(currentPosition.x, currentPosition.y, 0)));
             }
