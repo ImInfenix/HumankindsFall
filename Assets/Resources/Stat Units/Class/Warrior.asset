@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clas: 0
   maxLife: 125
-  maxMana: 100
+  maxMana: 10
   mana: 0
-  armor: 100
+  armor: 5
   moveSpeed: 0.5
   attackSpeed: 1
   damage: 10

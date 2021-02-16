@@ -54,6 +54,7 @@ public class Unit : MonoBehaviour
         RaceStat[] races = (RaceStat[]) Resources.FindObjectsOfTypeAll(typeof(RaceStat));
         ClassStat[] classes = (ClassStat[]) Resources.FindObjectsOfTypeAll(typeof(ClassStat));
 
+        
         //select a random RaceStat
         int randomRaceIndex = Random.Range(0, races.Length);
         raceStats = races[randomRaceIndex];
@@ -143,10 +144,13 @@ public class Unit : MonoBehaviour
         if (cell.GetIsOccupied() == false)
         {
             isActing = true;
+            //change the occupied tile then start the animation
             occupyNewCell(cell);
             StartCoroutine(MoveAnimation(cell));
-            //setPosition(cell);
             yield return new WaitForSeconds(moveSpeed);
+
+            //ensure that the unit is at the center of the current cell before it can start acting again
+            setPosition(cell);
             isActing = false;
         }
     }
@@ -169,7 +173,7 @@ public class Unit : MonoBehaviour
         int numberOfRefresh = 0;
 
         //while the unit is not arrived at the target position and the max number of movement is not reached
-        while (transform.position != cell.WorldPosition && numberOfRefresh < maxRefresh)
+        while (transform.position != cell.WorldPosition && numberOfRefresh <= maxRefresh)
         {
             transform.position = Vector3.Lerp(transform.position, cell.WorldPosition, speed);
             numberOfRefresh++;
@@ -364,7 +368,7 @@ public class Unit : MonoBehaviour
                 }
             }
         }
-        while (continueSearch && debugSafetyCount < 100); //while we haven't found the path to the target cell
+        while (continueSearch && debugSafetyCount < 1000); //while we haven't found the path to the target cell
 
         return null;
     }
