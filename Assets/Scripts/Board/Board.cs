@@ -145,4 +145,9 @@ public class Board : MonoBehaviour
 
         tilemap.SetColor(position, colour);
     }
+
+    public Tilemap GetTilemap()
+    {
+        return tilemap;
+    }
 }

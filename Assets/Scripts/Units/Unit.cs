@@ -402,7 +402,7 @@ public class Unit : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if(canMove && race != Race.Humans)
+        if(canMove && CompareTag("UnitAlly"))
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -420,23 +420,18 @@ public class Unit : MonoBehaviour
 
     private void OnMouseUp()
     {
-        if(canMove && race != Race.Humans)
+        if(canMove && CompareTag("UnitAlly"))
         {
             Vector3 mousePos;
             mousePos = Input.mousePosition;
             mousePos = Camera.main.ScreenToWorldPoint(mousePos);
-            
-            int posX = (int)Mathf.Round(mousePos.x);
-            int posY = (int)Mathf.Round(mousePos.y);
 
-            if(board.GetCell(new Vector3Int(posX, posY, 0)) == null || board.GetCell(new Vector3Int(posX, posY, 0)).GetIsOccupied() == true)
-            {
-                setPosition(board.GetCell(new Vector3Int(currentPosition.x, currentPosition.y, 0)));
-            }
+            Vector3Int tileCoordinate = board.GetTilemap().WorldToCell(mousePos);
+
+            if (board.GetCell(tileCoordinate) == null || board.GetCell(tileCoordinate).GetIsOccupied() == true)
+                setPosition(board.GetCell(currentPosition));
             else
-            {
-                setPosition(board.GetCell(new Vector3Int(posX, posY, 0)));
-            }
+                setPosition(board.GetCell(tileCoordinate));            
 
             moving = false;
         }
