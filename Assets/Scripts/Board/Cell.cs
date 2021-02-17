@@ -30,6 +30,8 @@ public class Cell
     public Cell BottomLeft { get { return _bottomLeft; } }
     private Cell _bottomLeft;
 
+    private Color _baseColor;
+
     public Cell(Vector3Int positionInBoard, Vector3 worldPosition, UnityEngine.Tilemaps.Tile associatedTileInTilemap, Vector2Int boardSize)
     {
         _tileMapPosition = positionInBoard;
@@ -92,8 +94,8 @@ public class Cell
         return $"Cell tilemap position: {TileMapPosition}, world position: {WorldPosition}, neighbours: Left {Left?.TileMapPosition} TopLeft {(TopLeft?.TileMapPosition)} TopRight {(TopRight?.TileMapPosition)} Right {(Right?.TileMapPosition)} BottomRight {(BottomRight?.TileMapPosition)} BottomLeft {(BottomLeft?.TileMapPosition)}\nProperties: {Type}";
     }
 
-    public void SetRed()
+    public void SetColor(Color color)
     {
-        GameObject.Find("Board").GetComponent<Board>().SetTileColour(Color.red, _tileMapPosition);
+        GameObject.Find("Board").GetComponent<Board>().SetTileColour(color, _tileMapPosition);
     }
 }
