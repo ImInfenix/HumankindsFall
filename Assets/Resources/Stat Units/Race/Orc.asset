@@ -19,7 +19,7 @@ MonoBehaviour:
   armor: 0
   moveSpeed: 0
   attackSpeed: 0
-  damage: 5
+  damage: 2
   unitNames:
   - Brurokk
   - Gromug

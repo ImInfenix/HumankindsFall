@@ -40,6 +40,7 @@ public class Unit : MonoBehaviour
     private bool hasTarget = false;
     private bool isActing = false;
     private string targetTag = "UnitAlly";
+    private bool isMoving = false;
 
     private SpriteRenderer spriteRenderer;
     private Color baseColor, damageColor;
@@ -150,9 +151,9 @@ public class Unit : MonoBehaviour
             isActing = true;
             //change the occupied tile then start the animation
             occupyNewCell(cell);
+            StopCoroutine(MoveAnimation(cell));
             StartCoroutine(MoveAnimation(cell));
             yield return new WaitForSeconds(moveSpeed);
-
             //ensure that the unit is at the center of the current cell before it can start acting again
             setPosition(cell);
             isActing = false;
@@ -179,10 +180,10 @@ public class Unit : MonoBehaviour
         Vector3 distance = cell.WorldPosition - transform.position;
 
         //while the unit is not arrived at the target position and the max number of movement is not reached
-        while (transform.position != cell.WorldPosition && numberOfRefresh <= maxRefresh)
+        while (cell == currentCell && transform.position != cell.WorldPosition && numberOfRefresh <= maxRefresh)
         {
             transform.position += distance * speed;
-            numberOfRefresh++;
+            numberOfRefresh++;            
             yield return new WaitForSeconds(refreshRate);
         }
 
