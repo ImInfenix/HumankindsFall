@@ -23,6 +23,7 @@ public class Unit : MonoBehaviour
     [SerializeField] private string unitName;
 
     private bool moving;
+    private bool canMove;
     public Board board;
     private Vector3 worldPosition;
     public Vector3Int currentPosition;
@@ -31,7 +32,6 @@ public class Unit : MonoBehaviour
 
     private float startPosX;
     private float startPosY;
-
 
     public Vector3Int initialPos;
     private Vector3Int targetPos;
@@ -103,6 +103,9 @@ public class Unit : MonoBehaviour
 
     public void UpdateUnit()
     {
+
+        canMove = false;
+
         //findTarget();
         checkDeath();
 
@@ -503,7 +506,8 @@ public class Unit : MonoBehaviour
     }
     public void UpdateDragDrop()
     {
-        if(moving)
+        canMove = true;
+        if (moving)
         {
             Vector3 mousePos;
             mousePos = Input.mousePosition;
@@ -515,22 +519,40 @@ public class Unit : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if(Input.GetMouseButtonDown(0))
+        if(canMove && CompareTag("UnitAlly"))
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                Vector3 mousePos;
+                mousePos = Input.mousePosition;
+                mousePos = Camera.main.ScreenToWorldPoint(mousePos);
+
+                startPosX = mousePos.x - this.transform.localPosition.x;
+                startPosY = mousePos.y - this.transform.localPosition.y;
+
+                moving = true;
+            }
+        } 
+    }
+
+    private void OnMouseUp()
+    {
+        if(canMove && CompareTag("UnitAlly"))
         {
             Vector3 mousePos;
             mousePos = Input.mousePosition;
             mousePos = Camera.main.ScreenToWorldPoint(mousePos);
 
-            startPosX = mousePos.x - this.transform.localPosition.x;
-            startPosY = mousePos.y - this.transform.localPosition.y;
+            Vector3Int tileCoordinate = board.GetTilemap().WorldToCell(mousePos);
 
-            moving = true;
+            if (board.GetCell(tileCoordinate) == null || board.GetCell(tileCoordinate).GetIsOccupied() == true)
+                setPosition(board.GetCell(currentPosition));
+            else
+                setPosition(board.GetCell(tileCoordinate));            
+
+            moving = false;
         }
-    }
-
-    private void OnMouseUp()
-    {
-        moving = false;
+       
     }
 
     private void OnDestroy()
