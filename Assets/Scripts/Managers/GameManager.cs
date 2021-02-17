@@ -65,23 +65,35 @@ public class GameManager : MonoBehaviour
             {
                 unit.UpdateUnit();
                 tousEgaux = tousEgaux && unit.CompareTag(resolution);
-                
+
             }
             if (tousEgaux)
             {
-                gamestate = GameState.Resolution;
-                if (resolution == "UnitEnemy")
-                    ResolutionPhaseHandler.instance.ChangeText("DEFAITE");
-                if (resolution == "UnitAly")
-                    ResolutionPhaseHandler.instance.ChangeText("VICTOIRE");
-                ResolutionPhaseHandler.instance.Show();
+                CombatResolution(resolution);
             }
-            
+
         }
         else if (gamestate == GameState.Resolution)
         {
-            
+
         }
-        
+
+    }
+
+
+    private void CombatResolution(string resolution)
+    {
+        gamestate = GameState.Resolution;
+        if (resolution == "UnitEnemy")
+        {
+            ResolutionPhaseHandler.instance.ChangeText("DEFAITE");
+        }
+        if (resolution == "UnitAlly")
+        {
+            ResolutionPhaseHandler.instance.ChangeText("VICTOIRE");
+            Player.instance.Wallet.Earn(10); // a terme, remplacer le 10 par niveau.getRecompense()
+        }
+
+        ResolutionPhaseHandler.instance.Show();
     }
 }
