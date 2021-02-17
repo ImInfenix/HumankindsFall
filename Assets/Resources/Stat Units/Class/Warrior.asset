@@ -15,9 +15,9 @@ MonoBehaviour:
   clas: 0
   maxLife: 125
   maxMana: 10
-  mana: 0
+  mana: 2
   armor: 5
-  moveSpeed: 0.5
+  moveSpeed: 0.6
   attackSpeed: 1
   damage: 10
   range: 1

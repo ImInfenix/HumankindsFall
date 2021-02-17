@@ -5,7 +5,8 @@ using UnityEngine;
 public enum Race
 {
     Orc,
-    Humans
+    Human,
+    Skeleton
 }
 
 [CreateAssetMenu(fileName = "New UnitRaceStat", menuName = "Race Stat Units")]

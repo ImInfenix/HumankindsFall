@@ -5,13 +5,13 @@ using UnityEngine;
 public enum Class
 {
     Warrior,
-    Mage
+    Mage,
+    Bowman
 }
 
 [CreateAssetMenu(fileName = "New UnitClassStat", menuName = "Class Stat Units")]
 public class ClassStat : ScriptableObject
 {
-
     public Class clas;
 
     public int maxLife;

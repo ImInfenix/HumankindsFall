@@ -9,9 +9,6 @@ public class Unit : MonoBehaviour
     public RaceStat raceStats;
     public ClassStat classStat;
 
-    private Race race;
-    private Class clas;
-
     private static int infVal = 1000;
 
     private int maxLife;
@@ -44,8 +41,13 @@ public class Unit : MonoBehaviour
     private bool isActing = false;
     private string targetTag = "UnitAlly";
 
+    private SpriteRenderer spriteRenderer;
+    private Color baseColor, damageColor;
+    private int takingDamageCount = 0;
+
     public HealthbarHandler healthBar;
 
+    public GameObject projectileGameObject;
 
     // Start is called before the first frame update
     void Start()
@@ -63,9 +65,6 @@ public class Unit : MonoBehaviour
         int randomClassIndex = Random.Range(0, classes.Length);
         classStat = classes[randomClassIndex];
 
-        race = raceStats.race;
-        clas = classStat.clas;
-
         string[] possibleNames = raceStats.unitNames;
         int randomNameIndex = Random.Range(0, possibleNames.Length);
         unitName = possibleNames[randomNameIndex];
@@ -80,7 +79,8 @@ public class Unit : MonoBehaviour
         damage = raceStats.damage + classStat.damage;
         range = classStat.range;
 
-        healthBar.SetHealth(maxLife, currentLife);
+        healthBar.SetHealth(currentLife, maxLife);
+        healthBar.SetStamina(mana, maxMana);
 
         //canAttack = true;
         hasTarget = false;
@@ -92,6 +92,10 @@ public class Unit : MonoBehaviour
         if (CompareTag("UnitAlly"))
             //it should target enemy units
             targetTag = "UnitEnemy";
+
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        baseColor = spriteRenderer.color;
+        damageColor = new Color(1, 0.6f, 0.6f);
 
         GameManager.instance.AddUnit(this);
     }
@@ -157,7 +161,7 @@ public class Unit : MonoBehaviour
 
     IEnumerator MoveAnimation(Cell cell)
     {
-        //set the speed of the animation (distance at each Vector3.Lerp)
+        //set the speed of the animation (distance at each iteration of while loop)
         float speed = 0.1f;
 
         //if the unit is moving too fast, inscrease the animation speed
@@ -172,10 +176,12 @@ public class Unit : MonoBehaviour
 
         int numberOfRefresh = 0;
 
+        Vector3 distance = cell.WorldPosition - transform.position;
+
         //while the unit is not arrived at the target position and the max number of movement is not reached
         while (transform.position != cell.WorldPosition && numberOfRefresh <= maxRefresh)
         {
-            transform.position = Vector3.Lerp(transform.position, cell.WorldPosition, speed);
+            transform.position += distance * speed;
             numberOfRefresh++;
             yield return new WaitForSeconds(refreshRate);
         }
@@ -193,6 +199,9 @@ public class Unit : MonoBehaviour
         StartCoroutine(AttackAnimation());
 
         targetUnit.takeDamage(damage);
+
+        if (range > 1)
+            StartCoroutine(ProjectileAnimation());
 
         yield return new WaitForSeconds(attackSpeed);
         isActing = false;
@@ -220,6 +229,42 @@ public class Unit : MonoBehaviour
 
         //place the sprite back to its original position
         transform.position = worldPosition;
+    }
+
+    IEnumerator ProjectileAnimation()
+    {
+        GameObject projectile = Instantiate(projectileGameObject, worldPosition, Quaternion.identity, transform);
+
+        //set the speed of the animation (distance at each iteration of while loop)
+        float speed = 0.06f;
+
+        //if the unit is attacking too fast, inscrease the animation speed
+        if (attackSpeed <= 0.2f)
+            speed = 0.15f;
+
+        //set the maximum number of refresh of the projectile animation
+        float maxRefresh = 1 / speed;
+
+        //time to wait between every movement
+        float refreshRate = 0.01f;
+
+        int numberOfRefresh = 0;
+
+        Vector3 distance = targetUnit.transform.position - projectile.transform.position;
+        float angle = Mathf.Atan2(distance.y, distance.x) * Mathf.Rad2Deg;
+        projectile.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
+        //while there is still a target, the projectile is not arrived at the target position and the max number of refresh is not reached
+        while (targetUnit != null && projectile.transform.position != targetUnit.transform.position && numberOfRefresh <= maxRefresh)
+        {
+            projectile.transform.position += distance * speed;
+            numberOfRefresh++;
+            yield return new WaitForSeconds(refreshRate);
+        }
+
+        Destroy(projectile);
+
+        yield return null;
     }
 
     private void occupyNewCell(Cell cell)
@@ -428,6 +473,20 @@ public class Unit : MonoBehaviour
     {
         currentLife -= damage;
         healthBar.SetHealth(currentLife);
+        StartCoroutine(TakeDamageAnimation());
+    }
+
+    IEnumerator TakeDamageAnimation()
+    {
+        spriteRenderer.color = damageColor;
+        takingDamageCount++;
+
+        yield return new WaitForSeconds(0.4f);
+
+        //if this is the last animation playing, set the color back to normal
+        takingDamageCount--;
+        if(takingDamageCount == 0)
+            spriteRenderer.color = baseColor;
     }
 
     private void OnDrawGizmosSelected()

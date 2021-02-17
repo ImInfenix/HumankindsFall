@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de9e8c1568867244bb3c508a017b768c, type: 3}
   m_Name: Skeleton
   m_EditorClassIdentifier: 
-  race: 0
+  race: 2
   maxLife: 0
   maxMana: 0
   mana: 0

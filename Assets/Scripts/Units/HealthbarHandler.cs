@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class HealthbarHandler : MonoBehaviour
 {
-
-    public Slider slider;
+    public Slider healthSlider;
+    public Slider staminaSlider;
     private Vector3 offset = new Vector3(0,0.3f,0);
 
     public Camera attachedCamera;
@@ -25,17 +25,28 @@ public class HealthbarHandler : MonoBehaviour
 
     private void UpdatePosition()
     {
-        slider.transform.position = attachedCamera.WorldToScreenPoint(transform.parent.position + offset);
+        this.transform.GetChild(0).transform.position = attachedCamera.WorldToScreenPoint(transform.parent.position + offset);
     }
 
     public void SetHealth(int health, int maxHealth)
     {
-        slider.maxValue = maxHealth;
-        slider.value = health;
+        healthSlider.maxValue = maxHealth;
+        healthSlider.value = health;
     }
 
     public void SetHealth(int health)
     {
-        slider.value = health;
+        healthSlider.value = health;
+    }
+
+    public void SetStamina(int stamina, int maxStamina)
+    {
+        staminaSlider.maxValue = maxStamina;
+        staminaSlider.value = stamina;
+    }
+
+    public void SetStamina(int stamina)
+    {
+        staminaSlider.value = stamina;
     }
 }
