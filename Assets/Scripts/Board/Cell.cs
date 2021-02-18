@@ -8,6 +8,7 @@ public class Cell
     private Vector3Int _tileMapPosition;
 
     private bool isOccupied = false;
+    private int numberOfUnits = 0;
 
     private Vector2Int _boardSize;
 
@@ -52,12 +53,12 @@ public class Cell
     {
         this.isOccupied = isOccupied;
 
-        /*
+        
         if (isOccupied)
             GameObject.Find("Board").GetComponent<Board>().SetTileColour(Color.red, _tileMapPosition);
         else
             GameObject.Find("Board").GetComponent<Board>().SetTileColour(Color.white, _tileMapPosition);
-        */
+        
     }
 
     public Cell[] GetAllNeighbours()
@@ -79,5 +80,19 @@ public class Cell
     public override string ToString()
     {
         return $"Cell tilemap position: {TileMapPosition}, world position: {WorldPosition}, neighbours: Left {Left?.TileMapPosition} TopLeft {(TopLeft?.TileMapPosition)} TopRight {(TopRight?.TileMapPosition)} Right {(Right?.TileMapPosition)} BottomRight {(BottomRight?.TileMapPosition)} BottomLeft {(BottomLeft?.TileMapPosition)}\nProperties: {Type}";
+    }
+
+    public void IncreaseNumberOfUnits()
+    {
+        numberOfUnits++;
+        if (numberOfUnits > 0)
+            SetIsOccupied(true);
+    }
+
+    public void DecreaseNumberOfUnits()
+    {
+        numberOfUnits--;
+        if (numberOfUnits <= 0)
+            SetIsOccupied(false);
     }
 }

@@ -87,7 +87,9 @@ public class Unit : MonoBehaviour
         hasTarget = false;
         isActing = false;
 
-        setPosition(board.GetCell(new Vector3Int(initialPos.x, initialPos.y, 0)));
+        Cell startCell = board.GetCell(new Vector3Int(initialPos.x, initialPos.y, 0));
+        occupyNewCell(startCell);
+        setPosition(startCell);
 
         //if the unit is an ally unit
         if (CompareTag("UnitAlly"))
@@ -108,6 +110,11 @@ public class Unit : MonoBehaviour
 
         //findTarget();
         checkDeath();
+
+        if (path == null && !isActing)
+        {
+            StartCoroutine(UnitWaitForSeconds(moveSpeed));
+        }
 
         /*if (!hasTarget)
         {
@@ -134,6 +141,14 @@ public class Unit : MonoBehaviour
         }
     }
 
+    IEnumerator UnitWaitForSeconds(float seconds)
+    {
+        isActing = true;
+        yield return new WaitForSeconds(seconds);
+        isActing = false;
+        findTarget();
+    }
+
     //follow a path represented by a list of cells to cross
     IEnumerator MoveFollowingPath(List<Cell> path)
     {
@@ -149,17 +164,23 @@ public class Unit : MonoBehaviour
     //move to a given cell
     IEnumerator MoveToCell(Cell cell)
     {
-        if (cell.GetIsOccupied() == false)
+        if (!cell.GetIsOccupied())
         {
             isActing = true;
             //change the occupied tile then start the animation
             occupyNewCell(cell);
-            StopCoroutine(MoveAnimation(cell));
+            //StopCoroutine(MoveAnimation(cell));
             StartCoroutine(MoveAnimation(cell));
             yield return new WaitForSeconds(moveSpeed);
             //ensure that the unit is at the center of the current cell before it can start acting again
             setPosition(cell);
             isActing = false;
+        }
+
+        else
+        {
+            path = null;
+            yield return new WaitForSeconds(moveSpeed);
         }
     }
 
@@ -271,21 +292,20 @@ public class Unit : MonoBehaviour
         yield return null;
     }
 
-    private void occupyNewCell(Cell cell)
+    private void occupyNewCell(Cell newCell)
     {
         if (currentCell != null)
         {
-            currentCell.SetIsOccupied(false);
+            currentCell.DecreaseNumberOfUnits();      
         }
 
-        currentCell = cell;
-        currentCell.SetIsOccupied(true);
+        currentCell = newCell;
+        currentCell.IncreaseNumberOfUnits();
     }
 
     //set the position of the unit in a cell
     public void setPosition(Cell cell)
     {
-        currentCell = cell;
         currentPosition = currentCell.TileMapPosition;
         worldPosition = new Vector3(currentCell.WorldPosition.x, currentCell.WorldPosition.y, 0);
         transform.position = worldPosition;
@@ -340,7 +360,6 @@ public class Unit : MonoBehaviour
         localBoard[currentCellPosition.x, currentCellPosition.y].isExplorationList = true;
 
         //determines the path to the target cell by explorating neighbour cells of a cell in the exploration list
-        bool continueSearch = true;
         int debugSafetyCount = 0;
         do
         {
@@ -373,8 +392,6 @@ public class Unit : MonoBehaviour
                 //if the cell we are explorating is the target cell, return the path to this cell
                 if (localBoard[localClosestCell.x, localClosestCell.y].thisCell == targetCell)
                 {
-                    continueSearch = false;
-
                     do
                     {
                         //add the previous cell of the path to the list, then go to this cell
@@ -401,14 +418,14 @@ public class Unit : MonoBehaviour
                         (int x, int y) cellNeighbourPosition = (cellNeighbour.TileMapPositionOffset().x, cellNeighbour.TileMapPositionOffset().y);
 
                         //if the cost of the neighbour is bigger than the cost of this cell + 1,
-                        //it means that there is a shorter path than the one the neighbour knows which
+                        //it means that there is a shorter path than the one the neighbour knows
                         if (localBoard[cellNeighbourPosition.x, cellNeighbourPosition.y].cost > localBoard[localClosestCell.x, localClosestCell.y].cost + 1)
                         {
                             localBoard[cellNeighbourPosition.x, cellNeighbourPosition.y].cost = localBoard[localClosestCell.x, localClosestCell.y].cost + 1;
                             localBoard[cellNeighbourPosition.x, cellNeighbourPosition.y].previousCell = localBoard[localClosestCell.x, localClosestCell.y].thisCell;
                         }
 
-                        if (!localBoard[cellNeighbourPosition.x, cellNeighbourPosition.y].isExplorationList && (cellNeighbour.GetIsOccupied() == false || cellNeighbour == targetCell))
+                        if (!localBoard[cellNeighbourPosition.x, cellNeighbourPosition.y].isExplorationList && (cellNeighbour.GetIsOccupied() == false || cellNeighbour == targetCell) && !localBoard[cellNeighbourPosition.x, cellNeighbourPosition.y].isMarked)
                         {
                             explorationList.Add((cellNeighbourPosition.x, cellNeighbourPosition.y));
                             localBoard[cellNeighbourPosition.x, cellNeighbourPosition.y].isExplorationList = true;
@@ -417,7 +434,7 @@ public class Unit : MonoBehaviour
                 }
             }
         }
-        while (continueSearch && debugSafetyCount < 1000); //while we haven't found the path to the target cell
+        while (explorationList.Count > 0 /*&& debugSafetyCount < 500*/); //while we haven't found the path to the target cell
 
         return null;
     }
@@ -468,7 +485,7 @@ public class Unit : MonoBehaviour
     {
         if(currentLife <= 0)
         {
-            currentCell.SetIsOccupied(false);
+            currentCell.DecreaseNumberOfUnits();
             Destroy(this.gameObject);
         }
     }
@@ -519,7 +536,7 @@ public class Unit : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if(canMove && CompareTag("UnitAlly"))
+        if(canMove /*&& CompareTag("UnitAlly")*/)
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -537,7 +554,7 @@ public class Unit : MonoBehaviour
 
     private void OnMouseUp()
     {
-        if(canMove && CompareTag("UnitAlly"))
+        if(canMove /*&& CompareTag("UnitAlly")*/)
         {
             Vector3 mousePos;
             mousePos = Input.mousePosition;
@@ -548,7 +565,11 @@ public class Unit : MonoBehaviour
             if (board.GetCell(tileCoordinate) == null || board.GetCell(tileCoordinate).GetIsOccupied() == true)
                 setPosition(board.GetCell(currentPosition));
             else
-                setPosition(board.GetCell(tileCoordinate));            
+            {
+                Cell newCell = board.GetCell(tileCoordinate);
+                occupyNewCell(newCell);
+                setPosition(newCell);
+            }
 
             moving = false;
         }
