@@ -90,7 +90,7 @@ public class Unit : MonoBehaviour
         range = classStat.range;
 
         healthBar.SetHealth(currentLife, maxLife);
-        healthBar.SetStamina(mana, maxMana);
+        healthBar.SetStamina(currentStamina, maxStamina);
 
         //canAttack = true;
         hasTarget = false;
@@ -122,11 +122,7 @@ public class Unit : MonoBehaviour
 
     public void UpdateUnit()
     {
-
         canMove = false;
-
-        //findTarget();
-        checkDeath();
 
         if (path == null && !isActing)
         {
@@ -167,6 +163,7 @@ public class Unit : MonoBehaviour
                 targetPos = path[targetDistance-1].TileMapPosition;
                 targetUnit = path[targetDistance-1].GetCurrentUnit();
 
+                print(targetUnit);
             }
         }
     }
@@ -176,7 +173,7 @@ public class Unit : MonoBehaviour
         isActing = true;
         yield return new WaitForSeconds(seconds);
         isActing = false;
-        findTarget();
+        path = PathfindingTool.findTarget(board, currentCell, targetTag);        
     }
 
     //follow a path represented by a list of cells to cross
@@ -336,6 +333,7 @@ public class Unit : MonoBehaviour
 
         currentCell = newCell;
         currentCell.IncreaseNumberOfUnits();
+        currentCell.SetCurrentUnit(this);
     }
 
     //set the position of the unit in a cell
@@ -370,6 +368,7 @@ public class Unit : MonoBehaviour
         currentLife -= damage;
         checkDeath();
         healthBar.SetHealth(currentLife);
+        StartCoroutine(TakeDamageAnimation());
     }
 
     public void heal(int heal)
@@ -379,8 +378,7 @@ public class Unit : MonoBehaviour
         {
             currentLife = maxLife;
         }
-        healthBar.SetHealth(currentLife);
-        StartCoroutine(TakeDamageAnimation());
+        healthBar.SetHealth(currentLife);        
     }
 
     IEnumerator TakeDamageAnimation()
