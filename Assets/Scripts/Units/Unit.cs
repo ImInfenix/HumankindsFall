@@ -242,6 +242,17 @@ public class Unit : MonoBehaviour
     public void takeDamage(int damage)
     {
         currentLife -= damage;
+        checkDeath();
+        healthBar.SetHealth(currentLife);
+    }
+
+    public void heal(int heal)
+    {
+        currentLife += heal;
+        if(currentLife > maxLife)
+        {
+            currentLife = maxLife;
+        }
         healthBar.SetHealth(currentLife);
     }
 
@@ -306,5 +317,19 @@ public class Unit : MonoBehaviour
     public bool getIsAbilityActivated()
     {
         return isAbilityActivated;
+    }
+
+    public int getRange()
+    {
+        return range;
+    }
+    public void setRange(int range)
+    {
+        this.range = range;
+    }
+
+    public int getCurrentLife()
+    {
+        return currentLife;
     }
 }

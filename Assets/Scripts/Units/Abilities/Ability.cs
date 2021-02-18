@@ -4,9 +4,14 @@ using UnityEngine;
 
 abstract public class Ability : MonoBehaviour
 {
-    [SerializeField] protected int castStaminaThreshold;
-    protected int currentStamina;
+
     protected Unit unit;
+    protected int currentStamina;
+
+    [SerializeField] protected int castStaminaThreshold;
+    protected int castRange;
+    protected int areaOfEffect;
+    protected int power;
 
     public void setUnit(Unit unit)
     {
