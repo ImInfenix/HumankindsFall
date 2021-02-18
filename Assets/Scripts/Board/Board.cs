@@ -151,6 +151,11 @@ public class Board : MonoBehaviour
         tilemap.SetColor(position, colour);
     }
 
+    public Tilemap GetTilemap()
+    {
+        return tilemap;
+    }
+
     IEnumerator LateStart(float waitTime)
     {
         /*yield return new WaitForSeconds(waitTime);
@@ -161,6 +166,6 @@ public class Board : MonoBehaviour
         List<Cell> listCells = PathfindingTool.cellsInRadius(board[3, 3], 2);
         print("Le nombre de cases : " + listCells.Count);
 
-        
+
     }
 }
