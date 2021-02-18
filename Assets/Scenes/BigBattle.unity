@@ -181,6 +181,16 @@ PrefabInstance:
       objectReference: {fileID: 731789020}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
+      propertyPath: unitName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
+      propertyPath: abilityName
+      value: FireBall
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
       propertyPath: initialPos.x
       value: -2
       objectReference: {fileID: 0}
@@ -299,6 +309,16 @@ PrefabInstance:
       propertyPath: board
       value: 
       objectReference: {fileID: 731789020}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
+      propertyPath: unitName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
+      propertyPath: abilityName
+      value: FireBall
+      objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: initialPos.x
@@ -440,10 +460,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
+      propertyPath: unitName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
       propertyPath: classStat
       value: 
       objectReference: {fileID: 11400000, guid: 1bfdba91039434f47a5db49ef4005d27,
         type: 2}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
+      propertyPath: abilityName
+      value: FireBall
+      objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: attackSpeed
@@ -668,10 +698,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
+      propertyPath: unitName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
       propertyPath: classStat
       value: 
       objectReference: {fileID: 11400000, guid: a237670b240c1c14ead404c0ef53f35e,
         type: 2}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
+      propertyPath: abilityName
+      value: FireBall
+      objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: attackSpeed
@@ -802,6 +842,16 @@ PrefabInstance:
       propertyPath: board
       value: 
       objectReference: {fileID: 731789020}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
+      propertyPath: unitName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
+      propertyPath: abilityName
+      value: FireBall
+      objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: initialPos.x
@@ -938,10 +988,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
+      propertyPath: unitName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
       propertyPath: classStat
       value: 
       objectReference: {fileID: 11400000, guid: a237670b240c1c14ead404c0ef53f35e,
         type: 2}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
+      propertyPath: abilityName
+      value: FireBall
+      objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: attackSpeed
@@ -2297,6 +2357,16 @@ PrefabInstance:
       objectReference: {fileID: 731789020}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
+      propertyPath: unitName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
+      propertyPath: abilityName
+      value: FireBall
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
       propertyPath: initialPos.x
       value: -2
       objectReference: {fileID: 0}
@@ -2431,10 +2501,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
+      propertyPath: unitName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
       propertyPath: classStat
       value: 
       objectReference: {fileID: 11400000, guid: a237670b240c1c14ead404c0ef53f35e,
         type: 2}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
+      propertyPath: abilityName
+      value: FireBall
+      objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: attackSpeed
@@ -2567,6 +2647,16 @@ PrefabInstance:
       objectReference: {fileID: 731789020}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
+      propertyPath: unitName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
+      propertyPath: abilityName
+      value: FireBall
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
       propertyPath: initialPos.x
       value: -2
       objectReference: {fileID: 0}
@@ -2690,6 +2780,16 @@ PrefabInstance:
       propertyPath: board
       value: 
       objectReference: {fileID: 731789020}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
+      propertyPath: unitName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
+      propertyPath: abilityName
+      value: FireBall
+      objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: initialPos.x
@@ -2956,10 +3056,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
+      propertyPath: unitName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
       propertyPath: classStat
       value: 
       objectReference: {fileID: 11400000, guid: 1bfdba91039434f47a5db49ef4005d27,
         type: 2}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
+      propertyPath: abilityName
+      value: FireBall
+      objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: attackSpeed
@@ -3313,6 +3423,16 @@ PrefabInstance:
       objectReference: {fileID: 731789020}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
+      propertyPath: unitName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
+      propertyPath: abilityName
+      value: FireBall
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
       propertyPath: initialPos.x
       value: -2
       objectReference: {fileID: 0}
@@ -3534,6 +3654,16 @@ PrefabInstance:
       objectReference: {fileID: 731789020}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
+      propertyPath: unitName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
+      propertyPath: abilityName
+      value: FireBall
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
       propertyPath: initialPos.x
       value: -2
       objectReference: {fileID: 0}
@@ -3668,10 +3798,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
+      propertyPath: unitName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
       propertyPath: classStat
       value: 
       objectReference: {fileID: 11400000, guid: a237670b240c1c14ead404c0ef53f35e,
         type: 2}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
+      propertyPath: abilityName
+      value: FireBall
+      objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: attackSpeed
@@ -3818,10 +3958,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
+      propertyPath: unitName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
       propertyPath: classStat
       value: 
       objectReference: {fileID: 11400000, guid: 1bfdba91039434f47a5db49ef4005d27,
         type: 2}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
+      propertyPath: abilityName
+      value: FireBall
+      objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: attackSpeed
@@ -3999,6 +4149,16 @@ PrefabInstance:
       objectReference: {fileID: 731789020}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
+      propertyPath: unitName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
+      propertyPath: abilityName
+      value: FireBall
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
       propertyPath: initialPos.x
       value: -2
       objectReference: {fileID: 0}
@@ -4138,10 +4298,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
+      propertyPath: unitName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
       propertyPath: classStat
       value: 
       objectReference: {fileID: 11400000, guid: 1bfdba91039434f47a5db49ef4005d27,
         type: 2}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
+      propertyPath: abilityName
+      value: FireBall
+      objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: attackSpeed
@@ -4283,10 +4453,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
+      propertyPath: unitName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
       propertyPath: classStat
       value: 
       objectReference: {fileID: 11400000, guid: 1bfdba91039434f47a5db49ef4005d27,
         type: 2}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
+      propertyPath: abilityName
+      value: FireBall
+      objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: attackSpeed
@@ -4428,10 +4608,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
+      propertyPath: unitName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
       propertyPath: classStat
       value: 
       objectReference: {fileID: 11400000, guid: 1bfdba91039434f47a5db49ef4005d27,
         type: 2}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
+      propertyPath: abilityName
+      value: FireBall
+      objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: attackSpeed
@@ -4711,6 +4901,16 @@ PrefabInstance:
       objectReference: {fileID: 731789020}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
+      propertyPath: unitName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
+      propertyPath: abilityName
+      value: FireBall
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
       propertyPath: initialPos.x
       value: -2
       objectReference: {fileID: 0}
@@ -4829,6 +5029,16 @@ PrefabInstance:
       propertyPath: board
       value: 
       objectReference: {fileID: 731789020}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
+      propertyPath: unitName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
+      propertyPath: abilityName
+      value: FireBall
+      objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: initialPos.x
@@ -4970,10 +5180,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
+      propertyPath: unitName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
       propertyPath: classStat
       value: 
       objectReference: {fileID: 11400000, guid: 1bfdba91039434f47a5db49ef4005d27,
         type: 2}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
+      propertyPath: abilityName
+      value: FireBall
+      objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: attackSpeed
@@ -5115,10 +5335,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
+      propertyPath: unitName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
       propertyPath: classStat
       value: 
       objectReference: {fileID: 11400000, guid: 1bfdba91039434f47a5db49ef4005d27,
         type: 2}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
+      propertyPath: abilityName
+      value: FireBall
+      objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: attackSpeed
@@ -5251,6 +5481,16 @@ PrefabInstance:
       objectReference: {fileID: 731789020}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
+      propertyPath: unitName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
+      propertyPath: abilityName
+      value: FireBall
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
       propertyPath: initialPos.x
       value: -2
       objectReference: {fileID: 0}
@@ -5374,6 +5614,16 @@ PrefabInstance:
       propertyPath: board
       value: 
       objectReference: {fileID: 731789020}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
+      propertyPath: unitName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
+      propertyPath: abilityName
+      value: FireBall
+      objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: initialPos.x
@@ -5510,10 +5760,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
+      propertyPath: unitName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
       propertyPath: classStat
       value: 
       objectReference: {fileID: 11400000, guid: 1bfdba91039434f47a5db49ef4005d27,
         type: 2}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
+      propertyPath: abilityName
+      value: FireBall
+      objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: attackSpeed
@@ -5649,6 +5909,16 @@ PrefabInstance:
       propertyPath: board
       value: 
       objectReference: {fileID: 731789020}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
+      propertyPath: unitName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
+      propertyPath: abilityName
+      value: FireBall
+      objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: initialPos.x
@@ -5851,10 +6121,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
+      propertyPath: unitName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
       propertyPath: classStat
       value: 
       objectReference: {fileID: 11400000, guid: 1bfdba91039434f47a5db49ef4005d27,
         type: 2}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
+      propertyPath: abilityName
+      value: FireBall
+      objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: attackSpeed
@@ -5987,6 +6267,16 @@ PrefabInstance:
       objectReference: {fileID: 731789020}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
+      propertyPath: unitName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
+      propertyPath: abilityName
+      value: FireBall
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
       propertyPath: initialPos.x
       value: -2
       objectReference: {fileID: 0}
@@ -6105,6 +6395,16 @@ PrefabInstance:
       propertyPath: board
       value: 
       objectReference: {fileID: 731789020}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
+      propertyPath: unitName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
+      propertyPath: abilityName
+      value: FireBall
+      objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: initialPos.x
@@ -6235,6 +6535,16 @@ PrefabInstance:
       propertyPath: board
       value: 
       objectReference: {fileID: 731789020}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
+      propertyPath: unitName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
+      propertyPath: abilityName
+      value: FireBall
+      objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: initialPos.x
@@ -6371,10 +6681,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
+      propertyPath: unitName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
       propertyPath: classStat
       value: 
       objectReference: {fileID: 11400000, guid: a237670b240c1c14ead404c0ef53f35e,
         type: 2}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
+      propertyPath: abilityName
+      value: FireBall
+      objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: attackSpeed
@@ -6589,6 +6909,16 @@ PrefabInstance:
       objectReference: {fileID: 731789020}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
+      propertyPath: unitName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
+      propertyPath: abilityName
+      value: FireBall
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
       propertyPath: initialPos.x
       value: -2
       objectReference: {fileID: 0}
@@ -6723,10 +7053,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
+      propertyPath: unitName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
       propertyPath: classStat
       value: 
       objectReference: {fileID: 11400000, guid: 1bfdba91039434f47a5db49ef4005d27,
         type: 2}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
+      propertyPath: abilityName
+      value: FireBall
+      objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: attackSpeed
@@ -6857,6 +7197,16 @@ PrefabInstance:
       propertyPath: board
       value: 
       objectReference: {fileID: 731789020}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
+      propertyPath: unitName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
+      propertyPath: abilityName
+      value: FireBall
+      objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: initialPos.x
@@ -6998,10 +7348,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
+      propertyPath: unitName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
       propertyPath: classStat
       value: 
       objectReference: {fileID: 11400000, guid: 1bfdba91039434f47a5db49ef4005d27,
         type: 2}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
+      propertyPath: abilityName
+      value: FireBall
+      objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: attackSpeed
@@ -7143,10 +7503,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
+      propertyPath: unitName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
       propertyPath: classStat
       value: 
       objectReference: {fileID: 11400000, guid: 1bfdba91039434f47a5db49ef4005d27,
         type: 2}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
+      propertyPath: abilityName
+      value: FireBall
+      objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: attackSpeed
@@ -7284,6 +7654,16 @@ PrefabInstance:
       objectReference: {fileID: 731789020}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
+      propertyPath: unitName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
+      propertyPath: abilityName
+      value: FireBall
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
       propertyPath: initialPos.x
       value: -2
       objectReference: {fileID: 0}
@@ -7418,10 +7798,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
+      propertyPath: unitName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
       propertyPath: classStat
       value: 
       objectReference: {fileID: 11400000, guid: a237670b240c1c14ead404c0ef53f35e,
         type: 2}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
+      propertyPath: abilityName
+      value: FireBall
+      objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: attackSpeed
@@ -7620,10 +8010,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
+      propertyPath: unitName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
       propertyPath: classStat
       value: 
       objectReference: {fileID: 11400000, guid: 1bfdba91039434f47a5db49ef4005d27,
         type: 2}
+    - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
+        type: 3}
+      propertyPath: abilityName
+      value: FireBall
+      objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: attackSpeed

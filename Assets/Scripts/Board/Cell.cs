@@ -56,12 +56,12 @@ public class Cell
     {
         this.isOccupied = isOccupied;
 
-
+        /*
         if (isOccupied)
             GameObject.Find("Board").GetComponent<Board>().SetTileColour(Color.red, _tileMapPosition);
         else
             GameObject.Find("Board").GetComponent<Board>().SetTileColour(Color.white, _tileMapPosition);
-
+        */
     }
 
     public void SetCurrentUnit(Unit unit)

@@ -48,13 +48,13 @@ public class FireBall : Ability
         if (bestTargetCell != null)
         {
             List<Cell> listCellsTouched = PathfindingTool.cellsInRadius(bestTargetCell, areaOfEffect);
-            StartCoroutine(ProjectileAnimation(bestTargetCell, listUnitsTouch, listCellsTouched));
+            StartCoroutine(ProjectileAnimation(bestTargetCell, listCellsTouched));
             unit.setRange(basicRange);
         }
         unit.setIsAbilityActivated(false);
     }
     
-    IEnumerator ProjectileAnimation(Cell targetCell, List<Unit> listUnitsTouch, List<Cell> listCells)
+    IEnumerator ProjectileAnimation(Cell targetCell, List<Cell> listCells)
     {
         Vector3Int startPosition = transform.GetComponent<Unit>().getPosition();
         GameObject projectile = Instantiate(projectileGameObject, startPosition, Quaternion.identity, transform);
@@ -86,6 +86,8 @@ public class FireBall : Ability
         }
 
         Destroy(projectile);
+
+        List<Unit> listUnitsTouch = PathfindingTool.unitsInRadius(targetCell, areaOfEffect, unit.getTargetTag());
 
         foreach (Unit unit in listUnitsTouch)
         {

@@ -162,8 +162,6 @@ public class Unit : MonoBehaviour
                 hasTarget = true;
                 targetPos = path[targetDistance-1].TileMapPosition;
                 targetUnit = path[targetDistance-1].GetCurrentUnit();
-
-                print(targetUnit);
             }
         }
     }
@@ -329,6 +327,7 @@ public class Unit : MonoBehaviour
         if (currentCell != null)
         {
             currentCell.DecreaseNumberOfUnits();
+            currentCell.SetCurrentUnit(null);
         }
 
         currentCell = newCell;
@@ -358,7 +357,6 @@ public class Unit : MonoBehaviour
     {
         if(currentLife <= 0)
         {
-            currentCell.DecreaseNumberOfUnits();
             Destroy(this.gameObject);
         }
     }
@@ -462,6 +460,7 @@ public class Unit : MonoBehaviour
 
     private void OnDestroy()
     {
+        currentCell.DecreaseNumberOfUnits();
         GameManager.instance.RemoveUnit(this);
     }
 
