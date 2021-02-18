@@ -6,19 +6,23 @@ public class FireBall : Ability
 {
     [SerializeField] private GameObject projectileGameObject;
 
-    int castRange = 4;
-    int blastRadius = 1;
+    private int basicRange;
 
     private void Start()
     {
-        castStaminaThreshold = 3;
-    
+        castStaminaThreshold = 8;
+        castRange = 4;
+        areaOfEffect = 1;
+        power = 35;
+
         projectileGameObject = Resources.Load("Ability Prefabs/Fireball") as GameObject;
     }
     override public void castAbility()
     {
-        Debug.Log("Coucou !");
         unit.setIsAbilityActivated(true);
+
+        basicRange = unit.getRange();
+        unit.setRange(castRange);
 
         List<Cell> listCells = PathfindingTool.cellsInRadius(unit.currentCell, castRange);
 
@@ -28,7 +32,7 @@ public class FireBall : Ability
 
         foreach (Cell cell in listCells)
         {
-            List<Unit> listUnitsTouchProv = PathfindingTool.unitsInRadius(cell, blastRadius, unit.getTargetTag());
+            List<Unit> listUnitsTouchProv = PathfindingTool.unitsInRadius(cell, areaOfEffect, unit.getTargetTag());
             int maxTargetTouchProv = listUnitsTouchProv.Count;
 
             if (maxTargetTouchProv > maxTargetTouch)
@@ -43,8 +47,9 @@ public class FireBall : Ability
 
         if (bestTargetCell != null)
         {
-            List<Cell> listCellsTouched = PathfindingTool.cellsInRadius(bestTargetCell, blastRadius);
+            List<Cell> listCellsTouched = PathfindingTool.cellsInRadius(bestTargetCell, areaOfEffect);
             StartCoroutine(ProjectileAnimation(bestTargetCell, listUnitsTouch, listCellsTouched));
+            unit.setRange(basicRange);
         }
         unit.setIsAbilityActivated(false);
     }
@@ -82,13 +87,9 @@ public class FireBall : Ability
 
         Destroy(projectile);
 
-
-        print("flagsdfqsf");
-        print("listUnitsTouch : " + listUnitsTouch.Count);
         foreach (Unit unit in listUnitsTouch)
         {
-            print("mort !");
-            unit.takeDamage(1000);
+            unit.takeDamage(power);
         }
 
         //color all hit tiles in red for a short duration, then set the color back to normal
