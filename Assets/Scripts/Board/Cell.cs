@@ -11,6 +11,7 @@ public class Cell
     private int numberOfUnits = 0;
 
     private Vector2Int _boardSize;
+    private Unit currentUnit = null;
 
     public Vector3 WorldPosition { get { return _worldPosition; } }
     private Vector3 _worldPosition;
@@ -29,6 +30,8 @@ public class Cell
     private Cell _bottomRight;
     public Cell BottomLeft { get { return _bottomLeft; } }
     private Cell _bottomLeft;
+
+    private Color _baseColor;
 
     public Cell(Vector3Int positionInBoard, Vector3 worldPosition, UnityEngine.Tilemaps.Tile associatedTileInTilemap, Vector2Int boardSize)
     {
@@ -53,12 +56,22 @@ public class Cell
     {
         this.isOccupied = isOccupied;
 
-        
+
         if (isOccupied)
             GameObject.Find("Board").GetComponent<Board>().SetTileColour(Color.red, _tileMapPosition);
         else
             GameObject.Find("Board").GetComponent<Board>().SetTileColour(Color.white, _tileMapPosition);
-        
+
+    }
+
+    public void SetCurrentUnit(Unit unit)
+    {
+        currentUnit = unit;
+    }
+
+    public Unit GetCurrentUnit()
+    {
+        return currentUnit;
     }
 
     public Cell[] GetAllNeighbours()
@@ -94,5 +107,10 @@ public class Cell
         numberOfUnits--;
         if (numberOfUnits <= 0)
             SetIsOccupied(false);
+    }
+
+    public void SetColor(Color color)
+    {
+        GameObject.Find("Board").GetComponent<Board>().SetTileColour(color, _tileMapPosition);
     }
 }
