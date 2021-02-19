@@ -23,4 +23,5 @@ public class ClassStat : ScriptableObject
     public int range;
     public GameObject projectile;
     public string[] abilities;
+    public Sprite classIconSprite;
 }

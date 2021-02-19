@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-
+using UnityEngine.UI;
 
 public class Unit : MonoBehaviour
 {
@@ -15,8 +15,6 @@ public class Unit : MonoBehaviour
 
     private int maxLife;
     [SerializeField] private int currentLife;
-    private int maxStamina;
-    private int currentStamina;
     private int incrementStamina;
     private int armor;
     private float moveSpeed;
@@ -55,7 +53,7 @@ public class Unit : MonoBehaviour
     private Ability ability;
 
     [SerializeField] private HealthbarHandler healthBar;
-
+    [SerializeField] private Image classIcon;
     private GameObject projectileGameObject;
 
     // Start is called before the first frame update
@@ -65,8 +63,6 @@ public class Unit : MonoBehaviour
 
         maxLife = raceStats.maxLife + classStat.maxLife;
         currentLife = maxLife;
-        maxStamina = 10/*raceStats.maxMana + classStat.maxMana*/;
-        currentStamina = 0 /*raceStats.mana + classStat.mana*/;
         incrementStamina = 1;
         armor = raceStats.armor + classStat.armor;
         moveSpeed = raceStats.moveSpeed + classStat.moveSpeed;
@@ -77,7 +73,9 @@ public class Unit : MonoBehaviour
         projectileGameObject = classStat.projectile;
 
         healthBar.SetHealth(currentLife, maxLife);
-        healthBar.SetStamina(currentStamina, maxStamina);
+
+        classIcon.sprite = classStat.classIconSprite;
+        gameObject.GetComponent<SpriteRenderer>().sprite = raceStats.unitSprite;
 
         //canAttack = true;
         hasTarget = false;
@@ -103,7 +101,7 @@ public class Unit : MonoBehaviour
     private void GenerateRaceAndClass()
     {
         //get all RaceStat ScriptableObject
-        Object[] races = Resources.LoadAll("Stat Units/Race", typeof(RaceStat));
+        RaceStat[] races = Resources.LoadAll<RaceStat>("Stat Units/Race");
 
         //allies are not humans
         if (CompareTag("UnitAlly"))
@@ -112,7 +110,7 @@ public class Unit : MonoBehaviour
             {
                 //select a random RaceStat
                 int randomRaceIndex = Random.Range(0, races.Length);
-                raceStats = (RaceStat)races[randomRaceIndex];
+                raceStats = races[randomRaceIndex];
             }
             while (raceStats.race == Race.Human);
         }
@@ -131,7 +129,7 @@ public class Unit : MonoBehaviour
         }
 
         //get all ClassStat scriptableObject
-        Object[] classes = Resources.LoadAll("Stat Units/Class", typeof(ClassStat));
+        ClassStat[] classes = Resources.LoadAll<ClassStat>("Stat Units/Class");
 
         //select a random ClassStat
         int randomClassIndex = Random.Range(0, classes.Length);
@@ -524,5 +522,10 @@ public class Unit : MonoBehaviour
     public int getCurrentLife()
     {
         return currentLife;
+    }
+
+    public HealthbarHandler getHealthbar()
+    {
+        return healthBar;
     }
 }

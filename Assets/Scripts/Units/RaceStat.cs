@@ -24,4 +24,5 @@ public class RaceStat : ScriptableObject
     public float attackSpeed;
     public int damage;
     public string[] unitNames;
+    public Sprite unitSprite;
 }

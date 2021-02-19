@@ -23,3 +23,4 @@ MonoBehaviour:
     type: 3}
   abilities:
   - DeadlyShot
+  classIconSprite: {fileID: 21300000, guid: 86c6c6f29db512a4e807516745fad1ec, type: 3}

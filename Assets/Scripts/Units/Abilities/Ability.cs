@@ -16,15 +16,9 @@ abstract public class Ability : MonoBehaviour
     public void setUnit(Unit unit)
     {
         this.unit = unit;
+        unit.getHealthbar().SetStamina(currentStamina, castStaminaThreshold);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    //
     public void updateAbility(int incrementStamina)
     {
         currentStamina += incrementStamina;
@@ -33,6 +27,8 @@ abstract public class Ability : MonoBehaviour
             currentStamina -= castStaminaThreshold;
             castAbility();
         }
+
+        unit.getHealthbar().SetStamina(currentStamina, castStaminaThreshold);
     }
 
     abstract public void castAbility();

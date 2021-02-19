@@ -25,7 +25,7 @@ public class HealthbarHandler : MonoBehaviour
 
     private void UpdatePosition()
     {
-        this.transform.GetChild(0).transform.position = attachedCamera.WorldToScreenPoint(transform.parent.position + offset);
+        transform.GetChild(0).transform.position = attachedCamera.WorldToScreenPoint(transform.parent.position + offset);
     }
 
     public void SetHealth(int health, int maxHealth)

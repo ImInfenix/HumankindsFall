@@ -26,3 +26,4 @@ MonoBehaviour:
   - Zovak
   - Rhul
   - Agvur
+  unitSprite: {fileID: 21300000, guid: 09d067041c81d534f9552bbd1b5f76c8, type: 3}

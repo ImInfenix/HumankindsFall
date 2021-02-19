@@ -56,7 +56,7 @@ public class FireBall : Ability
     
     IEnumerator ProjectileAnimation(Cell targetCell, List<Cell> listCells)
     {
-        Vector3Int startPosition = transform.GetComponent<Unit>().getPosition();
+        Vector3 startPosition = transform.position;
         GameObject projectile = Instantiate(projectileGameObject, startPosition, Quaternion.identity, transform);
 
         //set the speed of the animation (distance at each iteration of while loop)
