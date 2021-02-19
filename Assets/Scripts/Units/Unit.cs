@@ -103,7 +103,7 @@ public class Unit : MonoBehaviour
     private void GenerateRaceAndClass()
     {
         //get all RaceStat ScriptableObject
-        RaceStat[] races = (RaceStat[])Resources.FindObjectsOfTypeAll(typeof(RaceStat));
+        Object[] races = Resources.LoadAll("Stat Units/Race", typeof(RaceStat));
 
         //allies are not humans
         if (CompareTag("UnitAlly"))
@@ -112,7 +112,7 @@ public class Unit : MonoBehaviour
             {
                 //select a random RaceStat
                 int randomRaceIndex = Random.Range(0, races.Length);
-                raceStats = races[randomRaceIndex];
+                raceStats = (RaceStat)races[randomRaceIndex];
             }
             while (raceStats.race == Race.Human);
         }
@@ -131,11 +131,11 @@ public class Unit : MonoBehaviour
         }
 
         //get all ClassStat scriptableObject
-        ClassStat[] classes = (ClassStat[])Resources.FindObjectsOfTypeAll(typeof(ClassStat));
+        Object[] classes = Resources.LoadAll("Stat Units/Class", typeof(ClassStat));
 
         //select a random ClassStat
         int randomClassIndex = Random.Range(0, classes.Length);
-        classStat = classes[randomClassIndex];
+        classStat = (ClassStat)classes[randomClassIndex];
 
         //select a random name based on race
         string[] possibleNames = raceStats.unitNames;

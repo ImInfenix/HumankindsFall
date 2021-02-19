@@ -19,5 +19,7 @@ MonoBehaviour:
   attackSpeed: 1
   damage: 6
   range: 2
+  projectile: {fileID: 3756010517097857206, guid: 28de22995b20a354ba2da0a6e56df8ef,
+    type: 3}
   abilities:
   - FireBall
