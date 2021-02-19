@@ -150,6 +150,14 @@ public class Board : MonoBehaviour
 
         tilemap.SetColor(position, colour);
     }
+    
+    public void StartSetColorForSeconds(List<Cell> cells)
+    {
+        foreach (Cell cell in cells)
+        {
+            StartCoroutine(cell.SetColorForSeconds(new Color(1, 0.5f, 0.5f), 0.2f));
+        }
+    }
 
     public Tilemap GetTilemap()
     {

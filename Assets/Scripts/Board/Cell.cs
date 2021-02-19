@@ -31,7 +31,7 @@ public class Cell
     public Cell BottomLeft { get { return _bottomLeft; } }
     private Cell _bottomLeft;
 
-    private Color _baseColor;
+    private bool _isColored;
 
     public Cell(Vector3Int positionInBoard, Vector3 worldPosition, UnityEngine.Tilemaps.Tile associatedTileInTilemap, Vector2Int boardSize)
     {
@@ -39,6 +39,7 @@ public class Cell
         _worldPosition = worldPosition;
         _type = new TileType(associatedTileInTilemap);
         _boardSize = boardSize;
+        _isColored = false;
     }
 
     public Vector3Int TileMapPositionOffset()
@@ -109,8 +110,23 @@ public class Cell
             SetIsOccupied(false);
     }
 
-    public void SetColor(Color color)
+    private void SetColor(Color color)
     {
         GameObject.Find("Board").GetComponent<Board>().SetTileColour(color, _tileMapPosition);
     }
+
+    public IEnumerator SetColorForSeconds(Color color, float seconds)
+    {
+        if (!_isColored)
+        {
+            _isColored = true;
+            SetColor(color);
+            yield return new WaitForSeconds(seconds);
+            SetColor(Color.white);
+        }
+
+        _isColored = false;
+    }
+
+
 }

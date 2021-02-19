@@ -187,7 +187,7 @@ PrefabInstance:
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: abilityName
-      value: FireBall
+      value: HealZone
       objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
@@ -317,7 +317,7 @@ PrefabInstance:
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: abilityName
-      value: FireBall
+      value: HealZone
       objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
@@ -472,7 +472,7 @@ PrefabInstance:
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: abilityName
-      value: FireBall
+      value: HealZone
       objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
@@ -710,7 +710,7 @@ PrefabInstance:
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: abilityName
-      value: FireBall
+      value: HealZone
       objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
@@ -850,7 +850,7 @@ PrefabInstance:
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: abilityName
-      value: FireBall
+      value: HealZone
       objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
@@ -1000,7 +1000,7 @@ PrefabInstance:
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: abilityName
-      value: FireBall
+      value: HealZone
       objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
@@ -2363,7 +2363,7 @@ PrefabInstance:
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: abilityName
-      value: FireBall
+      value: HealZone
       objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
@@ -2513,7 +2513,7 @@ PrefabInstance:
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: abilityName
-      value: FireBall
+      value: HealZone
       objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
@@ -2653,7 +2653,7 @@ PrefabInstance:
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: abilityName
-      value: FireBall
+      value: HealZone
       objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
@@ -2788,7 +2788,7 @@ PrefabInstance:
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: abilityName
-      value: FireBall
+      value: HealZone
       objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
@@ -3068,7 +3068,7 @@ PrefabInstance:
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: abilityName
-      value: FireBall
+      value: HealZone
       objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
@@ -3429,7 +3429,7 @@ PrefabInstance:
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: abilityName
-      value: FireBall
+      value: HealZone
       objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
@@ -3660,7 +3660,7 @@ PrefabInstance:
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: abilityName
-      value: FireBall
+      value: HealZone
       objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
@@ -3810,7 +3810,7 @@ PrefabInstance:
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: abilityName
-      value: FireBall
+      value: HealZone
       objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
@@ -3970,7 +3970,7 @@ PrefabInstance:
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: abilityName
-      value: FireBall
+      value: HealZone
       objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
@@ -4155,7 +4155,7 @@ PrefabInstance:
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: abilityName
-      value: FireBall
+      value: HealZone
       objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
@@ -4310,7 +4310,7 @@ PrefabInstance:
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: abilityName
-      value: FireBall
+      value: HealZone
       objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
@@ -4465,7 +4465,7 @@ PrefabInstance:
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: abilityName
-      value: FireBall
+      value: HealZone
       objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
@@ -4620,7 +4620,7 @@ PrefabInstance:
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: abilityName
-      value: FireBall
+      value: HealZone
       objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
@@ -4907,7 +4907,7 @@ PrefabInstance:
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: abilityName
-      value: FireBall
+      value: HealZone
       objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
@@ -5037,7 +5037,7 @@ PrefabInstance:
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: abilityName
-      value: FireBall
+      value: HealZone
       objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
@@ -5192,7 +5192,7 @@ PrefabInstance:
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: abilityName
-      value: FireBall
+      value: HealZone
       objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
@@ -5347,7 +5347,7 @@ PrefabInstance:
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: abilityName
-      value: FireBall
+      value: HealZone
       objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
@@ -5487,7 +5487,7 @@ PrefabInstance:
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: abilityName
-      value: FireBall
+      value: HealZone
       objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
@@ -5622,7 +5622,7 @@ PrefabInstance:
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: abilityName
-      value: FireBall
+      value: HealZone
       objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
@@ -5772,7 +5772,7 @@ PrefabInstance:
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: abilityName
-      value: FireBall
+      value: HealZone
       objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
@@ -5917,7 +5917,7 @@ PrefabInstance:
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: abilityName
-      value: FireBall
+      value: HealZone
       objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
@@ -6133,7 +6133,7 @@ PrefabInstance:
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: abilityName
-      value: FireBall
+      value: HealZone
       objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
@@ -6273,7 +6273,7 @@ PrefabInstance:
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: abilityName
-      value: FireBall
+      value: HealZone
       objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
@@ -6403,7 +6403,7 @@ PrefabInstance:
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: abilityName
-      value: FireBall
+      value: HealZone
       objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
@@ -6543,7 +6543,7 @@ PrefabInstance:
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: abilityName
-      value: FireBall
+      value: HealZone
       objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
@@ -6693,7 +6693,7 @@ PrefabInstance:
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: abilityName
-      value: FireBall
+      value: HealZone
       objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
@@ -6915,7 +6915,7 @@ PrefabInstance:
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: abilityName
-      value: FireBall
+      value: HealZone
       objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
@@ -7065,7 +7065,7 @@ PrefabInstance:
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: abilityName
-      value: FireBall
+      value: HealZone
       objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
@@ -7205,7 +7205,7 @@ PrefabInstance:
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: abilityName
-      value: FireBall
+      value: HealZone
       objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
@@ -7360,7 +7360,7 @@ PrefabInstance:
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: abilityName
-      value: FireBall
+      value: HealZone
       objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
@@ -7515,7 +7515,7 @@ PrefabInstance:
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: abilityName
-      value: FireBall
+      value: HealZone
       objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
@@ -7660,7 +7660,7 @@ PrefabInstance:
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: abilityName
-      value: FireBall
+      value: HealZone
       objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
@@ -7810,7 +7810,7 @@ PrefabInstance:
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: abilityName
-      value: FireBall
+      value: HealZone
       objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
@@ -8022,7 +8022,7 @@ PrefabInstance:
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: abilityName
-      value: FireBall
+      value: HealZone
       objectReference: {fileID: 0}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}

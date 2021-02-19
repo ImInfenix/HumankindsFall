@@ -21,3 +21,5 @@ MonoBehaviour:
   attackSpeed: 1
   damage: 10
   range: 1
+  abilities:
+  - CircularAttack

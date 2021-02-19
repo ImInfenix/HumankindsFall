@@ -6,7 +6,8 @@ public enum Class
 {
     Warrior,
     Mage,
-    Bowman
+    Bowman,
+    Healer
 }
 
 [CreateAssetMenu(fileName = "New UnitClassStat", menuName = "Class Stat Units")]
@@ -15,11 +16,11 @@ public class ClassStat : ScriptableObject
     public Class clas;
 
     public int maxLife;
-    public int maxMana;
-    public int mana;
     public int armor;
     public float moveSpeed;
     public float attackSpeed;
     public int damage;
     public int range;
+    public GameObject projectile;
+    public string[] abilities;
 }

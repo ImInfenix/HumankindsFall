@@ -45,7 +45,7 @@ public class Unit : MonoBehaviour
     private bool isMoving = false;
 
     private SpriteRenderer spriteRenderer;
-    private Color baseColor, damageColor;
+    private Color baseColor, damageColor, healColor;
     private int takingDamageCount = 0;
     private bool isAbilityActivated = false;
     private string targetTag = "UnitAlly";
@@ -54,29 +54,14 @@ public class Unit : MonoBehaviour
 
     private Ability ability;
 
-    public HealthbarHandler healthBar;
+    [SerializeField] private HealthbarHandler healthBar;
 
-    public GameObject projectileGameObject;
+    private GameObject projectileGameObject;
 
     // Start is called before the first frame update
     void Start()
     {
-        //get all RaceStat and ClassStat scriptableObject
-        RaceStat[] races = (RaceStat[]) Resources.FindObjectsOfTypeAll(typeof(RaceStat));
-        ClassStat[] classes = (ClassStat[]) Resources.FindObjectsOfTypeAll(typeof(ClassStat));
-
-
-        //select a random RaceStat
-        int randomRaceIndex = Random.Range(0, races.Length);
-        raceStats = races[randomRaceIndex];
-
-        //select a random ClassStat
-        int randomClassIndex = Random.Range(0, classes.Length);
-        classStat = classes[randomClassIndex];
-
-        string[] possibleNames = raceStats.unitNames;
-        int randomNameIndex = Random.Range(0, possibleNames.Length);
-        unitName = possibleNames[randomNameIndex];
+        GenerateRaceAndClass();
 
         maxLife = raceStats.maxLife + classStat.maxLife;
         currentLife = maxLife;
@@ -88,6 +73,8 @@ public class Unit : MonoBehaviour
         attackSpeed = raceStats.attackSpeed + classStat.attackSpeed;
         damage = raceStats.damage + classStat.damage;
         range = classStat.range;
+
+        projectileGameObject = classStat.projectile;
 
         healthBar.SetHealth(currentLife, maxLife);
         healthBar.SetStamina(currentStamina, maxStamina);
@@ -108,16 +95,66 @@ public class Unit : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         baseColor = spriteRenderer.color;
         damageColor = new Color(1, 0.6f, 0.6f);
+        healColor = new Color(0.6f, 1, 0.6f);
 
-        if(abilityName != null && abilityName != "")
+        GameManager.instance.AddUnit(this);
+    }
+
+    private void GenerateRaceAndClass()
+    {
+        //get all RaceStat ScriptableObject
+        RaceStat[] races = (RaceStat[])Resources.FindObjectsOfTypeAll(typeof(RaceStat));
+
+        //allies are not humans
+        if (CompareTag("UnitAlly"))
         {
+            do
+            {
+                //select a random RaceStat
+                int randomRaceIndex = Random.Range(0, races.Length);
+                raceStats = races[randomRaceIndex];
+            }
+            while (raceStats.race == Race.Human);
+        }
+
+        //enemies are humans
+        else
+        {
+            foreach (RaceStat raceStat in races)
+            {
+                if (raceStat.race == Race.Human)
+                {
+                    raceStats = raceStat;
+                    break;
+                }
+            }
+        }
+
+        //get all ClassStat scriptableObject
+        ClassStat[] classes = (ClassStat[])Resources.FindObjectsOfTypeAll(typeof(ClassStat));
+
+        //select a random ClassStat
+        int randomClassIndex = Random.Range(0, classes.Length);
+        classStat = classes[randomClassIndex];
+
+        //select a random name based on race
+        string[] possibleNames = raceStats.unitNames;
+        int randomNameIndex = Random.Range(0, possibleNames.Length);
+        unitName = possibleNames[randomNameIndex];
+
+        //select a random ability based on class
+        int randomAbilityIndex = Random.Range(0, classStat.abilities.Length);
+        abilityName = classStat.abilities[randomAbilityIndex];
+
+        //if the ability name exists
+        if (abilityName != null && abilityName != "")
+        {
+            //load the ability class and add a component to the unit
             var abilityType = System.Type.GetType(abilityName);
             gameObject.AddComponent(abilityType);
             ability = gameObject.GetComponent<Ability>();
             ability.setUnit(this);
         }
-
-        GameManager.instance.AddUnit(this);
     }
 
     public void UpdateUnit()
@@ -128,11 +165,6 @@ public class Unit : MonoBehaviour
         {
             StartCoroutine(UnitWaitForSeconds(moveSpeed));
         }
-
-        /*if (!hasTarget)
-        {
-            findTarget();
-        }*/
 
         //if the unit is not following a path yet and has a target cell different from their current cell
         if(isAbilityActivated && abilityName != null && abilityName != "")
@@ -366,7 +398,7 @@ public class Unit : MonoBehaviour
         currentLife -= damage;
         checkDeath();
         healthBar.SetHealth(currentLife);
-        StartCoroutine(TakeDamageAnimation());
+        StartCoroutine(ChangeColorAnimation(damageColor));
     }
 
     public void heal(int heal)
@@ -376,12 +408,13 @@ public class Unit : MonoBehaviour
         {
             currentLife = maxLife;
         }
-        healthBar.SetHealth(currentLife);        
+        healthBar.SetHealth(currentLife);
+        StartCoroutine(ChangeColorAnimation(healColor));
     }
 
-    IEnumerator TakeDamageAnimation()
+    IEnumerator ChangeColorAnimation(Color color)
     {
-        spriteRenderer.color = damageColor;
+        spriteRenderer.color = color;
         takingDamageCount++;
 
         yield return new WaitForSeconds(0.4f);

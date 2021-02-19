@@ -43,7 +43,7 @@ public class FireBall : Ability
             }
         }
 
-        print("maxTargetTouch : " + maxTargetTouch);
+        //print("maxTargetTouch : " + maxTargetTouch);
 
         if (bestTargetCell != null)
         {
@@ -95,18 +95,6 @@ public class FireBall : Ability
         }
 
         //color all hit tiles in red for a short duration, then set the color back to normal
-        foreach(Cell cell in listCells)
-        {
-            cell.SetColor(Color.red);
-        }
-
-        yield return new WaitForSeconds(0.5f);
-
-        foreach (Cell cell in listCells)
-        {
-            cell.SetColor(Color.white);
-        }
-
-        //unit.setIsAbilityActivated(false);
+        GameObject.Find("Board").GetComponent<Board>().StartSetColorForSeconds(listCells);
     }
 }
