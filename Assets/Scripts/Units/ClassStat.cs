@@ -5,7 +5,13 @@ using UnityEngine;
 public enum Class
 {
     Warrior,
-    Mage
+    Mage,
+    Tank,
+    Bowman,
+    Healer,
+    Support,
+    Berserker,
+    Assassin
 }
 
 [CreateAssetMenu(fileName = "New UnitClassStat", menuName = "Class Stat Units")]

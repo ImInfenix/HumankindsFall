@@ -33,9 +33,19 @@ public class SynergyHandler : MonoBehaviour
     void Start()
     {
         rc.Add(new RaceCount(Race.Orc, 0, " Orc : "));
+        rc.Add(new RaceCount(Race.Skeleton, 0, " Skeleton : "));
+        rc.Add(new RaceCount(Race.Octopus, 0, " Octopus : "));
+        rc.Add(new RaceCount(Race.Elemental, 0, " Elemental : "));
+        rc.Add(new RaceCount(Race.Giant, 0, " Giant : "));
 
         cc.Add(new ClassCount(Class.Mage, 0, " Mage : "));
         cc.Add(new ClassCount(Class.Warrior, 0, " Warrior : "));
+        cc.Add(new ClassCount(Class.Tank, 0, " Tank : "));
+        cc.Add(new ClassCount(Class.Bowman, 0, " Bowman : "));
+        cc.Add(new ClassCount(Class.Healer, 0, " Healer : "));
+        cc.Add(new ClassCount(Class.Support, 0, " Support : "));
+        cc.Add(new ClassCount(Class.Berserker, 0, " Berserker : "));
+        cc.Add(new ClassCount(Class.Assassin, 0, " Assassin : "));
 
         synergyText.gameObject.SetActive(true);
         synergyText.text = "\n";
