@@ -46,7 +46,7 @@ public class Unit : MonoBehaviour
     private Color baseColor, damageColor, healColor;
     private int takingDamageCount = 0;
     private bool isAbilityActivated = false;
-    private string targetTag = "UnitAlly";
+    private string targetTag;
 
     [SerializeField] private string abilityName;
 
@@ -54,6 +54,7 @@ public class Unit : MonoBehaviour
 
     [SerializeField] private HealthbarHandler healthBar;
     [SerializeField] private Image classIcon;
+    [SerializeField] private SpriteRenderer circleSprite;
     private GameObject projectileGameObject;
 
     // Start is called before the first frame update
@@ -87,8 +88,17 @@ public class Unit : MonoBehaviour
 
         //if the unit is an ally unit
         if (CompareTag("UnitAlly"))
+        {
             //it should target enemy units
             targetTag = "UnitEnemy";
+            circleSprite.color = new Color(0, 0, 1);
+        }
+
+        else
+        {
+            targetTag = "UnitAlly";
+            circleSprite.color = new Color(1, 0, 0);
+        }
 
         spriteRenderer = GetComponent<SpriteRenderer>();
         baseColor = spriteRenderer.color;
