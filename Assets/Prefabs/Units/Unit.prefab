@@ -294,8 +294,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1575234587
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 6211927434488055067, guid: 57473b633c94a8243ae915fe0f1ceab3,
     type: 3}
@@ -327,6 +327,7 @@ MonoBehaviour:
   board: {fileID: 0}
   currentPosition: {x: 0, y: 0, z: 0}
   initialPos: {x: 0, y: 0, z: 0}
+  abilityName: 
   healthBar: {fileID: 97388024288105356}
 --- !u!61 &-6404775025605529892
 BoxCollider2D:

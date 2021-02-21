@@ -49,6 +49,12 @@ public class Unit : MonoBehaviour
 
     public HealthbarHandler healthBar;
 
+    private SpriteRenderer spriteRenderer;
+
+    private void Awake()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -297,6 +303,8 @@ public class Unit : MonoBehaviour
                 startPosY = mousePos.y - this.transform.localPosition.y;
 
                 moving = true;
+
+                spriteRenderer.sortingOrder = 10;
             }
         } 
     }
@@ -317,6 +325,8 @@ public class Unit : MonoBehaviour
                 setPosition(board.GetCell(tileCoordinate));            
 
             moving = false;
+
+            spriteRenderer.sortingOrder = 0;
         }
        
     }
