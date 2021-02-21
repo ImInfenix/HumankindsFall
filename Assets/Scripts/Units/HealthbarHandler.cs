@@ -5,13 +5,24 @@ using UnityEngine.UI;
 
 public class HealthbarHandler : MonoBehaviour
 {
+    public static List<HealthbarHandler> healthbarHandlers;
 
     public Slider slider;
     private Vector3 offset = new Vector3(0,0.3f,0);
 
     public Camera attachedCamera;
 
-    void Start()
+    private void Awake()
+    {
+        if (healthbarHandlers == null)
+            healthbarHandlers = new List<HealthbarHandler>();
+
+        healthbarHandlers.Add(this);
+
+        gameObject.SetActive(false);
+    }
+
+    void OnEnable()
     {
         attachedCamera = Camera.main;
         UpdatePosition();
@@ -21,6 +32,11 @@ public class HealthbarHandler : MonoBehaviour
     void Update()
     {
         UpdatePosition();
+    }
+
+    private void OnDestroy()
+    {
+        healthbarHandlers.Remove(this);
     }
 
     private void UpdatePosition()
@@ -37,5 +53,17 @@ public class HealthbarHandler : MonoBehaviour
     public void SetHealth(int health)
     {
         slider.value = health;
+    }
+
+    public static void ShowAll()
+    {
+        foreach (HealthbarHandler handler in healthbarHandlers)
+            handler.gameObject.SetActive(true);
+    }
+    
+    public static void HideAll()
+    {
+        foreach (HealthbarHandler handler in healthbarHandlers)
+            handler.gameObject.SetActive(false);
     }
 }

@@ -47,6 +47,7 @@ public class GameManager : MonoBehaviour
     {
         gamestate = GameState.Combat;
         Player.instance.Inventory.UpdateGUI();
+        HealthbarHandler.ShowAll();
     }
 
     public void Update()
@@ -97,5 +98,6 @@ public class GameManager : MonoBehaviour
         }
 
         ResolutionPhaseHandler.instance.Show();
+        HealthbarHandler.HideAll();
     }
 }
