@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Player))]
+[RequireComponent(typeof(Player)), DisallowMultipleComponent]
 public class Inventory : MonoBehaviour
 {
     private InventoryUI inventoryUI;

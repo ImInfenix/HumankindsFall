@@ -86,7 +86,7 @@ public class Unit : MonoBehaviour
             //it should target enemy units
             targetTag = "UnitEnemy";
 
-        if(abilityName != null && abilityName != "")
+        if (abilityName != null && abilityName != "")
         {
             var abilityType = System.Type.GetType(abilityName);
             gameObject.AddComponent(abilityType);
@@ -112,7 +112,7 @@ public class Unit : MonoBehaviour
         }*/
 
         //if the unit is not following a path yet and has a target cell different from their current cell
-        if(isAbilityActivated && abilityName != null && abilityName != "")
+        if (isAbilityActivated && abilityName != null && abilityName != "")
         {
             ability.castAbility();
         }
@@ -125,7 +125,7 @@ public class Unit : MonoBehaviour
                 //start the coroutine to move to the next cell of the path
                 StartCoroutine(MoveToCell(path[0]));
             }
-            else if(targetDistance <= range && targetUnit != null && path != null)
+            else if (targetDistance <= range && targetUnit != null && path != null)
             {
                 //start the coroutine to attack the target
                 StartCoroutine(AttackTarget());
@@ -133,12 +133,12 @@ public class Unit : MonoBehaviour
 
             //check if a better target can be selected
             path = PathfindingTool.findTarget(board, currentCell, targetTag);
-            if(path != null)
+            if (path != null)
             {
                 targetDistance = path.Count;
                 hasTarget = true;
-                targetPos = path[targetDistance-1].TileMapPosition;
-                targetUnit = path[targetDistance-1].GetCurrentUnit();
+                targetPos = path[targetDistance - 1].TileMapPosition;
+                targetUnit = path[targetDistance - 1].GetCurrentUnit();
 
             }
         }
@@ -241,7 +241,7 @@ public class Unit : MonoBehaviour
 
     private void checkDeath()
     {
-        if(currentLife <= 0)
+        if (currentLife <= 0)
         {
             currentCell.SetIsOccupied(false);
             Destroy(this.gameObject);
@@ -258,7 +258,7 @@ public class Unit : MonoBehaviour
     public void heal(int heal)
     {
         currentLife += heal;
-        if(currentLife > maxLife)
+        if (currentLife > maxLife)
         {
             currentLife = maxLife;
         }
@@ -291,7 +291,7 @@ public class Unit : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if(canMove && CompareTag("UnitAlly"))
+        if (canMove && CompareTag("UnitAlly"))
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -306,12 +306,12 @@ public class Unit : MonoBehaviour
 
                 spriteRenderer.sortingOrder = 10;
             }
-        } 
+        }
     }
 
     private void OnMouseUp()
     {
-        if(canMove && CompareTag("UnitAlly"))
+        if (canMove && CompareTag("UnitAlly"))
         {
             Vector3 mousePos;
             mousePos = Input.mousePosition;
@@ -322,13 +322,35 @@ public class Unit : MonoBehaviour
             if (board.GetCell(tileCoordinate) == null || board.GetCell(tileCoordinate).GetIsOccupied() == true)
                 setPosition(board.GetCell(currentPosition));
             else
-                setPosition(board.GetCell(tileCoordinate));            
+                setPosition(board.GetCell(tileCoordinate));
 
             moving = false;
 
             spriteRenderer.sortingOrder = 0;
+
         }
-       
+
+        PointerEventData pointerData = new PointerEventData(EventSystem.current)
+        {
+            pointerId = -1,
+        };
+
+        pointerData.position = Input.mousePosition;
+
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(pointerData, results);
+
+        InventorySlot slotUnderMouse = null;
+
+        foreach(RaycastResult r in results)
+        {
+            slotUnderMouse = r.gameObject.GetComponent<InventorySlot>();
+            if (slotUnderMouse != null)
+                break;
+        }
+
+        if(slotUnderMouse != null)
+            Debug.Log(slotUnderMouse.name);
     }
 
     private void OnDestroy()
