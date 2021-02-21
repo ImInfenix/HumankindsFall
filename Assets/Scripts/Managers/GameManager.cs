@@ -7,8 +7,8 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     private List<Unit> units;
-    private enum GameState { Placement, Combat, Resolution };
-    private GameState gamestate;
+    public enum GameState { Placement, Combat, Resolution };
+    public GameState gamestate { get; private set; }
 
     private void Awake()
     {
@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour
     public void ConfirmPlacement()
     {
         gamestate = GameState.Combat;
+        Player.instance.Inventory.UpdateGUI();
     }
 
     public void Update()
@@ -92,6 +93,7 @@ public class GameManager : MonoBehaviour
         {
             ResolutionPhaseHandler.instance.ChangeText("VICTOIRE");
             Player.instance.Wallet.Earn(10); // a terme, remplacer le 10 par niveau.getRecompense()
+            Player.instance.Inventory.UpdateGUI();
         }
 
         ResolutionPhaseHandler.instance.Show();
