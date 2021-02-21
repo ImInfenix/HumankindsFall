@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(Player))]
 public class Inventory : MonoBehaviour
 {
+    [Header("UI Fields")]
     [SerializeField]
     private InventoryUI inventoryUI;
     [SerializeField]

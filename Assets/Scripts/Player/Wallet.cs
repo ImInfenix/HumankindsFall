@@ -40,6 +40,6 @@ public class Wallet : MonoBehaviour
 
     public void UpdateGUI()
     {
-        amountDisplay.text = $"{amount} G";
+        amountDisplay.text = amount.ToString();
     }
 }
