@@ -23,6 +23,7 @@ public class Unit : MonoBehaviour
     private int damage;
     private int range;
 
+    private bool isInInventory;
     private bool moving;
     private bool canMove;
     public Board board;
@@ -72,6 +73,7 @@ public class Unit : MonoBehaviour
         attackSpeed = raceStats.attackSpeed + classStat.attackSpeed;
         damage = raceStats.damage + classStat.damage;
         range = classStat.range;
+        isInInventory = false; //A changer par la suite
 
         healthBar.SetHealth(maxLife, currentLife);
 
@@ -330,24 +332,7 @@ public class Unit : MonoBehaviour
 
         }
 
-        PointerEventData pointerData = new PointerEventData(EventSystem.current)
-        {
-            pointerId = -1,
-        };
-
-        pointerData.position = Input.mousePosition;
-
-        List<RaycastResult> results = new List<RaycastResult>();
-        EventSystem.current.RaycastAll(pointerData, results);
-
-        InventorySlot slotUnderMouse = null;
-
-        foreach(RaycastResult r in results)
-        {
-            slotUnderMouse = r.gameObject.GetComponent<InventorySlot>();
-            if (slotUnderMouse != null)
-                break;
-        }
+        InventorySlot slotUnderMouse = getSlotUnderMouse();
 
         if(slotUnderMouse != null)
             Debug.Log(slotUnderMouse.name);
@@ -385,5 +370,28 @@ public class Unit : MonoBehaviour
     public int getCurrentLife()
     {
         return currentLife;
+    }
+
+    private InventorySlot getSlotUnderMouse()
+    {
+        PointerEventData pointerData = new PointerEventData(EventSystem.current)
+        {
+            pointerId = -1,
+        };
+
+        pointerData.position = Input.mousePosition;
+
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(pointerData, results);
+
+        InventorySlot slotUnderMouse = null;
+
+        foreach (RaycastResult r in results)
+        {
+            slotUnderMouse = r.gameObject.GetComponent<InventorySlot>();
+            if (slotUnderMouse != null)
+                break;
+        }
+        return slotUnderMouse;
     }
 }
