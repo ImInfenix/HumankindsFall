@@ -27,11 +27,7 @@ public class SynergyHandler : MonoBehaviour
         }
 
         synergyText = GetComponent<TextMeshProUGUI>();
-    }
 
-    // Start is called before the first frame update
-    void Start()
-    {
         rc.Add(new RaceCount(Race.Orc, 0, " Orc : "));
         rc.Add(new RaceCount(Race.Skeleton, 0, " Skeleton : "));
         rc.Add(new RaceCount(Race.Octopus, 0, " Octopus : "));
@@ -46,9 +42,11 @@ public class SynergyHandler : MonoBehaviour
         cc.Add(new ClassCount(Class.Support, 0, " Support : "));
         cc.Add(new ClassCount(Class.Berserker, 0, " Berserker : "));
         cc.Add(new ClassCount(Class.Assassin, 0, " Assassin : "));
+    }
 
-        synergyText.gameObject.SetActive(true);
-        synergyText.text = "\n";
+    // Start is called before the first frame update
+    void Start()
+    {
     }
 
     // Update is called once per frame
@@ -61,6 +59,7 @@ public class SynergyHandler : MonoBehaviour
     {
         if(u.tag == "UnitAlly")
         {
+            Debug.Log("????? "+rc.Count);
             foreach (RaceCount r in rc)
             {
                 if (r.getRace() == u.getRace())
