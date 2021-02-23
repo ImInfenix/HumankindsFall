@@ -6,7 +6,7 @@ using UnityEngine.Tilemaps;
 public class Board : MonoBehaviour
 {
     [SerializeField]
-    private Tilemap tilemap;
+    private Tilemap tilemap, placementTilemap;
     public Vector2Int tileToInspect;
 
     private Cell[,] board;
@@ -17,14 +17,15 @@ public class Board : MonoBehaviour
 
     private Vector2Int boardOrigin;
 
+    [SerializeField] GameObject Unit;
+    private List<Cell> allyCellsList = new List<Cell>();
+
     void Awake()
     {
         Initialize(tilemap);
-    }
 
-    private void Start()
-    {
-        //StartCoroutine(LateStart(0.5f));
+        Initialize(placementTilemap);
+        GenerateUnits(placementTilemap);
     }
 
     public void Initialize(Tilemap tilemap)
@@ -44,6 +45,40 @@ public class Board : MonoBehaviour
 
         Vector3Int firstCellPositionInTilemap = board[0, 0].TileMapPosition;
         boardOrigin = Vector2Int.zero - new Vector2Int(firstCellPositionInTilemap.x, firstCellPositionInTilemap.y);
+    }
+
+    public void GenerateUnits(Tilemap tilemap)
+    {
+        //go through all tiles of the tilemap
+        BoundsInt bounds = tilemap.cellBounds;
+        TileBase[] tiles = tilemap.GetTilesBlock(bounds);
+
+        for (int x = 0; x < bounds.size.x; x++)
+        {
+            for (int y = 0; y < bounds.size.y; y++)
+            {
+                TileBase tile = tiles[x + y * bounds.size.x];
+                if (tile != null)
+                {
+                    Vector3Int tilePosition = new Vector3Int(x - Mathf.FloorToInt(SizeX / 2), y - Mathf.FloorToInt(SizeY / 2), 0);
+                    Sprite tileSprite = tilemap.GetSprite(tilePosition);
+
+                    if (tileSprite.name == "EnemyTileSprite")
+                    {
+                        Unit unit = Instantiate(Unit, transform).GetComponent<Unit>();
+                        unit.setBoard(this);
+                        unit.occupyNewCell(GetCell(tilePosition));
+                        unit.updatePosition();
+                        unit.tag = "UnitEnemy";
+                    }
+
+                    else if (tileSprite.name == "AllyTileSprite")
+                    {
+                        allyCellsList.Add(GetCell(tilePosition));   
+                    }
+                }
+            }
+        }
     }
 
     public Cell GetCell(Vector3Int tilemapPosition)
@@ -164,16 +199,13 @@ public class Board : MonoBehaviour
         return tilemap;
     }
 
-    IEnumerator LateStart(float waitTime)
+    public List<Cell> GetAuthorizedAllyCells()
     {
-        /*yield return new WaitForSeconds(waitTime);
-        List<Unit> listUnit = PathfindingTool.unitsInRadius(board[0,0], 3, "UnitAlly");
-        print("Le nombre d'unités : " + listUnit.Count);*/
+        return allyCellsList;
+    }
 
-        yield return new WaitForSeconds(waitTime);
-        List<Cell> listCells = PathfindingTool.cellsInRadius(board[3, 3], 2);
-        print("Le nombre de cases : " + listCells.Count);
-
-
+    public void HidePlacementTilemap()
+    {
+        placementTilemap.GetComponent<TilemapRenderer>().enabled = false;
     }
 }

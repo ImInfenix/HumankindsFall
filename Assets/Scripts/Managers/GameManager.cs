@@ -45,6 +45,7 @@ public class GameManager : MonoBehaviour
 
     public void ConfirmPlacement()
     {
+        GameObject.Find("Board").GetComponent<Board>().HidePlacementTilemap();
         gamestate = GameState.Combat;
     }
 

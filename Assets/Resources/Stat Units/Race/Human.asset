@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Human
   m_EditorClassIdentifier: 
   race: 1
-  maxLife: 10
+  maxLife: 0
   maxMana: 0
   mana: 0
   armor: 0

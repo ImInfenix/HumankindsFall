@@ -82,9 +82,12 @@ public class Unit : MonoBehaviour
         hasTarget = false;
         isActing = false;
 
-        Cell startCell = board.GetCell(new Vector3Int(initialPos.x, initialPos.y, 0));
-        occupyNewCell(startCell);
-        setPosition(startCell);
+        if (currentCell == null)
+        {
+            Cell startCell = board.GetCell(new Vector3Int(initialPos.x, initialPos.y, 0));
+            occupyNewCell(startCell);
+            updatePosition();
+        }
 
         //if the unit is an ally unit
         if (CompareTag("UnitAlly"))
@@ -103,7 +106,7 @@ public class Unit : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         baseColor = spriteRenderer.color;
         damageColor = new Color(1, 0.6f, 0.6f);
-        healColor = new Color(0.6f, 1, 0.6f);
+        healColor = new Color(0.4f, 1, 0.4f);
 
         GameManager.instance.AddUnit(this);
     }
@@ -221,7 +224,7 @@ public class Unit : MonoBehaviour
         foreach (Cell cell in path)
         {
             yield return new WaitForSeconds(moveSpeed);
-            setPosition(cell);
+            updatePosition();
         }
         isActing = false;
     }
@@ -238,7 +241,7 @@ public class Unit : MonoBehaviour
             StartCoroutine(MoveAnimation(cell));
             yield return new WaitForSeconds(moveSpeed);
             //ensure that the unit is at the center of the current cell before it can start acting again
-            setPosition(cell);
+            updatePosition();
             isActing = false;
         }
 
@@ -276,7 +279,7 @@ public class Unit : MonoBehaviour
             yield return new WaitForSeconds(refreshRate);
         }
 
-        setPosition(cell);
+        updatePosition();
 
         yield return null;
     }
@@ -362,7 +365,7 @@ public class Unit : MonoBehaviour
         yield return null;
     }
 
-    private void occupyNewCell(Cell newCell)
+    public void occupyNewCell(Cell newCell)
     {
         if (currentCell != null)
         {
@@ -376,11 +379,12 @@ public class Unit : MonoBehaviour
     }
 
     //set the position of the unit in a cell
-    public void setPosition(Cell cell)
+    public void updatePosition()
     {
         currentPosition = currentCell.TileMapPosition;
         worldPosition = new Vector3(currentCell.WorldPosition.x, currentCell.WorldPosition.y, 0);
         transform.position = worldPosition;
+        //print(currentCell);
     }
 
     public Vector3Int getPosition()
@@ -406,7 +410,7 @@ public class Unit : MonoBehaviour
         currentLife -= damage;
         checkDeath();
         healthBar.SetHealth(currentLife);
-        StartCoroutine(ChangeColorAnimation(damageColor));
+        StartCoroutine(ChangeColorAnimation(damageColor, 0.4f));
     }
 
     public void heal(int heal)
@@ -417,15 +421,15 @@ public class Unit : MonoBehaviour
             currentLife = maxLife;
         }
         healthBar.SetHealth(currentLife);
-        StartCoroutine(ChangeColorAnimation(healColor));
+        StartCoroutine(ChangeColorAnimation(healColor, 0.7f));
     }
 
-    IEnumerator ChangeColorAnimation(Color color)
+    IEnumerator ChangeColorAnimation(Color color, float durationSeconds)
     {
         spriteRenderer.color = color;
         takingDamageCount++;
 
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(durationSeconds);
 
         //if this is the last animation playing, set the color back to normal
         takingDamageCount--;
@@ -459,7 +463,7 @@ public class Unit : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if(canMove /*&& CompareTag("UnitAlly")*/)
+        if(canMove && CompareTag("UnitAlly"))
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -477,7 +481,7 @@ public class Unit : MonoBehaviour
 
     private void OnMouseUp()
     {
-        if(canMove /*&& CompareTag("UnitAlly")*/)
+        if(canMove && CompareTag("UnitAlly"))
         {
             Vector3 mousePos;
             mousePos = Input.mousePosition;
@@ -485,13 +489,17 @@ public class Unit : MonoBehaviour
 
             Vector3Int tileCoordinate = board.GetTilemap().WorldToCell(mousePos);
 
-            if (board.GetCell(tileCoordinate) == null || board.GetCell(tileCoordinate).GetIsOccupied() == true)
-                setPosition(board.GetCell(currentPosition));
+            List<Cell> authorizedCells = board.GetAuthorizedAllyCells();
+            Cell targetCell = board.GetCell(tileCoordinate);
+
+            if (targetCell == null || targetCell.GetIsOccupied() == true || !authorizedCells.Contains(targetCell))
+                updatePosition();
+
             else
             {
                 Cell newCell = board.GetCell(tileCoordinate);
                 occupyNewCell(newCell);
-                setPosition(newCell);
+                updatePosition();
             }
 
             moving = false;
@@ -537,5 +545,10 @@ public class Unit : MonoBehaviour
     public HealthbarHandler getHealthbar()
     {
         return healthBar;
+    }
+
+    public void setBoard(Board board)
+    {
+        this.board = board;
     }
 }
