@@ -2,23 +2,29 @@
 
 public class UnitDescription
 {
-    Sprite spriteRenderer;
-    RaceStat unitRace;
-    ClassStat unitClass;
-    string abilityName;
+    private readonly Sprite sprite;
+    private readonly RaceStat unitRace;
+    private readonly ClassStat unitClass;
+    private readonly string unitName;
+    private readonly string abilityName;
 
-    public UnitDescription(
-    Sprite spriteRenderer, RaceStat unitRace, ClassStat unitClass, string abilityName)
+    public UnitDescription(Unit unit)
     {
-        this.spriteRenderer = spriteRenderer;
-        this.unitRace = unitRace;
-        this.unitClass = unitClass;
-        this.abilityName = abilityName;
+        sprite = unit.GetSprite();
+        unitRace = unit.raceStats;
+        unitClass = unit.classStat;
+        abilityName = unit.GetAbilityName();
+        unitName = unit.name;
+    }
+
+    public string GetUnitName()
+    {
+        return unitName;
     }
 
     public Sprite GetSprite()
     {
-        return spriteRenderer;
+        return sprite;
     }
 
     public RaceStat GetRace()

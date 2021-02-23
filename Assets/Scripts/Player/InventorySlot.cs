@@ -4,10 +4,13 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class InventorySlot : MonoBehaviour, IDragHandler
+public class InventorySlot : MonoBehaviour, IDragHandler, IPointerClickHandler
 {
     [SerializeField]
     private Image lockedImage;
+
+    [SerializeField]
+    private UnitDescriptionDisplay unitDescriptionDisplay;
 
     [Header("Prefab"), SerializeField]
     private GameObject unitPrefab;
@@ -38,6 +41,8 @@ public class InventorySlot : MonoBehaviour, IDragHandler
 
         Unlock();
         attachedCamera = Camera.main;
+
+        unitDescriptionDisplay = FindObjectOfType<UnitDescriptionDisplay>();
     }
 
     public void Unlock()
@@ -66,7 +71,9 @@ public class InventorySlot : MonoBehaviour, IDragHandler
         float size = spriteRect.height * aspectRatio * 2;
         rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, (rt.rect.width - size) / 2, size);
 
-        unitDescription = new UnitDescription(sprite, unit.raceStats, unit.classStat, unit.GetAbilityName());
+        unitDescription = new UnitDescription(unit);
+
+        unit.board.GetCell(unit.currentPosition).SetIsOccupied(false);
 
         Destroy(unit.gameObject);
     }
@@ -105,10 +112,11 @@ public class InventorySlot : MonoBehaviour, IDragHandler
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (_status != SlotState.Used)
+        if (_status != SlotState.Used || GameManager.instance.gamestate != GameManager.GameState.Placement)
             return;
 
         Unit newUnit = Instantiate(unitPrefab).GetComponent<Unit>();
+        newUnit.name = unitDescription.GetUnitName();
         newUnit.SetSprite(unitDescription.GetSprite());
         newUnit.raceStats = unitDescription.GetRace();
         newUnit.classStat = unitDescription.GetClass();
@@ -122,5 +130,13 @@ public class InventorySlot : MonoBehaviour, IDragHandler
         _status = SlotState.Empty;
         unitDescription = null;
         Destroy(child);
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (this.Status == SlotState.Used)
+        {
+            unitDescriptionDisplay.SetUnitName(child.name);
+        }
     }
 }

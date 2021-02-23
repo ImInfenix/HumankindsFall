@@ -296,7 +296,7 @@ public class Unit : MonoBehaviour
     {
         if (canMove && CompareTag("UnitAlly"))
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && GameManager.instance.gamestate == GameManager.GameState.Placement)
             {
                 PrepareForDragNDrop();
             }
