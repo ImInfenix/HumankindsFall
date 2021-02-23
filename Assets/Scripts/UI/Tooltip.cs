@@ -30,6 +30,8 @@ public class Tooltip : MonoBehaviour
         Vector2 textSize = tooltipText.GetRenderedValues(false);
         Vector2 paddingSize = new Vector2(8, 8);
         backgroundRectTransform.sizeDelta = textSize+paddingSize;
+        transform.Find("Text").GetComponent<RectTransform>().localPosition = new Vector3(-textSize.x, paddingSize.y/2, 0);
+        backgroundRectTransform.localPosition = new Vector3(-textSize.x - paddingSize.x/2, 0, 0);
     }
 
     private void HideTooltip()
