@@ -23,7 +23,6 @@ public class Unit : MonoBehaviour
     private int damage;
     private int range;
 
-    private bool isInInventory;
     private bool moving;
     private bool canMove;
     public Board board;
@@ -73,7 +72,6 @@ public class Unit : MonoBehaviour
         attackSpeed = raceStats.attackSpeed + classStat.attackSpeed;
         damage = raceStats.damage + classStat.damage;
         range = classStat.range;
-        isInInventory = false; //A changer par la suite
 
         healthBar.SetHealth(maxLife, currentLife);
 
@@ -287,7 +285,10 @@ public class Unit : MonoBehaviour
             mousePos = Input.mousePosition;
             mousePos = Camera.main.ScreenToWorldPoint(mousePos);
 
-            this.gameObject.transform.localPosition = new Vector3(mousePos.x - startPosX, mousePos.y - startPosY, this.gameObject.transform.localPosition.z);
+            this.gameObject.transform.position = new Vector3(mousePos.x - startPosX, mousePos.y - startPosY, this.gameObject.transform.localPosition.z);
+
+            if (Input.GetMouseButtonUp(0))
+                OnMouseUp();
         }
     }
 
@@ -297,18 +298,22 @@ public class Unit : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0))
             {
-                Vector3 mousePos;
-                mousePos = Input.mousePosition;
-                mousePos = Camera.main.ScreenToWorldPoint(mousePos);
-
-                startPosX = mousePos.x - this.transform.localPosition.x;
-                startPosY = mousePos.y - this.transform.localPosition.y;
-
-                moving = true;
-
-                spriteRenderer.sortingOrder = 10;
+                PrepareForDragNDrop();
             }
         }
+    }
+
+    public void PrepareForDragNDrop()
+    {
+        Vector3 mousePos = Input.mousePosition;
+        mousePos = Camera.main.ScreenToWorldPoint(mousePos);
+
+        startPosX = mousePos.x - this.transform.position.x;
+        startPosY = mousePos.y - this.transform.position.y;
+
+        moving = true;
+
+        spriteRenderer.sortingOrder = 10;
     }
 
     private void OnMouseUp()
@@ -332,10 +337,10 @@ public class Unit : MonoBehaviour
 
         }
 
-        InventorySlot slotUnderMouse = getSlotUnderMouse();
+        InventorySlot slotUnderMouse = InventorySlot.GetSlotUnderMouse();
 
-        if(slotUnderMouse != null)
-            Debug.Log(slotUnderMouse.name);
+        if (slotUnderMouse != null)
+            slotUnderMouse.PutInSlot(this);
     }
 
     private void OnDestroy()
@@ -358,6 +363,11 @@ public class Unit : MonoBehaviour
         return isAbilityActivated;
     }
 
+    public string GetAbilityName()
+    {
+        return abilityName;
+    }
+
     public int getRange()
     {
         return range;
@@ -372,26 +382,23 @@ public class Unit : MonoBehaviour
         return currentLife;
     }
 
-    private InventorySlot getSlotUnderMouse()
+    public Sprite GetSprite()
     {
-        PointerEventData pointerData = new PointerEventData(EventSystem.current)
-        {
-            pointerId = -1,
-        };
+        return spriteRenderer.sprite;
+    }
 
-        pointerData.position = Input.mousePosition;
+    public void SetSprite(Sprite sprite)
+    {
+        spriteRenderer.sprite = sprite;
+    }
 
-        List<RaycastResult> results = new List<RaycastResult>();
-        EventSystem.current.RaycastAll(pointerData, results);
+    public void SetAbilityName(string abilityName)
+    {
+        this.abilityName = abilityName;
+    }
 
-        InventorySlot slotUnderMouse = null;
-
-        foreach (RaycastResult r in results)
-        {
-            slotUnderMouse = r.gameObject.GetComponent<InventorySlot>();
-            if (slotUnderMouse != null)
-                break;
-        }
-        return slotUnderMouse;
+    public void AttachBoard()
+    {
+        this.board = Board.CurrentBoard;
     }
 }

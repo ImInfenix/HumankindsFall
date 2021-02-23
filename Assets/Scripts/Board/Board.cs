@@ -5,6 +5,8 @@ using UnityEngine.Tilemaps;
 
 public class Board : MonoBehaviour
 {
+    public static Board CurrentBoard { get; private set; }
+
     [SerializeField]
     private Tilemap tilemap;
     public Vector2Int tileToInspect;
@@ -19,6 +21,7 @@ public class Board : MonoBehaviour
 
     void Awake()
     {
+        CurrentBoard = this;
         Initialize(tilemap);
     }
 
@@ -167,5 +170,11 @@ public class Board : MonoBehaviour
         print("Le nombre de cases : " + listCells.Count);
 
 
+    }
+
+    private void OnDestroy()
+    {
+        if (CurrentBoard == this)
+            CurrentBoard = null;
     }
 }
