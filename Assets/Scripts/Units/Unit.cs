@@ -50,7 +50,7 @@ public class Unit : MonoBehaviour
     private int takingDamageCount = 0;
     private bool isAbilityActivated = false;
     private string targetTag;
-
+    [HideInInspector]
     public bool isRandomUnit = true;
 
     [SerializeField] private string abilityName;
