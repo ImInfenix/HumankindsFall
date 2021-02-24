@@ -6,13 +6,13 @@ using TMPro;
 [RequireComponent(typeof(Player))]
 public class Wallet : MonoBehaviour
 {
-    [SerializeField]
     private TMP_Text amountDisplay;
 
     private int amount;
 
     private void Awake()
     {
+        amountDisplay = GameObject.Find("Wallet_GUI").GetComponent<TMP_Text>();
         amount = 0;
         UpdateGUI();
     }
