@@ -20,7 +20,10 @@ public class InventoryUI : MonoBehaviour
         Transform inventorySubObject = transform.Find("Inventory");
         UnitsSlots = inventorySubObject.Find("UnitsSlots").GetComponent<RectTransform>();
         CurrentUnitDescription = inventorySubObject.Find("CurrentUnitDescription").GetComponent<RectTransform>();
+    }
 
+    private void Start()
+    {
         Hide();
     }
 
