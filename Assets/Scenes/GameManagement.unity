@@ -1862,6 +1862,16 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ConfirmPlacement
       objectReference: {fileID: 0}
+    - target: {fileID: 2231666391417544150, guid: 1ea72ca18e933a54bb70c20132f56984,
+        type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 519420031}
+    - target: {fileID: 2231666391417544150, guid: 1ea72ca18e933a54bb70c20132f56984,
+        type: 3}
+      propertyPath: m_RenderMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5270946470730239109, guid: 1ea72ca18e933a54bb70c20132f56984,
         type: 3}
       propertyPath: m_Name

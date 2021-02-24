@@ -98,16 +98,16 @@ public class Unit : MonoBehaviour
         }
 
         //if the unit is an ally unit
-        if (CompareTag("UnitAlly"))
+        if (CompareTag(allyTag))
         {
             //it should target enemy units
-            targetTag = "UnitEnemy";
+            targetTag = ennemyTag;
             circleSprite.color = new Color(0, 0, 1);
         }
 
         else
         {
-            targetTag = "UnitAlly";
+            targetTag = allyTag;
             circleSprite.color = new Color(1, 0, 0);
         }
 
@@ -125,7 +125,7 @@ public class Unit : MonoBehaviour
         RaceStat[] races = Resources.LoadAll<RaceStat>("Stat Units/Race");
 
         //allies are not humans
-        if (CompareTag("UnitAlly"))
+        if (CompareTag(allyTag))
         {
             do
             {
