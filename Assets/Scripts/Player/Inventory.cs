@@ -12,8 +12,13 @@ public class Inventory : MonoBehaviour
         inventoryUI = FindObjectOfType<InventoryUI>();
     }
 
-    public void UpdateGUI()
+    public void Hide()
     {
         inventoryUI.Hide();
+    }
+
+    public void Show()
+    {
+        inventoryUI.Show();
     }
 }

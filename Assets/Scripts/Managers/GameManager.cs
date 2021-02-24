@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
     public void ConfirmPlacement()
     {
         gamestate = GameState.Combat;
-        Player.instance.Inventory.UpdateGUI();
+        Player.instance.Inventory.Hide();
         HealthbarHandler.ShowAll();
     }
 
@@ -94,7 +94,7 @@ public class GameManager : MonoBehaviour
         {
             ResolutionPhaseHandler.instance.ChangeText("VICTOIRE");
             Player.instance.Wallet.Earn(10); // a terme, remplacer le 10 par niveau.getRecompense()
-            Player.instance.Inventory.UpdateGUI();
+            Player.instance.Inventory.Hide();
         }
 
         ResolutionPhaseHandler.instance.Show();

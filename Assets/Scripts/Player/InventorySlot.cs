@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class InventorySlot : MonoBehaviour, IDragHandler, IPointerClickHandler
 {
-    [SerializeField]
+    [Header("UI References"), SerializeField]
     private Image lockedImage;
 
     [SerializeField]
@@ -143,37 +143,22 @@ public class InventorySlot : MonoBehaviour, IDragHandler, IPointerClickHandler
         _status = SlotState.Empty;
         unitDescription = null;
         Destroy(child);
-        unitDescriptionDisplay.unselectActualSlot();
+        unitDescriptionDisplay.UnselectActualSlot();
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (this.Status == SlotState.Used)
+        if (Status != SlotState.Used)
         {
-            unitDescriptionDisplay.changeActualSlot(this);
-            unitDescriptionDisplay.SetUnitName(child.name);
-            ClassStat classe = unitDescription.GetClass();
-            RaceStat race = unitDescription.GetRace();
-            int maxLife = classe.maxLife + race.maxLife;
-            int maxMana = classe.maxMana + race.maxMana;
-            int armor = classe.armor + race.armor;
-            float atakSpeed = classe.attackSpeed + race.attackSpeed;
+            unitDescriptionDisplay?.UnselectActualSlot();
+            return;
+        }
 
-            string stats =
-                "Class : " + classe.name + "\n" +
-                "Race : " + race.name + "\n" +
-                "PV : " + maxLife + "\n" +
-                "Mana : " + maxMana + "\n" +
-                "Armor : " + armor + "\n" +
-                "Attack Speed : " + atakSpeed;
-                ;
-            unitDescriptionDisplay.SetUnitStats(stats);
-            
-        }
-        else
-        {
-            unitDescriptionDisplay?.unselectActualSlot();
-        }
+        unitDescriptionDisplay.ChangeActualSlot(this);
     }
 
+    public UnitDescription GetCurrentUnitDescription()
+    {
+        return unitDescription;
+    }
 }
