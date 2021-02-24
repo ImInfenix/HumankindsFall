@@ -6,6 +6,9 @@ using UnityEngine.EventSystems;
 
 public class Unit : MonoBehaviour
 {
+    public const string ennemyTag = "UnitEnemy";
+    public const string allyTag = "UnitAlly";
+
     public RaceStat raceStats;
     public ClassStat classStat;
 
@@ -41,7 +44,7 @@ public class Unit : MonoBehaviour
     private bool hasTarget = false;
     private bool isActing = false;
     private bool isAbilityActivated = false;
-    private string targetTag = "UnitAlly";
+    private string targetTag = allyTag;
 
     [SerializeField] private string abilityName;
 
@@ -82,9 +85,9 @@ public class Unit : MonoBehaviour
         setPosition(board.GetCell(new Vector3Int(initialPos.x, initialPos.y, 0)));
 
         //if the unit is an ally unit
-        if (CompareTag("UnitAlly"))
+        if (CompareTag(allyTag))
             //it should target enemy units
-            targetTag = "UnitEnemy";
+            targetTag = ennemyTag;
 
         if (abilityName != null && abilityName != "")
         {
@@ -294,13 +297,17 @@ public class Unit : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (canMove && CompareTag("UnitAlly"))
+        if (GameManager.instance.gamestate != GameManager.GameState.Placement)
+            return;
+
+        if (CompareTag(allyTag))
         {
-            if (Input.GetMouseButtonDown(0) && GameManager.instance.gamestate == GameManager.GameState.Placement)
+            if (Input.GetMouseButtonDown(0) && canMove)
             {
                 PrepareForDragNDrop();
             }
         }
+
     }
 
     public void PrepareForDragNDrop()
@@ -308,8 +315,8 @@ public class Unit : MonoBehaviour
         Vector3 mousePos = Input.mousePosition;
         mousePos = Camera.main.ScreenToWorldPoint(mousePos);
 
-        startPosX = mousePos.x - this.transform.position.x;
-        startPosY = mousePos.y - this.transform.position.y;
+        startPosX = mousePos.x - transform.position.x;
+        startPosY = mousePos.y - transform.position.y;
 
         moving = true;
 
@@ -318,29 +325,36 @@ public class Unit : MonoBehaviour
 
     private void OnMouseUp()
     {
-        if (canMove && CompareTag("UnitAlly"))
+        if (GameManager.instance.gamestate != GameManager.GameState.Placement)
+            return;
+
+
+        if (CompareTag(allyTag))
         {
-            Vector3 mousePos;
-            mousePos = Input.mousePosition;
-            mousePos = Camera.main.ScreenToWorldPoint(mousePos);
+            if (canMove)
+            {
+                Vector3 mousePos;
+                mousePos = Input.mousePosition;
+                mousePos = Camera.main.ScreenToWorldPoint(mousePos);
 
-            Vector3Int tileCoordinate = board.GetTilemap().WorldToCell(mousePos);
+                Vector3Int tileCoordinate = board.GetTilemap().WorldToCell(mousePos);
 
-            if (board.GetCell(tileCoordinate) == null || board.GetCell(tileCoordinate).GetIsOccupied() == true)
-                setPosition(board.GetCell(currentPosition));
-            else
-                setPosition(board.GetCell(tileCoordinate));
+                if (board.GetCell(tileCoordinate) == null || board.GetCell(tileCoordinate).GetIsOccupied() == true)
+                    setPosition(board.GetCell(currentPosition));
+                else
+                    setPosition(board.GetCell(tileCoordinate));
 
-            moving = false;
+                moving = false;
 
-            spriteRenderer.sortingOrder = 0;
+                spriteRenderer.sortingOrder = 0;
 
+                InventorySlot slotUnderMouse = InventorySlot.GetSlotUnderMouse();
+
+                if (slotUnderMouse != null)
+                    slotUnderMouse.PutInSlot(this);
+            }
         }
 
-        InventorySlot slotUnderMouse = InventorySlot.GetSlotUnderMouse();
-
-        if (slotUnderMouse != null)
-            slotUnderMouse.PutInSlot(this);
     }
 
     private void OnDestroy()
