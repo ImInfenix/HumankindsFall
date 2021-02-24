@@ -26,6 +26,10 @@ public class Player : MonoBehaviour
 
         _wallet = GetComponent<Wallet>();
         _inventory = GetComponent<Inventory>();
+    }
+
+    private void Start()
+    {
         _inventory.FillFields();
     }
 }
