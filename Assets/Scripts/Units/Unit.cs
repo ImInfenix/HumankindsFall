@@ -392,6 +392,16 @@ public class Unit : MonoBehaviour
         return (currentPosition);
     }
 
+    public Race getRace()
+    {
+        return race;
+    }
+
+    public Class getClass()
+    {
+        return clas;
+    }
+
     public Cell getCell()
     {
         return currentCell;
@@ -448,6 +458,8 @@ public class Unit : MonoBehaviour
             Gizmos.DrawLine(transform.position, targetUnit.transform.position);
         }
     }
+
+
     public void UpdateDragDrop()
     {
         canMove = true;

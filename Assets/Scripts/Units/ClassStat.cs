@@ -6,8 +6,12 @@ public enum Class
 {
     Warrior,
     Mage,
+    Tank,
     Bowman,
-    Healer
+    Healer,
+    Support,
+    Berserker,
+    Assassin
 }
 
 [CreateAssetMenu(fileName = "New UnitClassStat", menuName = "Class Stat Units")]

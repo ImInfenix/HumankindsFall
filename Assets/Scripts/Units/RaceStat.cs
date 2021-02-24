@@ -6,7 +6,10 @@ public enum Race
 {
     Orc,
     Human,
-    Skeleton
+    Skeleton,
+    Octopus,
+    Elemental,
+    Giant,
 }
 
 [CreateAssetMenu(fileName = "New UnitRaceStat", menuName = "Race Stat Units")]

@@ -36,11 +36,14 @@ public class GameManager : MonoBehaviour
     public void AddUnit(Unit unit)
     {
         units.Add(unit);
+        SynergyHandler.instance.addUnit(unit);
     }
 
     public void RemoveUnit(Unit unit)
     {
         units.Remove(unit);
+        if(unit.getCurrentLife() > 0)
+            SynergyHandler.instance.removeUnit(unit);
     }
 
     public void ConfirmPlacement()
