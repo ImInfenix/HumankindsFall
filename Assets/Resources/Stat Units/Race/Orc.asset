@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de9e8c1568867244bb3c508a017b768c, type: 3}
+  m_Name: Orc
+  m_EditorClassIdentifier: 
+  race: 0
+  maxLife: 25
+  maxMana: 0
+  mana: 0
+  armor: 0
+  moveSpeed: 0
+  attackSpeed: 0
+  damage: 2
+  unitNames:
+  - Brurokk
+  - Gromug
+  - Zovak
+  - Rhul
+  - Agvur
+  unitSprite: {fileID: 21300000, guid: 09d067041c81d534f9552bbd1b5f76c8, type: 3}

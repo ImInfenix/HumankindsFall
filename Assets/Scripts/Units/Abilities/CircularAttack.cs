@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CircularAttack : Ability
 {
+    private GameObject animationGameObject;
 
     private void Start()
     {
@@ -11,14 +12,18 @@ public class CircularAttack : Ability
         castRange = 0;
         areaOfEffect = 1;
         power = 45;
+
+        animationGameObject = Resources.Load("Ability Prefabs/CircularAttack") as GameObject;
     }
     override public void castAbility()
     {
         unit.setIsAbilityActivated(true);
 
-        List<Unit> listUnitsHealProv = PathfindingTool.unitsInRadius(unit.currentCell, areaOfEffect, unit.getTargetTag());
+        List<Unit> listUnitsHitProv = PathfindingTool.unitsInRadius(unit.currentCell, areaOfEffect, unit.getTargetTag());
 
-        foreach (Unit unit in listUnitsHealProv)
+        Instantiate(animationGameObject, transform.position, Quaternion.identity, transform);
+
+        foreach (Unit unit in listUnitsHitProv)
             unit.takeDamage(power);
 
 

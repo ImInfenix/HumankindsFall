@@ -8,6 +8,7 @@ public class Cell
     private Vector3Int _tileMapPosition;
 
     private bool isOccupied = false;
+    private int numberOfUnits = 0;
 
     private Vector2Int _boardSize;
     private Unit currentUnit = null;
@@ -30,7 +31,7 @@ public class Cell
     public Cell BottomLeft { get { return _bottomLeft; } }
     private Cell _bottomLeft;
 
-    private Color _baseColor;
+    private bool _isColored;
 
     public Cell(Vector3Int positionInBoard, Vector3 worldPosition, UnityEngine.Tilemaps.Tile associatedTileInTilemap, Vector2Int boardSize)
     {
@@ -38,6 +39,7 @@ public class Cell
         _worldPosition = worldPosition;
         _type = new TileType(associatedTileInTilemap);
         _boardSize = boardSize;
+        _isColored = false;
     }
 
     public Vector3Int TileMapPositionOffset()
@@ -94,8 +96,37 @@ public class Cell
         return $"Cell tilemap position: {TileMapPosition}, world position: {WorldPosition}, neighbours: Left {Left?.TileMapPosition} TopLeft {(TopLeft?.TileMapPosition)} TopRight {(TopRight?.TileMapPosition)} Right {(Right?.TileMapPosition)} BottomRight {(BottomRight?.TileMapPosition)} BottomLeft {(BottomLeft?.TileMapPosition)}\nProperties: {Type}";
     }
 
-    public void SetColor(Color color)
+    public void IncreaseNumberOfUnits()
+    {
+        numberOfUnits++;
+        if (numberOfUnits > 0)
+            SetIsOccupied(true);
+    }
+
+    public void DecreaseNumberOfUnits()
+    {
+        numberOfUnits--;
+        if (numberOfUnits <= 0)
+            SetIsOccupied(false);
+    }
+
+    private void SetColor(Color color)
     {
         GameObject.Find("Board").GetComponent<Board>().SetTileColour(color, _tileMapPosition);
     }
+
+    public IEnumerator SetColorForSeconds(Color color, float seconds)
+    {
+        if (!_isColored)
+        {
+            _isColored = true;
+            SetColor(color);
+            yield return new WaitForSeconds(seconds);
+            SetColor(Color.white);
+        }
+
+        _isColored = false;
+    }
+
+
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-
+using UnityEngine.UI;
 
 public class Unit : MonoBehaviour
 {
@@ -12,19 +12,19 @@ public class Unit : MonoBehaviour
     public RaceStat raceStats;
     public ClassStat classStat;
 
+    private static int infVal = 1000;
     private Race race;
     private Class clas;
 
     private int maxLife;
     [SerializeField] private int currentLife;
-    private int maxStamina;
-    private int currentStamina;
     private int incrementStamina;
     private int armor;
     private float moveSpeed;
     private float attackSpeed;
     private int damage;
     private int range;
+    [SerializeField] private string unitName;
 
     private bool moving;
     private bool canMove;
@@ -43,8 +43,13 @@ public class Unit : MonoBehaviour
     private int targetDistance = PathfindingTool.infVal;
     private bool hasTarget = false;
     private bool isActing = false;
+    private bool isMoving = false;
+
+    private SpriteRenderer spriteRenderer;
+    private Color baseColor, damageColor, healColor;
+    private int takingDamageCount = 0;
     private bool isAbilityActivated = false;
-    private string targetTag = allyTag;
+    private string targetTag;
 
     [SerializeField] private string abilityName;
 
@@ -58,17 +63,18 @@ public class Unit : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
+    [SerializeField] private HealthbarHandler healthBar;
+    [SerializeField] private Image classIcon;
+    [SerializeField] private SpriteRenderer circleSprite;
+    private GameObject projectileGameObject;
 
     // Start is called before the first frame update
     void Start()
     {
-        race = raceStats.race;
-        clas = classStat.clas;
+        GenerateRaceAndClass();
 
         maxLife = raceStats.maxLife + classStat.maxLife;
         currentLife = maxLife;
-        maxStamina = 10/*raceStats.maxMana + classStat.maxMana*/;
-        currentStamina = 0 /*raceStats.mana + classStat.mana*/;
         incrementStamina = 1;
         armor = raceStats.armor + classStat.armor;
         moveSpeed = raceStats.moveSpeed + classStat.moveSpeed;
@@ -76,43 +82,114 @@ public class Unit : MonoBehaviour
         damage = raceStats.damage + classStat.damage;
         range = classStat.range;
 
-        healthBar.SetHealth(maxLife, currentLife);
+        projectileGameObject = classStat.projectile;
+
+        healthBar.SetHealth(currentLife, maxLife);
+
+        classIcon.sprite = classStat.classIconSprite;
+        gameObject.GetComponent<SpriteRenderer>().sprite = raceStats.unitSprite;
 
         //canAttack = true;
         hasTarget = false;
         isActing = false;
 
-        setPosition(board.GetCell(new Vector3Int(initialPos.x, initialPos.y, 0)));
+        if (currentCell == null)
+        {
+            Cell startCell = board.GetCell(new Vector3Int(initialPos.x, initialPos.y, 0));
+            occupyNewCell(startCell);
+            updatePosition();
+        }
 
         //if the unit is an ally unit
-        if (CompareTag(allyTag))
+        if (CompareTag("UnitAlly"))
+        {
             //it should target enemy units
-            targetTag = ennemyTag;
+            targetTag = "UnitEnemy";
+            circleSprite.color = new Color(0, 0, 1);
+        }
 
+        else
+        {
+            targetTag = "UnitAlly";
+            circleSprite.color = new Color(1, 0, 0);
+        }
+
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        baseColor = spriteRenderer.color;
+        damageColor = new Color(1, 0.6f, 0.6f);
+        healColor = new Color(0.4f, 1, 0.4f);
+
+        GameManager.instance.AddUnit(this);
+    }
+
+    private void GenerateRaceAndClass()
+    {
+        //get all RaceStat ScriptableObject
+        RaceStat[] races = Resources.LoadAll<RaceStat>("Stat Units/Race");
+
+        //allies are not humans
+        if (CompareTag("UnitAlly"))
+        {
+            do
+            {
+                //select a random RaceStat
+                int randomRaceIndex = Random.Range(0, races.Length);
+                raceStats = races[randomRaceIndex];
+            }
+            while (raceStats.race == Race.Human);
+        }
+
+        //enemies are humans
+        else
+        {
+            foreach (RaceStat raceStat in races)
+            {
+                if (raceStat.race == Race.Human)
+                {
+                    raceStats = raceStat;
+                    break;
+                }
+            }
+        }
+
+        race = raceStats.race;
+
+        //get all ClassStat scriptableObject
+        ClassStat[] classes = Resources.LoadAll<ClassStat>("Stat Units/Class");
+
+        //select a random ClassStat
+        int randomClassIndex = Random.Range(0, classes.Length);
+        classStat = classes[randomClassIndex];
+        clas = classStat.clas;
+
+        //select a random name based on race
+        string[] possibleNames = raceStats.unitNames;
+        int randomNameIndex = Random.Range(0, possibleNames.Length);
+        unitName = possibleNames[randomNameIndex];
+
+        //select a random ability based on class
+        int randomAbilityIndex = Random.Range(0, classStat.abilities.Length);
+        abilityName = classStat.abilities[randomAbilityIndex];
+
+        //if the ability name exists
         if (abilityName != null && abilityName != "")
         {
+            //load the ability class and add a component to the unit
             var abilityType = System.Type.GetType(abilityName);
             gameObject.AddComponent(abilityType);
             ability = gameObject.GetComponent<Ability>();
             ability.setUnit(this);
         }
-
-        GameManager.instance.AddUnit(this);
-
     }
 
     public void UpdateUnit()
     {
-
         canMove = false;
 
-        //findTarget();
-        checkDeath();
-
-        /*if (!hasTarget)
+        if (path == null && !isActing)
         {
-            findTarget();
-        }*/
+            StartCoroutine(UnitWaitForSeconds(moveSpeed));
+        }
 
         //if the unit is not following a path yet and has a target cell different from their current cell
         if (isAbilityActivated && abilityName != null && abilityName != "")
@@ -147,6 +224,14 @@ public class Unit : MonoBehaviour
         }
     }
 
+    IEnumerator UnitWaitForSeconds(float seconds)
+    {
+        isActing = true;
+        yield return new WaitForSeconds(seconds);
+        isActing = false;
+        path = PathfindingTool.findTarget(board, currentCell, targetTag);        
+    }
+
     //follow a path represented by a list of cells to cross
     IEnumerator MoveFollowingPath(List<Cell> path)
     {
@@ -154,7 +239,7 @@ public class Unit : MonoBehaviour
         foreach (Cell cell in path)
         {
             yield return new WaitForSeconds(moveSpeed);
-            setPosition(cell);
+            updatePosition();
         }
         isActing = false;
     }
@@ -162,13 +247,56 @@ public class Unit : MonoBehaviour
     //move to a given cell
     IEnumerator MoveToCell(Cell cell)
     {
-        if (cell.GetIsOccupied() == false)
+        if (!cell.GetIsOccupied())
         {
             isActing = true;
-            setPosition(cell);
+            //change the occupied tile then start the animation
+            occupyNewCell(cell);
+            //StopCoroutine(MoveAnimation(cell));
+            StartCoroutine(MoveAnimation(cell));
             yield return new WaitForSeconds(moveSpeed);
+            //ensure that the unit is at the center of the current cell before it can start acting again
+            updatePosition();
             isActing = false;
         }
+
+        else
+        {
+            path = null;
+            yield return new WaitForSeconds(moveSpeed);
+        }
+    }
+
+    IEnumerator MoveAnimation(Cell cell)
+    {
+        //set the speed of the animation (distance at each iteration of while loop)
+        float speed = 0.1f;
+
+        //if the unit is moving too fast, inscrease the animation speed
+        if (moveSpeed <= 0.2)
+            speed = 0.2f;
+
+        //set the maximum number of movement in the animation
+        float maxRefresh = 1 / speed;
+
+        //time to wait between every movement
+        float refreshRate = 0.01f;
+
+        int numberOfRefresh = 0;
+
+        Vector3 distance = cell.WorldPosition - transform.position;
+
+        //while the unit is not arrived at the target position and the max number of movement is not reached
+        while (cell == currentCell && transform.position != cell.WorldPosition && numberOfRefresh <= maxRefresh)
+        {
+            transform.position += distance * speed;
+            numberOfRefresh++;
+            yield return new WaitForSeconds(refreshRate);
+        }
+
+        updatePosition();
+
+        yield return null;
     }
 
     //attack the current target
@@ -179,6 +307,9 @@ public class Unit : MonoBehaviour
         StartCoroutine(AttackAnimation());
 
         targetUnit.takeDamage(damage);
+
+        if (range > 1)
+            StartCoroutine(ProjectileAnimation());
 
         if (abilityName != null && abilityName != "")
         {
@@ -201,10 +332,10 @@ public class Unit : MonoBehaviour
         transform.position = worldPosition + attackDirection;
 
         //set the animation time to be fast, and faster than the attack speed
-        float animationTime = 0.2f;
-        if (attackSpeed <= 0.2f)
+        float animationTime = 0.3f;
+        if (attackSpeed <= 0.3f)
         {
-            animationTime = attackSpeed / 2;
+            animationTime = 2 * attackSpeed / 3;
         }
 
         yield return new WaitForSeconds(0.2f);
@@ -213,28 +344,77 @@ public class Unit : MonoBehaviour
         transform.position = worldPosition;
     }
 
-    //set the position of the unit in a cell
-    public void setPosition(Cell cell)
+    IEnumerator ProjectileAnimation()
+    {
+        GameObject projectile = Instantiate(projectileGameObject, worldPosition, Quaternion.identity, transform);
+
+        //set the speed of the animation (distance at each iteration of while loop)
+        float speed = 0.06f;
+
+        //if the unit is attacking too fast, inscrease the animation speed
+        if (attackSpeed <= 0.2f)
+            speed = 0.15f;
+
+        //set the maximum number of refresh of the projectile animation
+        float maxRefresh = 1 / speed;
+
+        //time to wait between every movement
+        float refreshRate = 0.01f;
+
+        int numberOfRefresh = 0;
+
+        Vector3 distance = targetUnit.transform.position - projectile.transform.position;
+        float angle = Mathf.Atan2(distance.y, distance.x) * Mathf.Rad2Deg;
+        projectile.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
+        //while there is still a target, the projectile is not arrived at the target position and the max number of refresh is not reached
+        while (targetUnit != null && projectile.transform.position != targetUnit.transform.position && numberOfRefresh <= maxRefresh)
+        {
+            projectile.transform.position += distance * speed;
+            numberOfRefresh++;
+            yield return new WaitForSeconds(refreshRate);
+        }
+
+        Destroy(projectile);
+
+        yield return null;
+    }
+
+    public void occupyNewCell(Cell newCell)
     {
         if (currentCell != null)
         {
-            currentCell.SetIsOccupied(false);
+            currentCell.DecreaseNumberOfUnits();
             currentCell.SetCurrentUnit(null);
         }
 
-        currentCell = cell;
-
-        currentCell.SetIsOccupied(true);
+        currentCell = newCell;
+        currentCell.IncreaseNumberOfUnits();
         currentCell.SetCurrentUnit(this);
+    }
 
+    //set the position of the unit in a cell
+    public void updatePosition()
+    {
         currentPosition = currentCell.TileMapPosition;
         worldPosition = new Vector3(currentCell.WorldPosition.x, currentCell.WorldPosition.y, 0);
         transform.position = worldPosition;
+        //print(currentCell);
     }
 
     public Vector3Int getPosition()
     {
         return (currentPosition);
+    }
+
+    public Race getRace()
+    {
+        return race;
+    }
+
+    public Class getClass()
+    {
+        return clas;
     }
 
     public Cell getCell()
@@ -246,7 +426,6 @@ public class Unit : MonoBehaviour
     {
         if (currentLife <= 0)
         {
-            currentCell.SetIsOccupied(false);
             Destroy(this.gameObject);
         }
     }
@@ -256,6 +435,7 @@ public class Unit : MonoBehaviour
         currentLife -= damage;
         checkDeath();
         healthBar.SetHealth(currentLife);
+        StartCoroutine(ChangeColorAnimation(damageColor, 0.4f));
     }
 
     public void heal(int heal)
@@ -266,6 +446,20 @@ public class Unit : MonoBehaviour
             currentLife = maxLife;
         }
         healthBar.SetHealth(currentLife);
+        StartCoroutine(ChangeColorAnimation(healColor, 0.7f));
+    }
+
+    IEnumerator ChangeColorAnimation(Color color, float durationSeconds)
+    {
+        spriteRenderer.color = color;
+        takingDamageCount++;
+
+        yield return new WaitForSeconds(durationSeconds);
+
+        //if this is the last animation playing, set the color back to normal
+        takingDamageCount--;
+        if(takingDamageCount == 0)
+            spriteRenderer.color = baseColor;
     }
 
     private void OnDrawGizmosSelected()
@@ -279,6 +473,8 @@ public class Unit : MonoBehaviour
             Gizmos.DrawLine(transform.position, targetUnit.transform.position);
         }
     }
+
+
     public void UpdateDragDrop()
     {
         canMove = true;
@@ -348,8 +544,20 @@ public class Unit : MonoBehaviour
 
                 spriteRenderer.sortingOrder = 0;
 
-                InventorySlot slotUnderMouse = InventorySlot.GetSlotUnderMouse();
+            List<Cell> authorizedCells = board.GetAuthorizedAllyCells();
+            Cell targetCell = board.GetCell(tileCoordinate);
 
+            if (targetCell == null || targetCell.GetIsOccupied() == true || !authorizedCells.Contains(targetCell))
+                updatePosition();
+
+            else
+            {
+                Cell newCell = board.GetCell(tileCoordinate);
+                occupyNewCell(newCell);
+                updatePosition();
+            }
+
+                InventorySlot slotUnderMouse = InventorySlot.GetSlotUnderMouse();
                 if (slotUnderMouse != null)
                     slotUnderMouse.PutInSlot(this);
             }
@@ -359,6 +567,7 @@ public class Unit : MonoBehaviour
 
     private void OnDestroy()
     {
+        currentCell.DecreaseNumberOfUnits();
         GameManager.instance.RemoveUnit(this);
     }
 
@@ -414,5 +623,13 @@ public class Unit : MonoBehaviour
     public void AttachBoard()
     {
         this.board = Board.CurrentBoard;
+    public HealthbarHandler getHealthbar()
+    {
+        return healthBar;
+    }
+
+    public void setBoard(Board board)
+    {
+        this.board = board;
     }
 }

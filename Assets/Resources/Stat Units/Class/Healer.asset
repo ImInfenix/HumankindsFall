@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ba64e6d5dd11e449bb0e8bd6d5fc7c8, type: 3}
+  m_Name: Healer
+  m_EditorClassIdentifier: 
+  clas: 3
+  maxLife: 100
+  armor: 0
+  moveSpeed: 0.5
+  attackSpeed: 1
+  damage: 5
+  range: 2
+  projectile: {fileID: 3756010517097857206, guid: 28de22995b20a354ba2da0a6e56df8ef,
+    type: 3}
+  abilities:
+  - HealZone
+  classIconSprite: {fileID: 21300000, guid: 2449a7655f0cee7478d50e9704bc319a, type: 3}
