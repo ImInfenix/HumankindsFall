@@ -130,6 +130,17 @@ public class InventorySlot : MonoBehaviour, IDragHandler, IPointerClickHandler
         if (_status != SlotState.Used || GameManager.instance.gamestate != GameManager.GameState.Placement)
             return;
 
+        List<Cell> authorizedCells = Board.CurrentBoard.GetAuthorizedAllyCells();
+
+        List<Cell> avalaibleCells = new List<Cell>();
+
+        foreach (Cell cell in authorizedCells)
+            if (!cell.GetIsOccupied())
+                avalaibleCells.Add(cell);
+
+        if (avalaibleCells.Count == 0)
+            return;
+
         Unit newUnit = Instantiate(unitPrefab).GetComponent<Unit>();
         newUnit.SetName(unitDescription.GetUnitName());
         newUnit.SetSprite(unitDescription.GetSprite());
@@ -138,6 +149,9 @@ public class InventorySlot : MonoBehaviour, IDragHandler, IPointerClickHandler
         newUnit.SetAbilityName(unitDescription.GetAbilityName());
         newUnit.AttachBoard();
         newUnit.transform.SetPositionAndRotation(attachedCamera.ScreenToWorldPoint(Input.mousePosition), Quaternion.identity);
+
+        Cell destinatinCell = avalaibleCells[0];
+        newUnit.initialPos = destinatinCell.TileMapPosition;
 
         newUnit.tag = "UnitAlly";
         newUnit.isRandomUnit = false;
