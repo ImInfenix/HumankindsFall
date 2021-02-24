@@ -86,7 +86,6 @@ public class GameManager : MonoBehaviour
 
     }
 
-
     private void CombatResolution(string resolution)
     {
         gamestate = GameState.Resolution;
@@ -103,5 +102,6 @@ public class GameManager : MonoBehaviour
 
         ResolutionPhaseHandler.instance.Show();
         HealthbarHandler.HideAll();
+        Player.instance.Inventory.Hide();
     }
 }
