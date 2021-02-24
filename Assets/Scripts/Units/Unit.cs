@@ -431,7 +431,8 @@ public class Unit : MonoBehaviour
     {
         if (currentLife <= 0)
         {
-            Destroy(this.gameObject);
+            StopAllCoroutines();
+            Destroy(gameObject);
         }
     }
 
