@@ -10,6 +10,9 @@ public class InventorySlot : MonoBehaviour, IDragHandler, IPointerClickHandler
     private Image lockedImage;
 
     [SerializeField]
+    private Image selectedImage;
+
+    [SerializeField]
     private UnitDescriptionDisplay unitDescriptionDisplay;
 
     [Header("Prefab"), SerializeField]
@@ -49,6 +52,16 @@ public class InventorySlot : MonoBehaviour, IDragHandler, IPointerClickHandler
     {
         _status = SlotState.Empty;
         lockedImage.gameObject.SetActive(false);
+    }
+
+    public void Select()
+    {
+        selectedImage.gameObject.SetActive(true);
+    }
+
+    public void Unselect()
+    {
+        selectedImage.gameObject.SetActive(false);
     }
 
     public void PutInSlot(Unit unit)
@@ -130,13 +143,37 @@ public class InventorySlot : MonoBehaviour, IDragHandler, IPointerClickHandler
         _status = SlotState.Empty;
         unitDescription = null;
         Destroy(child);
+        unitDescriptionDisplay.unselectActualSlot();
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
         if (this.Status == SlotState.Used)
         {
+            unitDescriptionDisplay.changeActualSlot(this);
             unitDescriptionDisplay.SetUnitName(child.name);
+            ClassStat classe = unitDescription.GetClass();
+            RaceStat race = unitDescription.GetRace();
+            int maxLife = classe.maxLife + race.maxLife;
+            int maxMana = classe.maxMana + race.maxMana;
+            int armor = classe.armor + race.armor;
+            float atakSpeed = classe.attackSpeed + race.attackSpeed;
+
+            string stats =
+                "Class : " + classe.name + "\n" +
+                "Race : " + race.name + "\n" +
+                "PV : " + maxLife + "\n" +
+                "Mana : " + maxMana + "\n" +
+                "Armor : " + armor + "\n" +
+                "Attack Speed : " + atakSpeed;
+                ;
+            unitDescriptionDisplay.SetUnitStats(stats);
+            
+        }
+        else
+        {
+            unitDescriptionDisplay.unselectActualSlot();
         }
     }
+
 }
