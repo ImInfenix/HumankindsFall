@@ -172,7 +172,7 @@ public class InventorySlot : MonoBehaviour, IDragHandler, IPointerClickHandler
         }
         else
         {
-            unitDescriptionDisplay.unselectActualSlot();
+            unitDescriptionDisplay?.unselectActualSlot();
         }
     }
 
