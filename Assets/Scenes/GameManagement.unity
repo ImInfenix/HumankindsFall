@@ -1052,18 +1052,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2be743677ad655a4ebf530df0939075a, type: 3}
---- !u!114 &266032998 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1916477016714681627, guid: 85ed2434bf7766e4c920413ade69af70,
-    type: 3}
-  m_PrefabInstance: {fileID: 717941780}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 732d1d855b49067448f9780ec9f2ffdf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &444962684 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2231666390241425387, guid: 1ea72ca18e933a54bb70c20132f56984,
@@ -1819,13 +1807,8 @@ PrefabInstance:
       objectReference: {fileID: 519420031}
     - target: {fileID: 2231666390658058980, guid: 1ea72ca18e933a54bb70c20132f56984,
         type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 266032998}
-    - target: {fileID: 2231666390658058980, guid: 1ea72ca18e933a54bb70c20132f56984,
-        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ConfirmPlacement
+      value: RunCombat
       objectReference: {fileID: 0}
     - target: {fileID: 2231666391417544150, guid: 1ea72ca18e933a54bb70c20132f56984,
         type: 3}
