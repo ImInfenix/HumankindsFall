@@ -78,6 +78,20 @@ public class Unit : MonoBehaviour
 
     public void InitializeUnit()
     {
+        //select a random ability based on class
+        int randomAbilityIndex = Random.Range(0, classStat.abilities.Length);
+        abilityName = classStat.abilities[randomAbilityIndex];
+
+        //if the ability name exists
+        if (abilityName != null && abilityName != "")
+        {
+            //load the ability class and add a component to the unit
+            var abilityType = System.Type.GetType(abilityName);
+            gameObject.AddComponent(abilityType);
+            ability = gameObject.GetComponent<Ability>();
+            ability.setUnit(this);
+        }
+
         maxLife = raceStats.maxLife + classStat.maxLife;
         currentLife = maxLife;
         incrementStamina = 1;
@@ -171,20 +185,6 @@ public class Unit : MonoBehaviour
         string[] possibleNames = raceStats.unitNames;
         int randomNameIndex = Random.Range(0, possibleNames.Length);
         unitName = possibleNames[randomNameIndex];
-
-        //select a random ability based on class
-        int randomAbilityIndex = Random.Range(0, classStat.abilities.Length);
-        abilityName = classStat.abilities[randomAbilityIndex];
-
-        //if the ability name exists
-        if (abilityName != null && abilityName != "")
-        {
-            //load the ability class and add a component to the unit
-            var abilityType = System.Type.GetType(abilityName);
-            gameObject.AddComponent(abilityType);
-            ability = gameObject.GetComponent<Ability>();
-            ability.setUnit(this);
-        }
     }
 
     public void UpdateUnit()
