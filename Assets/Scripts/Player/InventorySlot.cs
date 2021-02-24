@@ -131,7 +131,7 @@ public class InventorySlot : MonoBehaviour, IDragHandler, IPointerClickHandler
             return;
 
         Unit newUnit = Instantiate(unitPrefab).GetComponent<Unit>();
-        newUnit.name = unitDescription.GetUnitName();
+        newUnit.SetName(unitDescription.GetUnitName());
         newUnit.SetSprite(unitDescription.GetSprite());
         newUnit.raceStats = unitDescription.GetRace();
         newUnit.classStat = unitDescription.GetClass();

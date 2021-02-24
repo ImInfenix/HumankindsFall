@@ -640,4 +640,9 @@ public class Unit : MonoBehaviour
     {
         return unitName;
     }
+
+    public void SetName(string name)
+    {
+        unitName = name;
+    }
 }
