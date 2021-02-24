@@ -55,14 +55,11 @@ public class Unit : MonoBehaviour
 
     private Ability ability;
 
-    public HealthbarHandler healthBar;
-
-    private SpriteRenderer spriteRenderer;
-
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
+
     [SerializeField] private HealthbarHandler healthBar;
     [SerializeField] private Image classIcon;
     [SerializeField] private SpriteRenderer circleSprite;
@@ -229,7 +226,7 @@ public class Unit : MonoBehaviour
         isActing = true;
         yield return new WaitForSeconds(seconds);
         isActing = false;
-        path = PathfindingTool.findTarget(board, currentCell, targetTag);        
+        path = PathfindingTool.findTarget(board, currentCell, targetTag);
     }
 
     //follow a path represented by a list of cells to cross
@@ -458,7 +455,7 @@ public class Unit : MonoBehaviour
 
         //if this is the last animation playing, set the color back to normal
         takingDamageCount--;
-        if(takingDamageCount == 0)
+        if (takingDamageCount == 0)
             spriteRenderer.color = baseColor;
     }
 
@@ -535,27 +532,22 @@ public class Unit : MonoBehaviour
 
                 Vector3Int tileCoordinate = board.GetTilemap().WorldToCell(mousePos);
 
-                if (board.GetCell(tileCoordinate) == null || board.GetCell(tileCoordinate).GetIsOccupied() == true)
-                    setPosition(board.GetCell(currentPosition));
-                else
-                    setPosition(board.GetCell(tileCoordinate));
-
-                moving = false;
-
                 spriteRenderer.sortingOrder = 0;
 
-            List<Cell> authorizedCells = board.GetAuthorizedAllyCells();
-            Cell targetCell = board.GetCell(tileCoordinate);
+                List<Cell> authorizedCells = board.GetAuthorizedAllyCells();
+                Cell targetCell = board.GetCell(tileCoordinate);
 
-            if (targetCell == null || targetCell.GetIsOccupied() == true || !authorizedCells.Contains(targetCell))
-                updatePosition();
+                if (targetCell == null || targetCell.GetIsOccupied() == true || !authorizedCells.Contains(targetCell))
+                    updatePosition();
 
-            else
-            {
-                Cell newCell = board.GetCell(tileCoordinate);
-                occupyNewCell(newCell);
-                updatePosition();
-            }
+                else
+                {
+                    Cell newCell = board.GetCell(tileCoordinate);
+                    occupyNewCell(newCell);
+                    updatePosition();
+                }
+
+                moving = false;
 
                 InventorySlot slotUnderMouse = InventorySlot.GetSlotUnderMouse();
                 if (slotUnderMouse != null)
@@ -622,7 +614,9 @@ public class Unit : MonoBehaviour
 
     public void AttachBoard()
     {
-        this.board = Board.CurrentBoard;
+        board = Board.CurrentBoard;
+    }
+
     public HealthbarHandler getHealthbar()
     {
         return healthBar;

@@ -82,7 +82,9 @@ public class InventorySlot : MonoBehaviour, IDragHandler, IPointerClickHandler
         float aspectRatio = spriteRect.width / spriteRect.height;
         RectTransform rt = child.GetComponent<RectTransform>();
         float size = spriteRect.height * aspectRatio * 2;
-        rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, (rt.rect.width - size) / 2, size);
+
+        rt.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 100);
+        rt.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 100 * aspectRatio);
 
         unitDescription = new UnitDescription(unit);
 
