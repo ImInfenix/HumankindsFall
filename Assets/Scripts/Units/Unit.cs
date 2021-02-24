@@ -51,6 +51,8 @@ public class Unit : MonoBehaviour
     private bool isAbilityActivated = false;
     private string targetTag;
 
+    public bool isRandomUnit = true;
+
     [SerializeField] private string abilityName;
 
     private Ability ability;
@@ -68,8 +70,14 @@ public class Unit : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GenerateRaceAndClass();
+        if(isRandomUnit)
+            GenerateRaceAndClass();
 
+        InitializeUnit();
+    }
+
+    public void InitializeUnit()
+    {
         maxLife = raceStats.maxLife + classStat.maxLife;
         currentLife = maxLife;
         incrementStamina = 1;
@@ -625,5 +633,10 @@ public class Unit : MonoBehaviour
     public void setBoard(Board board)
     {
         this.board = board;
+    }
+
+    public string GetName()
+    {
+        return unitName;
     }
 }

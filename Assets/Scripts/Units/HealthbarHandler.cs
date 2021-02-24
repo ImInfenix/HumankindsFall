@@ -21,7 +21,7 @@ public class HealthbarHandler : MonoBehaviour
 
         healthbarHandlers.Add(this);
 
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
     }
 
     void OnEnable()

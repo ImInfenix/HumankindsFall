@@ -14,7 +14,7 @@ public class UnitDescription
         unitRace = unit.raceStats;
         unitClass = unit.classStat;
         abilityName = unit.GetAbilityName();
-        unitName = unit.name;
+        unitName = unit.GetName();
     }
 
     public string GetUnitName()

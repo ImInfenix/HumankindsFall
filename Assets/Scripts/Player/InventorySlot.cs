@@ -140,6 +140,7 @@ public class InventorySlot : MonoBehaviour, IDragHandler, IPointerClickHandler
         newUnit.transform.SetPositionAndRotation(attachedCamera.ScreenToWorldPoint(Input.mousePosition), Quaternion.identity);
 
         newUnit.tag = "UnitAlly";
+        newUnit.isRandomUnit = false;
         newUnit.PrepareForDragNDrop();
 
         _status = SlotState.Empty;
