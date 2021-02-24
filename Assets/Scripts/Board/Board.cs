@@ -24,7 +24,6 @@ public class Board : MonoBehaviour
     {
         Initialize(tilemap);
 
-        Initialize(placementTilemap);
         GenerateUnits(placementTilemap);
     }
 
@@ -63,6 +62,7 @@ public class Board : MonoBehaviour
                     Vector3Int tilePosition = new Vector3Int(x - Mathf.FloorToInt(SizeX / 2), y - Mathf.FloorToInt(SizeY / 2), 0);
                     Sprite tileSprite = tilemap.GetSprite(tilePosition);
 
+                    //if it's an enemy tile, spawn a random enemy
                     if (tileSprite.name == "EnemyTileSprite")
                     {
                         Unit unit = Instantiate(Unit, transform).GetComponent<Unit>();
@@ -72,6 +72,7 @@ public class Board : MonoBehaviour
                         unit.tag = "UnitEnemy";
                     }
 
+                    //if it's an ally tile, add it to the list of authorized tiles
                     else if (tileSprite.name == "AllyTileSprite")
                     {
                         allyCellsList.Add(GetCell(tilePosition));   

@@ -141,12 +141,15 @@ public class Unit : MonoBehaviour
             }
         }
 
+        race = raceStats.race;
+
         //get all ClassStat scriptableObject
         ClassStat[] classes = Resources.LoadAll<ClassStat>("Stat Units/Class");
 
         //select a random ClassStat
         int randomClassIndex = Random.Range(0, classes.Length);
-        classStat = (ClassStat)classes[randomClassIndex];
+        classStat = classes[randomClassIndex];
+        clas = classStat.clas;
 
         //select a random name based on race
         string[] possibleNames = raceStats.unitNames;

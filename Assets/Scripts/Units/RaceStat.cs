@@ -17,8 +17,6 @@ public class RaceStat : ScriptableObject
 {
     public Race race;
 
-    // protected Object attack; A voir comment on implémente les attaques
-
     public int maxLife;
     public int maxMana;
     public int mana;
