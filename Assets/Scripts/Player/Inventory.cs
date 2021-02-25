@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -40,7 +42,6 @@ public class Inventory : MonoBehaviour
     public void AddUnitInInventory(UnitDescription unit)
     {
         unitsInInventory.Add(unit.GetId(), unit);
-        inventoryUI.PutInEmptySlot(unit);
     }
 
     public void RemoveFromInventory(UnitDescription unit)
@@ -52,5 +53,10 @@ public class Inventory : MonoBehaviour
     private void AddRandomUnit()
     {
         UnitGenerator.GenerateUnit(Unit.allyTag);
+    }
+
+    public UnitDescription[] GetAllUnits()
+    {
+        return unitsInInventory.Values.ToArray();
     }
 }

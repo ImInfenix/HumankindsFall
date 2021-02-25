@@ -46,6 +46,10 @@ public class InventoryUI : MonoBehaviour
 
     private void Start()
     {
+        UnitDescription[] unitsInInventory = inventory.GetAllUnits();
+        foreach (UnitDescription desc in unitsInInventory)
+            PutInEmptySlot(desc);
+
         Hide();
     }
 
