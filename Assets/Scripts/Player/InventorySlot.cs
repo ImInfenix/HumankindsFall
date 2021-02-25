@@ -153,7 +153,7 @@ public class InventorySlot : MonoBehaviour, IDragHandler, IPointerClickHandler
         Cell destinatinCell = avalaibleCells[0];
         newUnit.initialPos = destinatinCell.TileMapPosition;
 
-        newUnit.tag = "UnitAlly";
+        newUnit.tag = Unit.allyTag;
         newUnit.isRandomUnit = false;
         newUnit.PrepareForDragNDrop();
 

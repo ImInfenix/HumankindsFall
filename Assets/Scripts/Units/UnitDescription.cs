@@ -17,6 +17,15 @@ public class UnitDescription
         unitName = unit.GetName();
     }
 
+    public UnitDescription(string name, RaceStat unitRace, ClassStat unitClass, string abilityName)
+    {
+        unitName = name;
+        this.unitRace = unitRace;
+        this.unitClass = unitClass;
+        this.abilityName = abilityName;
+        sprite = unitRace.unitSprite;
+    }
+
     public string GetUnitName()
     {
         return unitName;

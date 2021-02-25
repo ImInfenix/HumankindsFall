@@ -78,10 +78,6 @@ public class Unit : MonoBehaviour
 
     public void InitializeUnit()
     {
-        //select a random ability based on class
-        int randomAbilityIndex = Random.Range(0, classStat.abilities.Length);
-        abilityName = classStat.abilities[randomAbilityIndex];
-
         //if the ability name exists
         if (abilityName != null && abilityName != "")
         {
@@ -106,7 +102,8 @@ public class Unit : MonoBehaviour
         healthBar.SetHealth(currentLife, maxLife);
 
         classIcon.sprite = classStat.classIconSprite;
-        gameObject.GetComponent<SpriteRenderer>().sprite = raceStats.unitSprite;
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.sprite = raceStats.unitSprite;
 
         //canAttack = true;
         hasTarget = false;
@@ -133,7 +130,6 @@ public class Unit : MonoBehaviour
             circleSprite.color = new Color(1, 0, 0);
         }
 
-        spriteRenderer = GetComponent<SpriteRenderer>();
         baseColor = spriteRenderer.color;
         damageColor = new Color(1, 0.6f, 0.6f);
         healColor = new Color(0.4f, 1, 0.4f);
@@ -143,48 +139,12 @@ public class Unit : MonoBehaviour
 
     private void GenerateRaceAndClass()
     {
-        //get all RaceStat ScriptableObject
-        RaceStat[] races = Resources.LoadAll<RaceStat>("Stat Units/Race");
-
-        //allies are not humans
-        if (CompareTag(allyTag))
-        {
-            do
-            {
-                //select a random RaceStat
-                int randomRaceIndex = Random.Range(0, races.Length);
-                raceStats = races[randomRaceIndex];
-            }
-            while (raceStats.race == Race.Human);
-        }
-
-        //enemies are humans
-        else
-        {
-            foreach (RaceStat raceStat in races)
-            {
-                if (raceStat.race == Race.Human)
-                {
-                    raceStats = raceStat;
-                    break;
-                }
-            }
-        }
-
-        race = raceStats.race;
-
-        //get all ClassStat scriptableObject
-        ClassStat[] classes = Resources.LoadAll<ClassStat>("Stat Units/Class");
-
-        //select a random ClassStat
-        int randomClassIndex = Random.Range(0, classes.Length);
-        classStat = classes[randomClassIndex];
-        clas = classStat.clas;
-
-        //select a random name based on race
-        string[] possibleNames = raceStats.unitNames;
-        int randomNameIndex = Random.Range(0, possibleNames.Length);
-        unitName = possibleNames[randomNameIndex];
+        UnitDescription newDescription = UnitGenerator.GenerateUnit(tag);
+        unitName = newDescription.GetUnitName();
+        name = unitName;
+        raceStats = newDescription.GetRace();
+        classStat = newDescription.GetClass();
+        abilityName = newDescription.GetAbilityName();
     }
 
     public void UpdateUnit()
