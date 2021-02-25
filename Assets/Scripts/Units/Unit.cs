@@ -13,8 +13,6 @@ public class Unit : MonoBehaviour
     public ClassStat classStat;
 
     private static int infVal = 1000;
-    private Race race;
-    private Class clas;
 
     private int maxLife;
     [SerializeField] private int currentLife;
@@ -74,6 +72,9 @@ public class Unit : MonoBehaviour
             GenerateRaceAndClass();
 
         InitializeUnit();
+
+        Debug.Log($"Adding {name} with race {raceStats.name} and class {classStat.name}");
+        GameManager.instance.AddUnit(this);
     }
 
     public void InitializeUnit()
@@ -133,8 +134,6 @@ public class Unit : MonoBehaviour
         baseColor = spriteRenderer.color;
         damageColor = new Color(1, 0.6f, 0.6f);
         healColor = new Color(0.4f, 1, 0.4f);
-
-        GameManager.instance.AddUnit(this);
     }
 
     private void GenerateRaceAndClass()
@@ -374,12 +373,12 @@ public class Unit : MonoBehaviour
 
     public Race getRace()
     {
-        return race;
+        return raceStats.race;
     }
 
     public Class getClass()
     {
-        return clas;
+        return classStat.clas;
     }
 
     public Cell getCell()

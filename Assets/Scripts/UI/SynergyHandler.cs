@@ -156,18 +156,24 @@ public class SynergyHandler : MonoBehaviour
 
     public void addUnit(Unit u)
     {
-        if(u.tag == "UnitAlly")
+        if(u.tag == Unit.allyTag)
         {
             foreach (RaceCount r in rc)
             {
                 if (r.getRace() == u.getRace())
+                {
                     r.setNumber(r.getNumber() + 1);
+                    Debug.Log($"Incremented race {r.getRace()} from race {u.getRace()}");
+                }
             }
 
             foreach (ClassCount c in cc)
             {
                 if (c.getClass() == u.getClass())
+                {
                     c.setNumber(c.getNumber() + 1);
+                    Debug.Log($"Incremented class {c.getClass()} from class {u.getClass()}");
+                }
             }
 
             updateText();

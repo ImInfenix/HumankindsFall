@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
     {
         units.Add(unit);
         SynergyHandler.instance.addUnit(unit);
+
     }
 
     public void RemoveUnit(Unit unit)
