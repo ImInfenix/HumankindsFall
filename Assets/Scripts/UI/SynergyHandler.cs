@@ -163,7 +163,6 @@ public class SynergyHandler : MonoBehaviour
                 if (r.getRace() == u.getRace())
                 {
                     r.setNumber(r.getNumber() + 1);
-                    Debug.Log($"Incremented race {r.getRace()} from race {u.getRace()}");
                 }
             }
 
@@ -172,7 +171,6 @@ public class SynergyHandler : MonoBehaviour
                 if (c.getClass() == u.getClass())
                 {
                     c.setNumber(c.getNumber() + 1);
-                    Debug.Log($"Incremented class {c.getClass()} from class {u.getClass()}");
                 }
             }
 

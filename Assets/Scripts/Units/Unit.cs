@@ -73,7 +73,6 @@ public class Unit : MonoBehaviour
 
         InitializeUnit();
 
-        Debug.Log($"Adding {name} with race {raceStats.name} and class {classStat.name}");
         GameManager.instance.AddUnit(this);
     }
 
