@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,6 +13,8 @@ public class InventoryUI : MonoBehaviour
 
     private Inventory inventory;
 
+    private List<InventorySlot> slots;
+
     public bool isDisplayed { get; private set; }
 
     private void Awake()
@@ -20,6 +23,25 @@ public class InventoryUI : MonoBehaviour
         Transform inventorySubObject = transform.Find("Inventory");
         UnitsSlots = inventorySubObject.Find("UnitsSlots").GetComponent<RectTransform>();
         CurrentUnitDescription = inventorySubObject.Find("CurrentUnitDescription").GetComponent<RectTransform>();
+        
+        this.slots = new List<InventorySlot>();
+        InventorySlot[] slots = FindObjectsOfType<InventorySlot>();
+        foreach (InventorySlot slot in slots)
+        {
+            AddSlot(slot);
+        }
+    }
+
+    public void PutInEmptySlot(UnitDescription unit)
+    {
+        foreach(InventorySlot slot in slots)
+        {
+            if(slot.Status == InventorySlot.SlotState.Empty)
+            {
+                slot.PutInSlot(unit);
+                return;
+            }
+        }
     }
 
     private void Start()
@@ -84,5 +106,10 @@ public class InventoryUI : MonoBehaviour
     public void HideDescription()
     {
         CurrentUnitDescription.gameObject.SetActive(false);
+    }
+
+    public void AddSlot(InventorySlot slot)
+    {
+        slots.Add(slot);
     }
 }

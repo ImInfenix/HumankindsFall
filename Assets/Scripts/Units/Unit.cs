@@ -55,6 +55,8 @@ public class Unit : MonoBehaviour
 
     private Ability ability;
 
+    public uint id;
+
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -143,6 +145,7 @@ public class Unit : MonoBehaviour
         raceStats = newDescription.GetRace();
         classStat = newDescription.GetClass();
         abilityName = newDescription.GetAbilityName();
+        id = newDescription.GetId();
     }
 
     public void UpdateUnit()

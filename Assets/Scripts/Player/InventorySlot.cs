@@ -43,8 +43,11 @@ public class InventorySlot : MonoBehaviour, IDragHandler, IPointerClickHandler
         }
 
         Unlock();
-        attachedCamera = Camera.main;
+    }
 
+    private void Start()
+    {
+        attachedCamera = Camera.main;
         unitDescriptionDisplay = FindObjectOfType<UnitDescriptionDisplay>();
     }
 
@@ -69,28 +72,35 @@ public class InventorySlot : MonoBehaviour, IDragHandler, IPointerClickHandler
         if (_status != SlotState.Empty)
             return;
 
-        _status = SlotState.Used;
-
-        child = new GameObject(unit.name);
-        child.transform.SetParent(transform, false);
-
-        Image i = child.AddComponent<Image>();
-        Sprite sprite = unit.GetSprite();
-        i.sprite = sprite;
-
-        Rect spriteRect = unit.GetSprite().rect;
-        float aspectRatio = spriteRect.width / spriteRect.height;
-        RectTransform rt = child.GetComponent<RectTransform>();
-        float size = spriteRect.height * aspectRatio * 2;
-
-        rt.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 100);
-        rt.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 100 * aspectRatio);
-
-        unitDescription = new UnitDescription(unit);
+        PutInSlot(new UnitDescription(unit));
 
         unit.board.GetCell(unit.currentPosition).SetIsOccupied(false);
 
         Destroy(unit.gameObject);
+    }
+
+    public void PutInSlot(UnitDescription unitDescription)
+    {
+        if (_status != SlotState.Empty)
+            return;
+
+        _status = SlotState.Used;
+
+        child = new GameObject(unitDescription.GetUnitName());
+        child.transform.SetParent(transform, false);
+
+        Image i = child.AddComponent<Image>();
+        Sprite sprite = unitDescription.GetSprite();
+        i.sprite = sprite;
+
+        Rect spriteRect = unitDescription.GetSprite().rect;
+        float aspectRatio = spriteRect.width / spriteRect.height;
+        RectTransform rt = child.GetComponent<RectTransform>();
+
+        rt.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 100);
+        rt.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 100 * aspectRatio);
+
+        this.unitDescription = unitDescription;
     }
 
     private static uint currentId = 0;
@@ -155,6 +165,7 @@ public class InventorySlot : MonoBehaviour, IDragHandler, IPointerClickHandler
 
         newUnit.tag = Unit.allyTag;
         newUnit.isRandomUnit = false;
+        newUnit.id = unitDescription.GetId();
         newUnit.PrepareForDragNDrop();
 
         _status = SlotState.Empty;

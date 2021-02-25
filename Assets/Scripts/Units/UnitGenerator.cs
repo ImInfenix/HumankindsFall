@@ -11,7 +11,7 @@ public static class UnitGenerator
         string name = GetRandomName(unitRace);
         string abilityName = GetRandomAbilityName(unitClass);
 
-        return new UnitDescription(name, unitRace, unitClass, abilityName);
+        return new UnitDescription(name, unitRace, unitClass, abilityName, unitTag);
     }
 
     public static RaceStat GetRandomRace(string unitTag)
