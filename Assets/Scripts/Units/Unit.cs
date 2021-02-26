@@ -12,8 +12,6 @@ public class Unit : MonoBehaviour
     public RaceStat raceStats;
     public ClassStat classStat;
 
-    private static int infVal = 1000;
-
     private int maxLife;
     [SerializeField] private int currentLife;
     private int incrementStamina;
@@ -36,10 +34,10 @@ public class Unit : MonoBehaviour
     private float startPosY;
 
     public Vector3Int initialPos;
-    private Vector3Int targetPos;
+    //private Vector3Int targetPos;
     private Unit targetUnit = null;
-    private int targetDistance = PathfindingTool.infVal;
-    private bool hasTarget = false;
+    //private int targetDistance = PathfindingTool.infVal;
+    //private bool hasTarget = false;
     private bool isActing = false;
     private bool isMoving = false;
 
@@ -108,7 +106,7 @@ public class Unit : MonoBehaviour
         spriteRenderer.sprite = raceStats.unitSprite;
 
         //canAttack = true;
-        hasTarget = false;
+        //hasTarget = false;
         isActing = false;
 
         if (currentCell == null)
@@ -152,11 +150,6 @@ public class Unit : MonoBehaviour
     {
         canMove = false;
 
-        if (path == null && !isActing)
-        {
-            StartCoroutine(UnitWaitForSeconds(moveSpeed));
-        }
-
         //if the unit is not following a path yet and has a target cell different from their current cell
         if (isAbilityActivated && abilityName != null && abilityName != "")
         {
@@ -165,28 +158,22 @@ public class Unit : MonoBehaviour
 
         if (!isActing)
         {
+            List<Unit> listAvailableTarget = PathfindingTool.unitsInRadius(currentCell, range, targetTag);
+            
             //if the target is not yet in range of attack
-            if (targetDistance > range && targetUnit != null && path != null)
+            if (listAvailableTarget.Count > 0)
+            {
+                targetUnit = listAvailableTarget[0];
+                StartCoroutine(AttackTarget());
+            }
+
+            else if (path != null && path.Count > 0)
             {
                 //start the coroutine to move to the next cell of the path
                 StartCoroutine(MoveToCell(path[0]));
             }
-            else if (targetDistance <= range && targetUnit != null && path != null)
-            {
-                //start the coroutine to attack the target
-                StartCoroutine(AttackTarget());
-            }
 
-            //check if a better target can be selected
-            path = PathfindingTool.findTarget(board, currentCell, targetTag);
-            if (path != null)
-            {
-                targetDistance = path.Count;
-                hasTarget = true;
-                targetPos = path[targetDistance - 1].TileMapPosition;
-                targetUnit = path[targetDistance - 1].GetCurrentUnit();
-
-            }
+            path = PathfindingTool.createPathTarget(this);
         }
     }
 
@@ -195,7 +182,7 @@ public class Unit : MonoBehaviour
         isActing = true;
         yield return new WaitForSeconds(seconds);
         isActing = false;
-        path = PathfindingTool.findTarget(board, currentCell, targetTag);
+        //path = PathfindingTool.findTarget(board, currentCell, targetTag);
     }
 
     //follow a path represented by a list of cells to cross
@@ -434,7 +421,7 @@ public class Unit : MonoBehaviour
         if (Application.isPlaying)
         {
             Gizmos.color = Color.red;
-            if (targetUnit == null || currentCell == null || hasTarget == false)
+            if (targetUnit == null || currentCell == null /*|| hasTarget == false*/)
                 return;
 
             Gizmos.DrawLine(transform.position, targetUnit.transform.position);
@@ -605,5 +592,10 @@ public class Unit : MonoBehaviour
     public void SetName(string name)
     {
         unitName = name;
+    }
+
+    public void setTargetUnit(Unit unit)
+    {
+        targetUnit = unit;
     }
 }
