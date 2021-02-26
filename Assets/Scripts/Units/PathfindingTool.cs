@@ -80,7 +80,6 @@ public static class PathfindingTool
         localBoard[currentCellPosition.x, currentCellPosition.y].isExplorationList = true;
 
         //determines the path to the target cell by explorating neighbour cells of a cell in the exploration list
-        bool continueSearch = true;
         int debugSafetyCount = 0;
         do
         {
@@ -113,7 +112,6 @@ public static class PathfindingTool
                 //if the cell we are explorating is the target cell, return the path to this cell
                 if (localBoard[localClosestCell.x, localClosestCell.y].thisCell == targetCell)
                 {
-                    continueSearch = false;
 
                     do
                     {
@@ -148,7 +146,7 @@ public static class PathfindingTool
                             localBoard[cellNeighbourPosition.x, cellNeighbourPosition.y].previousCell = localBoard[localClosestCell.x, localClosestCell.y].thisCell;
                         }
 
-                        if (!localBoard[cellNeighbourPosition.x, cellNeighbourPosition.y].isExplorationList && (cellNeighbour.GetIsOccupied() == false || cellNeighbour == targetCell))
+                        if (!localBoard[cellNeighbourPosition.x, cellNeighbourPosition.y].isExplorationList && (cellNeighbour.GetIsOccupied() == false || cellNeighbour == targetCell) && !localBoard[cellNeighbourPosition.x, cellNeighbourPosition.y].isMarked)
                         {
                             explorationList.Add((cellNeighbourPosition.x, cellNeighbourPosition.y));
                             localBoard[cellNeighbourPosition.x, cellNeighbourPosition.y].isExplorationList = true;
@@ -157,7 +155,7 @@ public static class PathfindingTool
                 }
             }
         }
-        while (continueSearch && debugSafetyCount < 100); //while we haven't found the path to the target cell
+        while (explorationList.Count > 0); //while we haven't found the path to the target cell
 
         return null;
     }
