@@ -105,4 +105,9 @@ public class GameManager : MonoBehaviour
         HealthbarHandler.HideAll();
         Player.instance.Inventory.Hide();
     }
+
+    private void OnDestroy()
+    {
+        instance = null;
+    }
 }
