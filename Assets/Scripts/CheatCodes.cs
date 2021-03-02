@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class CheatCodes : MonoBehaviour
 {
@@ -9,9 +8,7 @@ public class CheatCodes : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            Destroy(GameManager.instance.gameObject);
-            Destroy(Player.instance.gameObject);
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            SceneLoader.ReloadScene();
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 
 [RequireComponent(typeof(Player))]
 public class Wallet : MonoBehaviour
@@ -10,10 +11,14 @@ public class Wallet : MonoBehaviour
 
     private int amount;
 
-    private void Awake()
+    public void Awake()
+    {
+        amount = 0;
+    }
+
+    public void FillFields()
     {
         amountDisplay = GameObject.Find("Wallet_GUI").GetComponent<TMP_Text>();
-        amount = 0;
         UpdateGUI();
     }
 

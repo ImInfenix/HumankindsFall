@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -26,6 +27,12 @@ public class Player : MonoBehaviour
 
         _wallet = GetComponent<Wallet>();
         _inventory = GetComponent<Inventory>();
-        _inventory.FillFields();
+        InitiateForNewScene();
+    }
+
+    internal void InitiateForNewScene()
+    {
+        Inventory.FillFields();
+        Wallet.FillFields();
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(SceneLoader))]
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
@@ -13,20 +14,21 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         //Singleton creation
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else
+        if (instance != null)
         {
             Destroy(gameObject);
             return;
         }
+
+        instance = this;
+
         DontDestroyOnLoad(gameObject);
 
         //initialization
         units = new List<Unit>();
         gamestate = GameState.Placement;
+
+        GetComponent<SceneLoader>().Initialize();
     }
 
     /// <summary>
@@ -43,16 +45,25 @@ public class GameManager : MonoBehaviour
     public void RemoveUnit(Unit unit)
     {
         units.Remove(unit);
-        if(unit.getCurrentLife() > 0)
+        if (unit.getCurrentLife() > 0)
             SynergyHandler.instance.removeUnit(unit);
     }
 
     public void ConfirmPlacement()
     {
-        GameObject.Find("Board").GetComponent<Board>().HidePlacementTilemap();
+        if (gamestate != GameState.Placement)
+            return;
+
+        Board.CurrentBoard.HidePlacementTilemap();
         gamestate = GameState.Combat;
         Player.instance.Inventory.Hide();
         HealthbarHandler.ShowAll();
+    }
+
+    public void EnterNewCombatLevel()
+    {
+        gamestate = GameState.Placement;
+        Player.instance.InitiateForNewScene();
     }
 
     public void Update()
@@ -108,6 +119,7 @@ public class GameManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        instance = null;
+        if (instance == this)
+            instance = null;
     }
 }
