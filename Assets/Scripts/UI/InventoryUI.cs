@@ -6,9 +6,7 @@ using UnityEngine.UI;
 
 public class InventoryUI : MonoBehaviour
 {
-    [SerializeField]
     private RectTransform UnitsSlots;
-    [SerializeField]
     private RectTransform CurrentUnitDescription;
 
     private Inventory inventory;
