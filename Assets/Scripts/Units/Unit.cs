@@ -516,8 +516,9 @@ public class Unit : MonoBehaviour
 
     private void OnDestroy()
     {
+
         currentCell.DecreaseNumberOfUnits();
-        GameManager.instance.RemoveUnit(this);
+        GameManager.instance?.RemoveUnit(this);
     }
 
     public string getTargetTag()
