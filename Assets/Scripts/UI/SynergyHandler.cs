@@ -154,6 +154,16 @@ public class SynergyHandler : MonoBehaviour
         
     }
 
+    public List<ClassCount> getClassList()
+    {
+        return cc;
+    }
+
+    public List<RaceCount> getRaceList()
+    {
+        return rc;
+    }
+
     public void addUnit(Unit u)
     {
         if(u.tag == Unit.allyTag)

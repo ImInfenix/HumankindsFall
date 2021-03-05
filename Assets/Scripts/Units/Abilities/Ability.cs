@@ -6,7 +6,7 @@ abstract public class Ability : MonoBehaviour
 {
 
     protected Unit unit;
-    protected int currentStamina;
+    protected float currentStamina;
 
     [SerializeField] protected int castStaminaThreshold;
     protected int castRange;
@@ -19,7 +19,7 @@ abstract public class Ability : MonoBehaviour
         unit.getHealthbar().SetStamina(currentStamina, castStaminaThreshold);
     }
 
-    public void updateAbility(int incrementStamina)
+    public void updateAbility(float incrementStamina)
     {
         currentStamina += incrementStamina;
         if (currentStamina >= castStaminaThreshold && !unit.getIsAbilityActivated())
@@ -28,6 +28,19 @@ abstract public class Ability : MonoBehaviour
             castAbility();
         }
 
+        unit.getHealthbar().SetStamina(currentStamina, castStaminaThreshold);
+    }
+
+    public void mageSynergy(int lvl)
+    {
+        if (lvl == 1)
+        {
+            currentStamina = castStaminaThreshold / 4;
+        }
+        if (lvl == 2)
+        {
+            currentStamina = castStaminaThreshold / 2;
+        }
         unit.getHealthbar().SetStamina(currentStamina, castStaminaThreshold);
     }
 

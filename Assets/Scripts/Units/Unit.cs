@@ -6,34 +6,42 @@ using UnityEngine.UI;
 
 public class Unit : MonoBehaviour
 {
+    [Header("BASE")]
     public const string ennemyTag = "UnitEnemy";
     public const string allyTag = "UnitAlly";
 
     public RaceStat raceStats;
     public ClassStat classStat;
 
-    private int maxLife;
-    [SerializeField] private int currentLife;
-    private int incrementStamina;
-    private int armor;
-    private float moveSpeed;
-    private float attackSpeed;
-    private int damage;
-    private int range;
+    [Header ("STATS")]
+    [SerializeField] private int maxLife;           
+    [SerializeField] private float currentLife;
+    [SerializeField] private float incrementStamina;
+    [SerializeField] private float armor;
+    [SerializeField] private float initialArmor;
+    [SerializeField] private float moveSpeed;
+    [SerializeField] private float attackSpeed;
+    [SerializeField] private int damage;
+    [SerializeField] private int range;
     [SerializeField] private string unitName;
 
     private bool moving;
     private bool canMove;
+    private bool supportBuff = false;
+    private bool mage1 = false;
+
+    [Header("POSITION")]
     public Board board;
-    private Vector3 worldPosition;
+    [SerializeField] private Vector3 worldPosition;
     public Vector3Int currentPosition;
     public Cell currentCell = null;
     private List<Cell> path = null;
+    public Vector3Int initialPos;
 
     private float startPosX;
     private float startPosY;
 
-    public Vector3Int initialPos;
+    
     //private Vector3Int targetPos;
     private Unit targetUnit = null;
     //private int targetDistance = PathfindingTool.infVal;
@@ -49,10 +57,12 @@ public class Unit : MonoBehaviour
     [HideInInspector]
     public bool isRandomUnit = true;
 
+    [Header("ABILITY")]
     [SerializeField] private string abilityName;
 
-    private Ability ability;
+    [SerializeField] private Ability ability;
 
+    [Header("UI")]
     public uint id;
 
     private void Awake()
@@ -92,6 +102,7 @@ public class Unit : MonoBehaviour
         currentLife = maxLife;
         incrementStamina = 1;
         armor = raceStats.armor + classStat.armor;
+        initialArmor = armor;
         moveSpeed = raceStats.moveSpeed + classStat.moveSpeed;
         attackSpeed = raceStats.attackSpeed + classStat.attackSpeed;
         damage = raceStats.damage + classStat.damage;
@@ -386,7 +397,7 @@ public class Unit : MonoBehaviour
 
     public void takeDamage(int damage)
     {
-        currentLife -= damage;
+        currentLife -= damage/armor ;
         checkDeath();
         healthBar.SetHealth(currentLife);
         StartCoroutine(ChangeColorAnimation(damageColor, 0.4f));
@@ -550,7 +561,7 @@ public class Unit : MonoBehaviour
         this.range = range;
     }
 
-    public int getCurrentLife()
+    public float getCurrentLife()
     {
         return currentLife;
     }
@@ -598,5 +609,129 @@ public class Unit : MonoBehaviour
     public void setTargetUnit(Unit unit)
     {
         targetUnit = unit;
+    }
+
+    public void ActivateClass(Class c, int nb)
+    {
+        switch (c)
+        {
+            case Class.Mage:
+                if(nb >= 2 && nb < 4)
+                {
+                    ability.mageSynergy(1);
+                }
+                if(nb >= 4)
+                {
+                    ability.mageSynergy(2);
+                }
+                break;
+
+            case Class.Warrior:
+                if (nb >= 2 && nb < 4)
+                {
+                    damage += damage/4;
+                }
+                if (nb >= 4)
+                {
+                    damage += damage/2;
+                }
+                break;
+
+            case Class.Tank:
+                if(nb >= 2)
+                {
+                    maxLife += maxLife/2;
+                    currentLife = maxLife;
+                }
+                break;
+
+            case Class.Bowman:
+                if (nb >= 2)
+                {
+                    attackSpeed -= attackSpeed/4;
+                }
+                break;
+
+            case Class.Healer:
+                if(nb == 1)
+                {
+
+                }
+                if(nb == 2)
+                {
+
+                }
+                if(nb >= 3)
+                {
+
+                }
+                break;
+
+            case Class.Support:
+                List<Cell> neighbourCell = board.getNeighbour(currentCell);
+                if (nb >= 2)
+                {                  
+                    foreach(Cell cell in neighbourCell)
+                    {
+                        if(cell != null)
+                        {
+                            if (cell.GetIsOccupied())
+                            {
+                                if (nb == 2)
+                                {
+                                    cell.GetCurrentUnit().supportBoost(1);
+                                }
+                                if (nb == 3)
+                                {
+                                    cell.GetCurrentUnit().supportBoost(2);
+                                }
+                                if (nb >= 4)
+                                {
+                                    cell.GetCurrentUnit().supportBoost(3);
+                                }
+                            }
+                        }                       
+                    }
+                }              
+                break;
+
+            case Class.Berserker:
+                if (nb >= 2)
+                {
+                    if(board.isOccupiedNeighbour(currentCell) == false)
+                    {
+                        damage += damage / 2;
+                        armor += initialArmor / 4;
+                    }
+                }
+                break;
+
+            case Class.Assassin:
+                if(nb >= 1)
+                {
+
+                }
+                break;
+        }
+    }
+
+    public void supportBoost(int lvl)
+    {
+        if(supportBuff == false)
+        {
+            if (lvl == 1)
+            {
+                armor += initialArmor / 5;
+            }
+            if (lvl == 2)
+            {
+                armor += (initialArmor / 10) * 3;
+            }
+            if (lvl == 3)
+            {
+                armor += initialArmor / 2;
+            }
+            supportBuff = true;
+        }            
     }
 }

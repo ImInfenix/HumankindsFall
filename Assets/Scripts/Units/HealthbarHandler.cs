@@ -46,18 +46,18 @@ public class HealthbarHandler : MonoBehaviour
         transform.GetChild(0).transform.position = attachedCamera.WorldToScreenPoint(transform.parent.position + offset);
     }
 
-    public void SetHealth(int health, int maxHealth)
+    public void SetHealth(float health, int maxHealth)
     {
         healthSlider.maxValue = maxHealth;
         healthSlider.value = health;
     }
 
-    public void SetHealth(int health)
+    public void SetHealth(float health)
     {
         healthSlider.value = health;
     }
 
-    public void SetStamina(int stamina, int maxStamina)
+    public void SetStamina(float stamina, int maxStamina)
     {
         staminaSlider.maxValue = maxStamina;
         staminaSlider.value = stamina;

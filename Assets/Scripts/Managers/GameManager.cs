@@ -56,6 +56,7 @@ public class GameManager : MonoBehaviour
 
         Board.CurrentBoard.HidePlacementTilemap();
         gamestate = GameState.Combat;
+        ActivateClassSynergy();
         Player.instance.Inventory.Hide();
         HealthbarHandler.ShowAll();
     }
@@ -121,5 +122,17 @@ public class GameManager : MonoBehaviour
     {
         if (instance == this)
             instance = null;
+    }
+
+    private void ActivateClassSynergy()
+    {
+        List<ClassCount> cc = SynergyHandler.instance.getClassList();
+
+        foreach (Unit unit in units)
+        {
+            if(unit.CompareTag("UnitAlly"))
+                unit.ActivateClass(unit.getClass(), cc.Find(x => x.getClass() == unit.getClass()).getNumber());
+        }
+
     }
 }

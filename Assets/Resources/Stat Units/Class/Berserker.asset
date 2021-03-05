@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8ba64e6d5dd11e449bb0e8bd6d5fc7c8, type: 3}
-  m_Name: Mage
+  m_Name: Berserker
   m_EditorClassIdentifier: 
-  clas: 1
-  maxLife: 70
+  clas: 6
+  maxLife: 100
   armor: 1
-  moveSpeed: 0.5
+  moveSpeed: 0.7
   attackSpeed: 1
-  damage: 6
-  range: 2
-  projectile: {fileID: 3756010517097857206, guid: 28de22995b20a354ba2da0a6e56df8ef,
-    type: 3}
+  damage: 10
+  range: 1
+  projectile: {fileID: 0}
   abilities:
-  - FireBall
-  classIconSprite: {fileID: 21300000, guid: cd3b8d8f5d8563d4fb9a1350f6fd09fe, type: 3}
+  - CircularAttack
+  classIconSprite: {fileID: 3216016198144983771, guid: 694d76a68be753e43bd54fef7180c7f2,
+    type: 3}

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clas: 4
   maxLife: 100
-  armor: 0
+  armor: 1
   moveSpeed: 0.5
   attackSpeed: 1
   damage: 5

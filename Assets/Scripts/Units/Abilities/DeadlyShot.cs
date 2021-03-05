@@ -22,7 +22,7 @@ public class DeadlyShot : Ability
         if (listEnemyUnits.Length > 0)
         {
             Unit targetUnit = listEnemyUnits[0].GetComponent<Unit>();
-            int minLifeProv = targetUnit.getCurrentLife();
+            float minLifeProv = targetUnit.getCurrentLife();
             
 
             foreach (GameObject unit in listEnemyUnits)
