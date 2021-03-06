@@ -24,7 +24,7 @@ public class InventorySlot : MonoBehaviour, IDragHandler, IPointerClickHandler
 
     public bool startsLocked;
 
-    public uint Id { get; private set; }
+    public uint id;
 
     private UnitDescription unitDescription;
     private GameObject child;
@@ -33,8 +33,6 @@ public class InventorySlot : MonoBehaviour, IDragHandler, IPointerClickHandler
 
     private void Awake()
     {
-        Id = GetNewId();
-
         if (startsLocked)
         {
             _status = SlotState.Locked;
@@ -103,15 +101,6 @@ public class InventorySlot : MonoBehaviour, IDragHandler, IPointerClickHandler
         this.unitDescription = unitDescription;
     }
 
-    private static uint currentId = 0;
-
-    private static uint GetNewId()
-    {
-        uint newId = currentId;
-        currentId++;
-        return newId;
-    }
-
     public static InventorySlot GetSlotUnderMouse()
     {
         PointerEventData pointerData = new PointerEventData(EventSystem.current)
@@ -137,6 +126,9 @@ public class InventorySlot : MonoBehaviour, IDragHandler, IPointerClickHandler
 
     public void OnDrag(PointerEventData eventData)
     {
+        if (eventData.button != PointerEventData.InputButton.Left)
+            return;
+
         if (_status != SlotState.Used || GameManager.instance.gamestate != GameManager.GameState.Placement)
             return;
 
@@ -178,7 +170,8 @@ public class InventorySlot : MonoBehaviour, IDragHandler, IPointerClickHandler
     {
         if (Status != SlotState.Used)
         {
-            unitDescriptionDisplay?.UnselectActualSlot();
+            if (unitDescriptionDisplay != null)
+                unitDescriptionDisplay.UnselectActualSlot();
             return;
         }
 

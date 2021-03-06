@@ -11,6 +11,9 @@ public class Inventory : MonoBehaviour
 
     public InventoryUI inventoryUI;
 
+    [Header("Game start setup"), SerializeField]
+    private uint startingUnitCount;
+
     private void Awake()
     {
         unitsInInventory = new Dictionary<uint, UnitDescription>();
@@ -18,7 +21,7 @@ public class Inventory : MonoBehaviour
 
     private void Start()
     {
-        for (int i = 0; i < 8; i++)
+        for (int i = 0; i < startingUnitCount; i++)
         {
             AddRandomUnit();
         }
