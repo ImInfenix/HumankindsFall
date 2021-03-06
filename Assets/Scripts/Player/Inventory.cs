@@ -44,7 +44,12 @@ public class Inventory : MonoBehaviour
 
     public void AddUnitInInventory(UnitDescription unit)
     {
-        unitsInInventory.Add(unit.GetId(), unit);
+        UnitDescription equivalentUnit = GetEquivalentUnit(unit);
+        if(equivalentUnit == null)
+        {
+            unitsInInventory.Add(unit.GetId(), unit);
+            return;
+        }
     }
 
     public void RemoveFromInventory(UnitDescription unit)

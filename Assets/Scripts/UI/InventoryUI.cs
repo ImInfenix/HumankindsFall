@@ -3,8 +3,11 @@ using UnityEngine;
 
 public class InventoryUI : MonoBehaviour
 {
+    [SerializeField]
     private RectTransform UnitsSlots;
+    [SerializeField]
     private RectTransform CurrentUnitDescription;
+    public RewardSystem rewardSystem;
 
     private Inventory inventory;
 
@@ -16,9 +19,6 @@ public class InventoryUI : MonoBehaviour
     private void Awake()
     {
         inventory = FindObjectOfType<Inventory>();
-        Transform inventorySubObject = transform.Find("Inventory");
-        UnitsSlots = inventorySubObject.Find("UnitsSlots").GetComponent<RectTransform>();
-        CurrentUnitDescription = inventorySubObject.Find("CurrentUnitDescription").GetComponent<RectTransform>();
 
         uint i = 0;
         foreach (InventorySlot slot in slots)

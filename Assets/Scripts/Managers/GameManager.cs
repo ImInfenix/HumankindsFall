@@ -108,8 +108,8 @@ public class GameManager : MonoBehaviour
         if (resolution == "UnitAlly")
         {
             ResolutionPhaseHandler.instance.ChangeText("VICTOIRE");
-            Player.instance.Wallet.Earn(10); // a terme, remplacer le 10 par niveau.getRecompense()
             Player.instance.Inventory.Hide();
+            Player.instance.Inventory.inventoryUI.rewardSystem.StartRewardPhase();
         }
 
         ResolutionPhaseHandler.instance.Show();

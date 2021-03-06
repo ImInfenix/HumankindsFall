@@ -70,4 +70,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryUI: {fileID: 0}
-  startingUnitCount: 3
+  startingUnitCount: 5

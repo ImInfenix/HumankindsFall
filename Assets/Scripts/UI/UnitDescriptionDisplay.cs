@@ -12,7 +12,6 @@ public class UnitDescriptionDisplay : MonoBehaviour
 
     private InventorySlot actualSlot;
 
-
     public void Awake()
     {
         UnitName.text = "";
@@ -84,5 +83,17 @@ public class UnitDescriptionDisplay : MonoBehaviour
             "Attack Speed : " + atakSpeed;
         ;
         SetUnitStats(stats);
+    }
+
+    public InventorySlot.SlotType GetSelectedSlotType()
+    {
+        if (actualSlot == null) return InventorySlot.SlotType.None;
+
+        return actualSlot.GetType();
+    }
+
+    public InventorySlot GetActualSlot()
+    {
+        return actualSlot;
     }
 }

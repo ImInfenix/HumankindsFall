@@ -15,6 +15,10 @@ public class InventorySlot : MonoBehaviour, IDragHandler, IPointerClickHandler
     [SerializeField]
     private UnitDescriptionDisplay unitDescriptionDisplay;
 
+    public enum SlotType { Inventory, Shop, None }
+    [SerializeField]
+    private SlotType slotType = SlotType.Inventory;
+
     [Header("Prefab"), SerializeField]
     private GameObject unitPrefab;
 
@@ -47,7 +51,8 @@ public class InventorySlot : MonoBehaviour, IDragHandler, IPointerClickHandler
     private void Start()
     {
         attachedCamera = Camera.main;
-        unitDescriptionDisplay = FindObjectOfType<UnitDescriptionDisplay>();
+        if (unitDescriptionDisplay == null)
+            unitDescriptionDisplay = FindObjectOfType<UnitDescriptionDisplay>();
     }
 
     public void Unlock()
@@ -194,5 +199,10 @@ public class InventorySlot : MonoBehaviour, IDragHandler, IPointerClickHandler
     public UnitDescription GetCurrentUnitDescription()
     {
         return unitDescription;
+    }
+
+    public SlotType GetType()
+    {
+        return slotType;
     }
 }
