@@ -52,7 +52,7 @@ public class Inventory : MonoBehaviour
     //A retirer plus tard
     private void AddRandomUnit()
     {
-        UnitGenerator.GenerateUnit(Unit.allyTag);
+        AddUnitInInventory(UnitGenerator.GenerateUnit(Unit.allyTag));
     }
 
     public UnitDescription[] GetAllUnits()

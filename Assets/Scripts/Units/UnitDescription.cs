@@ -36,9 +36,6 @@ public class UnitDescription
         this.abilityName = abilityName;
         sprite = unitRace.unitSprite;
         id = GetNewId();
-
-        if(unitTag == Unit.allyTag)
-            Player.instance.Inventory.AddUnitInInventory(this);
     }
 
     public string GetUnitName()
