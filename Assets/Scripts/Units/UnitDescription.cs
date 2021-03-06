@@ -74,4 +74,9 @@ public class UnitDescription
         currentId++;
         return res;
     }
+
+    public bool IsOfSameTypeThan(UnitDescription otherUnit)
+    {
+        return unitRace == otherUnit.unitRace && unitClass == otherUnit.unitClass && abilityName == otherUnit.abilityName;
+    }
 }

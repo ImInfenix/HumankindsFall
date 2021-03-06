@@ -55,11 +55,32 @@ public class Inventory : MonoBehaviour
     //A retirer plus tard
     private void AddRandomUnit()
     {
-        AddUnitInInventory(UnitGenerator.GenerateUnit(Unit.allyTag));
+        UnitDescription newUnit = null;
+        bool createdUnit = false;
+        while (!createdUnit) //Unsafe, must have at most as many slots than possible combinations
+        {
+            newUnit = UnitGenerator.GenerateUnit(Unit.allyTag);
+            if (GetEquivalentUnit(newUnit) == null)
+                createdUnit = true;
+        }
+        AddUnitInInventory(newUnit);
     }
 
     public UnitDescription[] GetAllUnits()
     {
         return unitsInInventory.Values.ToArray();
+    }
+
+    private UnitDescription GetEquivalentUnit(UnitDescription unitToFind)
+    {
+        foreach(UnitDescription unit in unitsInInventory.Values)
+        {
+            if (unit.IsOfSameTypeThan(unitToFind))
+            {
+                return unit;
+            }
+        }
+
+        return null;
     }
 }
