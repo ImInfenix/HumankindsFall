@@ -10,8 +10,5 @@ public class CheatCodes : MonoBehaviour
         {
             SceneLoader.ReloadScene();
         }
-
-        if (Input.GetKeyDown(KeyCode.A))
-            Player.instance.Inventory.inventoryUI.rewardSystem.StartRewardPhase();
     }
 }

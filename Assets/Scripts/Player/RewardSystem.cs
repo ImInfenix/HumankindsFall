@@ -10,9 +10,21 @@ public class RewardSystem : MonoBehaviour
     [SerializeField]
     private UnitDescriptionDisplay unitDescriptionDisplay;
 
+    private List<uint> unitsInCombatIds;
+
     private void Awake()
     {
         gameObject.SetActive(false);
+    }
+
+    public void RegisterCombatParticipants()
+    {
+        unitsInCombatIds = new List<uint>();
+        foreach(Unit unit in FindObjectsOfType<Unit>())
+        {
+            if(unit.CompareTag(Unit.allyTag))
+                unitsInCombatIds.Add(unit.id);
+        }
     }
 
     public void StartRewardPhase()
@@ -21,6 +33,10 @@ public class RewardSystem : MonoBehaviour
         Player.instance.Wallet.Earn(10); // a terme, remplacer le 10 par niveau.getRecompense()
         foreach (InventorySlot slot in rewardSlots)
             slot.PutInSlot(UnitGenerator.GenerateUnit(Unit.allyTag));
+        foreach (uint id in unitsInCombatIds)
+            Player.instance.Inventory.GetUnit(id).EarnExperience(1);
+
+        Player.instance.Inventory.inventoryUI.UpdateGUI();
     }
 
     public void ConfirmRewardPhase()
@@ -28,7 +44,7 @@ public class RewardSystem : MonoBehaviour
         if (unitDescriptionDisplay.GetSelectedSlotType() != InventorySlot.SlotType.Shop)
             return;
 
-        Player.instance.Inventory.AddUnitInInventory(unitDescriptionDisplay.GetActualSlot().GetCurrentUnitDescription());
+        Player.instance.Inventory.AddUnitInInventory(unitDescriptionDisplay.GetActualSlot().GetCurrentUnitDescription(), true);
         gameObject.SetActive(false);
     }
 }

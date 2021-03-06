@@ -9,6 +9,8 @@ public class UnitDescriptionDisplay : MonoBehaviour
     private TMP_Text UnitName;
     [SerializeField]
     private TMP_Text UnitStats;
+    [SerializeField]
+    private TMP_Text UnitExperience;
 
     private InventorySlot actualSlot;
 
@@ -54,18 +56,31 @@ public class UnitDescriptionDisplay : MonoBehaviour
         UnitStats.text = stats;
     }
 
+    public void SetUnitExperience(uint amount)
+    {
+        if (actualSlot.GetSlotType() == InventorySlot.SlotType.Inventory)
+        {
+            UnitExperience.text = $"XP: {amount}";
+            return;
+        }
+
+        UnitExperience.text = "";
+    }
+
     public void UpdateDescription()
     {
         if (actualSlot == null)
         {
             UnitName.text = "";
             UnitStats.text = "";
+            UnitExperience.text = "";
             return;
         }
 
         UnitDescription currentDescription = actualSlot.GetCurrentUnitDescription();
 
         SetUnitName(currentDescription.GetUnitName());
+        SetUnitExperience(currentDescription.GetExperience());
         ClassStat classe = currentDescription.GetClass();
         RaceStat race = currentDescription.GetRace();
 
@@ -89,7 +104,7 @@ public class UnitDescriptionDisplay : MonoBehaviour
     {
         if (actualSlot == null) return InventorySlot.SlotType.None;
 
-        return actualSlot.GetType();
+        return actualSlot.GetSlotType();
     }
 
     public InventorySlot GetActualSlot()

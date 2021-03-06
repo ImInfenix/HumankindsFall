@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class UnitDescription
 {
@@ -10,6 +11,7 @@ public class UnitDescription
     private readonly string unitName;
     private readonly string abilityName;
     private readonly uint id;
+    private uint experience;
 
     public UnitDescription(Unit unit)
     {
@@ -19,6 +21,7 @@ public class UnitDescription
         abilityName = unit.GetAbilityName();
         unitName = unit.GetName();
         id = unit.id;
+        experience = 0;
     }
 
     /// <summary>
@@ -36,6 +39,7 @@ public class UnitDescription
         this.abilityName = abilityName;
         sprite = unitRace.unitSprite;
         id = GetNewId();
+        experience = 0;
     }
 
     public string GetUnitName()
@@ -78,5 +82,15 @@ public class UnitDescription
     public bool IsOfSameTypeThan(UnitDescription otherUnit)
     {
         return unitRace == otherUnit.unitRace && unitClass == otherUnit.unitClass && abilityName == otherUnit.abilityName;
+    }
+
+    public uint GetExperience()
+    {
+        return experience;
+    }
+
+    public void EarnExperience(uint experienceAmount)
+    {
+        experience += experienceAmount;
     }
 }

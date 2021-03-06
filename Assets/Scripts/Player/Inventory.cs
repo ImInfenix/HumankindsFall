@@ -42,14 +42,20 @@ public class Inventory : MonoBehaviour
         inventoryUI.Show();
     }
 
-    public void AddUnitInInventory(UnitDescription unit)
+    public void AddUnitInInventory(UnitDescription unit, bool addToGUINow = false)
     {
         UnitDescription equivalentUnit = GetEquivalentUnit(unit);
         if(equivalentUnit == null)
         {
             unitsInInventory.Add(unit.GetId(), unit);
+
+            if (addToGUINow)
+                inventoryUI.PutInEmptySlot(unit);
+
             return;
         }
+
+        equivalentUnit.EarnExperience(3);
     }
 
     public void RemoveFromInventory(UnitDescription unit)
@@ -69,6 +75,11 @@ public class Inventory : MonoBehaviour
                 createdUnit = true;
         }
         AddUnitInInventory(newUnit);
+    }
+
+    public UnitDescription GetUnit(uint id)
+    {
+        return unitsInInventory[id];
     }
 
     public UnitDescription[] GetAllUnits()

@@ -175,8 +175,13 @@ public class InventorySlot : MonoBehaviour, IDragHandler, IPointerClickHandler
         newUnit.tag = Unit.allyTag;
         newUnit.isRandomUnit = false;
         newUnit.id = unitDescription.GetId();
-        newUnit.PrepareForDragNDrop();
 
+        newUnit.PrepareForDragNDrop();
+        ClearSlot();
+    }
+
+    public void ClearSlot()
+    {
         _status = SlotState.Empty;
         unitDescription = null;
         Destroy(child);
@@ -201,7 +206,7 @@ public class InventorySlot : MonoBehaviour, IDragHandler, IPointerClickHandler
         return unitDescription;
     }
 
-    public SlotType GetType()
+    public SlotType GetSlotType()
     {
         return slotType;
     }

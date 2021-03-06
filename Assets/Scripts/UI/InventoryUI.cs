@@ -30,10 +30,7 @@ public class InventoryUI : MonoBehaviour
 
     private void Start()
     {
-        UnitDescription[] unitsInInventory = inventory.GetAllUnits();
-        foreach (UnitDescription desc in unitsInInventory)
-            PutInEmptySlot(desc);
-
+        UpdateGUI();
         Hide();
     }
 
@@ -47,6 +44,20 @@ public class InventoryUI : MonoBehaviour
                 return;
             }
         }
+    }
+
+    public void UpdateGUI()
+    {
+        foreach (InventorySlot slot in slots)
+            slot.ClearSlot();
+
+        UnitDescription[] unitsInInventory = inventory.GetAllUnits();
+        foreach (UnitDescription desc in unitsInInventory)
+            PutInEmptySlot(desc);
+    }
+
+    public void ClearSlots()
+    {
     }
 
     public void OnClick()
