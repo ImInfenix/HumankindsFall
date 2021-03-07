@@ -28,7 +28,11 @@ public class Unit : MonoBehaviour
     private bool moving;
     private bool canMove;
     private bool supportBuff = false;
-    private bool mage1 = false;
+    private bool healer1 = false;
+    private bool healer2 = false;
+    private bool healer3 = false;
+    private int cptHealer = 0;
+    private Unit healTarget = null;
 
     [Header("POSITION")]
     public Board board;
@@ -282,6 +286,39 @@ public class Unit : MonoBehaviour
 
         yield return new WaitForSeconds(attackSpeed);
         isActing = false;
+
+        cptHealer++;
+
+        if(healer1 == true)
+        {
+            if(cptHealer == 5)
+            {
+                Unit target = GameManager.instance.searchHealTarget();
+                if(target != null)
+                    target.heal((target.getMaxlife() / 20) * 3);
+                cptHealer = 0;
+            }
+        }
+        if (healer2 == true)
+        {
+            if (cptHealer == 3)
+            {
+                Unit target = GameManager.instance.searchHealTarget();
+                if (target != null)
+                    target.heal((target.getMaxlife() / 20) * 3);
+                cptHealer = 0;
+            }
+        }
+        if (healer3 == true)
+        {
+            if (cptHealer == 2)
+            {
+                Unit target = GameManager.instance.searchHealTarget();
+                if (target != null)
+                    target.heal((target.getMaxlife() / 20) * 3);
+                cptHealer = 0;
+            }
+        }
     }
 
     //move the sprite toward the target for a short time
@@ -532,6 +569,11 @@ public class Unit : MonoBehaviour
         GameManager.instance?.RemoveUnit(this);
     }
 
+    public int getMaxlife()
+    {
+        return maxLife;
+    }
+
     public string getTargetTag()
     {
         return targetTag;
@@ -655,15 +697,15 @@ public class Unit : MonoBehaviour
             case Class.Healer:
                 if(nb == 1)
                 {
-
+                    healer1 = true;
                 }
                 if(nb == 2)
                 {
-
+                    healer2 = true;
                 }
                 if(nb >= 3)
                 {
-
+                    healer3 = true;
                 }
                 break;
 

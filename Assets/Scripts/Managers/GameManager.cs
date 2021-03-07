@@ -39,12 +39,12 @@ public class GameManager : MonoBehaviour
     {
         units.Add(unit);
         SynergyHandler.instance.addUnit(unit);
-
     }
 
     public void RemoveUnit(Unit unit)
     {
         units.Remove(unit);
+
         if (unit.getCurrentLife() > 0)
             SynergyHandler.instance.removeUnit(unit);
     }
@@ -133,6 +133,19 @@ public class GameManager : MonoBehaviour
             if(unit.CompareTag("UnitAlly"))
                 unit.ActivateClass(unit.getClass(), cc.Find(x => x.getClass() == unit.getClass()).getNumber());
         }
+    }
 
+   public Unit searchHealTarget()
+    {
+        Unit target = units[0];
+        foreach(Unit unit in units)
+        {
+            if (unit.CompareTag("UnitAlly"))
+            {
+                if (unit.getCurrentLife() <= target.getCurrentLife() && unit.getCurrentLife() > 0)
+                    target = unit;
+            }
+        }
+        return target;
     }
 }

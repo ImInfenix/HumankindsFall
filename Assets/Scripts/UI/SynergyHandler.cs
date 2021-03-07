@@ -420,7 +420,6 @@ public class SynergyHandler : MonoBehaviour
                         break;
                 }
             }
-                //synergyText.text += c.getString() + c.getNumber() + "\n";
         }
     }
 }

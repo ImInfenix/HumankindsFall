@@ -12,13 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ba64e6d5dd11e449bb0e8bd6d5fc7c8, type: 3}
   m_Name: Tank
   m_EditorClassIdentifier: 
-  clas: 0
-  maxLife: 0
-  armor: 0
-  moveSpeed: 0
-  attackSpeed: 0
-  damage: 0
-  range: 0
+  clas: 2
+  maxLife: 120
+  armor: 1
+  moveSpeed: 0.6
+  attackSpeed: 1
+  damage: 7
+  range: 1
   projectile: {fileID: 0}
-  abilities: []
-  classIconSprite: {fileID: 0}
+  abilities:
+  - CircularAttack
+  classIconSprite: {fileID: 8884036787792595883, guid: 694d76a68be753e43bd54fef7180c7f2,
+    type: 3}
