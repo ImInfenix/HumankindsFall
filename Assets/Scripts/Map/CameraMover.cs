@@ -7,51 +7,66 @@ public class CameraMover : MonoBehaviour
 {
     [SerializeField]
     private Camera cam;
+    [SerializeField]
+    private GameObject map;
+    [SerializeField]
+    private int maxZoom;
+    [SerializeField]
+    private int minZoom ;
+    [SerializeField]
+    private float moveSpeed;
+
+    public void Awake()
+    {
+         maxZoom = 3;
+         minZoom = 5;
+         moveSpeed = 0.05f;
+    }
 
     public void moveCamera()
     {
         string panel = GetPanelUnderMouse();
         if (panel.Equals("PanelLeft"))
         {
-            cam.transform.position += new Vector3(-0.05f, 0.0f, 0.0f);
+            cam.transform.position += new Vector3(-moveSpeed, 0.0f, 0.0f);
         }
         if (panel.Equals("PanelRight"))
         {
-            cam.transform.position += new Vector3(+0.05f, 0.0f, 0.0f);
+            cam.transform.position += new Vector3(+moveSpeed, 0.0f, 0.0f);
         }
         if (panel.Equals("PanelDown"))
         {
-            cam.transform.position += new Vector3(0.0f, -0.05f, 0.0f);
+            cam.transform.position += new Vector3(0.0f, -moveSpeed, 0.0f);
         }
         if (panel.Equals("PanelUp"))
         {
-            cam.transform.position += new Vector3(0.0f, +0.05f, 0.0f);
+            cam.transform.position += new Vector3(0.0f, +moveSpeed, 0.0f);
         }
         if (panel.Equals("PanelUpLeft"))
         {
-            cam.transform.position += new Vector3(-0.04f, +0.04f, 0.0f);
+            cam.transform.position += new Vector3(-moveSpeed, +moveSpeed, 0.0f);
         }
         if (panel.Equals("PanelUpRight"))
         {
-            cam.transform.position += new Vector3(+0.04f, +0.04f, 0.0f);
+            cam.transform.position += new Vector3(+moveSpeed, +moveSpeed, 0.0f);
         }
         if (panel.Equals("PanelDownLeft"))
         {
-            cam.transform.position += new Vector3(-0.04f, -0.04f, 0.0f);
+            cam.transform.position += new Vector3(-moveSpeed, -moveSpeed, 0.0f);
         }
         if (panel.Equals("PanelDownRight"))
         {
-            cam.transform.position += new Vector3(+0.04f, -0.04f, 0.0f);
+            cam.transform.position += new Vector3(+moveSpeed, -moveSpeed, 0.0f);
         }
     }
 
     public void ZoomCamera()
     {
-        if(Input.mouseScrollDelta.y < 0 && cam.orthographicSize < 5)
+        if(Input.mouseScrollDelta.y < 0 && cam.orthographicSize < minZoom)
         {
             cam.orthographicSize += 1;
         }
-        if(Input.mouseScrollDelta.y > 0 && cam.orthographicSize > 2)
+        if(Input.mouseScrollDelta.y > 0 && cam.orthographicSize > maxZoom)
         {
             cam.orthographicSize -= 1;
         }
@@ -84,10 +99,21 @@ public class CameraMover : MonoBehaviour
         return panelUnderMouse.name;
     }
 
+    public void printData()
+    {
+        if (Input.GetKeyDown("space"))
+        {
+            Debug.Log(cam.orthographicSize);
+            Debug.Log(cam.transform.position);
+            Debug.Log(map.GetComponent<Renderer>().bounds);
+        }
+            
+    }
     public void Update()
     {
         moveCamera();
         ZoomCamera();
+        printData();
     }
 
 }
