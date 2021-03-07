@@ -24,6 +24,7 @@ public class Unit : MonoBehaviour
     [SerializeField] private int damage;
     [SerializeField] private int range;
     [SerializeField] private string unitName;
+    [SerializeField] private bool isTargetable;
 
     private bool moving;
     private bool canMove;
@@ -53,7 +54,7 @@ public class Unit : MonoBehaviour
     private bool isActing = false;
     private bool isMoving = false;
 
-    private SpriteRenderer spriteRenderer;
+    private SpriteRenderer spriteRenderer;   
     private Color baseColor, damageColor, healColor;
     private int takingDamageCount = 0;
     private bool isAbilityActivated = false;
@@ -111,7 +112,9 @@ public class Unit : MonoBehaviour
         attackSpeed = raceStats.attackSpeed + classStat.attackSpeed;
         damage = raceStats.damage + classStat.damage;
         range = classStat.range;
-
+        
+        isTargetable = true;       
+        
         projectileGameObject = classStat.projectile;
 
         healthBar.SetHealth(currentLife, maxLife);
@@ -178,8 +181,11 @@ public class Unit : MonoBehaviour
             //if the target is not yet in range of attack
             if (listAvailableTarget.Count > 0)
             {
-                targetUnit = listAvailableTarget[0];
-                StartCoroutine(AttackTarget());
+                if(listAvailableTarget[0].getTargetable())
+                {
+                    targetUnit = listAvailableTarget[0];
+                    StartCoroutine(AttackTarget());
+                }                                 
             }
 
             else if (path != null && path.Count > 0)
@@ -275,6 +281,9 @@ public class Unit : MonoBehaviour
         StartCoroutine(AttackAnimation());
 
         targetUnit.takeDamage(damage);
+
+        if (classStat.clas == Class.Assassin && isTargetable == false)
+            stopInvisibility();
 
         if (range > 1)
             StartCoroutine(ProjectileAnimation());
@@ -598,6 +607,11 @@ public class Unit : MonoBehaviour
     {
         return range;
     }
+
+    public bool getTargetable()
+    {
+        return isTargetable;
+    }
     public void setRange(int range)
     {
         this.range = range;
@@ -751,7 +765,9 @@ public class Unit : MonoBehaviour
             case Class.Assassin:
                 if(nb >= 1)
                 {
-
+                    startInvisibility();
+                    
+                    Invoke("stopInvisibility", 5);
                 }
                 break;
         }
@@ -775,5 +791,21 @@ public class Unit : MonoBehaviour
             }
             supportBuff = true;
         }            
+    }
+
+    private void startInvisibility()
+    {
+        isTargetable = false;
+        baseColor.a = 0.5f;
+        spriteRenderer.color = baseColor;
+    }
+    private void stopInvisibility()
+    {
+        if(isTargetable == false)
+        {
+            isTargetable = true;
+            baseColor.a = 1;
+            spriteRenderer.color = baseColor;
+        }           
     }
 }
