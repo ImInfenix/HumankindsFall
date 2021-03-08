@@ -15,6 +15,10 @@ public class Marker : MonoBehaviour
     private Sprite GreenFlag;
     [SerializeField]
     private Sprite RedFlag;
+    [SerializeField]
+    private GameObject Description;
+
+
     public void Awake()
     {
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
@@ -33,6 +37,6 @@ public class Marker : MonoBehaviour
 
     public void OnMouseDown()
     {
-        
+        Description.SetActive(true);
     }
 }

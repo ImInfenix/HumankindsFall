@@ -89,7 +89,7 @@ public class CameraMover : MonoBehaviour
         foreach (RaycastResult r in results)
         {
             panelUnderMouse = r.gameObject;
-            if (panelUnderMouse != null)
+            if (panelUnderMouse.tag == "PanelScroll")
                 break;
         }
         if (results.Count == 0)

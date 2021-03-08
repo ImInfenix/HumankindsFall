@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 75958848}
   m_Layer: 5
   m_Name: PanelUpRight
-  m_TagString: Untagged
+  m_TagString: PanelScroll
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -251,9 +251,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Ils vont nous les payer les b\xE2tards ! Cette ville \xE9tait \xE0 nous\nautrefois,
-    les orcs bleus \ns'en servait comme port \nd'attache pour aller chasser les \nmerlans
-    du Sud ! Cette fois, il n'y aura pas de quartiers !"
+  m_text: "Ils vont nous les payer les b\xE2tards ! Cette ville \xE9tait \xE0 nous
+    autrefois, les orcs bleus s'en servaient comme port d'attache pour aller chasser
+    les merlans du Sud ! Cette fois, il n'y aura pas de quartier !"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -442,7 +442,7 @@ GameObject:
   - component: {fileID: 541664379}
   m_Layer: 5
   m_Name: PanelDown
-  m_TagString: Untagged
+  m_TagString: PanelScroll
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -649,7 +649,7 @@ GameObject:
   - component: {fileID: 676587404}
   m_Layer: 5
   m_Name: PanelUp
-  m_TagString: Untagged
+  m_TagString: PanelScroll
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -797,7 +797,7 @@ GameObject:
   - component: {fileID: 904643855}
   m_Layer: 5
   m_Name: PanelLeft
-  m_TagString: Untagged
+  m_TagString: PanelScroll
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -871,7 +871,7 @@ GameObject:
   - component: {fileID: 1092090265}
   m_Layer: 5
   m_Name: PanelDownLeft
-  m_TagString: Untagged
+  m_TagString: PanelScroll
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -988,7 +988,7 @@ GameObject:
   - component: {fileID: 1219701119}
   m_Layer: 5
   m_Name: PanelDownRight
-  m_TagString: Untagged
+  m_TagString: PanelScroll
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1148,6 +1148,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 1580924936}
   GreenFlag: {fileID: 21300000, guid: 8b69d0bd588520547932449d6b0989a6, type: 3}
   RedFlag: {fileID: 21300000, guid: bbe849a1b3831304abe5e51003139db5, type: 3}
+  Description: {fileID: 2095747036}
 --- !u!58 &1580924939
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1326,7 +1327,7 @@ GameObject:
   - component: {fileID: 1926947252}
   m_Layer: 5
   m_Name: PanelRight
-  m_TagString: Untagged
+  m_TagString: PanelScroll
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1400,7 +1401,7 @@ GameObject:
   - component: {fileID: 1983137462}
   m_Layer: 5
   m_Name: PanelUpLeft
-  m_TagString: Untagged
+  m_TagString: PanelScroll
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1667,10 +1668,10 @@ RectTransform:
   m_Father: {fileID: 2095747037}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.615, y: 0.21555555}
-  m_AnchorMax: {x: 0.615, y: 0.21555555}
-  m_AnchoredPosition: {x: 72.2, y: 93.3}
-  m_SizeDelta: {x: 500, y: 800}
+  m_AnchorMin: {x: 0.6, y: 0.21555555}
+  m_AnchorMax: {x: 0.785, y: 0.7911112}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2075549310
 MonoBehaviour:
@@ -1691,7 +1692,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 83e5b134c5206e44fa706d00c41dd21a, type: 3}
+  m_Sprite: {fileID: -1560368227321105025, guid: 57473b633c94a8243ae915fe0f1ceab3,
+    type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1724,7 +1726,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2095747037
 RectTransform:
   m_ObjectHideFlags: 0
