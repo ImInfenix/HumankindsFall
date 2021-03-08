@@ -30,4 +30,9 @@ public class Marker : MonoBehaviour
         if (Input.GetKeyDown("space"))
             FinishLevel();
     }
+
+    public void OnMouseDown()
+    {
+        
+    }
 }
