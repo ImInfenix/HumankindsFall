@@ -22,5 +22,5 @@ MonoBehaviour:
   projectile: {fileID: 0}
   abilities:
   - CircularAttack
-  classIconSprite: {fileID: 8884036787792595883, guid: 694d76a68be753e43bd54fef7180c7f2,
+  classIconSprite: {fileID: -3995321456776435769, guid: 7bcbfa039553fa543bf7c8cd86ad6b82,
     type: 3}
