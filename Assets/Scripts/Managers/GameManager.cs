@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour
         Board.CurrentBoard.HidePlacementTilemap();
         gamestate = GameState.Combat;
         Player.instance.Inventory.Hide();
-        HealthbarHandler.ShowAll();
+        HealthbarHandler.ShowBars();
         Player.instance.Inventory.inventoryUI.rewardSystem.RegisterCombatParticipants();
     }
 

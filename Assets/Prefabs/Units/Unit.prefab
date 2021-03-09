@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 5554002511360014229}
   - component: {fileID: 5574277656131952138}
   - component: {fileID: 5069503327388432427}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: ClassIconBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -333,6 +333,7 @@ MonoBehaviour:
   slider: {fileID: 0}
   healthSlider: {fileID: 2775902829914204738}
   staminaSlider: {fileID: 3751454102309057999}
+  classIconGameObject: {fileID: 0}
   attachedCamera: {fileID: 0}
 --- !u!1 &5312309690352340306
 GameObject:
@@ -634,7 +635,6 @@ MonoBehaviour:
   abilityName: 
   id: 0
   healthBar: {fileID: 97388024288105356}
-  classIconGameObject: {fileID: 804634010622373872}
   classIcon: {fileID: 6468773289891199087}
   circleSprite: {fileID: 2859675798935787553}
 --- !u!61 &-6404775025605529892

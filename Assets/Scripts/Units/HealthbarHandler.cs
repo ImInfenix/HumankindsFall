@@ -75,10 +75,22 @@ public class HealthbarHandler : MonoBehaviour
     public static void ShowAll()
     {
         foreach (HealthbarHandler handler in healthbarHandlers)
-            handler.gameObject.transform.GetChild(0).gameObject.SetActive(true);
+            handler.gameObject.SetActive(true);
     }
     
     public static void HideAll()
+    {
+        foreach (HealthbarHandler handler in healthbarHandlers)
+            handler.gameObject.SetActive(false);
+    }
+
+    public static void ShowBars()
+    {
+        foreach (HealthbarHandler handler in healthbarHandlers)
+            handler.gameObject.transform.GetChild(0).gameObject.SetActive(true);
+    }
+
+    public static void HideBars()
     {
         foreach (HealthbarHandler handler in healthbarHandlers)
             handler.gameObject.transform.GetChild(0).gameObject.SetActive(false);
