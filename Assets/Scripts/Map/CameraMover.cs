@@ -26,37 +26,96 @@ public class CameraMover : MonoBehaviour
     public void moveCamera()
     {
         string panel = GetPanelUnderMouse();
-        if (panel.Equals("PanelLeft"))
+        if (panel.Equals("PanelLeft") && !isOnBoarderLeft())
         {
             cam.transform.position += new Vector3(-moveSpeed, 0.0f, 0.0f);
         }
-        if (panel.Equals("PanelRight"))
+        if (panel.Equals("PanelRight") && !isOnBoarderRight())
         {
             cam.transform.position += new Vector3(+moveSpeed, 0.0f, 0.0f);
         }
-        if (panel.Equals("PanelDown"))
+        if (panel.Equals("PanelDown") && !isOnBoarderDown())
         {
             cam.transform.position += new Vector3(0.0f, -moveSpeed, 0.0f);
         }
-        if (panel.Equals("PanelUp"))
+        if (panel.Equals("PanelUp") && !isOnBoarderUp())
         {
             cam.transform.position += new Vector3(0.0f, +moveSpeed, 0.0f);
         }
         if (panel.Equals("PanelUpLeft"))
         {
-            cam.transform.position += new Vector3(-moveSpeed, +moveSpeed, 0.0f);
+            if (!isOnBoarderUp())
+            {
+                if (!isOnBoarderLeft())
+                {
+                    cam.transform.position += new Vector3(-moveSpeed, +moveSpeed, 0.0f);
+                }
+                else
+                {
+                    cam.transform.position += new Vector3(0.0f, +moveSpeed, 0.0f);
+                }
+            }
+            else if (!isOnBoarderLeft())
+            {
+                cam.transform.position += new Vector3(-moveSpeed, 0.0f, 0.0f);
+            }
         }
+
         if (panel.Equals("PanelUpRight"))
         {
-            cam.transform.position += new Vector3(+moveSpeed, +moveSpeed, 0.0f);
+            if (!isOnBoarderUp())
+            {
+                if (!isOnBoarderRight())
+                {
+                    cam.transform.position += new Vector3(+moveSpeed, +moveSpeed, 0.0f);
+                }
+                else
+                {
+                    cam.transform.position += new Vector3(0.0f, +moveSpeed, 0.0f);
+                }
+            }
+            else if (!isOnBoarderRight())
+            {
+                cam.transform.position += new Vector3(+moveSpeed, 0.0f, 0.0f);
+            }
         }
+
         if (panel.Equals("PanelDownLeft"))
         {
-            cam.transform.position += new Vector3(-moveSpeed, -moveSpeed, 0.0f);
+            if (!isOnBoarderDown())
+            {
+                if (!isOnBoarderLeft())
+                {
+                    cam.transform.position += new Vector3(-moveSpeed, -moveSpeed, 0.0f);
+                }
+                else
+                {
+                    cam.transform.position += new Vector3(0.0f, -moveSpeed, 0.0f);
+                }
+            }
+            else if (!isOnBoarderLeft())
+            {
+                cam.transform.position += new Vector3(-moveSpeed, 0.0f, 0.0f);
+            }
         }
+
         if (panel.Equals("PanelDownRight"))
         {
-            cam.transform.position += new Vector3(+moveSpeed, -moveSpeed, 0.0f);
+            if (!isOnBoarderDown())
+            {
+                if (!isOnBoarderRight())
+                {
+                    cam.transform.position += new Vector3(+moveSpeed, -moveSpeed, 0.0f);
+                }
+                else
+                {
+                    cam.transform.position += new Vector3(0.0f, -moveSpeed, 0.0f);
+                }
+            }
+            else if (!isOnBoarderRight())
+            {
+                cam.transform.position += new Vector3(+moveSpeed, 0.0f, 0.0f);
+            }
         }
     }
 
@@ -114,6 +173,33 @@ public class CameraMover : MonoBehaviour
         moveCamera();
         ZoomCamera();
         printData();
+    }
+
+    public bool isOnBoarderRight()
+    {
+        float size = cam.orthographicSize;
+        float x = cam.transform.position.x;
+        return ((size == 5 && x > 1.35) || (size == 4 && x > 3.1) || (size == 3 && x > 4.9) || (size == 2 && x > 6.7));
+    }
+
+    public bool isOnBoarderLeft()
+    {
+        float size = cam.orthographicSize;
+        float x = cam.transform.position.x;
+        return ((size == 5 && x < -1.2) || (size == 4 && x < -3) || (size == 3 && x < -4.8) || (size == 2 && x < -6));
+    }
+
+    public bool isOnBoarderUp()
+    {
+        float size = cam.orthographicSize;
+        float y = cam.transform.position.y;
+        return ((size == 5 && y > 2.4) || (size == 4 && y > 3.4) || (size == 3 && y > 4.4) || (size == 2 && y > 5.4));
+    }
+    public bool isOnBoarderDown()
+    {
+        float size = cam.orthographicSize;
+        float y = cam.transform.position.y;
+        return ((size == 5 && y < -2.8) || (size == 4 && y < -3.8) || (size == 3 && y < -4.9) || (size == 2 && y < -5.9));
     }
 
 }

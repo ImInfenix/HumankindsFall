@@ -209,6 +209,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3715987373865777901, guid: 6f128a6d492d075408abb1695627d782,
         type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: -8793625291917413168, guid: 57473b633c94a8243ae915fe0f1ceab3,
+        type: 3}
+    - target: {fileID: 3715987373865777901, guid: 6f128a6d492d075408abb1695627d782,
+        type: 3}
       propertyPath: isAccessible
       value: 0
       objectReference: {fileID: 0}
@@ -803,8 +809,8 @@ RectTransform:
   m_Father: {fileID: 2095747037}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.22500001, y: 0.68666667}
-  m_AnchorMax: {x: 0.58875, y: 0.7911112}
+  m_AnchorMin: {x: 0.22500001, y: 0.6844444}
+  m_AnchorMax: {x: 0.6, y: 0.7911112}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1162,6 +1168,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Oasis
       objectReference: {fileID: 0}
+    - target: {fileID: 3715987373865777901, guid: 6f128a6d492d075408abb1695627d782,
+        type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 6781190906818467777, guid: 57473b633c94a8243ae915fe0f1ceab3,
+        type: 3}
     - target: {fileID: 3715987373865777901, guid: 6f128a6d492d075408abb1695627d782,
         type: 3}
       propertyPath: isAccessible
@@ -1719,6 +1731,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3715987373865777901, guid: 6f128a6d492d075408abb1695627d782,
         type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 7614699122904390950, guid: 57473b633c94a8243ae915fe0f1ceab3,
+        type: 3}
+    - target: {fileID: 3715987373865777901, guid: 6f128a6d492d075408abb1695627d782,
+        type: 3}
       propertyPath: isAccessible
       value: 0
       objectReference: {fileID: 0}
@@ -1878,7 +1896,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1644746013}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.03, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2541,6 +2559,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Alin
       objectReference: {fileID: 0}
+    - target: {fileID: 3715987373865777901, guid: 6f128a6d492d075408abb1695627d782,
+        type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 6258367583306725175, guid: 57473b633c94a8243ae915fe0f1ceab3,
+        type: 3}
     - target: {fileID: 3715987373865777901, guid: 6f128a6d492d075408abb1695627d782,
         type: 3}
       propertyPath: isAccessible
