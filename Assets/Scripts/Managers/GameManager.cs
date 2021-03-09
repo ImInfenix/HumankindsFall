@@ -58,6 +58,7 @@ public class GameManager : MonoBehaviour
         gamestate = GameState.Combat;
         Player.instance.Inventory.Hide();
         HealthbarHandler.ShowAll();
+        Player.instance.Inventory.inventoryUI.rewardSystem.RegisterCombatParticipants();
     }
 
     public void EnterNewCombatLevel()
@@ -104,15 +105,14 @@ public class GameManager : MonoBehaviour
         if (resolution == "UnitEnemy")
         {
             ResolutionPhaseHandler.instance.ChangeText("DEFAITE");
+            ResolutionPhaseHandler.instance.Show();
         }
         if (resolution == "UnitAlly")
         {
-            ResolutionPhaseHandler.instance.ChangeText("VICTOIRE");
-            Player.instance.Wallet.Earn(10); // a terme, remplacer le 10 par niveau.getRecompense()
             Player.instance.Inventory.Hide();
+            Player.instance.Inventory.inventoryUI.rewardSystem.StartRewardPhase();
         }
 
-        ResolutionPhaseHandler.instance.Show();
         HealthbarHandler.HideAll();
         Player.instance.Inventory.Hide();
     }

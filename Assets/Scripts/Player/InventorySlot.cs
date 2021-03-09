@@ -15,6 +15,10 @@ public class InventorySlot : MonoBehaviour, IDragHandler, IPointerClickHandler
     [SerializeField]
     private UnitDescriptionDisplay unitDescriptionDisplay;
 
+    public enum SlotType { Inventory, Shop, None }
+    [SerializeField]
+    private SlotType slotType = SlotType.Inventory;
+
     [Header("Prefab"), SerializeField]
     private GameObject unitPrefab;
 
@@ -24,17 +28,16 @@ public class InventorySlot : MonoBehaviour, IDragHandler, IPointerClickHandler
 
     public bool startsLocked;
 
-    public uint Id { get; private set; }
+    public uint id;
 
     private UnitDescription unitDescription;
     private GameObject child;
+    private GameObject classDisplay;
 
     private Camera attachedCamera;
 
     private void Awake()
     {
-        Id = GetNewId();
-
         if (startsLocked)
         {
             _status = SlotState.Locked;
@@ -48,7 +51,8 @@ public class InventorySlot : MonoBehaviour, IDragHandler, IPointerClickHandler
     private void Start()
     {
         attachedCamera = Camera.main;
-        unitDescriptionDisplay = FindObjectOfType<UnitDescriptionDisplay>();
+        if (unitDescriptionDisplay == null)
+            unitDescriptionDisplay = FindObjectOfType<UnitDescriptionDisplay>();
     }
 
     public void Unlock()
@@ -89,27 +93,29 @@ public class InventorySlot : MonoBehaviour, IDragHandler, IPointerClickHandler
         child = new GameObject(unitDescription.GetUnitName());
         child.transform.SetParent(transform, false);
 
-        Image i = child.AddComponent<Image>();
-        Sprite sprite = unitDescription.GetSprite();
-        i.sprite = sprite;
+        {
+            Image i = child.AddComponent<Image>();
+            Sprite sprite = unitDescription.GetSprite();
+            i.sprite = sprite;
 
-        Rect spriteRect = unitDescription.GetSprite().rect;
-        float aspectRatio = spriteRect.width / spriteRect.height;
-        RectTransform rt = child.GetComponent<RectTransform>();
+            Rect spriteRect = unitDescription.GetSprite().rect;
+            float aspectRatio = spriteRect.width / spriteRect.height;
+            RectTransform rt = child.GetComponent<RectTransform>();
 
-        rt.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 100);
-        rt.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 100 * aspectRatio);
+            rt.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 100);
+            rt.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 100 * aspectRatio);
+        }
 
         this.unitDescription = unitDescription;
-    }
 
-    private static uint currentId = 0;
-
-    private static uint GetNewId()
-    {
-        uint newId = currentId;
-        currentId++;
-        return newId;
+        {
+            classDisplay = new GameObject("Class display");
+            classDisplay.transform.SetParent(transform, false);
+            RectTransform rt = classDisplay.AddComponent<RectTransform>();
+            rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, 0, 25);
+            rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Right, 0, 25);
+            classDisplay.AddComponent<Image>().sprite = unitDescription.GetClass().classIconSprite;
+        }
     }
 
     public static InventorySlot GetSlotUnderMouse()
@@ -137,6 +143,9 @@ public class InventorySlot : MonoBehaviour, IDragHandler, IPointerClickHandler
 
     public void OnDrag(PointerEventData eventData)
     {
+        if (eventData.button != PointerEventData.InputButton.Left)
+            return;
+
         if (_status != SlotState.Used || GameManager.instance.gamestate != GameManager.GameState.Placement)
             return;
 
@@ -166,11 +175,17 @@ public class InventorySlot : MonoBehaviour, IDragHandler, IPointerClickHandler
         newUnit.tag = Unit.allyTag;
         newUnit.isRandomUnit = false;
         newUnit.id = unitDescription.GetId();
-        newUnit.PrepareForDragNDrop();
 
+        newUnit.PrepareForDragNDrop();
+        ClearSlot();
+    }
+
+    public void ClearSlot()
+    {
         _status = SlotState.Empty;
         unitDescription = null;
         Destroy(child);
+        Destroy(classDisplay);
         unitDescriptionDisplay.UnselectActualSlot();
     }
 
@@ -178,7 +193,8 @@ public class InventorySlot : MonoBehaviour, IDragHandler, IPointerClickHandler
     {
         if (Status != SlotState.Used)
         {
-            unitDescriptionDisplay?.UnselectActualSlot();
+            if (unitDescriptionDisplay != null)
+                unitDescriptionDisplay.UnselectActualSlot();
             return;
         }
 
@@ -188,5 +204,10 @@ public class InventorySlot : MonoBehaviour, IDragHandler, IPointerClickHandler
     public UnitDescription GetCurrentUnitDescription()
     {
         return unitDescription;
+    }
+
+    public SlotType GetSlotType()
+    {
+        return slotType;
     }
 }

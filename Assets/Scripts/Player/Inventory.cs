@@ -11,6 +11,9 @@ public class Inventory : MonoBehaviour
 
     public InventoryUI inventoryUI;
 
+    [Header("Game start setup"), SerializeField]
+    private uint startingUnitCount;
+
     private void Awake()
     {
         unitsInInventory = new Dictionary<uint, UnitDescription>();
@@ -18,7 +21,7 @@ public class Inventory : MonoBehaviour
 
     private void Start()
     {
-        for (int i = 0; i < 8; i++)
+        for (int i = 0; i < startingUnitCount; i++)
         {
             AddRandomUnit();
         }
@@ -39,9 +42,20 @@ public class Inventory : MonoBehaviour
         inventoryUI.Show();
     }
 
-    public void AddUnitInInventory(UnitDescription unit)
+    public void AddUnitInInventory(UnitDescription unit, bool addToGUINow = false)
     {
-        unitsInInventory.Add(unit.GetId(), unit);
+        UnitDescription equivalentUnit = GetEquivalentUnit(unit);
+        if(equivalentUnit == null)
+        {
+            unitsInInventory.Add(unit.GetId(), unit);
+
+            if (addToGUINow)
+                inventoryUI.PutInEmptySlot(unit);
+
+            return;
+        }
+
+        equivalentUnit.EarnExperience(3);
     }
 
     public void RemoveFromInventory(UnitDescription unit)
@@ -52,11 +66,37 @@ public class Inventory : MonoBehaviour
     //A retirer plus tard
     private void AddRandomUnit()
     {
-        UnitGenerator.GenerateUnit(Unit.allyTag);
+        UnitDescription newUnit = null;
+        bool createdUnit = false;
+        while (!createdUnit) //Unsafe, must have at most as many slots than possible combinations
+        {
+            newUnit = UnitGenerator.GenerateUnit(Unit.allyTag);
+            if (GetEquivalentUnit(newUnit) == null)
+                createdUnit = true;
+        }
+        AddUnitInInventory(newUnit);
+    }
+
+    public UnitDescription GetUnit(uint id)
+    {
+        return unitsInInventory[id];
     }
 
     public UnitDescription[] GetAllUnits()
     {
         return unitsInInventory.Values.ToArray();
+    }
+
+    private UnitDescription GetEquivalentUnit(UnitDescription unitToFind)
+    {
+        foreach(UnitDescription unit in unitsInInventory.Values)
+        {
+            if (unit.IsOfSameTypeThan(unitToFind))
+            {
+                return unit;
+            }
+        }
+
+        return null;
     }
 }
