@@ -23,8 +23,8 @@ public class FireBall : Ability
 
         unit.setIsAbilityActivated(true);
 
-        basicRange = unit.getRange();
-        unit.setRange(castRange);
+        basicRange = unit.Range;
+        unit.Range = castRange;
 
         List<Cell> listCells = PathfindingTool.cellsInRadius(unit.currentCell, castRange);
 
@@ -51,7 +51,7 @@ public class FireBall : Ability
         {
             List<Cell> listCellsTouched = PathfindingTool.cellsInRadius(bestTargetCell, areaOfEffect);
             StartCoroutine(ProjectileAnimation(bestTargetCell, listCellsTouched));
-            unit.setRange(basicRange);
+            unit.Range = basicRange;
         }
         unit.setIsAbilityActivated(false);
     }

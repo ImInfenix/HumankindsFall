@@ -164,7 +164,7 @@ public static class PathfindingTool
     {
         List<Cell> arrayCellPath = new List<Cell>();
 
-        if (PathfindingTool.unitsInRadius(unit.currentCell, unit.getRange(), unit.getTargetTag()).Count > 0)
+        if (PathfindingTool.unitsInRadius(unit.currentCell, unit.Range, unit.getTargetTag()).Count > 0)
         {
             return arrayCellPath;
         }
@@ -223,7 +223,7 @@ public static class PathfindingTool
                 explorationList.RemoveAt(closestIndex);
 
                 //if the cell we are explorating is the target cell, return the path to this cell
-                List<Unit> listAvailableTarget = PathfindingTool.unitsInRadius(localBoard[localClosestCell.x, localClosestCell.y].thisCell, unit.getRange(), unit.getTargetTag());
+                List<Unit> listAvailableTarget = PathfindingTool.unitsInRadius(localBoard[localClosestCell.x, localClosestCell.y].thisCell, unit.Range, unit.getTargetTag());
                 
                 if (listAvailableTarget.Count > 0)
                 {

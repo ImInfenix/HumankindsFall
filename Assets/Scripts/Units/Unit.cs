@@ -66,6 +66,18 @@ public class Unit : MonoBehaviour
     [SerializeField] private SpriteRenderer circleSprite;
     private GameObject projectileGameObject;
 
+    private List<Gem> gems = new List<Gem>();
+
+    public int MaxLife { get => maxLife; set => maxLife = value; }
+    public int CurrentLife { get => currentLife; set => currentLife = value; }
+    public int IncrementStamina { get => incrementStamina; set => incrementStamina = value; }
+    public int Armor { get => armor; set => armor = value; }
+    public float MoveSpeed { get => moveSpeed; set => moveSpeed = value; }
+    public float AttackSpeed { get => attackSpeed; set => attackSpeed = value; }
+    public int Damage { get => damage; set => damage = value; }
+    public int Range { get => range; set => range = value; }
+    public int Power { get => power; set => power = value; }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -89,18 +101,22 @@ public class Unit : MonoBehaviour
             ability.setUnit(this);
         }
 
-        maxLife = raceStats.maxLife + classStat.maxLife;
-        currentLife = maxLife;
-        incrementStamina = 1;
-        armor = raceStats.armor + classStat.armor;
-        moveSpeed = raceStats.moveSpeed + classStat.moveSpeed;
-        attackSpeed = raceStats.attackSpeed + classStat.attackSpeed;
-        damage = raceStats.damage + classStat.damage;
-        range = classStat.range;        
+        MaxLife = raceStats.maxLife + classStat.maxLife;
+        IncrementStamina = 1;
+        Armor = raceStats.armor + classStat.armor;
+        MoveSpeed = raceStats.moveSpeed + classStat.moveSpeed;
+        AttackSpeed = raceStats.attackSpeed + classStat.attackSpeed;
+        Damage = raceStats.damage + classStat.damage;
+        Range = classStat.range;
+
+        GetUnitGems();
+        ApplyInitGemsEffect();
+
+        CurrentLife = MaxLife;
 
         projectileGameObject = classStat.projectile;
 
-        healthBar.SetHealth(currentLife, maxLife);
+        healthBar.SetHealth(CurrentLife, MaxLife);
 
         classIcon.sprite = classStat.classIconSprite;
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -136,6 +152,24 @@ public class Unit : MonoBehaviour
         healColor = new Color(0.4f, 1, 0.4f);
     }
 
+    private void GetUnitGems()
+    {
+        foreach (Transform gemTransform in gameObject.transform.GetChild(2).transform)
+        {
+            Gem gemProv = gemTransform.GetComponent<Gem>();
+            gems.Add(gemProv);
+            gemProv.setUnit(this);
+        }        
+    }
+
+    private void ApplyInitGemsEffect()
+    {
+        foreach (Gem gem in gems)
+        {
+            gem.InitGemEffect();
+        }
+    }
+
     private void GenerateRaceAndClass()
     {
         UnitDescription newDescription = UnitGenerator.GenerateUnit(tag);
@@ -159,7 +193,7 @@ public class Unit : MonoBehaviour
 
         if (!isActing)
         {
-            List<Unit> listAvailableTarget = PathfindingTool.unitsInRadius(currentCell, range, targetTag);
+            List<Unit> listAvailableTarget = PathfindingTool.unitsInRadius(currentCell, Range, targetTag);
             
             //if the target is not yet in range of attack
             if (listAvailableTarget.Count > 0)
@@ -178,6 +212,14 @@ public class Unit : MonoBehaviour
         }
     }
 
+    private void ApplyAttackGemsEffect()
+    {
+        foreach (Gem gem in gems)
+        {
+            gem.AttackGemEffect();
+        }
+    }
+
     IEnumerator UnitWaitForSeconds(float seconds)
     {
         isActing = true;
@@ -192,7 +234,7 @@ public class Unit : MonoBehaviour
         isActing = true;
         foreach (Cell cell in path)
         {
-            yield return new WaitForSeconds(moveSpeed);
+            yield return new WaitForSeconds(MoveSpeed);
             updatePosition();
         }
         isActing = false;
@@ -208,7 +250,7 @@ public class Unit : MonoBehaviour
             occupyNewCell(cell);
             //StopCoroutine(MoveAnimation(cell));
             StartCoroutine(MoveAnimation(cell));
-            yield return new WaitForSeconds(moveSpeed);
+            yield return new WaitForSeconds(MoveSpeed);
             //ensure that the unit is at the center of the current cell before it can start acting again
             updatePosition();
             isActing = false;
@@ -217,7 +259,7 @@ public class Unit : MonoBehaviour
         else
         {
             path = null;
-            yield return new WaitForSeconds(moveSpeed);
+            yield return new WaitForSeconds(MoveSpeed);
         }
     }
 
@@ -227,7 +269,7 @@ public class Unit : MonoBehaviour
         float speed = 0.1f;
 
         //if the unit is moving too fast, inscrease the animation speed
-        if (moveSpeed <= 0.2)
+        if (MoveSpeed <= 0.2)
             speed = 0.2f;
 
         //set the maximum number of movement in the animation
@@ -260,17 +302,19 @@ public class Unit : MonoBehaviour
 
         StartCoroutine(AttackAnimation());
 
-        targetUnit.takeDamage(damage);
+        targetUnit.takeDamage(Damage);
 
-        if (range > 1)
+        ApplyAttackGemsEffect();
+
+        if (Range > 1)
             StartCoroutine(ProjectileAnimation());
 
         if (abilityName != null && abilityName != "")
         {
-            ability.updateAbility(incrementStamina);
+            ability.updateAbility(IncrementStamina);
         }
 
-        yield return new WaitForSeconds(attackSpeed);
+        yield return new WaitForSeconds(AttackSpeed);
         isActing = false;
     }
 
@@ -287,9 +331,9 @@ public class Unit : MonoBehaviour
 
         //set the animation time to be fast, and faster than the attack speed
         float animationTime = 0.3f;
-        if (attackSpeed <= 0.3f)
+        if (AttackSpeed <= 0.3f)
         {
-            animationTime = 2 * attackSpeed / 3;
+            animationTime = 2 * AttackSpeed / 3;
         }
 
         yield return new WaitForSeconds(0.2f);
@@ -306,7 +350,7 @@ public class Unit : MonoBehaviour
         float speed = 0.06f;
 
         //if the unit is attacking too fast, inscrease the animation speed
-        if (attackSpeed <= 0.2f)
+        if (AttackSpeed <= 0.2f)
             speed = 0.15f;
 
         //set the maximum number of refresh of the projectile animation
@@ -378,7 +422,7 @@ public class Unit : MonoBehaviour
 
     private void checkDeath()
     {
-        if (currentLife <= 0)
+        if (CurrentLife <= 0)
         {
             StopAllCoroutines();
             Destroy(gameObject);
@@ -387,20 +431,20 @@ public class Unit : MonoBehaviour
 
     public void takeDamage(int damage)
     {
-        currentLife -= damage;
+        CurrentLife -= damage;
         checkDeath();
-        healthBar.SetHealth(currentLife);
+        healthBar.SetHealth(CurrentLife);
         StartCoroutine(ChangeColorAnimation(damageColor, 0.4f));
     }
 
     public void heal(int heal)
     {
-        currentLife += heal;
-        if (currentLife > maxLife)
+        CurrentLife += heal;
+        if (CurrentLife > MaxLife)
         {
-            currentLife = maxLife;
+            CurrentLife = MaxLife;
         }
-        healthBar.SetHealth(currentLife);
+        healthBar.SetHealth(CurrentLife);
         StartCoroutine(ChangeColorAnimation(healColor, 0.7f));
     }
 
@@ -542,20 +586,6 @@ public class Unit : MonoBehaviour
         return abilityName;
     }
 
-    public int getRange()
-    {
-        return range;
-    }
-    public void setRange(int range)
-    {
-        this.range = range;
-    }
-
-    public int getCurrentLife()
-    {
-        return currentLife;
-    }
-
     public Sprite GetSprite()
     {
         return spriteRenderer.sprite;
@@ -599,10 +629,5 @@ public class Unit : MonoBehaviour
     public void setTargetUnit(Unit unit)
     {
         targetUnit = unit;
-    }
-
-    public int getPower()
-    {
-        return power;
     }
 }

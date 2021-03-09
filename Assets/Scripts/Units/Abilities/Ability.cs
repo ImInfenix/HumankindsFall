@@ -4,7 +4,6 @@ using UnityEngine;
 
 abstract public class Ability : MonoBehaviour
 {
-
     protected Unit unit;
     protected int currentStamina;
 
@@ -39,6 +38,6 @@ abstract public class Ability : MonoBehaviour
 
     private void updateCurrentPower()
     {
-        currentPower = basePower + unit.getPower();
+        currentPower = basePower + unit.Power;
     }
 }

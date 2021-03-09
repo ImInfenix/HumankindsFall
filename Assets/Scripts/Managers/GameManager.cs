@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
     public void RemoveUnit(Unit unit)
     {
         units.Remove(unit);
-        if (unit.getCurrentLife() > 0)
+        if (unit.CurrentLife > 0)
             SynergyHandler.instance.removeUnit(unit);
     }
 
