@@ -7,6 +7,7 @@ public class Marker : MonoBehaviour
 {
     [SerializeField]
     private List<Marker> Neighbours;
+    [SerializeField]
     private bool isAccessible;
     private bool isFinished;
     [SerializeField]
@@ -18,21 +19,35 @@ public class Marker : MonoBehaviour
     [SerializeField]
     private LevelDescription levelDescription;
     [SerializeField]
-    private string descriptionText;
-    [SerializeField]
-    private string titleText;
-    [SerializeField]
     private Sprite sprite;
-
+    [SerializeField]
+    private TextAsset descriptionTextFile;
+    private List<string> eachLine;
 
     public void Awake()
     {
+        if (!isAccessible)
+            this.gameObject.SetActive(false);
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = RedFlag;
+        eachLine = new List<string>();
+        string AllFile = descriptionTextFile.text;
+        eachLine.AddRange(AllFile.Split("\n"[0]));
     }
     public void FinishLevel()
     {
         spriteRenderer.sprite = GreenFlag;
+        foreach(Marker marker in Neighbours)
+        {
+            marker.Unlock();
+        }
+    }
+
+    public void Unlock()
+    {
+        if (!isAccessible)
+            this.gameObject.SetActive(true);
+
     }
 
     public void Update()
@@ -43,11 +58,12 @@ public class Marker : MonoBehaviour
 
     public void OnMouseDown()
     {
-        levelDescription.Show();
-        levelDescription.ChangeDescription(descriptionText);
-        levelDescription.ChangeTitle(titleText);
+        levelDescription.ChangeDescription(eachLine[1]);
+        levelDescription.ChangeTitle(eachLine[0]);
         levelDescription.ChangeImage(sprite);
+        levelDescription.Show();
+        FinishLevel();
     }
 
-
+    
 }

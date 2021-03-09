@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class LevelDescription : MonoBehaviour
 {
@@ -15,11 +16,6 @@ public class LevelDescription : MonoBehaviour
     private Image image;
 
     public void Awake()
-    {
-        Hide();
-    }
-
-    public void OnClick()
     {
         Hide();
     }
@@ -47,4 +43,11 @@ public class LevelDescription : MonoBehaviour
     {
         image.sprite = newImage;
     }
+
+    //Il faudra que la scène ait le même nom que le niveau
+    public void LoadBattle()
+    {
+        SceneManager.LoadScene(Title.text);
+    }
+
 }
