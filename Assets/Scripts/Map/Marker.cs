@@ -16,7 +16,13 @@ public class Marker : MonoBehaviour
     [SerializeField]
     private Sprite RedFlag;
     [SerializeField]
-    private GameObject Description;
+    private LevelDescription levelDescription;
+    [SerializeField]
+    private string descriptionText;
+    [SerializeField]
+    private string titleText;
+    [SerializeField]
+    private Sprite sprite;
 
 
     public void Awake()
@@ -37,6 +43,11 @@ public class Marker : MonoBehaviour
 
     public void OnMouseDown()
     {
-        Description.SetActive(true);
+        levelDescription.Show();
+        levelDescription.ChangeDescription(descriptionText);
+        levelDescription.ChangeTitle(titleText);
+        levelDescription.ChangeImage(sprite);
     }
+
+
 }
