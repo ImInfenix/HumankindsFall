@@ -422,4 +422,67 @@ public class SynergyHandler : MonoBehaviour
             }
         }
     }
+
+    public void ActivateRaceSynergy()
+    {
+        foreach (RaceCount r in rc)
+        {
+            switch (r.getRace())
+            {
+                case Race.Orc:
+                    if (orcButton)
+                    {
+                        if(r.getNumber() >= 2)
+                        {
+
+                        }
+                    }
+                    break;
+
+                case Race.Skeleton:
+                    if (skeletonButton)
+                    {
+                        if (r.getNumber() >= 2)
+                        {
+
+                        }
+                    }
+
+                    break;
+
+                case Race.Octopus:
+                    if (octopusButton)
+                    {
+                        if (r.getNumber() >= 2)
+                        {
+
+                        }
+                    }
+
+                    break;
+
+                case Race.Elemental:
+                    if (elementalButton)
+                    {
+                        if (r.getNumber() >= 2)
+                        {
+
+                        }
+                    }
+
+                    break;
+
+                case Race.Giant:
+                    if (giantButton)
+                    {
+                        if (r.getNumber() >= 2)
+                        {
+
+                        }
+                    }
+
+                    break;
+            }            
+        }
+    }
 }
