@@ -20,6 +20,7 @@ public class Unit : MonoBehaviour
     private float attackSpeed;
     private int damage;
     private int range;
+    private int power;
     [SerializeField] private string unitName;
 
     private bool moving;
@@ -95,7 +96,7 @@ public class Unit : MonoBehaviour
         moveSpeed = raceStats.moveSpeed + classStat.moveSpeed;
         attackSpeed = raceStats.attackSpeed + classStat.attackSpeed;
         damage = raceStats.damage + classStat.damage;
-        range = classStat.range;
+        range = classStat.range;        
 
         projectileGameObject = classStat.projectile;
 
@@ -598,5 +599,10 @@ public class Unit : MonoBehaviour
     public void setTargetUnit(Unit unit)
     {
         targetUnit = unit;
+    }
+
+    public int getPower()
+    {
+        return power;
     }
 }

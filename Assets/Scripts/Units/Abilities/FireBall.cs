@@ -13,12 +13,14 @@ public class FireBall : Ability
         castStaminaThreshold = 8;
         castRange = 4;
         areaOfEffect = 1;
-        power = 35;
+        basePower = 35;
 
         projectileGameObject = Resources.Load("Ability Prefabs/Fireball") as GameObject;
     }
     override public void castAbility()
     {
+        base.castAbility();
+
         unit.setIsAbilityActivated(true);
 
         basicRange = unit.getRange();
@@ -91,7 +93,7 @@ public class FireBall : Ability
 
         foreach (Unit unit in listUnitsTouch)
         {
-            unit.takeDamage(power);
+            unit.takeDamage(currentPower);
         }
 
         //color all hit tiles in red for a short duration, then set the color back to normal

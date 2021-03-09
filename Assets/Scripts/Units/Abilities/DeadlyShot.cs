@@ -9,12 +9,14 @@ public class DeadlyShot : Ability
     private void Start()
     {
         castStaminaThreshold = 7;
-        power = 45;
+        basePower = 45;
 
         projectileGameObject = Resources.Load("Ability Prefabs/DeadlyShot") as GameObject;
     }
     override public void castAbility()
     {
+        base.castAbility();
+
         unit.setIsAbilityActivated(true);
 
         GameObject[] listEnemyUnits = GameObject.FindGameObjectsWithTag(unit.getTargetTag());
@@ -74,6 +76,6 @@ public class DeadlyShot : Ability
         Destroy(projectile);
 
         if(targetUnit != null)
-            targetUnit.takeDamage(power);
+            targetUnit.takeDamage(currentPower);
     }
 }
