@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &3735868996941771250
+--- !u!1001 &4107297752765102830
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -10,35 +10,20 @@ PrefabInstance:
     - target: {fileID: 2720397800951172354, guid: 049abbfc15d17fe4a920d7065f9db2c1,
         type: 3}
       propertyPath: m_Name
-      value: BowmanHuman Variant
+      value: AssassinHuman Variant
       objectReference: {fileID: 0}
     - target: {fileID: 2720397800951172356, guid: 049abbfc15d17fe4a920d7065f9db2c1,
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: a52849e3cd8042d44af518e61472b6f2,
+      objectReference: {fileID: 21300000, guid: 0b6a9270ef2465e419fa439a5608fc0b,
         type: 3}
     - target: {fileID: 2720397800951172357, guid: 049abbfc15d17fe4a920d7065f9db2c1,
         type: 3}
       propertyPath: classStat
       value: 
-      objectReference: {fileID: 11400000, guid: a237670b240c1c14ead404c0ef53f35e,
+      objectReference: {fileID: 11400000, guid: d6714f3932b6ea8438f08d08fc772aca,
         type: 2}
-    - target: {fileID: 2720397800951172357, guid: 049abbfc15d17fe4a920d7065f9db2c1,
-        type: 3}
-      propertyPath: abilityName
-      value: DeadlyShot
-      objectReference: {fileID: 0}
-    - target: {fileID: 2720397800951172357, guid: 049abbfc15d17fe4a920d7065f9db2c1,
-        type: 3}
-      propertyPath: isPlacedUnit
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2720397800951172357, guid: 049abbfc15d17fe4a920d7065f9db2c1,
-        type: 3}
-      propertyPath: isRandomUnit
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2720397800951172359, guid: 049abbfc15d17fe4a920d7065f9db2c1,
         type: 3}
       propertyPath: m_RootOrder
@@ -117,12 +102,17 @@ PrefabInstance:
     - target: {fileID: 6589877847807463380, guid: 049abbfc15d17fe4a920d7065f9db2c1,
         type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 0.43
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 6589877847807463380, guid: 049abbfc15d17fe4a920d7065f9db2c1,
         type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 0.66
+      value: 0.63
+      objectReference: {fileID: 0}
+    - target: {fileID: 6924323467820561886, guid: 049abbfc15d17fe4a920d7065f9db2c1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 049abbfc15d17fe4a920d7065f9db2c1, type: 3}

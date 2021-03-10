@@ -23,6 +23,7 @@ public class Unit : MonoBehaviour
     [SerializeField] private float attackSpeed;
     [SerializeField] private int damage;
     [SerializeField] private int range;
+    [SerializeField] private int power;
     [SerializeField] private string unitName;
     [SerializeField] private bool isTargetable;
 
@@ -61,6 +62,7 @@ public class Unit : MonoBehaviour
     private string targetTag;
 
     public bool isRandomUnit = true;
+    [SerializeField] private bool isPlacedUnit;
 
     [Header("ABILITY")]
     [SerializeField] private string abilityName;
@@ -83,9 +85,9 @@ public class Unit : MonoBehaviour
     private List<Gem> gems = new List<Gem>();
 
     public int MaxLife { get => maxLife; set => maxLife = value; }
-    public int CurrentLife { get => currentLife; set => currentLife = value; }
-    public int IncrementStamina { get => incrementStamina; set => incrementStamina = value; }
-    public int Armor { get => armor; set => armor = value; }
+    public float CurrentLife { get => currentLife; set => currentLife = value; }
+    public float IncrementStamina { get => incrementStamina; set => incrementStamina = value; }
+    public float Armor { get => armor; set => armor = value; }
     public float MoveSpeed { get => moveSpeed; set => moveSpeed = value; }
     public float AttackSpeed { get => attackSpeed; set => attackSpeed = value; }
     public int Damage { get => damage; set => damage = value; }
@@ -156,7 +158,7 @@ public class Unit : MonoBehaviour
 
         if (currentCell == null)
         {
-            if (isRandomUnit && false)
+            if (!isPlacedUnit)
             {
                 Cell startCell = board.GetCell(new Vector3Int(initialPos.x, initialPos.y, 0));
                 occupyNewCell(startCell);
@@ -647,6 +649,11 @@ public class Unit : MonoBehaviour
 
         currentCell.DecreaseNumberOfUnits();
         GameManager.instance?.RemoveUnit(this);
+    }
+
+    public bool getTargetable()
+    {
+        return isTargetable;
     }
 
     public int getMaxlife()

@@ -141,7 +141,7 @@ public class GameManager : MonoBehaviour
         {
             if (unit.CompareTag("UnitAlly"))
             {
-                if (unit.getCurrentLife() <= target.getCurrentLife() && unit.getCurrentLife() > 0)
+                if (unit.CurrentLife <= target.CurrentLife && unit.CurrentLife > 0)
                     target = unit;
             }
         }

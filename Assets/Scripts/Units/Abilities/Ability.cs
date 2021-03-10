@@ -53,6 +53,4 @@ abstract public class Ability : MonoBehaviour
         }
         unit.getHealthbar().SetStamina(currentStamina, castStaminaThreshold);
     }
-
-    abstract public void castAbility();
 }
