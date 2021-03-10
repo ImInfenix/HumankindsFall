@@ -219,21 +219,9 @@ public class Board : MonoBehaviour
             CurrentBoard = null;
     }
 
-    public List<Cell> getNeighbour(Cell c)
-    {
-        List<Cell> neighbourCell = new List<Cell>();
-        neighbourCell.Add(GetCell(new Vector3Int(c.TileMapPosition.x,c.TileMapPosition.y+1,0)));
-        neighbourCell.Add(GetCell(new Vector3Int(c.TileMapPosition.x-1, c.TileMapPosition.y, 0)));
-        neighbourCell.Add(GetCell(new Vector3Int(c.TileMapPosition.x, c.TileMapPosition.y-1, 0)));
-        neighbourCell.Add(GetCell(new Vector3Int(c.TileMapPosition.x+1, c.TileMapPosition.y-1, 0)));
-        neighbourCell.Add(GetCell(new Vector3Int(c.TileMapPosition.x+1, c.TileMapPosition.y, 0)));
-        neighbourCell.Add(GetCell(new Vector3Int(c.TileMapPosition.x+1, c.TileMapPosition.y+1, 0)));
-        return neighbourCell;
-    }
-
     public bool isOccupiedNeighbour(Cell c)
     {
-        List<Cell> neighbourList = getNeighbour(c);
+        Cell[] neighbourList = c.GetAllNeighbours();
         foreach(Cell cell in neighbourList)
         {
             if(cell != null)

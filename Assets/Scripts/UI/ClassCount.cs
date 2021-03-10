@@ -61,7 +61,7 @@ public class ClassCount
                 break;
 
             case Class.Support:
-                def = "Units near supports gain armor\n (2) 20% armor\n (3) 30% armor\n (3) 50% armor";
+                def = "Units near supports gain armor\n (2) 20% armor\n (3) 30% armor\n (4) 50% armor";
                 break;
 
             case Class.Berserker:

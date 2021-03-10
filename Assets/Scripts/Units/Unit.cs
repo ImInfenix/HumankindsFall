@@ -724,29 +724,24 @@ public class Unit : MonoBehaviour
                 break;
 
             case Class.Support:
-                List<Cell> neighbourCell = board.getNeighbour(currentCell);
+                List<Unit> unitInRange = PathfindingTool.unitsInRadius(currentCell, 1, allyTag);
                 if (nb >= 2)
                 {                  
-                    foreach(Cell cell in neighbourCell)
-                    {
-                        if(cell != null)
+                    foreach(Unit unit in unitInRange)
+                    {                       
+                            
+                        if (nb == 2)
                         {
-                            if (cell.GetIsOccupied())
-                            {
-                                if (nb == 2)
-                                {
-                                    cell.GetCurrentUnit().supportBoost(1);
-                                }
-                                if (nb == 3)
-                                {
-                                    cell.GetCurrentUnit().supportBoost(2);
-                                }
-                                if (nb >= 4)
-                                {
-                                    cell.GetCurrentUnit().supportBoost(3);
-                                }
-                            }
-                        }                       
+                            unit.supportBoost(1);
+                        }
+                        if (nb == 3)
+                        {
+                            unit.supportBoost(2);
+                        }
+                        if (nb >= 4)
+                        {
+                            unit.supportBoost(3);
+                        }                                                                      
                     }
                 }              
                 break;
