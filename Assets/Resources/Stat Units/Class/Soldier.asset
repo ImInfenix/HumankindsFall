@@ -10,17 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8ba64e6d5dd11e449bb0e8bd6d5fc7c8, type: 3}
-  m_Name: Warrior
+  m_Name: Soldier
   m_EditorClassIdentifier: 
-  clas: 0
-  maxLife: 125
-  armor: 5
-  moveSpeed: 0.6
-  attackSpeed: 1
-  damage: 10
+  clas: 8
+  maxLife: 100
+  armor: 0
+  moveSpeed: 0.5
+  attackSpeed: 0.9
+  damage: 8
   range: 1
-  incrementStamina: 100
+  incrementStamina: 0
   projectile: {fileID: 0}
-  abilities:
-  - CircularAttack
-  classIconSprite: {fileID: 21300000, guid: 1e2ed3e09712e5e44ae6782cd554c047, type: 3}
+  abilities: []
+  classIconSprite: {fileID: 0}

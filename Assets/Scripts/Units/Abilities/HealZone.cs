@@ -7,7 +7,7 @@ public class HealZone : Ability
 
     private void Start()
     {
-        castStaminaThreshold = 5;
+        castStaminaThreshold = 500;
         castRange = 0;
         areaOfEffect = 2;
         basePower = 30;

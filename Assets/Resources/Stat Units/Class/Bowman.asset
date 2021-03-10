@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: Bowman
   m_EditorClassIdentifier: 
   clas: 3
-  maxLife: 70
+  maxLife: 80
   armor: 0
   moveSpeed: 0.5
   attackSpeed: 0.9
   damage: 8
   range: 3
+  incrementStamina: 100
   projectile: {fileID: 3144628240142601262, guid: 90f4b5268b4c3944b8f783910b864353,
     type: 3}
   abilities:

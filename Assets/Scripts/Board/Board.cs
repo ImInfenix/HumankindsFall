@@ -61,8 +61,6 @@ public class Board : MonoBehaviour
         {
             for (int y = 0; y < bounds.size.y; y++)
             {
-                Debug.Log(bounds.size);
-
                 TileBase tile = tiles[x + y * bounds.size.x];
                 if (tile != null)
                 {

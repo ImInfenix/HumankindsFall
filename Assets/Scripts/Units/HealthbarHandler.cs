@@ -95,4 +95,14 @@ public class HealthbarHandler : MonoBehaviour
         foreach (HealthbarHandler handler in healthbarHandlers)
             handler.gameObject.transform.GetChild(0).gameObject.SetActive(false);
     }
+
+    public void HideStaminaBar()
+    {
+        staminaSlider.gameObject.SetActive(false);
+    }
+
+    public void HideClassIcon()
+    {
+        transform.GetChild(1).gameObject.SetActive(false);
+    }
 }

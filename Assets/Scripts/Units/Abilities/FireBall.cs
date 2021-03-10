@@ -10,7 +10,7 @@ public class FireBall : Ability
 
     private void Start()
     {
-        castStaminaThreshold = 8;
+        castStaminaThreshold = 800;
         castRange = 4;
         areaOfEffect = 1;
         basePower = 35;

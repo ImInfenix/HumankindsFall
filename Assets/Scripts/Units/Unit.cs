@@ -21,7 +21,7 @@ public class Unit : MonoBehaviour
     private int damage;
     private int range;
     private int power;
-    [SerializeField] private string unitName;
+    private string unitName;
 
     private bool moving;
     private bool canMove;
@@ -47,7 +47,7 @@ public class Unit : MonoBehaviour
     private int takingDamageCount = 0;
     private bool isAbilityActivated = false;
     private string targetTag;
-    [HideInInspector]
+
     public bool isRandomUnit = true;
 
     [SerializeField] private string abilityName;
@@ -101,8 +101,14 @@ public class Unit : MonoBehaviour
             ability.setUnit(this);
         }
 
+        else
+            healthBar.HideStaminaBar();
+
+        if (classStat.classIconSprite == null)
+            healthBar.HideClassIcon();
+
         MaxLife = raceStats.maxLife + classStat.maxLife;
-        IncrementStamina = 1;
+        IncrementStamina = classStat.incrementStamina;
         Armor = raceStats.armor + classStat.armor;
         MoveSpeed = raceStats.moveSpeed + classStat.moveSpeed;
         AttackSpeed = raceStats.attackSpeed + classStat.attackSpeed;
@@ -120,7 +126,12 @@ public class Unit : MonoBehaviour
 
         classIcon.sprite = classStat.classIconSprite;
         spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite = raceStats.unitSprite;
+
+        if (raceStats.race != Race.Human)
+            spriteRenderer.sprite = raceStats.unitSprite;
+
+        else
+            spriteRenderer.sprite = Resources.Load<Sprite>("Textures/Unit Sprites/Humans/" + classStat.clas.ToString());
 
         //canAttack = true;
         //hasTarget = false;
@@ -128,9 +139,20 @@ public class Unit : MonoBehaviour
 
         if (currentCell == null)
         {
-            Cell startCell = board.GetCell(new Vector3Int(initialPos.x, initialPos.y, 0));
-            occupyNewCell(startCell);
-            updatePosition();
+            if (isRandomUnit && false)
+            {
+                Cell startCell = board.GetCell(new Vector3Int(initialPos.x, initialPos.y, 0));
+                occupyNewCell(startCell);
+                updatePosition();
+            }
+
+            else
+            {
+                Vector3Int tileCoordinate = board.GetTilemap().WorldToCell(transform.position);
+                Cell newCell = board.GetCell(tileCoordinate);
+                occupyNewCell(newCell);
+                updatePosition();
+            }
         }
 
         //if the unit is an ally unit
@@ -206,6 +228,11 @@ public class Unit : MonoBehaviour
             {
                 //start the coroutine to move to the next cell of the path
                 StartCoroutine(MoveToCell(path[0]));
+            }
+
+            else if (path == null)
+            {
+                StartCoroutine(UnitWaitForSeconds(moveSpeed));
             }
 
             path = PathfindingTool.createPathTarget(this);

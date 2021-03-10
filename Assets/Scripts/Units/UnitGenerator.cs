@@ -7,7 +7,7 @@ public static class UnitGenerator
     public static UnitDescription GenerateUnit(string unitTag)
     {
         RaceStat unitRace = GetRandomRace(unitTag);
-        ClassStat unitClass = GetRandomClass();
+        ClassStat unitClass = GetRandomClass(unitRace.race);
         string name = GetRandomName(unitRace);
         string abilityName = GetRandomAbilityName(unitClass);
 
@@ -44,11 +44,24 @@ public static class UnitGenerator
         return null;
     }
 
-    public static ClassStat GetRandomClass()
+    public static ClassStat GetRandomClass(Race race)
     {
         ClassStat[] classes = Resources.LoadAll<ClassStat>("Stat Units/Class");
 
-        int randomClassIndex = Random.Range(0, classes.Length);
+        int randomClassIndex;
+
+        if (race != Race.Human)
+        {
+            do
+            {
+                randomClassIndex = Random.Range(0, classes.Length);
+            } while (classes[randomClassIndex].clas == Class.Soldier);
+        
+        }
+
+        else
+            randomClassIndex = Random.Range(0, classes.Length);
+
         return classes[randomClassIndex];
     }
 
@@ -61,7 +74,13 @@ public static class UnitGenerator
 
     public static string GetRandomAbilityName(ClassStat classStat)
     {
-        int randomAbilityIndex = Random.Range(0, classStat.abilities.Length);
-        return classStat.abilities[randomAbilityIndex];
+        if (classStat.abilities.Length > 0)
+        {
+            int randomAbilityIndex = Random.Range(0, classStat.abilities.Length);
+            return classStat.abilities[randomAbilityIndex];
+        }
+
+        else
+            return null;
     }
 }

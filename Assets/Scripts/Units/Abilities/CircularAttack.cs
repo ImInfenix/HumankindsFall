@@ -8,10 +8,10 @@ public class CircularAttack : Ability
 
     private void Start()
     {
-        castStaminaThreshold = 6;
+        castStaminaThreshold = 800;
         castRange = 0;
         areaOfEffect = 1;
-        basePower = 45;
+        basePower = 35;
 
         animationGameObject = Resources.Load("Ability Prefabs/CircularAttack") as GameObject;
     }
