@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+
+//Note : Map is in 0.09, -0.23, i don't know why. But because all position calculs were made based on this coordinates, pls don't move it :)
 public class CameraMover : MonoBehaviour
 {
     [SerializeField]
@@ -18,7 +20,7 @@ public class CameraMover : MonoBehaviour
 
     public void Awake()
     {
-         maxZoom = 3;
+         maxZoom = 2;
          minZoom = 5;
          moveSpeed = 0.05f;
     }
@@ -121,6 +123,8 @@ public class CameraMover : MonoBehaviour
 
     public void ZoomCamera()
     {
+        float x = cam.transform.position.x;
+        float y = cam.transform.position.y;
         if(Input.mouseScrollDelta.y < 0 && cam.orthographicSize < minZoom)
         {
             cam.orthographicSize += 1;
@@ -129,6 +133,40 @@ public class CameraMover : MonoBehaviour
         {
             cam.orthographicSize -= 1;
         }
+        if (cam.orthographicSize == 5)
+        {
+            if (x> 1.4f)
+                cam.transform.position = new Vector3(1.3f, y, -10.0f);                
+            if (x <-1.3f)
+                cam.transform.position = new Vector3(-1.2f, y, -10.0f);
+            if (y > 2.5f)
+                cam.transform.position = new Vector3(x, 2.4f, -10.0f);
+            if (y < -2.9f)
+                cam.transform.position = new Vector3(x, -2.8f, -10.0f);
+        }
+        if (cam.orthographicSize == 4)
+        {
+            if (x > 3.2f)
+                cam.transform.position = new Vector3(3.1f, y, -10.0f);
+            if (x < -3.1f)
+                cam.transform.position = new Vector3(-3.0f, y, -10.0f);
+            if (y > 3.5f)
+                cam.transform.position = new Vector3(x, 3.4f, -10.0f);
+            if (y < -3.9f)
+                cam.transform.position = new Vector3(x, -3.8f, -10.0f);
+        }
+        if (cam.orthographicSize == 3)
+        {
+            if (x > 5f)
+                cam.transform.position = new Vector3(4.9f, y, -10.0f);
+            if (x < -4.9f)
+                cam.transform.position = new Vector3(-4.8f, y, -10.0f);
+            if (y > 4.5f)
+                cam.transform.position = new Vector3(x, 4.4f, -10.0f);
+            if (y < -5f)
+                cam.transform.position = new Vector3(x, -4.8f, -10.0f);
+        }
+
     }
 
     public string GetPanelUnderMouse()
@@ -186,7 +224,7 @@ public class CameraMover : MonoBehaviour
     {
         float size = cam.orthographicSize;
         float x = cam.transform.position.x;
-        return ((size == 5 && x < -1.2) || (size == 4 && x < -3) || (size == 3 && x < -4.8) || (size == 2 && x < -6));
+        return ((size == 5 && x < -1.2) || (size == 4 && x < -3) || (size == 3 && x < -4.8) || (size == 2 && x < -6.5));
     }
 
     public bool isOnBoarderUp()
