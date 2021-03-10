@@ -11,7 +11,7 @@ public class MainMenuNavigation : MonoBehaviour
 
     public void ContinueGame()
     {
-        Debug.Log("Loading saved game");
+        SavingSystem.SaveData();
     }
 
     public void Leave()

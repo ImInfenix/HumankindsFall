@@ -10,5 +10,10 @@ public class CheatCodes : MonoBehaviour
         {
             SceneLoader.ReloadScene();
         }
+
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            SavingSystem.SaveData();
+        }
     }
 }
