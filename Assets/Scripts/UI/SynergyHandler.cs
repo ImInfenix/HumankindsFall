@@ -154,6 +154,16 @@ public class SynergyHandler : MonoBehaviour
         
     }
 
+    public List<ClassCount> getClassList()
+    {
+        return cc;
+    }
+
+    public List<RaceCount> getRaceList()
+    {
+        return rc;
+    }
+
     public void addUnit(Unit u)
     {
         if(u.tag == Unit.allyTag)
@@ -410,7 +420,69 @@ public class SynergyHandler : MonoBehaviour
                         break;
                 }
             }
-                //synergyText.text += c.getString() + c.getNumber() + "\n";
+        }
+    }
+
+    public void ActivateRaceSynergy()
+    {
+        foreach (RaceCount r in rc)
+        {
+            switch (r.getRace())
+            {
+                case Race.Orc:
+                    if (orcButton)
+                    {
+                        if(r.getNumber() >= 2)
+                        {
+
+                        }
+                    }
+                    break;
+
+                case Race.Skeleton:
+                    if (skeletonButton)
+                    {
+                        if (r.getNumber() >= 2)
+                        {
+
+                        }
+                    }
+
+                    break;
+
+                case Race.Octopus:
+                    if (octopusButton)
+                    {
+                        if (r.getNumber() >= 2)
+                        {
+
+                        }
+                    }
+
+                    break;
+
+                case Race.Elemental:
+                    if (elementalButton)
+                    {
+                        if (r.getNumber() >= 2)
+                        {
+
+                        }
+                    }
+
+                    break;
+
+                case Race.Giant:
+                    if (giantButton)
+                    {
+                        if (r.getNumber() >= 2)
+                        {
+
+                        }
+                    }
+
+                    break;
+            }            
         }
     }
 }

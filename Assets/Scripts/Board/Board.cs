@@ -220,4 +220,18 @@ public class Board : MonoBehaviour
         if (CurrentBoard == this)
             CurrentBoard = null;
     }
+
+    public bool isOccupiedNeighbour(Cell c)
+    {
+        Cell[] neighbourList = c.GetAllNeighbours();
+        foreach(Cell cell in neighbourList)
+        {
+            if(cell != null)
+            {
+                if (cell.GetIsOccupied())
+                    return true;
+            }
+        }
+        return false;
+    }
 }

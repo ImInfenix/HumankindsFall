@@ -39,7 +39,6 @@ public class GameManager : MonoBehaviour
     {
         units.Add(unit);
         SynergyHandler.instance.addUnit(unit);
-
     }
 
     public void RemoveUnit(Unit unit)
@@ -56,6 +55,7 @@ public class GameManager : MonoBehaviour
 
         Board.CurrentBoard.HidePlacementTilemap();
         gamestate = GameState.Combat;
+        ActivateClassSynergy();
         Player.instance.Inventory.Hide();
         HealthbarHandler.ShowBars();
         Player.instance.Inventory.inventoryUI.rewardSystem.RegisterCombatParticipants();
@@ -121,5 +121,30 @@ public class GameManager : MonoBehaviour
     {
         if (instance == this)
             instance = null;
+    }
+
+    private void ActivateClassSynergy()
+    {
+        List<ClassCount> cc = SynergyHandler.instance.getClassList();
+
+        foreach (Unit unit in units)
+        {
+            if(unit.CompareTag("UnitAlly"))
+                unit.ActivateClass(unit.getClass(), cc.Find(x => x.getClass() == unit.getClass()).getNumber());
+        }
+    }
+
+   public Unit searchHealTarget()
+    {
+        Unit target = units[0];
+        foreach(Unit unit in units)
+        {
+            if (unit.CompareTag("UnitAlly"))
+            {
+                if (unit.getCurrentLife() <= target.getCurrentLife() && unit.getCurrentLife() > 0)
+                    target = unit;
+            }
+        }
+        return target;
     }
 }

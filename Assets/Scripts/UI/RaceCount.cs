@@ -46,7 +46,7 @@ public class RaceCount
                 break;
 
             case Race.Skeleton:
-                def = "Deads worl\nSpell\nEnnemis loose moovespeed for 5 seconds\n (2) -10% moovespeed";
+                def = "Deads world\nSpell\nEnnemis loose moovespeed for 5 seconds\n (2) -10% moovespeed";
                 break;
 
             case Race.Octopus:

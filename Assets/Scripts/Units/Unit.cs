@@ -6,35 +6,47 @@ using UnityEngine.UI;
 
 public class Unit : MonoBehaviour
 {
+    [Header("BASE")]
     public const string ennemyTag = "UnitEnemy";
     public const string allyTag = "UnitAlly";
 
     public RaceStat raceStats;
     public ClassStat classStat;
 
-    private int maxLife;
-    [SerializeField] private int currentLife;
-    private int incrementStamina;
-    private int armor;
-    private float moveSpeed;
-    private float attackSpeed;
-    private int damage;
-    private int range;
-    private int power;
-    private string unitName;
+    [Header ("STATS")]
+    [SerializeField] private int maxLife;
+    [SerializeField] private float currentLife;
+    [SerializeField] private float incrementStamina;
+    [SerializeField] private float armor;
+    [SerializeField] private float initialArmor;
+    [SerializeField] private float moveSpeed;
+    [SerializeField] private float attackSpeed;
+    [SerializeField] private int damage;
+    [SerializeField] private int range;
+    [SerializeField] private string unitName;
+    [SerializeField] private bool isTargetable;
 
     private bool moving;
     private bool canMove;
+    private bool supportBuff = false;
+    private bool healer1 = false;
+    private bool healer2 = false;
+    private bool healer3 = false;
+    private int cptHealer = 0;
+    private Unit healTarget = null;
+
+    [Header("POSITION")]
     public Board board;
-    private Vector3 worldPosition;
+    [SerializeField] private Vector3 worldPosition;
     public Vector3Int currentPosition;
     public Cell currentCell = null;
     private List<Cell> path = null;
+    public Vector3Int initialPos;
 
     private float startPosX;
     private float startPosY;
 
-    public Vector3Int initialPos;
+
     //private Vector3Int targetPos;
     private Unit targetUnit = null;
     //private int targetDistance = PathfindingTool.infVal;
@@ -50,10 +62,12 @@ public class Unit : MonoBehaviour
 
     public bool isRandomUnit = true;
 
+    [Header("ABILITY")]
     [SerializeField] private string abilityName;
 
-    private Ability ability;
+    [SerializeField] private Ability ability;
 
+    [Header("UI")]
     public uint id;
 
     private void Awake()
@@ -110,10 +124,13 @@ public class Unit : MonoBehaviour
         MaxLife = raceStats.maxLife + classStat.maxLife;
         IncrementStamina = classStat.incrementStamina;
         Armor = raceStats.armor + classStat.armor;
+        initialArmor = armor;
         MoveSpeed = raceStats.moveSpeed + classStat.moveSpeed;
         AttackSpeed = raceStats.attackSpeed + classStat.attackSpeed;
         Damage = raceStats.damage + classStat.damage;
         Range = classStat.range;
+
+        isTargetable = true;
 
         GetUnitGems();
         ApplyInitGemsEffect();
@@ -181,7 +198,7 @@ public class Unit : MonoBehaviour
             Gem gemProv = gemTransform.GetComponent<Gem>();
             gems.Add(gemProv);
             gemProv.setUnit(this);
-        }        
+        }
     }
 
     private void ApplyInitGemsEffect()
@@ -216,12 +233,15 @@ public class Unit : MonoBehaviour
         if (!isActing)
         {
             List<Unit> listAvailableTarget = PathfindingTool.unitsInRadius(currentCell, Range, targetTag);
-            
+
             //if the target is not yet in range of attack
             if (listAvailableTarget.Count > 0)
             {
-                targetUnit = listAvailableTarget[0];
-                StartCoroutine(AttackTarget());
+                if(listAvailableTarget[0].getTargetable())
+                {
+                    targetUnit = listAvailableTarget[0];
+                    StartCoroutine(AttackTarget());
+                }
             }
 
             else if (path != null && path.Count > 0)
@@ -333,6 +353,9 @@ public class Unit : MonoBehaviour
 
         ApplyAttackGemsEffect();
 
+        if (classStat.clas == Class.Assassin && isTargetable == false)
+            stopInvisibility();
+
         if (Range > 1)
             StartCoroutine(ProjectileAnimation());
 
@@ -343,6 +366,39 @@ public class Unit : MonoBehaviour
 
         yield return new WaitForSeconds(AttackSpeed);
         isActing = false;
+
+        cptHealer++;
+
+        if(healer1 == true)
+        {
+            if(cptHealer == 5)
+            {
+                Unit target = GameManager.instance.searchHealTarget();
+                if(target != null)
+                    target.heal((target.getMaxlife() / 20) * 3);
+                cptHealer = 0;
+            }
+        }
+        if (healer2 == true)
+        {
+            if (cptHealer == 3)
+            {
+                Unit target = GameManager.instance.searchHealTarget();
+                if (target != null)
+                    target.heal((target.getMaxlife() / 20) * 3);
+                cptHealer = 0;
+            }
+        }
+        if (healer3 == true)
+        {
+            if (cptHealer == 2)
+            {
+                Unit target = GameManager.instance.searchHealTarget();
+                if (target != null)
+                    target.heal((target.getMaxlife() / 20) * 3);
+                cptHealer = 0;
+            }
+        }
     }
 
     //move the sprite toward the target for a short time
@@ -458,7 +514,7 @@ public class Unit : MonoBehaviour
 
     public void takeDamage(int damage)
     {
-        CurrentLife -= damage;
+        CurrentLife -= damage/armor ;
         checkDeath();
         healthBar.SetHealth(CurrentLife);
         StartCoroutine(ChangeColorAnimation(damageColor, 0.4f));
@@ -593,6 +649,11 @@ public class Unit : MonoBehaviour
         GameManager.instance?.RemoveUnit(this);
     }
 
+    public int getMaxlife()
+    {
+        return maxLife;
+    }
+
     public string getTargetTag()
     {
         return targetTag;
@@ -656,5 +717,142 @@ public class Unit : MonoBehaviour
     public void setTargetUnit(Unit unit)
     {
         targetUnit = unit;
+    }
+
+    public void ActivateClass(Class c, int nb)
+    {
+        switch (c)
+        {
+            case Class.Mage:
+                if(nb >= 2 && nb < 4)
+                {
+                    ability.mageSynergy(1);
+                }
+                if(nb >= 4)
+                {
+                    ability.mageSynergy(2);
+                }
+                break;
+
+            case Class.Warrior:
+                if (nb >= 2 && nb < 4)
+                {
+                    damage += damage/4;
+                }
+                if (nb >= 4)
+                {
+                    damage += damage/2;
+                }
+                break;
+
+            case Class.Tank:
+                if(nb >= 2)
+                {
+                    maxLife += maxLife/2;
+                    currentLife = maxLife;
+                }
+                break;
+
+            case Class.Bowman:
+                if (nb >= 2)
+                {
+                    attackSpeed -= attackSpeed/4;
+                }
+                break;
+
+            case Class.Healer:
+                if(nb == 1)
+                {
+                    healer1 = true;
+                }
+                if(nb == 2)
+                {
+                    healer2 = true;
+                }
+                if(nb >= 3)
+                {
+                    healer3 = true;
+                }
+                break;
+
+            case Class.Support:
+                List<Unit> unitInRange = PathfindingTool.unitsInRadius(currentCell, 1, allyTag);
+                if (nb >= 2)
+                {
+                    foreach(Unit unit in unitInRange)
+                    {
+
+                        if (nb == 2)
+                        {
+                            unit.supportBoost(1);
+                        }
+                        if (nb == 3)
+                        {
+                            unit.supportBoost(2);
+                        }
+                        if (nb >= 4)
+                        {
+                            unit.supportBoost(3);
+                        }
+                    }
+                }
+                break;
+
+            case Class.Berserker:
+                if (nb >= 2)
+                {
+                    if(board.isOccupiedNeighbour(currentCell) == false)
+                    {
+                        damage += damage / 2;
+                        armor += initialArmor / 4;
+                    }
+                }
+                break;
+
+            case Class.Assassin:
+                if(nb >= 1)
+                {
+                    startInvisibility();
+
+                    Invoke("stopInvisibility", 5);
+                }
+                break;
+        }
+    }
+
+    public void supportBoost(int lvl)
+    {
+        if(supportBuff == false)
+        {
+            if (lvl == 1)
+            {
+                armor += initialArmor / 5;
+            }
+            if (lvl == 2)
+            {
+                armor += (initialArmor / 10) * 3;
+            }
+            if (lvl == 3)
+            {
+                armor += initialArmor / 2;
+            }
+            supportBuff = true;
+        }
+    }
+
+    private void startInvisibility()
+    {
+        isTargetable = false;
+        baseColor.a = 0.5f;
+        spriteRenderer.color = baseColor;
+    }
+    private void stopInvisibility()
+    {
+        if(isTargetable == false)
+        {
+            isTargetable = true;
+            baseColor.a = 1;
+            spriteRenderer.color = baseColor;
+        }
     }
 }

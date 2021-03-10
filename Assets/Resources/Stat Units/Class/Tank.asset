@@ -10,18 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8ba64e6d5dd11e449bb0e8bd6d5fc7c8, type: 3}
-  m_Name: Bowman
-  m_EditorClassIdentifier:
-  clas: 3
-  maxLife: 80
+  m_Name: Tank
+  m_EditorClassIdentifier: 
+  clas: 2
+  maxLife: 120
   armor: 1
-  moveSpeed: 0.5
-  attackSpeed: 0.9
-  damage: 8
-  range: 3
-  incrementStamina: 100
-  projectile: {fileID: 3144628240142601262, guid: 90f4b5268b4c3944b8f783910b864353,
-    type: 3}
+  moveSpeed: 0.6
+  attackSpeed: 1
+  damage: 7
+  range: 1
+  projectile: {fileID: 0}
   abilities:
-  - DeadlyShot
-  classIconSprite: {fileID: 21300000, guid: 86c6c6f29db512a4e807516745fad1ec, type: 3}
+  - CircularAttack
+  classIconSprite: {fileID: -3995321456776435769, guid: 7bcbfa039553fa543bf7c8cd86ad6b82,
+    type: 3}

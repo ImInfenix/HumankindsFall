@@ -36,7 +36,7 @@ public static class PathfindingTool
                         path = pathProv;
                         targetDistance = path.Count;
                     }
-                }
+                }                             
             }
         }
 
@@ -299,7 +299,8 @@ public static class PathfindingTool
                 if (cellProv.GetCurrentUnit() != null && cellProv.GetCurrentUnit().CompareTag(tagUnit))
                 {
                     //Debug.Log("cellProv : " + cellProv.TileMapPosition);
-                    listUnit.Add(cellProv.GetCurrentUnit());
+                    if(cellProv.GetCurrentUnit().getTargetable())
+                        listUnit.Add(cellProv.GetCurrentUnit());
                 }
             }
 
