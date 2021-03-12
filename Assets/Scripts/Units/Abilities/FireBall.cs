@@ -10,19 +10,21 @@ public class FireBall : Ability
 
     private void Start()
     {
-        castStaminaThreshold = 8;
+        castStaminaThreshold = 800;
         castRange = 4;
         areaOfEffect = 1;
-        power = 35;
+        basePower = 35;
 
         projectileGameObject = Resources.Load("Ability Prefabs/Fireball") as GameObject;
     }
     override public void castAbility()
     {
+        base.castAbility();
+
         unit.setIsAbilityActivated(true);
 
-        basicRange = unit.getRange();
-        unit.setRange(castRange);
+        basicRange = unit.Range;
+        unit.Range = castRange;
 
         List<Cell> listCells = PathfindingTool.cellsInRadius(unit.currentCell, castRange);
 
@@ -49,7 +51,7 @@ public class FireBall : Ability
         {
             List<Cell> listCellsTouched = PathfindingTool.cellsInRadius(bestTargetCell, areaOfEffect);
             StartCoroutine(ProjectileAnimation(bestTargetCell, listCellsTouched));
-            unit.setRange(basicRange);
+            unit.Range = basicRange;
         }
         unit.setIsAbilityActivated(false);
     }
@@ -91,7 +93,7 @@ public class FireBall : Ability
 
         foreach (Unit unit in listUnitsTouch)
         {
-            unit.takeDamage(power);
+            unit.takeDamage(currentPower);
         }
 
         //color all hit tiles in red for a short duration, then set the color back to normal

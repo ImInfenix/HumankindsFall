@@ -164,13 +164,13 @@ public static class PathfindingTool
     {
         List<Cell> arrayCellPath = new List<Cell>();
 
-        if (PathfindingTool.unitsInRadius(unit.currentCell, unit.getRange(), unit.getTargetTag()).Count > 0)
+        if (PathfindingTool.unitsInRadius(unit.currentCell, unit.Range, unit.getTargetTag()).Count > 0)
         {
             return arrayCellPath;
         }
 
         //On crée notre tableau local
-        (Cell thisCell, bool isMarked, bool isExplorationList, float cost, Cell previousCell)[,] localBoard = new (Cell, bool, bool, float, Cell)[unit.board.SizeX, unit.board.SizeX];
+        (Cell thisCell, bool isMarked, bool isExplorationList, float cost, Cell previousCell)[,] localBoard = new (Cell, bool, bool, float, Cell)[unit.board.SizeX, unit.board.SizeY];
 
         //On crée notre front d'exploration
         List<(int x, int y)> explorationList = new List<(int x, int y)>();
@@ -178,7 +178,7 @@ public static class PathfindingTool
         //On initilalise notre tableau local
         for (int i = 0; i < unit.board.SizeX; i++)
         {
-            for (int j = 0; j < unit.board.SizeX; j++)
+            for (int j = 0; j < unit.board.SizeY; j++)
             {
                 localBoard[i, j].thisCell = unit.board.GetCellOffset(new Vector3Int(i, j, 0));
                 localBoard[i, j].isMarked = false;
@@ -223,7 +223,7 @@ public static class PathfindingTool
                 explorationList.RemoveAt(closestIndex);
 
                 //if the cell we are explorating is the target cell, return the path to this cell
-                List<Unit> listAvailableTarget = PathfindingTool.unitsInRadius(localBoard[localClosestCell.x, localClosestCell.y].thisCell, unit.getRange(), unit.getTargetTag());
+                List<Unit> listAvailableTarget = PathfindingTool.unitsInRadius(localBoard[localClosestCell.x, localClosestCell.y].thisCell, unit.Range, unit.getTargetTag());
                 
                 if (listAvailableTarget.Count > 0)
                 {

@@ -4,14 +4,14 @@ using UnityEngine;
 
 abstract public class Ability : MonoBehaviour
 {
-
     protected Unit unit;
     protected float currentStamina;
 
     [SerializeField] protected int castStaminaThreshold;
     protected int castRange;
     protected int areaOfEffect;
-    protected int power;
+    protected int basePower;
+    protected int currentPower;
 
     public void setUnit(Unit unit)
     {
@@ -31,6 +31,16 @@ abstract public class Ability : MonoBehaviour
         unit.getHealthbar().SetStamina(currentStamina, castStaminaThreshold);
     }
 
+    virtual public void castAbility()
+    {
+        updateCurrentPower();
+    }
+
+    private void updateCurrentPower()
+    {
+        currentPower = basePower + unit.Power;
+    }
+    
     public void mageSynergy(int lvl)
     {
         if (lvl == 1)
@@ -43,6 +53,4 @@ abstract public class Ability : MonoBehaviour
         }
         unit.getHealthbar().SetStamina(currentStamina, castStaminaThreshold);
     }
-
-    abstract public void castAbility();
 }
