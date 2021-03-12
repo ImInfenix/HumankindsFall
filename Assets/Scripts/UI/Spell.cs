@@ -145,7 +145,7 @@ public class Spell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
             {
                 if (cell != null)
                 {
-                    cell.SetColor(Color.red);
+                    cell.SetColor(Color.red); //new Color(Color.red.r, Color.red.g, Color.red.b,0.9f)
                 }
             }
         }

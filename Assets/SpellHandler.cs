@@ -56,6 +56,7 @@ public class SpellHandler : MonoBehaviour
         
     }
 
+    //Activate spells
     public void ActivateRaceSynergy()
     {
         rc = SynergyHandler.instance.getRaceList();
