@@ -11,6 +11,7 @@ public class Tooltip : MonoBehaviour
     private TextMeshProUGUI tooltipText;
     private RectTransform backgroundRectTransform;
     private RectTransform rectTransform;
+    public Canvas canvas;
 
     private void Awake()
     {
@@ -30,8 +31,8 @@ public class Tooltip : MonoBehaviour
         Vector2 textSize = tooltipText.GetRenderedValues(false);
         Vector2 paddingSize = new Vector2(8, 8);
         backgroundRectTransform.sizeDelta = textSize+paddingSize;
-        transform.Find("Text").GetComponent<RectTransform>().localPosition = new Vector3(-textSize.x, paddingSize.y/2, 0);
-        backgroundRectTransform.localPosition = new Vector3(-textSize.x - paddingSize.x/2, 0, 0);
+        transform.Find("Text").GetComponent<RectTransform>().localPosition = new Vector3(-textSize.x, paddingSize.y /2, 0);
+        backgroundRectTransform.localPosition = new Vector3(-textSize.x - 4, 0, 0);
     }
 
     private void HideTooltip()
@@ -41,7 +42,11 @@ public class Tooltip : MonoBehaviour
 
     private void Update()
     {
-        rectTransform.anchoredPosition = Input.mousePosition;
+        RectTransform cnvs = canvas.GetComponent<RectTransform>();
+        Vector2 offSet = new Vector2(cnvs.sizeDelta.x / 2f, cnvs.sizeDelta.y / 2f);
+        Vector2 viewPort = Camera.main.ScreenToViewportPoint(Input.mousePosition);
+        Vector2 position = new Vector2(cnvs.sizeDelta.x * viewPort.x - rectTransform.rect.width / 2 + 45 , cnvs.sizeDelta.y * viewPort.y + rectTransform.rect.height / 2 - 50);
+        rectTransform.anchoredPosition = position;
     }
 
     public static void ShowTooltip_Static(string def)

@@ -110,7 +110,7 @@ public class Cell
             SetIsOccupied(false);
     }
 
-    private void SetColor(Color color)
+    public void SetColor(Color color)
     {
         GameObject.Find("Board").GetComponent<Board>().SetTileColour(color, _tileMapPosition);
     }

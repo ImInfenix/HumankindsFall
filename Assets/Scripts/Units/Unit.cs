@@ -21,17 +21,20 @@ public class Unit : MonoBehaviour
     [SerializeField] private float initialArmor;
     [SerializeField] private float moveSpeed;
     [SerializeField] private float attackSpeed;
+    [SerializeField] private float accuracy;
     [SerializeField] private int damage;
     [SerializeField] private int range;
     [SerializeField] private string unitName;
     [SerializeField] private bool isTargetable;
-
+    
+    
     private bool moving;
     private bool canMove;
     private bool supportBuff = false;
     private bool healer1 = false;
     private bool healer2 = false;
     private bool healer3 = false;
+    private bool orcSpell = false;
     private int cptHealer = 0;
     private Unit healTarget = null;
 
@@ -112,6 +115,7 @@ public class Unit : MonoBehaviour
         attackSpeed = raceStats.attackSpeed + classStat.attackSpeed;
         damage = raceStats.damage + classStat.damage;
         range = classStat.range;
+        accuracy = 100;
         
         isTargetable = true;       
         
@@ -280,8 +284,15 @@ public class Unit : MonoBehaviour
 
         StartCoroutine(AttackAnimation());
 
-        targetUnit.takeDamage(damage);
-
+        if (orcSpell == false)
+            targetUnit.takeDamage(damage);
+        else
+        {
+            int rand = Random.Range(1, 101);
+            if(rand <= accuracy)
+                targetUnit.takeOrcDamage(damage);
+        }
+            
         if (classStat.clas == Class.Assassin && isTargetable == false)
             stopInvisibility();
 
@@ -444,6 +455,14 @@ public class Unit : MonoBehaviour
     public void takeDamage(int damage)
     {
         currentLife -= damage/armor ;
+        checkDeath();
+        healthBar.SetHealth(currentLife);
+        StartCoroutine(ChangeColorAnimation(damageColor, 0.4f));
+    }
+
+    public void takeOrcDamage(int damage)
+    {
+        currentLife -= damage;
         checkDeath();
         healthBar.SetHealth(currentLife);
         StartCoroutine(ChangeColorAnimation(damageColor, 0.4f));
@@ -802,5 +821,18 @@ public class Unit : MonoBehaviour
             baseColor.a = 1;
             spriteRenderer.color = baseColor;
         }           
+    }
+
+    public void activateOrcSpell(float accuracyLost, float time)
+    {
+        orcSpell = true;
+        accuracy -= accuracyLost;
+        Invoke("endOrcSpell", time);
+    }
+
+    private void endOrcSpell()
+    {
+        orcSpell = false;
+        accuracy = 100;
     }
 }
