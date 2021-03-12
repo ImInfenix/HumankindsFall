@@ -13,13 +13,12 @@ MonoBehaviour:
   m_Name: Tank
   m_EditorClassIdentifier: 
   clas: 2
-  maxLife: 150
+  maxLife: 120
   armor: 1
   moveSpeed: 0.6
   attackSpeed: 1
   damage: 7
   range: 1
-  incrementStamina: 100
   projectile: {fileID: 0}
   abilities:
   - CircularAttack

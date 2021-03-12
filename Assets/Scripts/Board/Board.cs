@@ -22,8 +22,6 @@ public class Board : MonoBehaviour
     [SerializeField] GameObject Unit;
     private List<Cell> allyCellsList = new List<Cell>();
 
-    private BoundsInt bounds;
-
     void Awake()
     {
         CurrentBoard = this;
@@ -35,7 +33,6 @@ public class Board : MonoBehaviour
     public void Initialize(Tilemap tilemap)
     {
         tilemap.CompressBounds();
-        bounds = tilemap.cellBounds;
         Vector3Int[] tilesPositions = GetTilesPositions(tilemap);
 
         if (tilesPositions.Length == 0)
@@ -55,6 +52,7 @@ public class Board : MonoBehaviour
     public void GenerateUnits(Tilemap tilemap)
     {
         //go through all tiles of the tilemap
+        BoundsInt bounds = tilemap.cellBounds;
         TileBase[] tiles = tilemap.GetTilesBlock(bounds);
 
         for (int x = 0; x < bounds.size.x; x++)

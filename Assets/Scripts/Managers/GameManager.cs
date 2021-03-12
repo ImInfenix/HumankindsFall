@@ -44,7 +44,8 @@ public class GameManager : MonoBehaviour
     public void RemoveUnit(Unit unit)
     {
         units.Remove(unit);
-        if (unit.CurrentLife > 0)
+
+        if (unit.getCurrentLife() > 0)
             SynergyHandler.instance.removeUnit(unit);
     }
 
@@ -58,7 +59,7 @@ public class GameManager : MonoBehaviour
         ActivateClassSynergy();
         SpellHandler.instance.ActivateRaceSynergy();
         Player.instance.Inventory.Hide();
-        HealthbarHandler.ShowBars();
+        HealthbarHandler.ShowAll();
         Player.instance.Inventory.inventoryUI.rewardSystem.RegisterCombatParticipants();
     }
 
@@ -142,7 +143,7 @@ public class GameManager : MonoBehaviour
         {
             if (unit.CompareTag("UnitAlly"))
             {
-                if (unit.CurrentLife <= target.CurrentLife && unit.CurrentLife > 0)
+                if (unit.getCurrentLife() <= target.getCurrentLife() && unit.getCurrentLife() > 0)
                     target = unit;
             }
         }

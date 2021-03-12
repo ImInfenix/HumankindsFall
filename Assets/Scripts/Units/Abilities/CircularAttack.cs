@@ -8,17 +8,15 @@ public class CircularAttack : Ability
 
     private void Start()
     {
-        castStaminaThreshold = 800;
+        castStaminaThreshold = 6;
         castRange = 0;
         areaOfEffect = 1;
-        basePower = 35;
+        power = 45;
 
         animationGameObject = Resources.Load("Ability Prefabs/CircularAttack") as GameObject;
     }
     override public void castAbility()
     {
-        base.castAbility();
-
         unit.setIsAbilityActivated(true);
 
         List<Unit> listUnitsHitProv = PathfindingTool.unitsInRadius(unit.currentCell, areaOfEffect, unit.getTargetTag());
@@ -26,7 +24,7 @@ public class CircularAttack : Ability
         Instantiate(animationGameObject, transform.position, Quaternion.identity, transform);
 
         foreach (Unit unit in listUnitsHitProv)
-            unit.takeDamage(currentPower);
+            unit.takeDamage(power);
 
 
         unit.setIsAbilityActivated(false);

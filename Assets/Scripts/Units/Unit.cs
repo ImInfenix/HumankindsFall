@@ -14,7 +14,7 @@ public class Unit : MonoBehaviour
     public ClassStat classStat;
 
     [Header ("STATS")]
-    [SerializeField] private int maxLife;
+    [SerializeField] private int maxLife;           
     [SerializeField] private float currentLife;
     [SerializeField] private float incrementStamina;
     [SerializeField] private float armor;
@@ -24,7 +24,6 @@ public class Unit : MonoBehaviour
     [SerializeField] private float accuracy;
     [SerializeField] private int damage;
     [SerializeField] private int range;
-    [SerializeField] private int power;
     [SerializeField] private string unitName;
     [SerializeField] private bool isTargetable;
     [SerializeField] private bool stuned = false;
@@ -53,7 +52,7 @@ public class Unit : MonoBehaviour
     private float startPosX;
     private float startPosY;
 
-
+    
     //private Vector3Int targetPos;
     private Unit targetUnit = null;
     //private int targetDistance = PathfindingTool.infVal;
@@ -61,14 +60,13 @@ public class Unit : MonoBehaviour
     private bool isActing = false;
     private bool isMoving = false;
 
-    private SpriteRenderer spriteRenderer;
+    private SpriteRenderer spriteRenderer;   
     private Color baseColor, damageColor, healColor;
     private int takingDamageCount = 0;
     private bool isAbilityActivated = false;
     private string targetTag;
-
+    [HideInInspector]
     public bool isRandomUnit = true;
-    [SerializeField] private bool isPlacedUnit;
 
     [Header("ABILITY")]
     [SerializeField] private string abilityName;
@@ -87,18 +85,6 @@ public class Unit : MonoBehaviour
     [SerializeField] private Image classIcon;
     [SerializeField] private SpriteRenderer circleSprite;
     private GameObject projectileGameObject;
-
-    private List<Gem> gems = new List<Gem>();
-
-    public int MaxLife { get => maxLife; set => maxLife = value; }
-    public float CurrentLife { get => currentLife; set => currentLife = value; }
-    public float IncrementStamina { get => incrementStamina; set => incrementStamina = value; }
-    public float Armor { get => armor; set => armor = value; }
-    public float MoveSpeed { get => moveSpeed; set => moveSpeed = value; }
-    public float AttackSpeed { get => attackSpeed; set => attackSpeed = value; }
-    public int Damage { get => damage; set => damage = value; }
-    public int Range { get => range; set => range = value; }
-    public int Power { get => power; set => power = value; }
 
     // Start is called before the first frame update
     void Start()
@@ -123,42 +109,26 @@ public class Unit : MonoBehaviour
             ability.setUnit(this);
         }
 
-        else
-            healthBar.HideStaminaBar();
-
-        if (classStat.classIconSprite == null)
-            healthBar.HideClassIcon();
-
-        MaxLife = raceStats.maxLife + classStat.maxLife;
-        IncrementStamina = classStat.incrementStamina;
-        Armor = raceStats.armor + classStat.armor;
+        maxLife = raceStats.maxLife + classStat.maxLife;
+        currentLife = maxLife;
+        incrementStamina = 1;
+        armor = raceStats.armor + classStat.armor;
         initialArmor = armor;
+        moveSpeed = raceStats.moveSpeed + classStat.moveSpeed;
+        attackSpeed = raceStats.attackSpeed + classStat.attackSpeed;
+        damage = raceStats.damage + classStat.damage;
+        range = classStat.range;
         accuracy = 100;
-          
-        MoveSpeed = raceStats.moveSpeed + classStat.moveSpeed;
-        AttackSpeed = raceStats.attackSpeed + classStat.attackSpeed;
-        Damage = raceStats.damage + classStat.damage;
-        Range = classStat.range;
-
-        isTargetable = true;
-
-        GetUnitGems();
-        ApplyInitGemsEffect();
-
-        CurrentLife = MaxLife;
-
+        
+        isTargetable = true;       
+        
         projectileGameObject = classStat.projectile;
 
-        healthBar.SetHealth(CurrentLife, MaxLife);
+        healthBar.SetHealth(currentLife, maxLife);
 
         classIcon.sprite = classStat.classIconSprite;
         spriteRenderer = GetComponent<SpriteRenderer>();
-
-        if (raceStats.race != Race.Human)
-            spriteRenderer.sprite = raceStats.unitSprite;
-
-        else
-            spriteRenderer.sprite = Resources.Load<Sprite>("Textures/Unit Sprites/Humans/" + classStat.clas.ToString());
+        spriteRenderer.sprite = raceStats.unitSprite;
 
         //canAttack = true;
         //hasTarget = false;
@@ -166,20 +136,9 @@ public class Unit : MonoBehaviour
 
         if (currentCell == null)
         {
-            if (!isPlacedUnit)
-            {
-                Cell startCell = board.GetCell(new Vector3Int(initialPos.x, initialPos.y, 0));
-                occupyNewCell(startCell);
-                updatePosition();
-            }
-
-            else
-            {
-                Vector3Int tileCoordinate = board.GetTilemap().WorldToCell(transform.position);
-                Cell newCell = board.GetCell(tileCoordinate);
-                occupyNewCell(newCell);
-                updatePosition();
-            }
+            Cell startCell = board.GetCell(new Vector3Int(initialPos.x, initialPos.y, 0));
+            occupyNewCell(startCell);
+            updatePosition();
         }
 
         //if the unit is an ally unit
@@ -199,24 +158,6 @@ public class Unit : MonoBehaviour
         baseColor = spriteRenderer.color;
         damageColor = new Color(1, 0.6f, 0.6f);
         healColor = new Color(0.4f, 1, 0.4f);
-    }
-
-    private void GetUnitGems()
-    {
-        foreach (Transform gemTransform in gameObject.transform.GetChild(2).transform)
-        {
-            Gem gemProv = gemTransform.GetComponent<Gem>();
-            gems.Add(gemProv);
-            gemProv.setUnit(this);
-        }
-    }
-
-    private void ApplyInitGemsEffect()
-    {
-        foreach (Gem gem in gems)
-        {
-            gem.InitGemEffect();
-        }
     }
 
     private void GenerateRaceAndClass()
@@ -242,8 +183,8 @@ public class Unit : MonoBehaviour
 
         if (!isActing)
         {
-            List<Unit> listAvailableTarget = PathfindingTool.unitsInRadius(currentCell, Range, targetTag);
-
+            List<Unit> listAvailableTarget = PathfindingTool.unitsInRadius(currentCell, range, targetTag);
+            
             //if the target is not yet in range of attack
             if (listAvailableTarget.Count > 0)
             {
@@ -251,7 +192,7 @@ public class Unit : MonoBehaviour
                 {
                     targetUnit = listAvailableTarget[0];
                     StartCoroutine(AttackTarget());
-                }
+                }                                 
             }
 
             else if (path != null && path.Count > 0)
@@ -260,20 +201,7 @@ public class Unit : MonoBehaviour
                 StartCoroutine(MoveToCell(path[0]));
             }
 
-            else if (path == null)
-            {
-                StartCoroutine(UnitWaitForSeconds(moveSpeed));
-            }
-
             path = PathfindingTool.createPathTarget(this);
-        }
-    }
-
-    private void ApplyAttackGemsEffect()
-    {
-        foreach (Gem gem in gems)
-        {
-            gem.AttackGemEffect();
         }
     }
 
@@ -291,7 +219,7 @@ public class Unit : MonoBehaviour
         isActing = true;
         foreach (Cell cell in path)
         {
-            yield return new WaitForSeconds(MoveSpeed);
+            yield return new WaitForSeconds(moveSpeed);
             updatePosition();
         }
         isActing = false;
@@ -307,7 +235,7 @@ public class Unit : MonoBehaviour
             occupyNewCell(cell);
             //StopCoroutine(MoveAnimation(cell));
             StartCoroutine(MoveAnimation(cell));
-            yield return new WaitForSeconds(MoveSpeed);
+            yield return new WaitForSeconds(moveSpeed);
             //ensure that the unit is at the center of the current cell before it can start acting again
             updatePosition();
             isActing = false;
@@ -316,7 +244,7 @@ public class Unit : MonoBehaviour
         else
         {
             path = null;
-            yield return new WaitForSeconds(MoveSpeed);
+            yield return new WaitForSeconds(moveSpeed);
         }
     }
 
@@ -326,7 +254,7 @@ public class Unit : MonoBehaviour
         float speed = 0.1f;
 
         //if the unit is moving too fast, inscrease the animation speed
-        if (MoveSpeed <= 0.2)
+        if (moveSpeed <= 0.2)
             speed = 0.2f;
 
         //set the maximum number of movement in the animation
@@ -377,21 +305,18 @@ public class Unit : MonoBehaviour
                     targetUnit.takeOrcDamage(damage);
             }
 
-            ApplyAttackGemsEffect();
-
             if (classStat.clas == Class.Assassin && isTargetable == false)
                 stopInvisibility();
 
-
-            if (Range > 1)
+            if (range > 1)
                 StartCoroutine(ProjectileAnimation());
 
             if (abilityName != null && abilityName != "")
             {
-                ability.updateAbility(IncrementStamina);
+                ability.updateAbility(incrementStamina);
             }
 
-            yield return new WaitForSeconds(AttackSpeed);
+            yield return new WaitForSeconds(attackSpeed);
             isActing = false;
 
             cptHealer++;
@@ -445,9 +370,9 @@ public class Unit : MonoBehaviour
 
         //set the animation time to be fast, and faster than the attack speed
         float animationTime = 0.3f;
-        if (AttackSpeed <= 0.3f)
+        if (attackSpeed <= 0.3f)
         {
-            animationTime = 2 * AttackSpeed / 3;
+            animationTime = 2 * attackSpeed / 3;
         }
 
         yield return new WaitForSeconds(0.2f);
@@ -464,7 +389,7 @@ public class Unit : MonoBehaviour
         float speed = 0.06f;
 
         //if the unit is attacking too fast, inscrease the animation speed
-        if (AttackSpeed <= 0.2f)
+        if (attackSpeed <= 0.2f)
             speed = 0.15f;
 
         //set the maximum number of refresh of the projectile animation
@@ -536,7 +461,7 @@ public class Unit : MonoBehaviour
 
     private void checkDeath()
     {
-        if (CurrentLife <= 0)
+        if (currentLife <= 0)
         {
             StopAllCoroutines();
             Destroy(gameObject);
@@ -545,9 +470,9 @@ public class Unit : MonoBehaviour
 
     public void takeDamage(int damage)
     {
-        CurrentLife -= damage/armor ;
+        currentLife -= damage/armor ;
         checkDeath();
-        healthBar.SetHealth(CurrentLife);
+        healthBar.SetHealth(currentLife);
         StartCoroutine(ChangeColorAnimation(damageColor, 0.4f));
     }
 
@@ -561,12 +486,12 @@ public class Unit : MonoBehaviour
 
     public void heal(int heal)
     {
-        CurrentLife += heal;
-        if (CurrentLife > MaxLife)
+        currentLife += heal;
+        if (currentLife > maxLife)
         {
-            CurrentLife = MaxLife;
+            currentLife = maxLife;
         }
-        healthBar.SetHealth(CurrentLife);
+        healthBar.SetHealth(currentLife);
         StartCoroutine(ChangeColorAnimation(healColor, 0.7f));
     }
 
@@ -686,11 +611,6 @@ public class Unit : MonoBehaviour
 
         currentCell.DecreaseNumberOfUnits();
         GameManager.instance?.RemoveUnit(this);
-    }
-
-    public bool getTargetable()
-    {
-        return isTargetable;
     }
 
     public int getMaxlife()
@@ -847,10 +767,10 @@ public class Unit : MonoBehaviour
             case Class.Support:
                 List<Unit> unitInRange = PathfindingTool.unitsInRadius(currentCell, 1, allyTag);
                 if (nb >= 2)
-                {
+                {                  
                     foreach(Unit unit in unitInRange)
-                    {
-
+                    {                       
+                            
                         if (nb == 2)
                         {
                             unit.supportBoost(1);
@@ -862,9 +782,9 @@ public class Unit : MonoBehaviour
                         if (nb >= 4)
                         {
                             unit.supportBoost(3);
-                        }
+                        }                                                                      
                     }
-                }
+                }              
                 break;
 
             case Class.Berserker:
@@ -882,7 +802,7 @@ public class Unit : MonoBehaviour
                 if(nb >= 1)
                 {
                     startInvisibility();
-
+                    
                     Invoke("stopInvisibility", 5);
                 }
                 break;
@@ -906,7 +826,7 @@ public class Unit : MonoBehaviour
                 armor += initialArmor / 2;
             }
             supportBuff = true;
-        }
+        }            
     }
 
     private void startInvisibility()
@@ -922,7 +842,7 @@ public class Unit : MonoBehaviour
             isTargetable = true;
             baseColor.a = 1;
             spriteRenderer.color = baseColor;
-        }
+        }           
     }
 
     public void activateOrcSpell(float accuracyLost, float time)

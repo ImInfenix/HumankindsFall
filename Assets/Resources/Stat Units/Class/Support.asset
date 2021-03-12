@@ -19,7 +19,6 @@ MonoBehaviour:
   attackSpeed: 1
   damage: 6
   range: 1
-  incrementStamina: 120
   projectile: {fileID: 0}
   abilities:
   - CircularAttack
