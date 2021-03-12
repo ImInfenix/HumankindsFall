@@ -723,11 +723,6 @@ public class Unit : MonoBehaviour
         return range;
     }
 
-    public bool getTargetable()
-    {
-        return isTargetable;
-    }
-
     public bool getStuned()
     {
         return stuned;
