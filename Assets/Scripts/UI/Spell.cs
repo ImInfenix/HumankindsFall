@@ -11,7 +11,6 @@ public class Spell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
     private Cell currentCell;
     private Cell targetCell;
     public Board board;
-    public Grid grid;
 
     [Header ("Select Spell Race")]
     public Race race;
