@@ -881,8 +881,14 @@ public class Unit : MonoBehaviour
         stuned = false;
     }
 
+
     public void activateGiantSpell()
     {
         giantSpell = true;
+    }
+    public void activateElementalSpell(int damage)
+    {
+        takeDamage(damage);
+
     }
 }

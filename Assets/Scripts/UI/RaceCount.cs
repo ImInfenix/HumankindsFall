@@ -54,7 +54,7 @@ public class RaceCount
                 break;
 
             case Race.Elemental:
-                def = "Fusion of elements\nSpell\nIncrease the target's attack by number of elemental on board\n (2) 2 attack per elemental";
+                def = "Fusion of elements\nSpell\nDeal damage on enemy target by number of elemental on board\n (2) 10 attack per elemental";
                 break;
 
             case Race.Giant:

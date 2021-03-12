@@ -164,6 +164,11 @@ public class SynergyHandler : MonoBehaviour
         return rc;
     }
 
+    public RaceCount getElementals()
+    {
+        return elementals;
+    }
+
     public void addUnit(Unit u)
     {
         if(u.tag == Unit.allyTag)
