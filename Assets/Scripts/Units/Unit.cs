@@ -26,16 +26,18 @@ public class Unit : MonoBehaviour
     [SerializeField] private int range;
     [SerializeField] private string unitName;
     [SerializeField] private bool isTargetable;
-    
-    
+    [SerializeField] private bool stuned = false;
+
+
     private bool moving;
     private bool canMove;
     private bool supportBuff = false;
     private bool healer1 = false;
     private bool healer2 = false;
     private bool healer3 = false;
-    private bool orcSpell = false;
+    private bool orcSpell = false;    
     private int cptHealer = 0;
+    private float saveArmor;
     private Unit healTarget = null;
 
     [Header("POSITION")]
@@ -225,7 +227,7 @@ public class Unit : MonoBehaviour
     //move to a given cell
     IEnumerator MoveToCell(Cell cell)
     {
-        if (!cell.GetIsOccupied())
+        if (!cell.GetIsOccupied() && stuned == false)
         {
             isActing = true;
             //change the occupied tile then start the animation
@@ -279,66 +281,70 @@ public class Unit : MonoBehaviour
 
     //attack the current target
     IEnumerator AttackTarget()
-    {
-        isActing = true;
-
-        StartCoroutine(AttackAnimation());
-
-        if (orcSpell == false)
-            targetUnit.takeDamage(damage);
-        else
+    {        
+        if(stuned == false)
         {
-            int rand = Random.Range(1, 101);
-            if(rand <= accuracy)
-                targetUnit.takeOrcDamage(damage);
-        }
-            
-        if (classStat.clas == Class.Assassin && isTargetable == false)
-            stopInvisibility();
+            isActing = true;
 
-        if (range > 1)
-            StartCoroutine(ProjectileAnimation());
+            StartCoroutine(AttackAnimation());
 
-        if (abilityName != null && abilityName != "")
-        {
-            ability.updateAbility(incrementStamina);
-        }
-
-        yield return new WaitForSeconds(attackSpeed);
-        isActing = false;
-
-        cptHealer++;
-
-        if(healer1 == true)
-        {
-            if(cptHealer == 5)
+            if (orcSpell == false)
+                targetUnit.takeDamage(damage);
+            else
             {
-                Unit target = GameManager.instance.searchHealTarget();
-                if(target != null)
-                    target.heal((target.getMaxlife() / 20) * 3);
-                cptHealer = 0;
+                int rand = Random.Range(1, 101);
+                if (rand <= accuracy)
+                    targetUnit.takeOrcDamage(damage);
+            }
+
+            if (classStat.clas == Class.Assassin && isTargetable == false)
+                stopInvisibility();
+
+            if (range > 1)
+                StartCoroutine(ProjectileAnimation());
+
+            if (abilityName != null && abilityName != "")
+            {
+                ability.updateAbility(incrementStamina);
+            }
+
+            yield return new WaitForSeconds(attackSpeed);
+            isActing = false;
+
+            cptHealer++;
+
+            if (healer1 == true)
+            {
+                if (cptHealer == 5)
+                {
+                    Unit target = GameManager.instance.searchHealTarget();
+                    if (target != null)
+                        target.heal((target.getMaxlife() / 20) * 3);
+                    cptHealer = 0;
+                }
+            }
+            if (healer2 == true)
+            {
+                if (cptHealer == 3)
+                {
+                    Unit target = GameManager.instance.searchHealTarget();
+                    if (target != null)
+                        target.heal((target.getMaxlife() / 20) * 3);
+                    cptHealer = 0;
+                }
+            }
+            if (healer3 == true)
+            {
+                if (cptHealer == 2)
+                {
+                    Unit target = GameManager.instance.searchHealTarget();
+                    if (target != null)
+                        target.heal((target.getMaxlife() / 20) * 3);
+                    cptHealer = 0;
+                }
             }
         }
-        if (healer2 == true)
-        {
-            if (cptHealer == 3)
-            {
-                Unit target = GameManager.instance.searchHealTarget();
-                if (target != null)
-                    target.heal((target.getMaxlife() / 20) * 3);
-                cptHealer = 0;
-            }
-        }
-        if (healer3 == true)
-        {
-            if (cptHealer == 2)
-            {
-                Unit target = GameManager.instance.searchHealTarget();
-                if (target != null)
-                    target.heal((target.getMaxlife() / 20) * 3);
-                cptHealer = 0;
-            }
-        }
+       
     }
 
     //move the sprite toward the target for a short time
@@ -631,6 +637,11 @@ public class Unit : MonoBehaviour
     {
         return isTargetable;
     }
+
+    public bool getStuned()
+    {
+        return stuned;
+    }
     public void setRange(int range)
     {
         this.range = range;
@@ -834,5 +845,28 @@ public class Unit : MonoBehaviour
     {
         orcSpell = false;
         accuracy = 100;
+    }
+
+    public void activateSkeletonSpell(float armorLost, float time)
+    {
+        saveArmor = armor;
+        armor -= (armorLost*armor);
+        Invoke("endSkeletonSpell", time);
+    }
+
+    private void endSkeletonSpell()
+    {
+        armor = saveArmor;
+    }
+
+    public void activateOctopusSpell(float time)
+    {
+        stuned = true;
+        Invoke("endOctopusSpell", time);
+    }
+
+    private void endOctopusSpell()
+    {
+        stuned = false;
     }
 }

@@ -11,22 +11,26 @@ public class Spell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
     private Cell currentCell;
     private Cell targetCell;
     public Board board;
+
     [Header ("Select Spell Race")]
     public Race race;
     [Header("Select Spell Range")]
+    [Range(0, 5)]
     public int range;
 
     // Start is called before the first frame update
     void Start()
     {
         activated = false;
+
+        //Initialize tooltips def
         switch(race)
         {
             case (Race.Orc):
                 definition = "For 5 seconds, orc in spell area ignore enemy defense but they lose 10% accuracy";
                 break;
             case (Race.Skeleton):
-                definition = "Ennemis in spell area loose 10% moovespeed for 5 seconds";
+                definition = "Ennemis in spell area loose 25% armor for 5 seconds";
                 break;
             case (Race.Octopus):
                 definition = "Stun the target for 5 seconds";
@@ -60,7 +64,7 @@ public class Spell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
                 currentCell = targetCell;
             } 
             
-            //Press Left Click
+            //Press Left Click = launch
             if(Input.GetMouseButtonDown(0))
             {
                 DesactivateArea(currentCell);
@@ -68,7 +72,7 @@ public class Spell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
                 activated = false;
             }
 
-            //Press Right Click
+            //Press Right Click = cancel
             if (Input.GetMouseButtonDown(1))
             {
                 DesactivateArea(currentCell);
@@ -89,7 +93,13 @@ public class Spell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        activated = true;
+        if(activated == true)
+        {
+            DesactivateArea(currentCell);
+            activated = false;
+        }
+        else
+            activated = true;
     }
 
     private void ActivateArea(Cell center)
@@ -124,12 +134,13 @@ public class Spell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
 
     private void ActivateSpell()
     {
-        List<Unit> affectedUnit = PathfindingTool.unitsInRadius(currentCell, range, "UnitAlly");
+        List<Unit> affectedAllyUnit = PathfindingTool.unitsInRadius(currentCell, range, "UnitAlly");
+        List<Unit> affectedEnemyUnit = PathfindingTool.unitsInRadius(currentCell, range, "UnitEnemy");
 
         switch (race)
         {
             case (Race.Orc):
-                foreach(Unit unit in affectedUnit)
+                foreach(Unit unit in affectedAllyUnit)
                 {
                     if (unit.getRace() == Race.Orc)
                     {
@@ -138,10 +149,24 @@ public class Spell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
                 }
                 break;
             case (Race.Skeleton):
-                
-                break;
+                foreach (Unit unit in affectedEnemyUnit)
+                {
+                    unit.activateSkeletonSpell(0.25f, 5);
+                }
+                    break;
             case (Race.Octopus):
-                
+                foreach (Unit unit in affectedEnemyUnit)
+                {
+                    if(unit != null)
+                    {
+                        unit.activateOctopusSpell(5);
+                    }
+                    else
+                    {
+                        Update();
+                    }
+                }
+
                 break;
             case (Race.Elemental):
                 
@@ -150,5 +175,6 @@ public class Spell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
                 
                 break;
         }
+        activated = false;
     }
 }
