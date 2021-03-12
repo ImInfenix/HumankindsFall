@@ -11,6 +11,7 @@ public class Spell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
     private Cell currentCell;
     private Cell targetCell;
     public Board board;
+    private RaceCount elemental;
 
     [Header ("Select Spell Race")]
     public Race race;
@@ -36,7 +37,8 @@ public class Spell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
                 definition = "Stun the target for 5 seconds";
                 break;
             case (Race.Elemental):
-                definition = "Increase the target's attack by number of elemental on board";
+                elemental = SynergyHandler.instance.getElementals();
+                definition = "Deal "+ elemental.getNumber()*10+" damage to enemy target";                
                 break;
             case (Race.Giant):
                 definition = "Choose a giant unit, his next attack will deal 15% more damage and stun the enemy for 2 seconds";
@@ -184,7 +186,18 @@ public class Spell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
 
                 break;
             case (Race.Elemental):
-                
+                foreach (Unit unit in affectedEnemyUnit)
+                {
+                    if (unit != null)
+                    {
+                        unit.activateElementalSpell(elemental.getNumber() * 10);
+                        Debug.Log("Touche " + elemental.getNumber() * 10);
+                    }
+                    else
+                    {
+                        Update();
+                    }
+                }
                 break;
             case (Race.Giant):
                 

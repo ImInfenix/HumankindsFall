@@ -869,4 +869,9 @@ public class Unit : MonoBehaviour
     {
         stuned = false;
     }
+
+    public void activateElementalSpell(int damage)
+    {
+        takeDamage(damage);
+    }
 }
