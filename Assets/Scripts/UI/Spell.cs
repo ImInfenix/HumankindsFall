@@ -214,8 +214,8 @@ public class Spell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
                 foreach (Unit unit in affectedEnemyUnit)
                 {
                     if(unit != null)
-                    {
-                        unit.activateOctopusSpell(5);
+                    {                       
+                        unit.activateStun(5);
                         launched = true;
                     }
                 }
@@ -245,7 +245,21 @@ public class Spell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
                 break;
 
             case (Race.Giant):
-                
+                foreach (Unit unit in affectedAllyUnit)
+                {
+                    if(unit != null)
+                    {
+                        if (unit.getRace() == Race.Giant)
+                        {
+                            unit.activateGiantSpell();
+                        }
+                        
+                    }
+                    else
+                    {
+                        Update();
+                    }
+                }
                 break;
         }
     }

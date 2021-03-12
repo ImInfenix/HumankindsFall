@@ -35,7 +35,8 @@ public class Unit : MonoBehaviour
     private bool healer1 = false;
     private bool healer2 = false;
     private bool healer3 = false;
-    private bool orcSpell = false;    
+    private bool orcSpell = false;
+    public bool giantSpell = false;
     private int cptHealer = 0;
     private float saveArmor;
     private Unit healTarget = null;
@@ -289,7 +290,14 @@ public class Unit : MonoBehaviour
             StartCoroutine(AttackAnimation());
 
             if (orcSpell == false)
-                targetUnit.takeDamage(damage);
+                if (giantSpell == false)
+                    targetUnit.takeDamage(damage);
+                else
+                {
+                    float damageGiant = damage*1.15f;
+                    targetUnit.takeDamage((int)damageGiant);
+                    targetUnit.activateStun(5);
+                }
             else
             {
                 int rand = Random.Range(1, 101);
@@ -343,6 +351,8 @@ public class Unit : MonoBehaviour
                     cptHealer = 0;
                 }
             }
+
+            giantSpell = false;
         }
        
     }
@@ -642,6 +652,7 @@ public class Unit : MonoBehaviour
     {
         return stuned;
     }
+
     public void setRange(int range)
     {
         this.range = range;
@@ -859,19 +870,25 @@ public class Unit : MonoBehaviour
         armor = saveArmor;
     }
 
-    public void activateOctopusSpell(float time)
+    public void activateStun(float time)
     {
         stuned = true;
-        Invoke("endOctopusSpell", time);
+        Invoke("endStun", time);
     }
 
-    private void endOctopusSpell()
+    private void endStun()
     {
         stuned = false;
     }
 
+
+    public void activateGiantSpell()
+    {
+        giantSpell = true;
+    }
     public void activateElementalSpell(int damage)
     {
         takeDamage(damage);
+
     }
 }
