@@ -57,6 +57,7 @@ public class GameManager : MonoBehaviour
         Board.CurrentBoard.HidePlacementTilemap();
         gamestate = GameState.Combat;
         ActivateClassSynergy();
+        SpellHandler.instance.ActivateRaceSynergy();
         Player.instance.Inventory.Hide();
         HealthbarHandler.ShowAll();
         Player.instance.Inventory.inventoryUI.rewardSystem.RegisterCombatParticipants();

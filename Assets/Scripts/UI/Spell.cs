@@ -29,6 +29,7 @@ public class Spell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
         cooldownImage.fillAmount = 0;
         activated = false;
         onCooldown = false;
+        board = FindObjectOfType<Board>();
 
         //Initialize tooltips def
         switch(race)
