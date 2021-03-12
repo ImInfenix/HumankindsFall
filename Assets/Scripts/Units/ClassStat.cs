@@ -11,7 +11,8 @@ public enum Class
     Healer,
     Support,
     Berserker,
-    Assassin
+    Assassin,
+    Soldier
 }
 
 [CreateAssetMenu(fileName = "New UnitClassStat", menuName = "Class Stat Units")]
@@ -25,6 +26,7 @@ public class ClassStat : ScriptableObject
     public float attackSpeed;
     public int damage;
     public int range;
+    public int incrementStamina;
     public GameObject projectile;
     public string[] abilities;
     public Sprite classIconSprite;
