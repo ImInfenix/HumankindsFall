@@ -247,18 +247,20 @@ public class Spell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
             case (Race.Giant):
                 foreach (Unit unit in affectedAllyUnit)
                 {
-                    if(unit != null)
+                    if (unit != null)
                     {
                         if (unit.getRace() == Race.Giant)
                         {
                             unit.activateGiantSpell();
+                            launched = true;
                         }
-                        
                     }
-                    else
-                    {
-                        Update();
-                    }
+                }
+                if (launched == true)
+                {
+                    onCooldown = true;
+                    cooldownImage.fillAmount = 1;
+                    activated = false;
                 }
                 break;
         }
