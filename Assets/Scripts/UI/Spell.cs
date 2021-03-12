@@ -11,6 +11,7 @@ public class Spell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
     private Cell currentCell;
     private Cell targetCell;
     public Board board;
+    public Grid grid;
 
     [Header ("Select Spell Race")]
     public Race race;
@@ -68,8 +69,14 @@ public class Spell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
             if(Input.GetMouseButtonDown(0))
             {
                 DesactivateArea(currentCell);
-                ActivateSpell();
-                activated = false;
+                if (currentCell != null)
+                {                   
+                    ActivateSpell();
+                }
+                else
+                {
+                    activated = false;
+                }                
             }
 
             //Press Right Click = cancel
@@ -99,7 +106,10 @@ public class Spell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
             activated = false;
         }
         else
-            activated = true;
+        {
+           activated = true;
+        }
+            
     }
 
     private void ActivateArea(Cell center)
@@ -142,16 +152,22 @@ public class Spell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
             case (Race.Orc):
                 foreach(Unit unit in affectedAllyUnit)
                 {
-                    if (unit.getRace() == Race.Orc)
+                    if(unit != null)
                     {
-                        unit.activateOrcSpell(10, 5);
-                    }
+                        if (unit.getRace() == Race.Orc)
+                        {
+                            unit.activateOrcSpell(10, 5);
+                        }
+                    }                   
                 }
                 break;
             case (Race.Skeleton):
                 foreach (Unit unit in affectedEnemyUnit)
                 {
-                    unit.activateSkeletonSpell(0.25f, 5);
+                    if(unit != null)
+                    {
+                        unit.activateSkeletonSpell(0.25f, 5);
+                    }                   
                 }
                     break;
             case (Race.Octopus):
