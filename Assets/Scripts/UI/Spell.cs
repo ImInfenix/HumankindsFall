@@ -2,15 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class Spell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
 
     private string definition;
     private bool activated;
+    private bool onCooldown;
+    private float cooldown;
     private Cell currentCell;
     private Cell targetCell;
     public Board board;
+    public Image cooldownImage;
     private RaceCount elemental;
 
     [Header ("Select Spell Race")]
@@ -22,26 +26,33 @@ public class Spell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
     // Start is called before the first frame update
     void Start()
     {
+        cooldownImage.fillAmount = 0;
         activated = false;
+        onCooldown = false;
 
         //Initialize tooltips def
         switch(race)
         {
             case (Race.Orc):
                 definition = "For 5 seconds, orc in spell area ignore enemy defense but they lose 10% accuracy";
+                cooldown = 5;
                 break;
             case (Race.Skeleton):
                 definition = "Ennemis in spell area loose 25% armor for 5 seconds";
+                cooldown = 5;
                 break;
             case (Race.Octopus):
                 definition = "Stun the target for 5 seconds";
+                cooldown = 5;
                 break;
             case (Race.Elemental):
                 elemental = SynergyHandler.instance.getElementals();
-                definition = "Deal "+ elemental.getNumber()*10+" damage to enemy target";                
+                definition = "Deal "+ elemental.getNumber()*10+" damage to enemy target";
+                cooldown = 5;
                 break;
             case (Race.Giant):
                 definition = "Choose a giant unit, his next attack will deal 15% more damage and stun the enemy for 2 seconds";
+                cooldown = 5;
                 break;
         }
     }
@@ -87,6 +98,15 @@ public class Spell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
                 activated = false;
             }
         }
+        if(onCooldown == true)
+        {
+            cooldownImage.fillAmount -= 1 / cooldown * Time.deltaTime;
+            if (cooldownImage.fillAmount <= 0 )
+            {
+                cooldownImage.fillAmount = 0;
+                onCooldown = false;
+            }
+        }
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -101,16 +121,18 @@ public class Spell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if(activated == true)
+        if(onCooldown == false)
         {
-            DesactivateArea(currentCell);
-            activated = false;
-        }
-        else
-        {
-           activated = true;
-        }
-            
+            if (activated == true)
+            {
+                DesactivateArea(currentCell);
+                activated = false;
+            }
+            else
+            {
+                activated = true;
+            }
+        }                 
     }
 
     private void ActivateArea(Cell center)
@@ -147,6 +169,7 @@ public class Spell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
     {
         List<Unit> affectedAllyUnit = PathfindingTool.unitsInRadius(currentCell, range, "UnitAlly");
         List<Unit> affectedEnemyUnit = PathfindingTool.unitsInRadius(currentCell, range, "UnitEnemy");
+        bool launched = false;
 
         switch (race)
         {
@@ -158,51 +181,72 @@ public class Spell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
                         if (unit.getRace() == Race.Orc)
                         {
                             unit.activateOrcSpell(10, 5);
+                            launched = true;
                         }
                     }                   
                 }
+                if(launched == true)
+                {
+                    onCooldown = true;
+                    cooldownImage.fillAmount = 1;
+                    activated = false;
+                }
                 break;
+
             case (Race.Skeleton):
                 foreach (Unit unit in affectedEnemyUnit)
                 {
                     if(unit != null)
                     {
                         unit.activateSkeletonSpell(0.25f, 5);
+                        launched = true;
                     }                   
                 }
-                    break;
+                if (launched == true)
+                {
+                    onCooldown = true;
+                    cooldownImage.fillAmount = 1;
+                    activated = false;
+                }
+                break;
+
             case (Race.Octopus):
                 foreach (Unit unit in affectedEnemyUnit)
                 {
                     if(unit != null)
                     {
                         unit.activateOctopusSpell(5);
-                    }
-                    else
-                    {
-                        Update();
+                        launched = true;
                     }
                 }
-
+                if (launched == true)
+                {
+                    onCooldown = true;
+                    cooldownImage.fillAmount = 1;
+                    activated = false;
+                }
                 break;
+
             case (Race.Elemental):
                 foreach (Unit unit in affectedEnemyUnit)
                 {
                     if (unit != null)
                     {
                         unit.activateElementalSpell(elemental.getNumber() * 10);
-                        Debug.Log("Touche " + elemental.getNumber() * 10);
-                    }
-                    else
-                    {
-                        Update();
+                        launched = true;
                     }
                 }
+                if (launched == true)
+                {
+                    onCooldown = true;
+                    cooldownImage.fillAmount = 1;
+                    activated = false;
+                }
                 break;
+
             case (Race.Giant):
                 
                 break;
         }
-        activated = false;
     }
 }
