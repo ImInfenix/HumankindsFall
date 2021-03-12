@@ -64,7 +64,6 @@ public class SpellHandler : MonoBehaviour
         {
             if(race.getNumber()>=2)
             {
-                Debug.Log("nb = " + race.getNumber() + " race = " + race.getRace());
                 switch (race.getRace())
                 {
                     case (Race.Orc):
