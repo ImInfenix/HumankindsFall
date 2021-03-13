@@ -47,7 +47,7 @@ public class SynergyHandler : MonoBehaviour
 
     private Color colorLvlBase = new Color(1f, 1f, 1f, 163 / 255f);
     private Color colorLvlInt = new Color(210f / 255f, 127f / 255f, 25f / 255f, 163f / 255f);
-    private Color colorLvlMax = Color.red;
+    private Color colorLvlMax = new Color(1f, 0, 0, 163f / 255f);//Color.red;
 
     private void Awake()
     {
@@ -80,68 +80,55 @@ public class SynergyHandler : MonoBehaviour
         cc.Add(assassins);
 
         orcButton = Instantiate(ButtonSynergy, GetComponent<RectTransform>());
-        orcButton.GetComponentInChildren<TextMeshProUGUI>().text = " Orc : ";
         orcButton.GetComponent<SynergyButton>().setTooltipDef(orcs.getString());
         orcButton.gameObject.SetActive(false);
 
         skeletonButton = Instantiate(ButtonSynergy, GetComponent<RectTransform>());
-        skeletonButton.GetComponentInChildren<TextMeshProUGUI>().text = " Skeleton : ";
         skeletonButton.GetComponent<SynergyButton>().setTooltipDef(skeletons.getString());
         skeletonButton.gameObject.SetActive(false);
 
         octopusButton = Instantiate(ButtonSynergy, GetComponent<RectTransform>());
-        octopusButton.GetComponentInChildren<TextMeshProUGUI>().text = " Octopus : ";
         octopusButton.GetComponent<SynergyButton>().setTooltipDef(octopus.getString());
         octopusButton.gameObject.SetActive(false);
 
         elementalButton = Instantiate(ButtonSynergy, GetComponent<RectTransform>());
-        elementalButton.GetComponentInChildren<TextMeshProUGUI>().text = " Elemental : ";
         elementalButton.GetComponent<SynergyButton>().setTooltipDef(elementals.getString());
         elementalButton.gameObject.SetActive(false);
 
         giantButton = Instantiate(ButtonSynergy, GetComponent<RectTransform>());
-        giantButton.GetComponentInChildren<TextMeshProUGUI>().text = " Giant : ";
         giantButton.GetComponent<SynergyButton>().setTooltipDef(giants.getString());
         giantButton.gameObject.SetActive(false);
 
 
         mageButton = Instantiate(ButtonSynergy, GetComponent<RectTransform>());
-        mageButton.GetComponentInChildren<TextMeshProUGUI>().text = " Mage : ";
         mageButton.GetComponent<SynergyButton>().setTooltipDef(mages.getString());
         mageButton.gameObject.SetActive(false);
 
         warriorButton = Instantiate(ButtonSynergy, GetComponent<RectTransform>());
-        warriorButton.GetComponentInChildren<TextMeshProUGUI>().text = " Warrior : ";
         warriorButton.GetComponent<SynergyButton>().setTooltipDef(warriors.getString());
         warriorButton.gameObject.SetActive(false);
 
         tankButton = Instantiate(ButtonSynergy, GetComponent<RectTransform>());
-        tankButton.GetComponentInChildren<TextMeshProUGUI>().text = " Tank : ";
         tankButton.GetComponent<SynergyButton>().setTooltipDef(tanks.getString());
         tankButton.gameObject.SetActive(false);
 
         bowmanButton = Instantiate(ButtonSynergy, GetComponent<RectTransform>());
-        bowmanButton.GetComponentInChildren<TextMeshProUGUI>().text = " Bowman : ";
         bowmanButton.GetComponent<SynergyButton>().setTooltipDef(bowmans.getString());
         bowmanButton.gameObject.SetActive(false);
 
         healerButton = Instantiate(ButtonSynergy, GetComponent<RectTransform>());
-        healerButton.GetComponentInChildren<TextMeshProUGUI>().text = " Healer : ";
         healerButton.GetComponent<SynergyButton>().setTooltipDef(healers.getString());
         healerButton.gameObject.SetActive(false);
 
         supportButton = Instantiate(ButtonSynergy, GetComponent<RectTransform>());
-        supportButton.GetComponentInChildren<TextMeshProUGUI>().text = " Support : ";
         supportButton.GetComponent<SynergyButton>().setTooltipDef(supports.getString());
         supportButton.gameObject.SetActive(false);
 
         berserkerButton = Instantiate(ButtonSynergy, GetComponent<RectTransform>());
-        berserkerButton.GetComponentInChildren<TextMeshProUGUI>().text = " Berserker : ";
         berserkerButton.GetComponent<SynergyButton>().setTooltipDef(berserkers.getString());
         berserkerButton.gameObject.SetActive(false);
 
         assassinButton = Instantiate(ButtonSynergy, GetComponent<RectTransform>());
-        assassinButton.GetComponentInChildren<TextMeshProUGUI>().text = " Assassin : ";
         assassinButton.GetComponent<SynergyButton>().setTooltipDef(assassins.getString());
         assassinButton.gameObject.SetActive(false);
     }
@@ -219,7 +206,6 @@ public class SynergyHandler : MonoBehaviour
 
     private void updateText()
     {
-        //synergyText.text = "";
         foreach (RaceCount r in rc)
         {
             if(r.getNumber() > 0)
@@ -234,10 +220,12 @@ public class SynergyHandler : MonoBehaviour
                             if(r.getNumber()>=2)
                             {
                                 orcButton.GetComponent<SynergyButton>().addOutline(colorLvlMax);
+                                boldRace(orcs, orcButton, 1);
                             }
                             else
-                            {
+                            {                               
                                 orcButton.GetComponent<SynergyButton>().hideOutline();
+                                boldRace(orcs, orcButton, 0);
                             }
                         }
                         break;
@@ -250,10 +238,12 @@ public class SynergyHandler : MonoBehaviour
                             if (r.getNumber() >= 2)
                             {
                                 skeletonButton.GetComponent<SynergyButton>().addOutline(colorLvlMax);
+                                boldRace(skeletons, skeletonButton, 1);
                             }
                             else
                             {
                                 skeletonButton.GetComponent<SynergyButton>().hideOutline();
+                                boldRace(skeletons, skeletonButton, 0);
                             }
                         }
                         
@@ -267,10 +257,12 @@ public class SynergyHandler : MonoBehaviour
                             if (r.getNumber() >= 2)
                             {
                                 octopusButton.GetComponent<SynergyButton>().addOutline(colorLvlMax);
+                                boldRace(octopus, octopusButton, 1);
                             }
                             else
                             {
                                 octopusButton.GetComponent<SynergyButton>().hideOutline();
+                                boldRace(octopus, octopusButton, 0);
                             }
                         }
                         
@@ -284,10 +276,12 @@ public class SynergyHandler : MonoBehaviour
                             if (r.getNumber() >= 2)
                             {
                                 elementalButton.GetComponent<SynergyButton>().addOutline(colorLvlMax);
+                                boldRace(elementals, elementalButton, 1);
                             }
                             else
                             {
                                 elementalButton.GetComponent<SynergyButton>().hideOutline();
+                                boldRace(elementals, elementalButton, 0);
                             }
                         }
                         
@@ -301,13 +295,14 @@ public class SynergyHandler : MonoBehaviour
                             if (r.getNumber() >= 2)
                             {
                                 giantButton.GetComponent<SynergyButton>().addOutline(colorLvlMax);
+                                boldRace(giants, giantButton, 1);
                             }
                             else
                             {
                                 giantButton.GetComponent<SynergyButton>().hideOutline();
+                                boldRace(giants, giantButton, 0);
                             }
                         }
-                        
                         break;
                         
                 }
@@ -359,14 +354,17 @@ public class SynergyHandler : MonoBehaviour
                             if (c.getNumber() >= 2 && c.getNumber() < 4)
                             {
                                 mageButton.GetComponent<SynergyButton>().addOutline(colorLvlBase);
+                                boldClass(mages, mageButton, 1);
                             }
                             if(c.getNumber() >= 4)
                             {
                                 mageButton.GetComponent<SynergyButton>().addOutline(colorLvlMax);
+                                boldClass(mages, mageButton, 2);
                             }
                             if (c.getNumber() < 2)
                             {
                                 mageButton.GetComponent<SynergyButton>().hideOutline();
+                                boldClass(mages, mageButton, 0);
                             }
                         }
                        
@@ -380,14 +378,17 @@ public class SynergyHandler : MonoBehaviour
                             if (c.getNumber() >= 2 && c.getNumber() < 4)
                             {
                                 warriorButton.GetComponent<SynergyButton>().addOutline(colorLvlBase);
+                                boldClass(warriors, warriorButton, 1);
                             }
                             if(c.getNumber() >= 4)
                             {
                                 warriorButton.GetComponent<SynergyButton>().addOutline(colorLvlMax);
+                                boldClass(warriors, warriorButton, 2);
                             }
                             if (c.getNumber() < 2)
                             {
                                 warriorButton.GetComponent<SynergyButton>().hideOutline();
+                                boldClass(warriors, warriorButton, 0);
                             }
                         }
                         
@@ -401,10 +402,12 @@ public class SynergyHandler : MonoBehaviour
                             if (c.getNumber() >= 2)
                             {
                                 tankButton.GetComponent<SynergyButton>().addOutline(colorLvlMax);
+                                boldClass(tanks, tankButton, 1);
                             }
                             else
                             {
                                 tankButton.GetComponent<SynergyButton>().hideOutline();
+                                boldClass(tanks, tankButton, 0);
                             }
                         }
                        
@@ -418,10 +421,12 @@ public class SynergyHandler : MonoBehaviour
                             if (c.getNumber() >= 2)
                             {
                                 bowmanButton.GetComponent<SynergyButton>().addOutline(colorLvlMax);
+                                boldClass(bowmans, bowmanButton, 1);
                             }
                             else
                             {
                                 bowmanButton.GetComponent<SynergyButton>().hideOutline();
+                                boldClass(bowmans, bowmanButton, 0);
                             }
                         }
                         
@@ -436,21 +441,24 @@ public class SynergyHandler : MonoBehaviour
                             if (c.getNumber() == 1)
                             {
                                 healerButton.GetComponent<SynergyButton>().addOutline(colorLvlBase);
+                                boldClass(healers, healerButton, 1);
                             }
                             if (c.getNumber() == 2)
                             {
                                 healerButton.GetComponent<SynergyButton>().addOutline(colorLvlInt);
+                                boldClass(healers, healerButton, 2);
                             }
                             if (c.getNumber() >= 3)
                             {
                                 healerButton.GetComponent<SynergyButton>().addOutline(colorLvlMax);
+                                boldClass(healers, healerButton, 3);
                             }
                             if (c.getNumber() < 1)
                             {
                                 healerButton.GetComponent<SynergyButton>().hideOutline();
+                                boldClass(healers, healerButton, 0);
                             }
-                        }
-                       
+                        }                       
                         break;
 
                     case Class.Support:
@@ -462,21 +470,24 @@ public class SynergyHandler : MonoBehaviour
                             if (c.getNumber() == 2)
                             {
                                 supportButton.GetComponent<SynergyButton>().addOutline(colorLvlBase);
+                                boldClass(supports, supportButton, 1);
                             }
                             if (c.getNumber() == 3)
                             {
                                 supportButton.GetComponent<SynergyButton>().addOutline(colorLvlInt);
+                                boldClass(supports, supportButton, 2);
                             }
                             if (c.getNumber() >= 4)
                             {
                                 supportButton.GetComponent<SynergyButton>().addOutline(colorLvlMax);
+                                boldClass(supports, supportButton, 3);
                             }
                             if (c.getNumber() < 2)
                             {
                                 supportButton.GetComponent<SynergyButton>().hideOutline();
+                                boldClass(supports, supportButton, 0);
                             }
-                        }
-                        
+                        }                        
                         break;
 
                     case Class.Berserker:
@@ -488,13 +499,14 @@ public class SynergyHandler : MonoBehaviour
                             if (c.getNumber() >= 2)
                             {
                                 berserkerButton.GetComponent<SynergyButton>().addOutline(colorLvlMax);
+                                boldClass(berserkers, berserkerButton, 1);
                             }
                             else
                             {
                                 berserkerButton.GetComponent<SynergyButton>().hideOutline();
+                                boldClass(berserkers, berserkerButton, 0);
                             }
-                        }
-                        
+                        }                        
                         break;
 
                     case Class.Assassin:
@@ -506,13 +518,14 @@ public class SynergyHandler : MonoBehaviour
                             if (c.getNumber() >= 1)
                             {
                                 assassinButton.GetComponent<SynergyButton>().addOutline(colorLvlMax);
+                                boldClass(assassins, assassinButton, 1);
                             }
                             else
                             {
                                 assassinButton.GetComponent<SynergyButton>().hideOutline();
+                                boldClass(assassins, assassinButton, 0);
                             }
-                        }
-                       
+                        }                       
                         break;
                 }
             }                                
@@ -593,4 +606,15 @@ public class SynergyHandler : MonoBehaviour
         assassinButton.gameObject.SetActive(false);
     }
 
+    private void boldRace(RaceCount raceC, Button b, int lvl)
+    {
+        raceC.initDefinition(lvl);
+        b.GetComponent<SynergyButton>().setTooltipDef(raceC.getString());
+    }
+
+    private void boldClass(ClassCount classC, Button b, int lvl)
+    {
+        classC.initDefinition(lvl);
+        b.GetComponent<SynergyButton>().setTooltipDef(classC.getString());
+    }
 }
