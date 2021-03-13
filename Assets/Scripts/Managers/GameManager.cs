@@ -114,6 +114,8 @@ public class GameManager : MonoBehaviour
             Player.instance.Inventory.inventoryUI.rewardSystem.StartRewardPhase();
         }
 
+        SpellHandler.instance.HideSpells();
+        SynergyHandler.instance.HideSynergy();
         HealthbarHandler.HideAll();
         Player.instance.Inventory.Hide();
     }

@@ -490,4 +490,33 @@ public class SynergyHandler : MonoBehaviour
             }            
         }
     }
+
+    public void HideSynergy()
+    {
+        orcButton.gameObject.SetActive(false);
+
+        skeletonButton.gameObject.SetActive(false);
+
+        octopusButton.gameObject.SetActive(false);
+
+        elementalButton.gameObject.SetActive(false);
+
+        giantButton.gameObject.SetActive(false);
+
+        mageButton.gameObject.SetActive(false);
+
+        warriorButton.gameObject.SetActive(false);
+
+        tankButton.gameObject.SetActive(false);
+
+        bowmanButton.gameObject.SetActive(false);
+
+        healerButton.gameObject.SetActive(false);
+
+        supportButton.gameObject.SetActive(false);
+
+        berserkerButton.gameObject.SetActive(false);
+
+        assassinButton.gameObject.SetActive(false);
+    }
 }

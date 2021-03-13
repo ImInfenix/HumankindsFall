@@ -87,4 +87,18 @@ public class SpellHandler : MonoBehaviour
         }
         
     }
+
+    public void HideSpells()
+    {
+
+        orcSpell.SetActive(false);
+
+        skeletonSpell.SetActive(false);
+
+        octopusSpell.SetActive(false);
+
+        elementalSpell.SetActive(false);
+
+        giantSpell.SetActive(false);
+    }
 }
