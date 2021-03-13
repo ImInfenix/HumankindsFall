@@ -52,7 +52,6 @@ public class InventoryUI : MonoBehaviour
             slot.ClearSlot();
 
         UnitDescription[] unitsInInventory = inventory.GetAllUnits();
-        Debug.Log($"Updating GUI to display {unitsInInventory.Length} units");
         foreach (UnitDescription desc in unitsInInventory)
             PutInEmptySlot(desc);
     }
