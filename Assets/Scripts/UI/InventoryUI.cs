@@ -18,7 +18,7 @@ public class InventoryUI : MonoBehaviour
 
     private void Awake()
     {
-        inventory = FindObjectOfType<Inventory>();
+        inventory = Player.instance.Inventory;
 
         uint i = 0;
         foreach (InventorySlot slot in slots)

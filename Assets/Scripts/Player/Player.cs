@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
         InitiateForNewScene();
     }
 
-    internal void InitiateForNewScene()
+    public void InitiateForNewScene()
     {
         Inventory.FillFields();
         Wallet.FillFields();
