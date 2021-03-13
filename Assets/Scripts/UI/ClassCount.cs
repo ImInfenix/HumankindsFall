@@ -45,11 +45,11 @@ public class ClassCount
                 break;
 
             case Class.Warrior:
-                def = "Warriors up their attack\n (2) +10% attack\n (4) +20% attack";
+                def = "Warriors up their attack\n (2) +25% attack\n (4) +50% attack";
                 break;
 
             case Class.Tank:
-                def = "Tanks increase their max health\n (2) +25% max health";
+                def = "Tanks increase their max health\n (2) +50% max health";
                 break;
 
             case Class.Bowman:
@@ -61,11 +61,11 @@ public class ClassCount
                 break;
 
             case Class.Support:
-                def = "Units near supports gain 20% armor\n (2) 1 case radius\n (3) 2 cases radius\n (3) 3 cases radius";
+                def = "Units near supports gain armor\n (2) 20% armor\n (3) 30% armor\n (4) 50% armor";
                 break;
 
             case Class.Berserker:
-                def = "Berserkers gain attack and armor when their is no unit around\n (2) +15% attack, +10% armor";
+                def = "Berserkers gain attack and armor when their is no unit around\n (2) +50% attack, +25% armor";
                 break;
 
             case Class.Assassin:

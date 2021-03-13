@@ -18,7 +18,7 @@ public class InventoryUI : MonoBehaviour
 
     private void Awake()
     {
-        inventory = FindObjectOfType<Inventory>();
+        inventory = Player.instance.Inventory;
 
         uint i = 0;
         foreach (InventorySlot slot in slots)
@@ -52,6 +52,7 @@ public class InventoryUI : MonoBehaviour
             slot.ClearSlot();
 
         UnitDescription[] unitsInInventory = inventory.GetAllUnits();
+        Debug.Log($"Updating GUI to display {unitsInInventory.Length} units");
         foreach (UnitDescription desc in unitsInInventory)
             PutInEmptySlot(desc);
     }

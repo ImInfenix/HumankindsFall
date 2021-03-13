@@ -46,7 +46,7 @@ public class RaceCount
                 break;
 
             case Race.Skeleton:
-                def = "Deads worl\nSpell\nEnnemis loose moovespeed for 5 seconds\n (2) -10% moovespeed";
+                def = "Deads world\nSpell\nEnnemis loose armor for 5 seconds\n (2) -25% armor";
                 break;
 
             case Race.Octopus:
@@ -54,7 +54,7 @@ public class RaceCount
                 break;
 
             case Race.Elemental:
-                def = "Fusion of elements\nSpell\nIncrease the target's attack by number of elemental on board\n (2) 2 attack per elemental";
+                def = "Fusion of elements\nSpell\nDeal damage on enemy target by number of elemental on board\n (2) 10 attack per elemental";
                 break;
 
             case Race.Giant:
