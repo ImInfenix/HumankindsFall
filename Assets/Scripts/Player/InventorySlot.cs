@@ -76,7 +76,7 @@ public class InventorySlot : MonoBehaviour, IDragHandler, IPointerClickHandler
         if (_status != SlotState.Empty)
             return;
 
-        PutInSlot(new UnitDescription(unit));
+        PutInSlot(Player.instance.Inventory.GetUnit(unit.id));
 
         unit.board.GetCell(unit.currentPosition).SetIsOccupied(false);
 
