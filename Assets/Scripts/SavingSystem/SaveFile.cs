@@ -4,6 +4,7 @@ using System.Collections.Generic;
 [Serializable]
 public class SaveFile
 {
+    public int fileVersion = 0;
     public int walletAmount;
     public uint unitGeneratorId;
     public List<UnitDescriptionForSerialization> units;

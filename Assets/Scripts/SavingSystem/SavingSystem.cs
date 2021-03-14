@@ -26,6 +26,11 @@ public class SavingSystem
         }
     }
 
+    public static bool GameSaveExists()
+    {
+        return File.Exists(SaveFilePath);
+    }
+
     public static SaveFile RetrieveData()
     {
         SaveFile saveFile = gameFileContent;
@@ -35,7 +40,7 @@ public class SavingSystem
 
     public static void RetrieveDataFromDisk()
     {
-        if (!File.Exists(SaveFilePath))
+        if (!GameSaveExists())
             return;
 
         try
