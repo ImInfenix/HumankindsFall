@@ -8,6 +8,7 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     private Dictionary<uint, UnitDescription> unitsInInventory;
+    private List<Gem> gemsInInventory;
 
     public InventoryUI inventoryUI;
 
@@ -17,6 +18,27 @@ public class Inventory : MonoBehaviour
     private void Awake()
     {
         unitsInInventory = new Dictionary<uint, UnitDescription>();
+        gemsInInventory = new List<Gem>();
+
+        //TEST GEMS
+        gemsInInventory.Add(new MachineGunGem());
+        gemsInInventory.Add(new RubyGem());
+        gemsInInventory.Add(new VampireGem());
+        gemsInInventory.Add(new MachineGunGem());
+        gemsInInventory.Add(new RubyGem());
+        gemsInInventory.Add(new VampireGem());
+        gemsInInventory.Add(new MachineGunGem());
+        gemsInInventory.Add(new RubyGem());
+        gemsInInventory.Add(new VampireGem());
+        gemsInInventory.Add(new MachineGunGem());
+        gemsInInventory.Add(new RubyGem());
+        gemsInInventory.Add(new VampireGem());
+        gemsInInventory.Add(new MachineGunGem());
+        gemsInInventory.Add(new RubyGem());
+        gemsInInventory.Add(new VampireGem());
+        gemsInInventory.Add(new MachineGunGem());
+        gemsInInventory.Add(new RubyGem());
+        gemsInInventory.Add(new VampireGem());
     }
 
     private void Start()
@@ -98,5 +120,10 @@ public class Inventory : MonoBehaviour
         }
 
         return null;
+    }
+
+    public List<Gem> GetAllGems()
+    {
+        return gemsInInventory;
     }
 }

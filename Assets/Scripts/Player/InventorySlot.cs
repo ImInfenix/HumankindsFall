@@ -166,6 +166,7 @@ public class InventorySlot : MonoBehaviour, IDragHandler, IPointerClickHandler
         newUnit.raceStats = unitDescription.GetRace();
         newUnit.classStat = unitDescription.GetClass();
         newUnit.SetAbilityName(unitDescription.GetAbilityName());
+        newUnit.SetGems(unitDescription.GetGems());
         newUnit.AttachBoard();
         newUnit.transform.SetPositionAndRotation(attachedCamera.ScreenToWorldPoint(Input.mousePosition), Quaternion.identity);
 

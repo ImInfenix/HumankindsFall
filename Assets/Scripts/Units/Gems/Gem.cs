@@ -16,4 +16,9 @@ abstract public class Gem : MonoBehaviour
     abstract public void InitGemEffect();
     abstract public void AttackGemEffect();
     abstract public void AbilityGemEffect();
+
+    public override string ToString()
+    {
+        return gemName + " : " + gemDescription;
+    }
 }

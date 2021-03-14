@@ -11,14 +11,20 @@ public class UnitDescriptionDisplay : MonoBehaviour
     private TMP_Text UnitStats;
     [SerializeField]
     private TMP_Text UnitExperience;
+    [SerializeField]
+    private GameObject GemSlot;
+    [SerializeField]
+    private GameObject UnitGemsZone;
 
     private InventorySlot actualSlot;
+    private List<GameObject> gemSlots;
 
     public void Awake()
     {
         UnitName.text = "";
         UnitStats.text = "";
         actualSlot = null;
+        gemSlots = new List<GameObject>();
     }
 
     public void ChangeActualSlot(InventorySlot slot)
@@ -98,6 +104,55 @@ public class UnitDescriptionDisplay : MonoBehaviour
             "Attack Speed : " + atakSpeed;
         ;
         SetUnitStats(stats);
+
+        string[] gems = currentDescription.GetGems();
+        GenerateSlots(gems);
+    }
+
+    public void GenerateSlots(string[] unitGems)
+    {
+        //number of gems slots should be the unit level
+        int numberOfGemsSlots = 3;
+
+        int widthOffset = 1;
+        int x = 0 - numberOfGemsSlots*widthOffset / 2;
+
+        //destroy previous displayed slots
+        foreach (GameObject slot in gemSlots)
+        {
+            Destroy(slot);
+        }
+
+        gemSlots = new List<GameObject>();
+
+        //create gem slots
+        for (int i = 0; i < numberOfGemsSlots; i++)
+        {
+            //get RectTransform corners to start at the top left corner
+            Vector3 position = new Vector3(x, 0, 0) + UnitGemsZone.transform.position;
+
+            x += widthOffset;
+
+            GameObject slot = Instantiate(GemSlot, position, Quaternion.identity, UnitGemsZone.transform);
+            slot.GetComponent<GemSlot>().IsUnitSlot = true;
+            gemSlots.Add(slot);
+        }
+
+        //put unit owned gems in slots
+        if (unitGems != null)
+        {
+            for (int i = 0; i < unitGems.Length; i++)
+            {
+                GameObject gemGameObject = Resources.Load("Gems/" + unitGems[i]) as GameObject;
+                Vector3 position = gemSlots[i].transform.position;
+                GameObject newGem = Instantiate(gemGameObject, position, Quaternion.identity, gemSlots[i].transform);
+
+                GemSlot currentGemSlot = gemSlots[i].GetComponent<GemSlot>();
+                currentGemSlot.Gem = newGem.GetComponent<Gem>();
+
+                newGem.transform.GetChild(0).GetComponent<GemUI>().GemSlot = currentGemSlot;
+            }
+        }
     }
 
     public InventorySlot.SlotType GetSelectedSlotType()

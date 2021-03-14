@@ -12,6 +12,7 @@ public class UnitDescription
     private readonly string abilityName;
     private readonly uint id;
     private uint experience;
+    private string[] gems;
 
     public UnitDescription(Unit unit)
     {
@@ -22,6 +23,7 @@ public class UnitDescription
         unitName = unit.GetName();
         id = unit.id;
         experience = 0;
+        gems = unit.GetGems();
     }
 
     /// <summary>
@@ -92,5 +94,29 @@ public class UnitDescription
     public void EarnExperience(uint experienceAmount)
     {
         experience += experienceAmount;
+    }
+
+    public string[] GetGems()
+    {
+        return gems;
+    }
+
+    public void AddGem(string gemName)
+    {
+        if (gems != null)
+        {
+            string[] newGems = new string[gems.Length + 1];
+
+            for (int i = 0; i < gems.Length; i++)
+            {
+                newGems[i] = gems[i];
+            }
+
+            newGems[gems.Length] = gemName;
+            gems = newGems;
+        }
+
+        else
+            gems = new string[1] { gemName };
     }
 }

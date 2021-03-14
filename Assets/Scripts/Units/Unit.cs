@@ -206,9 +206,19 @@ public class Unit : MonoBehaviour
         foreach (Transform gemTransform in gameObject.transform.GetChild(2).transform)
         {
             Gem gemProv = gemTransform.GetComponent<Gem>();
-            gems.Add(gemProv);
             gemProv.setUnit(this);
         }
+    }
+
+    public string[] GetGems()
+    {
+        string[] gemsArray = new string[gems.Count];
+        for (int i = 0; i < gems.Count; i++)
+        {
+            gemsArray[i] = gems[i].GetType().ToString();
+        }
+
+        return gemsArray;
     }
 
     private void ApplyInitGemsEffect()
@@ -736,6 +746,21 @@ public class Unit : MonoBehaviour
     public float getCurrentLife()
     {
         return currentLife;
+    }
+
+    public void SetGems(string[] gems)
+    {
+        this.gems = new List<Gem>();
+
+        if (gems != null)
+        {
+            foreach (string gem in gems)
+            {
+                GameObject gemGameObject = Resources.Load("Gems/" + gem) as GameObject;
+                GameObject newGem = Instantiate(gemGameObject, transform.GetChild(2));
+                this.gems.Add(newGem.GetComponent<Gem>());
+            }
+        }
     }
 
     public Sprite GetSprite()
