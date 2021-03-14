@@ -35,4 +35,18 @@ public class Player : MonoBehaviour
         Inventory.FillFields();
         Wallet.FillFields();
     }
+
+    private void Start()
+    {
+        SaveFile saveFile = SavingSystem.RetrieveData();
+
+        Inventory.Initialize(saveFile?.GetAllUnits());
+        if (saveFile != null)
+        {
+            Wallet.Initialize(saveFile.walletAmount);
+            UnitDescription.currentId = saveFile.unitGeneratorId;
+            return;
+        }
+        Wallet.Initialize();
+    }
 }

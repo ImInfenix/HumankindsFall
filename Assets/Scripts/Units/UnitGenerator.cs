@@ -4,6 +4,9 @@ using UnityEngine;
 
 public static class UnitGenerator
 {
+    private static ClassStat[] classes;
+    private static RaceStat[] races;
+
     public static UnitDescription GenerateUnit(string unitTag)
     {
         RaceStat unitRace = GetRandomRace(unitTag);
@@ -16,8 +19,7 @@ public static class UnitGenerator
 
     public static RaceStat GetRandomRace(string unitTag)
     {
-        //Get all RaceStat ScriptableObject
-        RaceStat[] races = Resources.LoadAll<RaceStat>("Stat Units/Race");
+        RaceStat[] races = GetAllRaces();
 
         RaceStat raceStats;
         if (unitTag == Unit.allyTag)
@@ -46,7 +48,7 @@ public static class UnitGenerator
 
     public static ClassStat GetRandomClass(Race race)
     {
-        ClassStat[] classes = Resources.LoadAll<ClassStat>("Stat Units/Class");
+        ClassStat[] classes = GetAllClasses();
 
         int randomClassIndex;
 
@@ -82,5 +84,25 @@ public static class UnitGenerator
 
         else
             return null;
+    }
+
+    public static ClassStat[] GetAllClasses()
+    {
+        if(classes == null)
+        {
+            classes = Resources.LoadAll<ClassStat>("Stat Units/Class");
+        }
+
+        return classes;
+    }
+
+    public static RaceStat[] GetAllRaces()
+    {
+        if(races == null)
+        {
+            races = Resources.LoadAll<RaceStat>("Stat Units/Race");
+        }
+
+        return races;
     }
 }

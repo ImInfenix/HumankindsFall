@@ -27,4 +27,25 @@ public class UnitDescriptionForSerialization
     {
         return new UnitDescriptionForSerialization(unit);
     }
+
+    public UnitDescription ToDescription()
+    {
+        Enum.TryParse(unitRace, out Race race);
+        RaceStat raceStatFound = null;
+        foreach(RaceStat raceStat in UnitGenerator.GetAllRaces())
+        {
+            if (raceStat.race == race)
+                raceStatFound = raceStat;
+        }
+
+        Enum.TryParse(unitClass, out Class @class);
+        ClassStat classStatFound = null;
+        foreach (ClassStat classStat in UnitGenerator.GetAllClasses())
+        {
+            if (classStat.clas == @class)
+                classStatFound = classStat;
+        }
+
+        return new UnitDescription(name, raceStatFound, classStatFound, abilityName, Unit.allyTag, id, experience);
+    }
 }

@@ -19,12 +19,19 @@ public class Inventory : MonoBehaviour
         unitsInInventory = new Dictionary<uint, UnitDescription>();
     }
 
-    private void Start()
+    public void Initialize(List<UnitDescription> units = null)
     {
-        for (int i = 0; i < startingUnitCount; i++)
+        if(units == null)
         {
-            AddRandomUnit();
+            for (int i = 0; i < startingUnitCount; i++)
+            {
+                AddRandomUnit();
+            }
+            return;
         }
+
+        foreach (UnitDescription unit in units)
+            AddUnitInInventory(unit);
     }
 
     public void FillFields()

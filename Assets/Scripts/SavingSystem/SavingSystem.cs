@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class SavingSystem
 {
+    private static SaveFile gameFileContent;
+
     private static string DocumentsPath { get { return Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments); } }
     private static string MyGamesPath { get { return $"{DocumentsPath}\\My Games"; } }
     private static string GamePath { get { return $"{MyGamesPath}\\Humankind's Fall"; } }
@@ -14,7 +16,43 @@ public class SavingSystem
     public static void SaveData()
     {
         CheckDirectory(GamePath);
-        File.WriteAllLines($"{SaveFilePath}", GetGameInformations());
+        try
+        {
+            File.WriteAllLines($"{SaveFilePath}", GetGameInformations());
+        }
+        catch (Exception e)
+        {
+            Debug.Log($"Error while saving data to disk\n{e}");
+        }
+    }
+
+    public static SaveFile RetrieveData()
+    {
+        SaveFile saveFile = gameFileContent;
+        gameFileContent = null;
+        return saveFile;
+    }
+
+    public static void RetrieveDataFromDisk()
+    {
+        if (!File.Exists(SaveFilePath))
+            return;
+
+        try
+        {
+            gameFileContent = JsonUtility.FromJson<SaveFile>(File.ReadAllText(SaveFilePath));
+        }
+        catch (Exception e)
+        {
+            gameFileContent = null;
+            Debug.Log($"Error while loading data from disk\n{e}");
+        }
+    }
+
+    public static void DeleteData()
+    {
+        if (File.Exists(SaveFilePath))
+            File.Delete(SaveFilePath);
     }
 
     private static IEnumerable<string> GetGameInformations()
@@ -35,7 +73,8 @@ public class SavingSystem
     {
         SaveFile saveFile = new SaveFile();
         saveFile.SetUnitsToSave(GetAllUnitsToSave());
-        saveFile.walletAmount = 150;
+        saveFile.walletAmount = (int)Player.instance?.Wallet?.GetAmount();
+        saveFile.unitGeneratorId = UnitDescription.currentId;
         return saveFile;
     }
 
@@ -43,11 +82,7 @@ public class SavingSystem
     {
         List<UnitDescription> units = new List<UnitDescription>();
 
-        units.Add(UnitGenerator.GenerateUnit(Unit.allyTag));
-        units.Add(UnitGenerator.GenerateUnit(Unit.allyTag));
-        units.Add(UnitGenerator.GenerateUnit(Unit.allyTag));
-        units.Add(UnitGenerator.GenerateUnit(Unit.allyTag));
-        units.Add(UnitGenerator.GenerateUnit(Unit.allyTag));
+        units.AddRange(Player.instance.Inventory.GetAllUnits());
 
         return units;
     }

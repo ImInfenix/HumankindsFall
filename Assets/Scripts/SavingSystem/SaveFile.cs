@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 [Serializable]
 public class SaveFile
 {
     public int walletAmount;
+    public uint unitGeneratorId;
     public List<UnitDescriptionForSerialization> units;
 
     public void SetUnitsToSave(List<UnitDescription> unitsToSave)
@@ -15,5 +14,15 @@ public class SaveFile
 
         foreach (UnitDescription unit in unitsToSave)
             units.Add(UnitDescriptionForSerialization.GetSerializableVersionOf(unit));
+    }
+
+    public List<UnitDescription> GetAllUnits()
+    {
+        List<UnitDescription> units = new List<UnitDescription>();
+
+        foreach(UnitDescriptionForSerialization unitSerialized in this.units)
+            units.Add(unitSerialized.ToDescription());
+
+        return units;
     }
 }

@@ -11,7 +11,8 @@ public class MainMenuNavigation : MonoBehaviour
 
     public void ContinueGame()
     {
-        SavingSystem.SaveData();
+        SavingSystem.RetrieveDataFromDisk();
+        SceneLoader.LoadNextScene();
     }
 
     public void Leave()
