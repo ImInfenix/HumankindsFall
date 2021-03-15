@@ -154,7 +154,7 @@ public class InventorySlot : MonoBehaviour, IDragHandler, IPointerClickHandler
         List<Cell> avalaibleCells = new List<Cell>();
 
         foreach (Cell cell in authorizedCells)
-            if (!cell.GetIsOccupied())
+            if (!cell.GetIsOccupied() && cell.GetIsObstacle() == false)
                 avalaibleCells.Add(cell);
 
         if (avalaibleCells.Count == 0)

@@ -146,7 +146,7 @@ public static class PathfindingTool
                             localBoard[cellNeighbourPosition.x, cellNeighbourPosition.y].previousCell = localBoard[localClosestCell.x, localClosestCell.y].thisCell;
                         }
 
-                        if (!localBoard[cellNeighbourPosition.x, cellNeighbourPosition.y].isExplorationList && (cellNeighbour.GetIsOccupied() == false || cellNeighbour == targetCell) && !localBoard[cellNeighbourPosition.x, cellNeighbourPosition.y].isMarked)
+                        if (!localBoard[cellNeighbourPosition.x, cellNeighbourPosition.y].isExplorationList && (cellNeighbour.GetIsOccupied() == false || cellNeighbour == targetCell) && cellNeighbour.GetIsObstacle() == false && !localBoard[cellNeighbourPosition.x, cellNeighbourPosition.y].isMarked)
                         {
                             explorationList.Add((cellNeighbourPosition.x, cellNeighbourPosition.y));
                             localBoard[cellNeighbourPosition.x, cellNeighbourPosition.y].isExplorationList = true;
@@ -264,7 +264,7 @@ public static class PathfindingTool
                             localBoard[cellNeighbourPosition.x, cellNeighbourPosition.y].previousCell = localBoard[localClosestCell.x, localClosestCell.y].thisCell;
                         }
 
-                        if (!localBoard[cellNeighbourPosition.x, cellNeighbourPosition.y].isExplorationList && (cellNeighbour.GetIsOccupied() == false /*|| cellNeighbour == targetCell*/) && !localBoard[cellNeighbourPosition.x, cellNeighbourPosition.y].isMarked)
+                        if (!localBoard[cellNeighbourPosition.x, cellNeighbourPosition.y].isExplorationList && (cellNeighbour.GetIsOccupied() == false  /*|| cellNeighbour == targetCell*/)&& cellNeighbour.GetIsObstacle() == false && !localBoard[cellNeighbourPosition.x, cellNeighbourPosition.y].isMarked)
                         {
                             explorationList.Add((cellNeighbourPosition.x, cellNeighbourPosition.y));
                             localBoard[cellNeighbourPosition.x, cellNeighbourPosition.y].isExplorationList = true;

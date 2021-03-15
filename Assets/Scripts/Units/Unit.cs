@@ -300,7 +300,7 @@ public class Unit : MonoBehaviour
     //move to a given cell
     IEnumerator MoveToCell(Cell cell)
     {
-        if (!cell.GetIsOccupied() && stuned == false)
+        if (!cell.GetIsOccupied() && cell.GetIsObstacle() == false && stuned == false)
         {
             isActing = true;
             //change the occupied tile then start the animation
@@ -661,7 +661,7 @@ public class Unit : MonoBehaviour
                 List<Cell> authorizedCells = board.GetAuthorizedAllyCells();
                 Cell targetCell = board.GetCell(tileCoordinate);
 
-                if (targetCell == null || targetCell.GetIsOccupied() == true || !authorizedCells.Contains(targetCell))
+                if (targetCell == null || targetCell.GetIsOccupied() == true || !authorizedCells.Contains(targetCell) || targetCell.GetIsObstacle() == true)
                     updatePosition();
 
                 else

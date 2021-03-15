@@ -8,6 +8,7 @@ public class Cell
     private Vector3Int _tileMapPosition;
 
     private bool isOccupied = false;
+    private bool isObstacle = false;
     private int numberOfUnits = 0;
 
     private Vector2Int _boardSize;
@@ -53,6 +54,11 @@ public class Cell
         return isOccupied;
     }
 
+    public bool GetIsObstacle()
+    {
+        return isObstacle;
+    }
+
     public void SetIsOccupied(bool isOccupied)
     {
         this.isOccupied = isOccupied;
@@ -63,6 +69,11 @@ public class Cell
         else
             GameObject.Find("Board").GetComponent<Board>().SetTileColour(Color.white, _tileMapPosition);
         */
+    }
+
+    public void SetIsObstacle(bool obstacle)
+    {
+        isObstacle = obstacle;
     }
 
     public void SetCurrentUnit(Unit unit)
@@ -78,6 +89,12 @@ public class Cell
     public Cell[] GetAllNeighbours()
     {
         Cell[] neighbours = { Left, TopLeft, TopRight, Right, BottomRight, BottomLeft    };
+        return neighbours;
+    }
+
+    public Cell[] GetTopNeighbours()
+    {
+        Cell[] neighbours = { TopLeft, TopRight };
         return neighbours;
     }
 
