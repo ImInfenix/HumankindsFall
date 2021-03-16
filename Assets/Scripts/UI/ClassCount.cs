@@ -13,7 +13,7 @@ public class ClassCount
     {
         c = classe;
         number = n;
-        initDefinition();
+        initDefinition(0);
     }
 
     public int getNumber()
@@ -36,40 +36,120 @@ public class ClassCount
         return def;
     }
 
-    private void initDefinition()
+    public void initDefinition(int lvl)
     {
         switch (c)
         {
             case Class.Mage:
-                def = "Mages start the combat with more stamina\n (2) 25% of their max stamina\n (4) 50% of their max stamina";
+                if(lvl==0)
+                {
+                    def = "Mages start the combat with more stamina\n (2) 25% of their max stamina\n (4) 50% of their max stamina";
+                }
+                if(lvl==1)
+                {
+                    def = "Mages start the combat with more stamina\n <b>(2) 25% of their max stamina</b>\n (4) 50% of their max stamina";
+                }
+                if(lvl==2)
+                {
+                    def = "Mages start the combat with more stamina\n (2) 25% of their max stamina\n <b>(4) 50% of their max stamina</b>";
+                }               
                 break;
 
             case Class.Warrior:
-                def = "Warriors up their attack\n (2) +10% attack\n (4) +20% attack";
+                if (lvl == 0)
+                {
+                    def = "Warriors up their attack\n (2) +25% attack\n (4) +50% attack";
+                }
+                if (lvl == 1)
+                {
+                    def = "Warriors up their attack\n <b>(2) +25% attack</b>\n (4) +50% attack";
+                }
+                if (lvl == 2)
+                {
+                    def = "Warriors up their attack\n (2) +25% attack\n <b>(4) +50% attack</b>";
+                }                
                 break;
 
             case Class.Tank:
-                def = "Tanks increase their max health\n (2) +25% max health";
+                if (lvl == 0)
+                {
+                    def = "Tanks increase their max health\n (2) +50% max health";
+                }
+                if (lvl == 1)
+                {
+                    def = "Tanks increase their max health\n <b>(2) +50% max health</b>";
+                }
                 break;
 
             case Class.Bowman:
-                def = "Bowmans increase their attack speed\n (2) +25% attack speed";
+                if (lvl == 0)
+                {
+                    def = "Bowmans increase their attack speed\n (2) +25% attack speed";
+                }
+                if (lvl == 1)
+                {
+                    def = "Bowmans increase their attack speed\n <b>(2) +25% attack speed</b>";
+                }
                 break;
 
             case Class.Healer:
-                def = "Healers heals the ally with the lowest health for 15% of his max health\n (1) Every 5 attacks\n (2) Every 3 attacks\n (3) Every 2 attacks";
+                if (lvl == 0)
+                {
+                    def = "Healers heals the ally with the lowest health for 15% of his max health\n (1) Every 5 attacks\n (2) Every 3 attacks\n (3) Every 2 attacks";
+                }
+                if (lvl == 1)
+                {
+                    def = "Healers heals the ally with the lowest health for 15% of his max health\n <b>(1) Every 5 attacks</b>\n (2) Every 3 attacks\n (3) Every 2 attacks";
+                }
+                if (lvl == 2)
+                {
+                    def = "Healers heals the ally with the lowest health for 15% of his max health\n (1) Every 5 attacks\n <b>(2) Every 3 attacks</b>\n (3) Every 2 attacks";
+                }
+                if (lvl == 3)
+                {
+                    def = "Healers heals the ally with the lowest health for 15% of his max health\n (1) Every 5 attacks\n (2) Every 3 attacks\n <b>(3) Every 2 attacks</b>";
+                }                
                 break;
 
             case Class.Support:
-                def = "Units near supports gain 20% armor\n (2) 1 case radius\n (3) 2 cases radius\n (3) 3 cases radius";
+                if (lvl == 0)
+                {
+                    def = "Units near supports gain armor\n (2) 20% armor\n (3) 30% armor\n (4) 50% armor";
+                }
+                if (lvl == 1)
+                {
+                    def = "Units near supports gain armor\n <b>(2) 20% armor</b>\n (3) 30% armor\n (4) 50% armor";
+                }
+                if (lvl == 2)
+                {
+                    def = "Units near supports gain armor\n (2) 20% armor\n <b>(3) 30% armor</b>\n (4) 50% armor";
+                }
+                if (lvl == 3)
+                {
+                    def = "Units near supports gain armor\n (2) 20% armor\n (3) 30% armor\n <b>(4) 50% armor</b>";
+                }                
                 break;
 
             case Class.Berserker:
-                def = "Berserkers gain attack and armor when their is no unit around\n (2) +15% attack, +10% armor";
+                if (lvl == 0)
+                {
+                    def = "Berserkers gain attack and armor when their is no unit around\n (2) +50% attack, +25% armor";
+                }
+                if (lvl == 1)
+                {
+                    def = "Berserkers gain attack and armor when their is no unit around\n <b>(2) +50% attack, +25% armor</b>";
+                }                
                 break;
 
             case Class.Assassin:
-                def = "At start of combat, assassins jump on the farthest unit\n (1) They gain invisibility for 5 seconds at start of combat";
+                if (lvl == 0)
+                {
+                    def = "At start of combat, assassins jump on the farthest unit\n (1) They gain invisibility for 5 seconds at start of combat";
+                }
+                if (lvl == 1)
+                {
+                    def = "At start of combat, assassins jump on the farthest unit\n <b>(1) They gain invisibility for 5 seconds at start of combat</b>";
+                }               
                 break;
         }
 

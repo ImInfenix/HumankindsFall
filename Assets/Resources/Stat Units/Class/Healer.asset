@@ -14,11 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clas: 4
   maxLife: 100
-  armor: 0
+  armor: 1
   moveSpeed: 0.5
-  attackSpeed: 1
-  damage: 5
+  attackSpeed: 1.2
+  damage: 11
   range: 2
+  incrementStamina: 150
   projectile: {fileID: 3756010517097857206, guid: 28de22995b20a354ba2da0a6e56df8ef,
     type: 3}
   abilities:

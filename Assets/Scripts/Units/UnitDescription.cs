@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class UnitDescription
 {
-    private static uint currentId = 0;
+    public static uint currentId;
 
     private readonly Sprite sprite;
     private readonly RaceStat unitRace;
@@ -31,15 +31,17 @@ public class UnitDescription
     /// <param name="unitRace"></param>
     /// <param name="unitClass"></param>
     /// <param name="abilityName"></param>
-    public UnitDescription(string name, RaceStat unitRace, ClassStat unitClass, string abilityName, string unitTag)
+    public UnitDescription(string name, RaceStat unitRace, ClassStat unitClass, string abilityName, string unitTag, uint? id = null, uint experience = 0)
     {
         unitName = name;
         this.unitRace = unitRace;
         this.unitClass = unitClass;
         this.abilityName = abilityName;
         sprite = unitRace.unitSprite;
-        id = GetNewId();
-        experience = 0;
+        if (id == null)
+            this.id = GetNewId();
+        else this.id = (uint) id;
+        this.experience = experience;
     }
 
     public string GetUnitName()

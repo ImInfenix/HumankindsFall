@@ -30,9 +30,23 @@ public class Player : MonoBehaviour
         InitiateForNewScene();
     }
 
-    internal void InitiateForNewScene()
+    public void InitiateForNewScene()
     {
         Inventory.FillFields();
         Wallet.FillFields();
+    }
+
+    private void Start()
+    {
+        SaveFile saveFile = SavingSystem.RetrieveData();
+
+        Inventory.Initialize(saveFile?.GetAllUnits());
+        if (saveFile != null)
+        {
+            Wallet.Initialize(saveFile.walletAmount);
+            UnitDescription.currentId = saveFile.unitGeneratorId;
+            return;
+        }
+        Wallet.Initialize();
     }
 }

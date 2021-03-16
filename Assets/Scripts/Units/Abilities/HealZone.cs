@@ -7,19 +7,21 @@ public class HealZone : Ability
 
     private void Start()
     {
-        castStaminaThreshold = 5;
+        castStaminaThreshold = 500;
         castRange = 0;
         areaOfEffect = 2;
-        power = 30;
+        basePower = 30;
     }
     override public void castAbility()
     {
+        base.castAbility();
+
         unit.setIsAbilityActivated(true);
 
         List<Unit> listUnitsHealProv = PathfindingTool.unitsInRadius(unit.currentCell, areaOfEffect, unit.tag);
 
         foreach (Unit unit in listUnitsHealProv)
-            unit.heal(power);
+            unit.heal(currentPower);
 
         unit.setIsAbilityActivated(false);
     }

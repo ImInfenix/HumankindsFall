@@ -11,9 +11,10 @@ public class Wallet : MonoBehaviour
 
     private int amount;
 
-    public void Awake()
+    public void Initialize(int initialAmount = 0)
     {
-        amount = 0;
+        amount = initialAmount;
+        UpdateGUI();
     }
 
     public void FillFields()

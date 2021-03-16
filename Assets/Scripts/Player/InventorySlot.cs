@@ -76,7 +76,7 @@ public class InventorySlot : MonoBehaviour, IDragHandler, IPointerClickHandler
         if (_status != SlotState.Empty)
             return;
 
-        PutInSlot(new UnitDescription(unit));
+        PutInSlot(Player.instance.Inventory.GetUnit(unit.id));
 
         unit.board.GetCell(unit.currentPosition).SetIsOccupied(false);
 
@@ -154,7 +154,7 @@ public class InventorySlot : MonoBehaviour, IDragHandler, IPointerClickHandler
         List<Cell> avalaibleCells = new List<Cell>();
 
         foreach (Cell cell in authorizedCells)
-            if (!cell.GetIsOccupied())
+            if (!cell.GetIsOccupied() && cell.GetIsObstacle() == false)
                 avalaibleCells.Add(cell);
 
         if (avalaibleCells.Count == 0)

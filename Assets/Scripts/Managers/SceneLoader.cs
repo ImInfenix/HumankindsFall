@@ -23,6 +23,11 @@ public class SceneLoader : MonoBehaviour
             GameManager.instance.EnterNewCombatLevel();
     }
 
+    public static void LoadNextScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
     public static void ReloadScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

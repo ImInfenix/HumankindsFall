@@ -6,34 +6,54 @@ using UnityEngine.UI;
 
 public class Unit : MonoBehaviour
 {
+    [Header("BASE")]
     public const string ennemyTag = "UnitEnemy";
     public const string allyTag = "UnitAlly";
 
     public RaceStat raceStats;
     public ClassStat classStat;
 
-    private int maxLife;
-    [SerializeField] private int currentLife;
-    private int incrementStamina;
-    private int armor;
-    private float moveSpeed;
-    private float attackSpeed;
-    private int damage;
-    private int range;
+    [Header ("STATS")]
+    [SerializeField] private int maxLife;
+    [SerializeField] private float currentLife;
+    [SerializeField] private float incrementStamina;
+    [SerializeField] private float armor;
+    [SerializeField] private float initialArmor;
+    [SerializeField] private float moveSpeed;
+    [SerializeField] private float attackSpeed;
+    [SerializeField] private float accuracy;
+    [SerializeField] private int damage;
+    [SerializeField] private int range;
+    [SerializeField] private int power;
     [SerializeField] private string unitName;
+    [SerializeField] private bool isTargetable;
+    [SerializeField] private bool stuned = false;
+
 
     private bool moving;
     private bool canMove;
+    private bool supportBuff = false;
+    private bool healer1 = false;
+    private bool healer2 = false;
+    private bool healer3 = false;
+    private bool orcSpell = false;
+    public bool giantSpell = false;
+    private int cptHealer = 0;
+    private float saveArmor;
+    private Unit healTarget = null;
+
+    [Header("POSITION")]
     public Board board;
-    private Vector3 worldPosition;
+    [SerializeField] private Vector3 worldPosition;
     public Vector3Int currentPosition;
     public Cell currentCell = null;
     private List<Cell> path = null;
+    public Vector3Int initialPos;
 
     private float startPosX;
     private float startPosY;
 
-    public Vector3Int initialPos;
+
     //private Vector3Int targetPos;
     private Unit targetUnit = null;
     //private int targetDistance = PathfindingTool.infVal;
@@ -46,13 +66,16 @@ public class Unit : MonoBehaviour
     private int takingDamageCount = 0;
     private bool isAbilityActivated = false;
     private string targetTag;
-    [HideInInspector]
-    public bool isRandomUnit = true;
 
+    public bool isRandomUnit = true;
+    [SerializeField] private bool isPlacedUnit;
+
+    [Header("ABILITY")]
     [SerializeField] private string abilityName;
 
-    private Ability ability;
+    [SerializeField] private Ability ability;
 
+    [Header("UI")]
     public uint id;
 
     private void Awake()
@@ -64,6 +87,18 @@ public class Unit : MonoBehaviour
     [SerializeField] private Image classIcon;
     [SerializeField] private SpriteRenderer circleSprite;
     private GameObject projectileGameObject;
+
+    private List<Gem> gems = new List<Gem>();
+
+    public int MaxLife { get => maxLife; set => maxLife = value; }
+    public float CurrentLife { get => currentLife; set => currentLife = value; }
+    public float IncrementStamina { get => incrementStamina; set => incrementStamina = value; }
+    public float Armor { get => armor; set => armor = value; }
+    public float MoveSpeed { get => moveSpeed; set => moveSpeed = value; }
+    public float AttackSpeed { get => attackSpeed; set => attackSpeed = value; }
+    public int Damage { get => damage; set => damage = value; }
+    public int Range { get => range; set => range = value; }
+    public int Power { get => power; set => power = value; }
 
     // Start is called before the first frame update
     void Start()
@@ -88,22 +123,42 @@ public class Unit : MonoBehaviour
             ability.setUnit(this);
         }
 
-        maxLife = raceStats.maxLife + classStat.maxLife;
-        currentLife = maxLife;
-        incrementStamina = 1;
-        armor = raceStats.armor + classStat.armor;
-        moveSpeed = raceStats.moveSpeed + classStat.moveSpeed;
-        attackSpeed = raceStats.attackSpeed + classStat.attackSpeed;
-        damage = raceStats.damage + classStat.damage;
-        range = classStat.range;
+        else
+            healthBar.HideStaminaBar();
+
+        if (classStat.classIconSprite == null)
+            healthBar.HideClassIcon();
+
+        MaxLife = raceStats.maxLife + classStat.maxLife;
+        IncrementStamina = classStat.incrementStamina;
+        Armor = raceStats.armor + classStat.armor;
+        initialArmor = armor;
+        accuracy = 100;
+          
+        MoveSpeed = raceStats.moveSpeed + classStat.moveSpeed;
+        AttackSpeed = raceStats.attackSpeed + classStat.attackSpeed;
+        Damage = raceStats.damage + classStat.damage;
+        Range = classStat.range;
+
+        isTargetable = true;
+
+        GetUnitGems();
+        ApplyInitGemsEffect();
+
+        CurrentLife = MaxLife;
 
         projectileGameObject = classStat.projectile;
 
-        healthBar.SetHealth(currentLife, maxLife);
+        healthBar.SetHealth(CurrentLife, MaxLife);
 
         classIcon.sprite = classStat.classIconSprite;
         spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite = raceStats.unitSprite;
+
+        if (raceStats.race != Race.Human)
+            spriteRenderer.sprite = raceStats.unitSprite;
+
+        else
+            spriteRenderer.sprite = Resources.Load<Sprite>("Textures/Unit Sprites/Humans/" + classStat.clas.ToString());
 
         //canAttack = true;
         //hasTarget = false;
@@ -111,9 +166,20 @@ public class Unit : MonoBehaviour
 
         if (currentCell == null)
         {
-            Cell startCell = board.GetCell(new Vector3Int(initialPos.x, initialPos.y, 0));
-            occupyNewCell(startCell);
-            updatePosition();
+            if (!isPlacedUnit)
+            {
+                Cell startCell = board.GetCell(new Vector3Int(initialPos.x, initialPos.y, 0));
+                occupyNewCell(startCell);
+                updatePosition();
+            }
+
+            else
+            {
+                Vector3Int tileCoordinate = board.GetTilemap().WorldToCell(transform.position);
+                Cell newCell = board.GetCell(tileCoordinate);
+                occupyNewCell(newCell);
+                updatePosition();
+            }
         }
 
         //if the unit is an ally unit
@@ -133,6 +199,24 @@ public class Unit : MonoBehaviour
         baseColor = spriteRenderer.color;
         damageColor = new Color(1, 0.6f, 0.6f);
         healColor = new Color(0.4f, 1, 0.4f);
+    }
+
+    private void GetUnitGems()
+    {
+        foreach (Transform gemTransform in gameObject.transform.GetChild(2).transform)
+        {
+            Gem gemProv = gemTransform.GetComponent<Gem>();
+            gems.Add(gemProv);
+            gemProv.setUnit(this);
+        }
+    }
+
+    private void ApplyInitGemsEffect()
+    {
+        foreach (Gem gem in gems)
+        {
+            gem.InitGemEffect();
+        }
     }
 
     private void GenerateRaceAndClass()
@@ -158,13 +242,16 @@ public class Unit : MonoBehaviour
 
         if (!isActing)
         {
-            List<Unit> listAvailableTarget = PathfindingTool.unitsInRadius(currentCell, range, targetTag);
-            
+            List<Unit> listAvailableTarget = PathfindingTool.unitsInRadius(currentCell, Range, targetTag);
+
             //if the target is not yet in range of attack
             if (listAvailableTarget.Count > 0)
             {
-                targetUnit = listAvailableTarget[0];
-                StartCoroutine(AttackTarget());
+                if(listAvailableTarget[0].getTargetable())
+                {
+                    targetUnit = listAvailableTarget[0];
+                    StartCoroutine(AttackTarget());
+                }
             }
 
             else if (path != null && path.Count > 0)
@@ -173,7 +260,20 @@ public class Unit : MonoBehaviour
                 StartCoroutine(MoveToCell(path[0]));
             }
 
+            else if (path == null)
+            {
+                StartCoroutine(UnitWaitForSeconds(moveSpeed));
+            }
+
             path = PathfindingTool.createPathTarget(this);
+        }
+    }
+
+    private void ApplyAttackGemsEffect()
+    {
+        foreach (Gem gem in gems)
+        {
+            gem.AttackGemEffect();
         }
     }
 
@@ -191,7 +291,7 @@ public class Unit : MonoBehaviour
         isActing = true;
         foreach (Cell cell in path)
         {
-            yield return new WaitForSeconds(moveSpeed);
+            yield return new WaitForSeconds(MoveSpeed);
             updatePosition();
         }
         isActing = false;
@@ -200,14 +300,14 @@ public class Unit : MonoBehaviour
     //move to a given cell
     IEnumerator MoveToCell(Cell cell)
     {
-        if (!cell.GetIsOccupied())
+        if (!cell.GetIsOccupied() && cell.GetIsObstacle() == false && stuned == false)
         {
             isActing = true;
             //change the occupied tile then start the animation
             occupyNewCell(cell);
             //StopCoroutine(MoveAnimation(cell));
             StartCoroutine(MoveAnimation(cell));
-            yield return new WaitForSeconds(moveSpeed);
+            yield return new WaitForSeconds(MoveSpeed);
             //ensure that the unit is at the center of the current cell before it can start acting again
             updatePosition();
             isActing = false;
@@ -216,7 +316,7 @@ public class Unit : MonoBehaviour
         else
         {
             path = null;
-            yield return new WaitForSeconds(moveSpeed);
+            yield return new WaitForSeconds(MoveSpeed);
         }
     }
 
@@ -226,7 +326,7 @@ public class Unit : MonoBehaviour
         float speed = 0.1f;
 
         //if the unit is moving too fast, inscrease the animation speed
-        if (moveSpeed <= 0.2)
+        if (MoveSpeed <= 0.2)
             speed = 0.2f;
 
         //set the maximum number of movement in the animation
@@ -254,23 +354,82 @@ public class Unit : MonoBehaviour
 
     //attack the current target
     IEnumerator AttackTarget()
-    {
-        isActing = true;
-
-        StartCoroutine(AttackAnimation());
-
-        targetUnit.takeDamage(damage);
-
-        if (range > 1)
-            StartCoroutine(ProjectileAnimation());
-
-        if (abilityName != null && abilityName != "")
+    {        
+        if(stuned == false)
         {
-            ability.updateAbility(incrementStamina);
-        }
+            isActing = true;
 
-        yield return new WaitForSeconds(attackSpeed);
-        isActing = false;
+            StartCoroutine(AttackAnimation());
+
+            if (orcSpell == false)
+                if (giantSpell == false)
+                    targetUnit.takeDamage(damage);
+                else
+                {
+                    float damageGiant = damage*1.15f;
+                    targetUnit.takeDamage((int)damageGiant);
+                    targetUnit.activateStun(5);
+                }
+            else
+            {
+                int rand = Random.Range(1, 101);
+                if (rand <= accuracy)
+                    targetUnit.takeOrcDamage(damage);
+            }
+
+            ApplyAttackGemsEffect();
+
+            if (classStat.clas == Class.Assassin && isTargetable == false)
+                stopInvisibility();
+
+
+            if (Range > 1)
+                StartCoroutine(ProjectileAnimation());
+
+            if (abilityName != null && abilityName != "")
+            {
+                ability.updateAbility(IncrementStamina);
+            }
+
+            yield return new WaitForSeconds(AttackSpeed);
+            isActing = false;
+
+            cptHealer++;
+
+            if (healer1 == true)
+            {
+                if (cptHealer == 5)
+                {
+                    Unit target = GameManager.instance.searchHealTarget();
+                    if (target != null)
+                        target.heal((target.getMaxlife() / 20) * 3);
+                    cptHealer = 0;
+                }
+            }
+            if (healer2 == true)
+            {
+                if (cptHealer == 3)
+                {
+                    Unit target = GameManager.instance.searchHealTarget();
+                    if (target != null)
+                        target.heal((target.getMaxlife() / 20) * 3);
+                    cptHealer = 0;
+                }
+            }
+            if (healer3 == true)
+            {
+                if (cptHealer == 2)
+                {
+                    Unit target = GameManager.instance.searchHealTarget();
+                    if (target != null)
+                        target.heal((target.getMaxlife() / 20) * 3);
+                    cptHealer = 0;
+                }
+            }
+
+            giantSpell = false;
+        }
+       
     }
 
     //move the sprite toward the target for a short time
@@ -286,9 +445,9 @@ public class Unit : MonoBehaviour
 
         //set the animation time to be fast, and faster than the attack speed
         float animationTime = 0.3f;
-        if (attackSpeed <= 0.3f)
+        if (AttackSpeed <= 0.3f)
         {
-            animationTime = 2 * attackSpeed / 3;
+            animationTime = 2 * AttackSpeed / 3;
         }
 
         yield return new WaitForSeconds(0.2f);
@@ -305,7 +464,7 @@ public class Unit : MonoBehaviour
         float speed = 0.06f;
 
         //if the unit is attacking too fast, inscrease the animation speed
-        if (attackSpeed <= 0.2f)
+        if (AttackSpeed <= 0.2f)
             speed = 0.15f;
 
         //set the maximum number of refresh of the projectile animation
@@ -377,7 +536,7 @@ public class Unit : MonoBehaviour
 
     private void checkDeath()
     {
-        if (currentLife <= 0)
+        if (CurrentLife <= 0)
         {
             StopAllCoroutines();
             Destroy(gameObject);
@@ -385,6 +544,14 @@ public class Unit : MonoBehaviour
     }
 
     public void takeDamage(int damage)
+    {
+        CurrentLife -= damage/armor ;
+        checkDeath();
+        healthBar.SetHealth(CurrentLife);
+        StartCoroutine(ChangeColorAnimation(damageColor, 0.4f));
+    }
+
+    public void takeOrcDamage(int damage)
     {
         currentLife -= damage;
         checkDeath();
@@ -394,12 +561,12 @@ public class Unit : MonoBehaviour
 
     public void heal(int heal)
     {
-        currentLife += heal;
-        if (currentLife > maxLife)
+        CurrentLife += heal;
+        if (CurrentLife > MaxLife)
         {
-            currentLife = maxLife;
+            CurrentLife = MaxLife;
         }
-        healthBar.SetHealth(currentLife);
+        healthBar.SetHealth(CurrentLife);
         StartCoroutine(ChangeColorAnimation(healColor, 0.7f));
     }
 
@@ -494,7 +661,7 @@ public class Unit : MonoBehaviour
                 List<Cell> authorizedCells = board.GetAuthorizedAllyCells();
                 Cell targetCell = board.GetCell(tileCoordinate);
 
-                if (targetCell == null || targetCell.GetIsOccupied() == true || !authorizedCells.Contains(targetCell))
+                if (targetCell == null || targetCell.GetIsOccupied() == true || !authorizedCells.Contains(targetCell) || targetCell.GetIsObstacle() == true)
                     updatePosition();
 
                 else
@@ -521,6 +688,16 @@ public class Unit : MonoBehaviour
         GameManager.instance?.RemoveUnit(this);
     }
 
+    public bool getTargetable()
+    {
+        return isTargetable;
+    }
+
+    public int getMaxlife()
+    {
+        return maxLife;
+    }
+
     public string getTargetTag()
     {
         return targetTag;
@@ -545,12 +722,18 @@ public class Unit : MonoBehaviour
     {
         return range;
     }
+
+    public bool getStuned()
+    {
+        return stuned;
+    }
+
     public void setRange(int range)
     {
         this.range = range;
     }
 
-    public int getCurrentLife()
+    public float getCurrentLife()
     {
         return currentLife;
     }
@@ -598,5 +781,189 @@ public class Unit : MonoBehaviour
     public void setTargetUnit(Unit unit)
     {
         targetUnit = unit;
+    }
+
+    public void ActivateClass(Class c, int nb)
+    {
+        switch (c)
+        {
+            case Class.Mage:
+                if(nb >= 2 && nb < 4)
+                {
+                    ability.mageSynergy(1);
+                }
+                if(nb >= 4)
+                {
+                    ability.mageSynergy(2);
+                }
+                break;
+
+            case Class.Warrior:
+                if (nb >= 2 && nb < 4)
+                {
+                    damage += damage/4;
+                }
+                if (nb >= 4)
+                {
+                    damage += damage/2;
+                }
+                break;
+
+            case Class.Tank:
+                if(nb >= 2)
+                {
+                    maxLife += maxLife/2;
+                    currentLife = maxLife;
+                }
+                break;
+
+            case Class.Bowman:
+                if (nb >= 2)
+                {
+                    attackSpeed -= attackSpeed/4;
+                }
+                break;
+
+            case Class.Healer:
+                if(nb == 1)
+                {
+                    healer1 = true;
+                }
+                if(nb == 2)
+                {
+                    healer2 = true;
+                }
+                if(nb >= 3)
+                {
+                    healer3 = true;
+                }
+                break;
+
+            case Class.Support:
+                List<Unit> unitInRange = PathfindingTool.unitsInRadius(currentCell, 1, allyTag);
+                if (nb >= 2)
+                {
+                    foreach(Unit unit in unitInRange)
+                    {
+
+                        if (nb == 2)
+                        {
+                            unit.supportBoost(1);
+                        }
+                        if (nb == 3)
+                        {
+                            unit.supportBoost(2);
+                        }
+                        if (nb >= 4)
+                        {
+                            unit.supportBoost(3);
+                        }
+                    }
+                }
+                break;
+
+            case Class.Berserker:
+                if (nb >= 2)
+                {
+                    if(board.isOccupiedNeighbour(currentCell) == false)
+                    {
+                        damage += damage / 2;
+                        armor += initialArmor / 4;
+                    }
+                }
+                break;
+
+            case Class.Assassin:
+                if(nb >= 1)
+                {
+                    startInvisibility();
+
+                    Invoke("stopInvisibility", 5);
+                }
+                break;
+        }
+    }
+
+    public void supportBoost(int lvl)
+    {
+        if(supportBuff == false)
+        {
+            if (lvl == 1)
+            {
+                armor += initialArmor / 5;
+            }
+            if (lvl == 2)
+            {
+                armor += (initialArmor / 10) * 3;
+            }
+            if (lvl == 3)
+            {
+                armor += initialArmor / 2;
+            }
+            supportBuff = true;
+        }
+    }
+
+    private void startInvisibility()
+    {
+        isTargetable = false;
+        baseColor.a = 0.5f;
+        spriteRenderer.color = baseColor;
+    }
+    private void stopInvisibility()
+    {
+        if(isTargetable == false)
+        {
+            isTargetable = true;
+            baseColor.a = 1;
+            spriteRenderer.color = baseColor;
+        }
+    }
+
+    public void activateOrcSpell(float accuracyLost, float time)
+    {
+        orcSpell = true;
+        accuracy -= accuracyLost;
+        Invoke("endOrcSpell", time);
+    }
+
+    private void endOrcSpell()
+    {
+        orcSpell = false;
+        accuracy = 100;
+    }
+
+    public void activateSkeletonSpell(float armorLost, float time)
+    {
+        saveArmor = armor;
+        armor -= (armorLost*armor);
+        Invoke("endSkeletonSpell", time);
+    }
+
+    private void endSkeletonSpell()
+    {
+        armor = saveArmor;
+    }
+
+    public void activateStun(float time)
+    {
+        stuned = true;
+        Invoke("endStun", time);
+    }
+
+    private void endStun()
+    {
+        stuned = false;
+    }
+
+
+    public void activateGiantSpell()
+    {
+        giantSpell = true;
+    }
+    public void activateElementalSpell(int damage)
+    {
+        takeDamage(damage);
+
     }
 }
