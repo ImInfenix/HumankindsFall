@@ -10,6 +10,13 @@ public class ShopSystem : MonoBehaviour
     [SerializeField]
     private UnitDescriptionDisplay unitDescriptionDisplay;
 
+    List<UnitDescription> unitsToSell;
+
+    private void Awake()
+    {
+        unitsToSell = new List<UnitDescription>();
+    }
+
     private void Start()
     {
         InitializeShop();
@@ -20,7 +27,11 @@ public class ShopSystem : MonoBehaviour
         gameObject.SetActive(true);
 
         foreach (InventorySlot slot in rewardSlots)
-            slot.PutInSlot(UnitGenerator.GenerateUnit(Unit.allyTag));
+        {
+            UnitDescription newUnit = UnitGenerator.GenerateUnit(Unit.allyTag);
+            slot.PutInSlot(newUnit);
+            unitsToSell.Add(newUnit);
+        }
 
         Player.instance.Inventory.inventoryUI.UpdateGUI();
     }
