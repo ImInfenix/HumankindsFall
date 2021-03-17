@@ -15,6 +15,7 @@ public class CheatCodes : MonoBehaviour
         {
             Inventory inventory = Player.instance.Inventory;
             inventory.GenerateGems();
+            GameObject.Find("GemsObjects").GetComponent<GemsInventory>().UpdateDisplay();
         }
     }
 }

@@ -119,4 +119,9 @@ public class UnitDescription
         else
             gems = new string[1] { gemName };
     }
+
+    public void SetGems(string[] gems)
+    {
+        this.gems = gems;
+    }
 }

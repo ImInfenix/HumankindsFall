@@ -15,6 +15,16 @@ public class GemsInventory : MonoBehaviour
     {
         inventory = Player.instance.Inventory;
 
+        UpdateDisplay();
+    }
+
+    public void UpdateDisplay()
+    {
+        foreach (Transform child in transform)
+        {
+            Destroy(child.gameObject);
+        }
+
         List<Gem> gems = inventory.GetAllGems();
 
         int count = 0;

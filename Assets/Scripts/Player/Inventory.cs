@@ -110,6 +110,11 @@ public class Inventory : MonoBehaviour
         return gemsInInventory;
     }
 
+    public void AddGem(Gem gem)
+    {
+        gemsInInventory.Add(gem);
+    }
+
     public void RemoveGem(Gem gem)
     {
         for (int i = 0; i < gemsInInventory.Count; i++)

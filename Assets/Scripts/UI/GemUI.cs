@@ -25,7 +25,7 @@ public class GemUI : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerU
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (eventData.button == PointerEventData.InputButton.Left)
+        if (eventData.button == PointerEventData.InputButton.Left && GemSlot == null)
         {
             startPosition = gameObject.transform.position;
             startParent = transform.parent.parent;
@@ -51,6 +51,8 @@ public class GemUI : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerU
     {
         if (GemSlot == null && eventData.button == PointerEventData.InputButton.Left)
         {
+            isDragging = false;
+
             //get the gem slot under the mouse pointer
             PointerEventData pointerData = new PointerEventData(EventSystem.current)
             {
@@ -73,33 +75,32 @@ public class GemUI : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerU
 
             //if there is no correct gem slot, reset the gem position
             if (slotUnderMouse == null || slotUnderMouse.Gem != null || !slotUnderMouse.IsUnitSlot)
-                gameObject.transform.position = startPosition;
+            {
+                transform.position = startPosition;
+                transform.parent.SetParent(startParent);
+            }
 
             //if there is a correct gem slot
             else
             {
-                gameObject.transform.position = slotUnderMouse.transform.position;
+                transform.position = slotUnderMouse.transform.position;
                 slotUnderMouse.Gem = currentGem;
 
                 if (GemSlot != null)
                     GemSlot.Gem = null;
 
                 GemSlot = slotUnderMouse;
-                gameObject.transform.parent = GemSlot.transform;
+                transform.parent.SetParent(GemSlot.transform);
 
                 Gem gem = GemSlot.Gem;
 
                 //get selected unit description, then add this gem to its gem list
-                GameObject.Find("CurrentUnitDescription").GetComponent<UnitDescriptionDisplay>().
-                    GetActualSlot().
-                    GetCurrentUnitDescription().
-                    AddGem(gem.GetType().ToString());
+                UnitDescriptionDisplay unitDescriptionDisplay = GameObject.Find("CurrentUnitDescription").GetComponent<UnitDescriptionDisplay>();
+                unitDescriptionDisplay.AddGem(transform.parent.gameObject);
 
                 //remove the gem from the inventory
                 inventory.RemoveGem(gem);
-            }
-
-            transform.parent.SetParent(startParent);
+            }            
         }
     }
 
