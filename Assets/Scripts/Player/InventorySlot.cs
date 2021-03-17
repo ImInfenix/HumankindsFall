@@ -93,6 +93,7 @@ public class InventorySlot : MonoBehaviour, IDragHandler, IPointerClickHandler
         child = new GameObject(unitDescription.GetUnitName());
         child.transform.SetParent(transform, false);
 
+        float width = GetComponent<RectTransform>().rect.width;
         {
             Image i = child.AddComponent<Image>();
             Sprite sprite = unitDescription.GetSprite();
@@ -101,7 +102,6 @@ public class InventorySlot : MonoBehaviour, IDragHandler, IPointerClickHandler
             Rect spriteRect = unitDescription.GetSprite().rect;
             float aspectRatio = spriteRect.width / spriteRect.height;
             RectTransform rt = child.GetComponent<RectTransform>();
-            float width = GetComponent<RectTransform>().rect.width;
             rt.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, width);
             rt.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, width * aspectRatio);
         }
@@ -112,8 +112,8 @@ public class InventorySlot : MonoBehaviour, IDragHandler, IPointerClickHandler
             classDisplay = new GameObject("Class display");
             classDisplay.transform.SetParent(transform, false);
             RectTransform rt = classDisplay.AddComponent<RectTransform>();
-            rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, 0, 25);
-            rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Right, 0, 25);
+            rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, 0, width * 0.25f);
+            rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Right, 0, width * 0.25f);
             classDisplay.AddComponent<Image>().sprite = unitDescription.GetClass().classIconSprite;
         }
     }
