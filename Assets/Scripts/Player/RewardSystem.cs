@@ -48,6 +48,7 @@ public class RewardSystem : MonoBehaviour
         gameObject.SetActive(false);
         SavingSystem.SaveData();
 
+        Player.instance.Inventory.Hide();
         ResolutionPhaseHandler.instance.ShowExitButton();
     }
 }
