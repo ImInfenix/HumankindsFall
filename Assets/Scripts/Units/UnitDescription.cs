@@ -33,7 +33,7 @@ public class UnitDescription
     /// <param name="unitRace"></param>
     /// <param name="unitClass"></param>
     /// <param name="abilityName"></param>
-    public UnitDescription(string name, RaceStat unitRace, ClassStat unitClass, string abilityName, string unitTag, uint? id = null, uint experience = 0)
+    public UnitDescription(string name, RaceStat unitRace, ClassStat unitClass, string abilityName, string unitTag, uint? id = null, uint experience = 0, string[] gems = null)
     {
         unitName = name;
         this.unitRace = unitRace;
@@ -44,6 +44,7 @@ public class UnitDescription
             this.id = GetNewId();
         else this.id = (uint) id;
         this.experience = experience;
+        this.gems = gems;
     }
 
     public string GetUnitName()

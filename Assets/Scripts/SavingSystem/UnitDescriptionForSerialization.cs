@@ -12,6 +12,7 @@ public class UnitDescriptionForSerialization
     public string abilityName;
     public uint id;
     public uint experience;
+    public string[] gems;
 
     private UnitDescriptionForSerialization(UnitDescription unit)
     {
@@ -21,6 +22,7 @@ public class UnitDescriptionForSerialization
         abilityName = unit.GetAbilityName();
         id = unit.GetId();
         experience = unit.GetExperience();
+        gems = unit.GetGems();
     }
 
     public static UnitDescriptionForSerialization GetSerializableVersionOf(UnitDescription unit)
@@ -46,6 +48,6 @@ public class UnitDescriptionForSerialization
                 classStatFound = classStat;
         }
 
-        return new UnitDescription(name, raceStatFound, classStatFound, abilityName, Unit.allyTag, id, experience);
+        return new UnitDescription(name, raceStatFound, classStatFound, abilityName, Unit.allyTag, id, experience, gems);
     }
 }
