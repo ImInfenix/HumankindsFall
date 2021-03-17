@@ -16,9 +16,8 @@ public class UnitDescriptionDisplay : MonoBehaviour
 
     public void Awake()
     {
-        UnitName.text = "";
-        UnitStats.text = "";
         actualSlot = null;
+        UpdateDescription();
     }
 
     public void ChangeActualSlot(InventorySlot slot)
