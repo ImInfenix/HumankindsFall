@@ -14,7 +14,7 @@ public class RaceCount
     {
         r = race;
         number = n;
-        initDefinition();
+        initDefinition(0);
     }
 
     public int getNumber()
@@ -37,28 +37,63 @@ public class RaceCount
         number = n;
     }
 
-    private void initDefinition()
+    public void initDefinition(int lvl)
     {
         switch(r)
         {
             case Race.Orc:
-                def = "Extrem brutality\nSpell\nOrc's attack ignore defense but they lose accuracy\n (2) 5 secondes, -10% accuracy";
+                if(lvl == 0)
+                {
+                    def = "Extrem brutality\n<b>Spell</b>\nOrc's attack ignore defense but they lose accuracy\n (2) 5 secondes, -10% accuracy";
+                }
+               if(lvl == 1)
+                {
+                    def = "Extrem brutality\n<b>Spell</b>\nOrc's attack ignore defense but they lose accuracy\n <b>(2) 5 secondes, -10% accuracy</b>";
+                }
                 break;
 
             case Race.Skeleton:
-                def = "Deads world\nSpell\nEnnemis loose armor for 5 seconds\n (2) -25% armor";
+                if (lvl == 0)
+                {
+                    def = "Deads world\n<b>Spell</b>\nEnnemis loose armor for 5 seconds\n (2) -25% armor";
+                }
+                if (lvl == 1)
+                {
+                    def = "Deads world\n<b>Spell</b>\nEnnemis loose armor for 5 seconds\n <b>(2) -25% armor</b>";
+                }                
                 break;
 
             case Race.Octopus:
-                def = "Sprawling cage\nSpell\nStun the target\n (2) 5 seconds";
+                if (lvl == 0)
+                {
+                    def = "Sprawling cage\n<b>Spell</b>\nStun the target\n (2) 5 seconds";
+                }
+                if (lvl == 1)
+                {
+                    def = "Sprawling cage\n<b>Spell</b>\nStun the target\n <b>(2) 5 seconds</b>";
+                }                
                 break;
 
             case Race.Elemental:
-                def = "Fusion of elements\nSpell\nDeal damage on enemy target by number of elemental on board\n (2) 10 attack per elemental";
+                if (lvl == 0)
+                {
+                    def = "Fusion of elements\n<b>Spell</b>\nDeal damage on enemy target by number of elemental on board\n (2) 10 attack per elemental";
+                }
+                if (lvl == 1)
+                {
+                    def = "Fusion of elements\n<b>Spell</b>\nDeal damage on enemy target by number of elemental on board\n <b>(2) 10 attack per elemental</b>";
+                }
                 break;
 
             case Race.Giant:
-                def = "Titanic impact\nSpell\nChoose a giant unit, his next attack will be powerful and stun the enemy for 2 seconds\n (2) + 15 damages";
+                if (lvl == 0)
+                {
+                    def = "Titanic impact\n<b>Spell</b>\nChoose a giant unit, his next attack will be powerful and stun the enemy for 2 seconds\n (2) + 15 damages";
+                }
+                if (lvl == 1)
+                {
+                    def = "Titanic impact\n<b>Spell</b>\nChoose a giant unit, his next attack will be powerful and stun the enemy for 2 seconds\n <b>(2) + 15 damages</b>";
+                }                
                 break;
         }
         

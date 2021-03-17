@@ -7,6 +7,10 @@ public class ResolutionPhaseHandler : MonoBehaviour
 {
     [SerializeField]
     private TMP_Text resolutionText;
+
+    [SerializeField]
+    private GameObject resolutionButton;
+
     public static ResolutionPhaseHandler instance;
 
     private void Awake()
@@ -32,6 +36,11 @@ public class ResolutionPhaseHandler : MonoBehaviour
     public void ChangeText(string newText)
     {
         resolutionText.text = newText;
+    }
+
+    public void ShowExitButton()
+    {
+        resolutionButton.SetActive(true);
     }
 
     /// <summary>

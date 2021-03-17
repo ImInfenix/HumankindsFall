@@ -22,14 +22,16 @@ public class UnitDescriptionDisplay : MonoBehaviour
     private List<Gem> currentGems;
     private List<GameObject> currentGemsDisplayed;
 
+    [HideInInspector]
+    public ShopSystem shopSystem;
+
     public void Awake()
     {
-        UnitName.text = "";
-        UnitStats.text = "";
         actualSlot = null;
         gemSlots = new List<GameObject>();
         currentGems = new List<Gem>();
         currentGemsDisplayed = new List<GameObject>();
+        UpdateDescription();
     }
 
     public void ChangeActualSlot(InventorySlot slot)
@@ -43,6 +45,16 @@ public class UnitDescriptionDisplay : MonoBehaviour
         UpdateDescription();
 
         Player.instance.Inventory.Show();
+
+        if(shopSystem != null)
+        {
+            if (actualSlot == null)
+                shopSystem.SetShopToNoneMode();
+            else if (actualSlot.GetSlotType() == InventorySlot.SlotType.Inventory)
+                shopSystem.SetShopToSellMode();
+            else
+                shopSystem.SetShopToBuyMode();
+        }
     }
 
     public void UnselectActualSlot()
@@ -55,6 +67,8 @@ public class UnitDescriptionDisplay : MonoBehaviour
         UpdateDescription();
 
         Player.instance.Inventory.Hide();
+
+        shopSystem?.SetShopToNoneMode();
     }
 
     public void SetUnitName(string name)
@@ -202,7 +216,7 @@ public class UnitDescriptionDisplay : MonoBehaviour
         currentDescription.AddGem(gem.GetType().ToString());
         currentGemsDisplayed.Add(gemGameObject);
     }
-    
+
     public void ClearGems()
     {
         currentGems.Clear();

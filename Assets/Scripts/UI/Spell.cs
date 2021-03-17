@@ -122,7 +122,7 @@ public class Spell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if(onCooldown == false)
+        if(onCooldown == false && GameManager.instance.gamestate == GameManager.GameState.Combat)
         {
             if (activated == true)
             {

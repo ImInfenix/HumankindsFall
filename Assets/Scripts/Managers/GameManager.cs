@@ -8,8 +8,10 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     private List<Unit> units;
-    public enum GameState { Placement, Combat, Resolution };
+    public enum GameState { Placement, Combat, Resolution, Shopping, Map, Menu };
     public GameState gamestate { get; private set; }
+
+    public GameState startingGameState = GameState.Placement;
 
     private void Awake()
     {
@@ -26,7 +28,7 @@ public class GameManager : MonoBehaviour
 
         //initialization
         units = new List<Unit>();
-        gamestate = GameState.Placement;
+        gamestate = startingGameState;
 
         GetComponent<SceneLoader>().Initialize();
     }
@@ -62,10 +64,27 @@ public class GameManager : MonoBehaviour
         Player.instance.Inventory.inventoryUI.rewardSystem.RegisterCombatParticipants();
     }
 
-    public void EnterNewCombatLevel()
+    public void EnterNewLevel()
+    {
+        Player.instance.InitiateForNewScene();
+    }
+
+    public void EnterMap()
+    {
+        gamestate = GameState.Map;
+        SceneLoader.LoadMapScene();
+    }
+
+    public void EnterShop()
+    {
+        gamestate = GameState.Shopping;
+        SceneLoader.LoadShopScene();
+    }
+
+    public void EnterBattle(string battleName)
     {
         gamestate = GameState.Placement;
-        Player.instance.InitiateForNewScene();
+        SceneLoader.LoadBattle(battleName);
     }
 
     public void Update()
@@ -110,6 +129,7 @@ public class GameManager : MonoBehaviour
         }
         if (resolution == "UnitAlly")
         {
+            ResolutionPhaseHandler.instance.ChangeText("");
             Player.instance.Inventory.Hide();
             Player.instance.Inventory.inventoryUI.rewardSystem.StartRewardPhase();
         }
@@ -131,15 +151,15 @@ public class GameManager : MonoBehaviour
 
         foreach (Unit unit in units)
         {
-            if(unit.CompareTag("UnitAlly"))
+            if (unit.CompareTag("UnitAlly"))
                 unit.ActivateClass(unit.getClass(), cc.Find(x => x.getClass() == unit.getClass()).getNumber());
         }
     }
 
-   public Unit searchHealTarget()
+    public Unit searchHealTarget()
     {
         Unit target = units[0];
-        foreach(Unit unit in units)
+        foreach (Unit unit in units)
         {
             if (unit.CompareTag("UnitAlly"))
             {

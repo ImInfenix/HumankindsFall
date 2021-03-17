@@ -8,7 +8,7 @@ public class CheatCodes : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            SceneLoader.ReloadScene();
+            SceneLoader.LoadMenu();
         }
 
         else if (Input.GetKeyDown(KeyCode.T))

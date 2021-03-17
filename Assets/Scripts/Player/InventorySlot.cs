@@ -76,7 +76,7 @@ public class InventorySlot : MonoBehaviour, IDragHandler, IPointerClickHandler
         if (_status != SlotState.Empty)
             return;
 
-        PutInSlot(new UnitDescription(unit));
+        PutInSlot(Player.instance.Inventory.GetUnit(unit.id));
 
         unit.board.GetCell(unit.currentPosition).SetIsOccupied(false);
 
@@ -93,6 +93,7 @@ public class InventorySlot : MonoBehaviour, IDragHandler, IPointerClickHandler
         child = new GameObject(unitDescription.GetUnitName());
         child.transform.SetParent(transform, false);
 
+        float width = GetComponent<RectTransform>().rect.width;
         {
             Image i = child.AddComponent<Image>();
             Sprite sprite = unitDescription.GetSprite();
@@ -101,9 +102,8 @@ public class InventorySlot : MonoBehaviour, IDragHandler, IPointerClickHandler
             Rect spriteRect = unitDescription.GetSprite().rect;
             float aspectRatio = spriteRect.width / spriteRect.height;
             RectTransform rt = child.GetComponent<RectTransform>();
-
-            rt.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 100);
-            rt.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 100 * aspectRatio);
+            rt.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, width);
+            rt.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, width * aspectRatio);
         }
 
         this.unitDescription = unitDescription;
@@ -112,8 +112,8 @@ public class InventorySlot : MonoBehaviour, IDragHandler, IPointerClickHandler
             classDisplay = new GameObject("Class display");
             classDisplay.transform.SetParent(transform, false);
             RectTransform rt = classDisplay.AddComponent<RectTransform>();
-            rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, 0, 25);
-            rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Right, 0, 25);
+            rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, 0, width * 0.25f);
+            rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Right, 0, width * 0.25f);
             classDisplay.AddComponent<Image>().sprite = unitDescription.GetClass().classIconSprite;
         }
     }
@@ -154,7 +154,7 @@ public class InventorySlot : MonoBehaviour, IDragHandler, IPointerClickHandler
         List<Cell> avalaibleCells = new List<Cell>();
 
         foreach (Cell cell in authorizedCells)
-            if (!cell.GetIsOccupied())
+            if (!cell.GetIsOccupied() && cell.GetIsObstacle() == false)
                 avalaibleCells.Add(cell);
 
         if (avalaibleCells.Count == 0)

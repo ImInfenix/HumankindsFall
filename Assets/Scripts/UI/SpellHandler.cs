@@ -53,7 +53,7 @@ public class SpellHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        ActivateRaceSynergy();
     }
 
     //Activate spells
@@ -73,17 +73,39 @@ public class SpellHandler : MonoBehaviour
                         skeletonSpell.SetActive(true);
                         break;
                     case (Race.Octopus):
-
+                        octopusSpell.SetActive(true);
                         break;
                     case (Race.Elemental):
-
+                        elementalSpell.SetActive(true);
                         break;
                     case (Race.Giant):
-
+                        giantSpell.SetActive(true);
                         break;
                 }
             }
-            
+
+            if (race.getNumber() < 2)
+            {
+                switch (race.getRace())
+                {
+                    case (Race.Orc):
+                        orcSpell.SetActive(false);
+                        break;
+                    case (Race.Skeleton):
+                        skeletonSpell.SetActive(false);
+                        break;
+                    case (Race.Octopus):
+                        octopusSpell.SetActive(false);
+                        break;
+                    case (Race.Elemental):
+                        elementalSpell.SetActive(false);
+                        break;
+                    case (Race.Giant):
+                        giantSpell.SetActive(false);
+                        break;
+                }
+            }
+
         }
         
     }

@@ -7,6 +7,8 @@ public class Player : MonoBehaviour
 {
     public static Player instance;
 
+    public int walletStartAmount = 0;
+
     public Wallet Wallet { get { return _wallet; } }
     private Wallet _wallet;
 
@@ -34,5 +36,20 @@ public class Player : MonoBehaviour
     {
         Inventory.FillFields();
         Wallet.FillFields();
+    }
+
+    private void Start()
+    {
+        SaveFile saveFile = SavingSystem.RetrieveData();
+
+        Inventory.Initialize(saveFile?.GetAllUnits());
+        if (saveFile != null)
+        {
+            Wallet.Initialize(saveFile.walletAmount);
+            UnitDescription.currentId = saveFile.unitGeneratorId;
+            Marker.finishedLevels = saveFile.finishedLevels;
+            return;
+        }
+        Wallet.Initialize(walletStartAmount);
     }
 }

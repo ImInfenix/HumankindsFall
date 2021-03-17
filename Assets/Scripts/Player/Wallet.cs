@@ -11,14 +11,18 @@ public class Wallet : MonoBehaviour
 
     private int amount;
 
-    public void Awake()
+    public void Initialize(int initialAmount = 0)
     {
-        amount = 0;
+        amount = initialAmount;
+        UpdateGUI();
     }
 
     public void FillFields()
     {
-        amountDisplay = GameObject.Find("Wallet_GUI").GetComponent<TMP_Text>();
+        GameObject wallet = GameObject.Find("Wallet_GUI");
+        if (wallet == null)
+            return;
+        amountDisplay = wallet.GetComponent<TMP_Text>();
         UpdateGUI();
     }
 
@@ -45,6 +49,8 @@ public class Wallet : MonoBehaviour
 
     public void UpdateGUI()
     {
+        if (amountDisplay == null)
+            return;
         amountDisplay.text = amount.ToString();
     }
 }

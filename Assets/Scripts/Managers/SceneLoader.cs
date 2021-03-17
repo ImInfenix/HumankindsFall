@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -6,6 +7,8 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(GameManager))]
 public class SceneLoader : MonoBehaviour
 {
+
+
     private static SceneLoader instance;
 
     public void Initialize()
@@ -19,8 +22,31 @@ public class SceneLoader : MonoBehaviour
 
     private void OnSceneLoaded(Scene loadedScene, LoadSceneMode loadMode)
     {
-        if (loadMode == LoadSceneMode.Single)
-            GameManager.instance.EnterNewCombatLevel();
+        if (GameManager.instance.gamestate == GameManager.GameState.Placement || GameManager.instance.gamestate == GameManager.GameState.Shopping)
+            GameManager.instance.EnterNewLevel();
+    }
+
+    public static void LoadMenu()
+    {
+        Destroy(GameManager.instance.gameObject);
+        Destroy(Player.instance.gameObject);
+        SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
+    }
+
+    public static void LoadMapScene()
+    {
+        SceneManager.LoadScene("Map", LoadSceneMode.Single);
+    }
+
+    public static void LoadShopScene()
+    {
+        SceneManager.LoadScene("Shop", LoadSceneMode.Single);
+    }
+
+    public static void LoadBattle(string battleName)
+    {
+        Marker.Add(battleName);
+        SceneManager.LoadScene(battleName, LoadSceneMode.Single);
     }
 
     public static void LoadNextScene()
