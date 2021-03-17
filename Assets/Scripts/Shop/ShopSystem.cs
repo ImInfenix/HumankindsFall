@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class ShopSystem : MonoBehaviour
 {
@@ -10,11 +11,19 @@ public class ShopSystem : MonoBehaviour
     [SerializeField]
     private UnitDescriptionDisplay unitDescriptionDisplay;
 
+    [SerializeField]
+    private TMP_Text shopButton;
+
     List<UnitDescription> unitsToSell;
+
+    enum ShopMode { None, Buy, Sell }
+    ShopMode shopMode;
 
     private void Awake()
     {
         unitsToSell = new List<UnitDescription>();
+        SetShopToNoneMode();
+        unitDescriptionDisplay.shopSystem = this;
     }
 
     private void Start()
@@ -38,6 +47,33 @@ public class ShopSystem : MonoBehaviour
 
     public void ConfirmShopping()
     {
+        switch (shopMode)
+        {
+            case ShopMode.None:
+                break;
+            case ShopMode.Buy:
+                Buy();
+                break;
+            case ShopMode.Sell:
+                Sell();
+                break;
+        }
+    }
+
+    private void Sell()
+    {
+        if (unitDescriptionDisplay.GetSelectedSlotType() != InventorySlot.SlotType.Inventory)
+            return;
+
+        Player.instance.Inventory.RemoveFromInventory(unitDescriptionDisplay.GetActualSlot().GetCurrentUnitDescription());
+
+        Player.instance.Wallet.Earn(5);
+
+        SavingSystem.SaveData();
+    }
+
+    private void Buy()
+    {
         if (unitDescriptionDisplay.GetSelectedSlotType() != InventorySlot.SlotType.Shop)
             return;
 
@@ -51,5 +87,25 @@ public class ShopSystem : MonoBehaviour
         unitDescriptionDisplay.UnselectActualSlot();
 
         SavingSystem.SaveData();
+    }
+
+    public void SetShopToBuyMode()
+    {
+        shopMode = ShopMode.Buy;
+        shopButton.text = "Acheter";
+        shopButton.transform.parent.gameObject.SetActive(true);
+    }
+
+    public void SetShopToSellMode()
+    {
+        shopMode = ShopMode.Sell;
+        shopButton.text = "Vendre";
+        shopButton.transform.parent.gameObject.SetActive(true);
+    }
+
+    public void SetShopToNoneMode()
+    {
+        shopMode = ShopMode.None;
+        shopButton.transform.parent.gameObject.SetActive(false);
     }
 }

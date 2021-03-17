@@ -68,6 +68,7 @@ public class Inventory : MonoBehaviour
     public void RemoveFromInventory(UnitDescription unit)
     {
         unitsInInventory.Remove(unit.GetId());
+        inventoryUI.UpdateGUI();
     }
 
     //A retirer plus tard

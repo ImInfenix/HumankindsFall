@@ -14,6 +14,9 @@ public class UnitDescriptionDisplay : MonoBehaviour
 
     private InventorySlot actualSlot;
 
+    [HideInInspector]
+    public ShopSystem shopSystem;
+
     public void Awake()
     {
         actualSlot = null;
@@ -31,6 +34,16 @@ public class UnitDescriptionDisplay : MonoBehaviour
         UpdateDescription();
 
         Player.instance.Inventory.Show();
+
+        if(shopSystem != null)
+        {
+            if (actualSlot == null)
+                shopSystem.SetShopToNoneMode();
+            else if (actualSlot.GetSlotType() == InventorySlot.SlotType.Inventory)
+                shopSystem.SetShopToSellMode();
+            else 
+                shopSystem.SetShopToBuyMode();
+        }
     }
 
     public void UnselectActualSlot()
@@ -43,6 +56,8 @@ public class UnitDescriptionDisplay : MonoBehaviour
         UpdateDescription();
 
         Player.instance.Inventory.Hide();
+
+        shopSystem?.SetShopToNoneMode();
     }
 
     public void SetUnitName(string name)

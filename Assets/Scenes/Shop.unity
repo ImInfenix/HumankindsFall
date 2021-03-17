@@ -1157,12 +1157,12 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1365264077}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1447866861}
-  m_Father: {fileID: 1855430787}
+  m_Father: {fileID: 1368245547}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.375, y: 0.05}
@@ -1336,7 +1336,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -1354,6 +1354,7 @@ RectTransform:
   - {fileID: 1228836813}
   - {fileID: 316110421}
   - {fileID: 1824409036}
+  - {fileID: 1365264078}
   m_Father: {fileID: 2231666390492017983}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1492,7 +1493,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "J'ach\xE8te !"
+  m_text: Transaction
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1519,7 +1520,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72
+  m_fontSize: 63.9
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1800,6 +1801,7 @@ MonoBehaviour:
   - {fileID: 966500113}
   - {fileID: 1709700405}
   unitDescriptionDisplay: {fileID: 3228196455902530547}
+  shopButton: {fileID: 1447866862}
 --- !u!224 &1855430787 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3617695967050263256, guid: eb5c2b42615f3bf47a85fb76fc049d57,
