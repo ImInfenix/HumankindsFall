@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class GemUI : MonoBehaviour
+public class GemUI : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUpHandler
 {
     Vector3 startPosition;
+    Transform startParent;
     GemSlot gemSlot;
 
     Inventory inventory;
@@ -17,12 +18,14 @@ public class GemUI : MonoBehaviour
         inventory = Player.instance.Inventory;
     }
 
-    public void OnMouseDown()
+    public void OnPointerDown(PointerEventData eventData)
     {
         startPosition = gameObject.transform.position;
+        startParent = transform.parent.parent;
+        gameObject.transform.parent.SetParent(GameObject.Find("InventoryGems").transform);
     }
 
-    public void OnMouseDrag()
+    public void OnDrag(PointerEventData eventData)
     {
         if (GemSlot == null)
         {
@@ -34,7 +37,7 @@ public class GemUI : MonoBehaviour
         }
     }
 
-    public void OnMouseUp()
+    public void OnPointerUp(PointerEventData eventData)
     {
         if (GemSlot == null)
         {
@@ -85,6 +88,8 @@ public class GemUI : MonoBehaviour
                 //remove the gem from the inventory
                 inventory.RemoveGem(gem);
             }
+
+            transform.parent.SetParent(startParent);
         }
     }
 }

@@ -6,6 +6,8 @@ public class InventoryUI : MonoBehaviour
     [SerializeField]
     private RectTransform UnitsSlots;
     [SerializeField]
+    private RectTransform GemsSlots;
+    [SerializeField]
     private RectTransform CurrentUnitDescription;
     public RewardSystem rewardSystem;
 
@@ -89,9 +91,11 @@ public class InventoryUI : MonoBehaviour
         {
             case GameManager.GameState.Placement:
                 ShowSlots();
+                ShowGemsSlots();
                 break;
             case GameManager.GameState.Combat:
                 HideSlots();
+                HideGemsSlots();
                 break;
             case GameManager.GameState.Resolution:
                 ShowSlots();
@@ -117,5 +121,15 @@ public class InventoryUI : MonoBehaviour
     public void HideDescription()
     {
         CurrentUnitDescription.gameObject.SetActive(false);
+    }
+
+    public void ShowGemsSlots()
+    {
+        GemsSlots.gameObject.SetActive(true);
+    }
+
+    public void HideGemsSlots()
+    {
+        GemsSlots.gameObject.SetActive(false);
     }
 }
