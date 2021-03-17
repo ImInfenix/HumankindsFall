@@ -21,24 +21,7 @@ public class Inventory : MonoBehaviour
         gemsInInventory = new List<Gem>();
 
         //TEST GEMS
-        gemsInInventory.Add(new MachineGunGem());
-        gemsInInventory.Add(new RubyGem());
-        gemsInInventory.Add(new VampireGem());
-        gemsInInventory.Add(new MachineGunGem());
-        gemsInInventory.Add(new RubyGem());
-        gemsInInventory.Add(new VampireGem());
-        gemsInInventory.Add(new MachineGunGem());
-        gemsInInventory.Add(new RubyGem());
-        gemsInInventory.Add(new VampireGem());
-        gemsInInventory.Add(new MachineGunGem());
-        gemsInInventory.Add(new RubyGem());
-        gemsInInventory.Add(new VampireGem());
-        gemsInInventory.Add(new MachineGunGem());
-        gemsInInventory.Add(new RubyGem());
-        gemsInInventory.Add(new VampireGem());
-        gemsInInventory.Add(new MachineGunGem());
-        gemsInInventory.Add(new RubyGem());
-        gemsInInventory.Add(new VampireGem());
+        GenerateGems();
     }
 
     private void Start()
@@ -125,5 +108,30 @@ public class Inventory : MonoBehaviour
     public List<Gem> GetAllGems()
     {
         return gemsInInventory;
+    }
+
+    public void RemoveGem(Gem gem)
+    {
+        for (int i = 0; i < gemsInInventory.Count; i++)
+        {
+            if (gemsInInventory[i].GetType() == gem.GetType())
+            {
+                gemsInInventory.RemoveAt(i);
+                break;
+            }
+        }
+    }
+
+    //TESTING FUNCTION
+    //generate one gem of each gameObject in Resources/Gems
+    public void GenerateGems()
+    {
+        GameObject[] gemsGameObjects = Resources.LoadAll("Gems", typeof(GameObject)).Cast<GameObject>().ToArray();
+        foreach (GameObject gem in gemsGameObjects)
+        {
+            GameObject newGem = Instantiate(gem);
+            gemsInInventory.Add(newGem.GetComponent<Gem>());
+            Destroy(newGem);
+        }
     }
 }

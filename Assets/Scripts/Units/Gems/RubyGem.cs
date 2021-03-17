@@ -20,7 +20,7 @@ public class RubyGem : Gem
         unit.MaxLife = Mathf.RoundToInt(unit.MaxLife * 1.2f);
     }
 
-    void Start()
+    void Awake()
     {
         gemName = "Gemme de rubis";
         gemDescription = "Augmente les PV max de 20, puis de 20%.";

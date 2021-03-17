@@ -10,5 +10,11 @@ public class CheatCodes : MonoBehaviour
         {
             SceneLoader.ReloadScene();
         }
+
+        else if (Input.GetKeyDown(KeyCode.T))
+        {
+            Inventory inventory = Player.instance.Inventory;
+            inventory.GenerateGems();
+        }
     }
 }

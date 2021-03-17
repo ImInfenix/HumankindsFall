@@ -19,7 +19,7 @@ public class VampireGem : Gem
         
     }
 
-    void Start()
+    void Awake()
     {
         gemName = "Gemme du vampire";
         gemDescription = "À chaque attaque, l'unité se soigne de 20% de sa valeur d'attaque.";
