@@ -131,18 +131,23 @@ public class UnitDescriptionDisplay : MonoBehaviour
     public void GenerateSlots(string[] unitGems)
     {
         //number of gems slots should be the unit level
-        int numberOfGemsSlots = 8;
+        int numberOfGemsSlots = 5;
 
         float widthOffset = 0.8f;
         float heightOffset = -0.8f;
 
         int nbGemsSlotsPerLine = numberOfGemsSlots;
+
+        float y = 0.5f;
+        
         if (numberOfGemsSlots > 5)
             nbGemsSlotsPerLine = 5;
 
+        else
+            y = 0;
+
         float baseX = 0 - (nbGemsSlotsPerLine - 1) * widthOffset / 2;
         float x = baseX;
-        float y = 0.5f;
 
         //destroy previous displayed slots
         foreach (GameObject slot in gemSlots)
