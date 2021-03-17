@@ -26,6 +26,13 @@ public class SceneLoader : MonoBehaviour
             GameManager.instance.EnterNewLevel();
     }
 
+    public static void LoadMenu()
+    {
+        Destroy(GameManager.instance.gameObject);
+        Destroy(Player.instance.gameObject);
+        SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
+    }
+
     public static void LoadMapScene()
     {
         SceneManager.LoadScene("Map", LoadSceneMode.Single);

@@ -47,5 +47,7 @@ public class RewardSystem : MonoBehaviour
         Player.instance.Inventory.AddUnitInInventory(unitDescriptionDisplay.GetActualSlot().GetCurrentUnitDescription(), true);
         gameObject.SetActive(false);
         SavingSystem.SaveData();
+
+        ResolutionPhaseHandler.instance.ShowExitButton();
     }
 }

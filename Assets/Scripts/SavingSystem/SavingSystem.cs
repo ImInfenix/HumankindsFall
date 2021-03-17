@@ -77,6 +77,7 @@ public class SavingSystem
     static SaveFile CreateSaveData()
     {
         SaveFile saveFile = new SaveFile();
+        saveFile.finishedLevels = Marker.finishedLevels;
         saveFile.SetUnitsToSave(GetAllUnitsToSave());
         saveFile.walletAmount = (int)Player.instance?.Wallet?.GetAmount();
         saveFile.unitGeneratorId = UnitDescription.currentId;
@@ -91,12 +92,4 @@ public class SavingSystem
 
         return units;
     }
-}
-
-[Serializable]
-public class MyClass
-{
-    public int level;
-    public float timeElapsed;
-    public string playerName;
 }

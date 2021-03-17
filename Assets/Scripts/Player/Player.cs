@@ -47,6 +47,7 @@ public class Player : MonoBehaviour
         {
             Wallet.Initialize(saveFile.walletAmount);
             UnitDescription.currentId = saveFile.unitGeneratorId;
+            Marker.finishedLevels = saveFile.finishedLevels;
             return;
         }
         Wallet.Initialize(walletStartAmount);

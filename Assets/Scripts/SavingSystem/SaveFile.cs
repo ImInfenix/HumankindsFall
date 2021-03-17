@@ -7,6 +7,7 @@ public class SaveFile
     public int fileVersion = 0;
     public int walletAmount;
     public uint unitGeneratorId;
+    public List<string> finishedLevels;
     public List<UnitDescriptionForSerialization> units;
 
     public void SetUnitsToSave(List<UnitDescription> unitsToSave)

@@ -134,8 +134,6 @@ public class GameManager : MonoBehaviour
             Player.instance.Inventory.inventoryUI.rewardSystem.StartRewardPhase();
         }
 
-        ResolutionPhaseHandler.instance.ShowExitButton();
-
         SpellHandler.instance.HideSpells();
         HealthbarHandler.HideAll();
         Player.instance.Inventory.Hide();
