@@ -15,6 +15,9 @@ public class Inventory : MonoBehaviour
     [Header("Game start setup"), SerializeField]
     private uint startingUnitCount;
 
+    [SerializeField]
+    private int maxElements = 8;
+
     private void Awake()
     {
         unitsInInventory = new Dictionary<uint, UnitDescription>();
@@ -59,6 +62,9 @@ public class Inventory : MonoBehaviour
         UnitDescription equivalentUnit = GetEquivalentUnit(unit);
         if(equivalentUnit == null)
         {
+            if (unitsInInventory.Count >= maxElements)
+                return;
+
             unitsInInventory.Add(unit.GetId(), unit);
 
             if (addToGUINow)
