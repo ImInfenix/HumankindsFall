@@ -8,8 +8,10 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     private List<Unit> units;
-    public enum GameState { Placement, Combat, Resolution };
+    public enum GameState { Placement, Combat, Resolution, Shopping };
     public GameState gamestate { get; private set; }
+
+    public GameState startingGameState = GameState.Placement;
 
     private void Awake()
     {
@@ -26,7 +28,7 @@ public class GameManager : MonoBehaviour
 
         //initialization
         units = new List<Unit>();
-        gamestate = GameState.Placement;
+        gamestate = startingGameState;
 
         GetComponent<SceneLoader>().Initialize();
     }

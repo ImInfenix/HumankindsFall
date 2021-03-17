@@ -7,6 +7,8 @@ public class Player : MonoBehaviour
 {
     public static Player instance;
 
+    public int walletStartAmount = 0;
+
     public Wallet Wallet { get { return _wallet; } }
     private Wallet _wallet;
 
@@ -47,6 +49,6 @@ public class Player : MonoBehaviour
             UnitDescription.currentId = saveFile.unitGeneratorId;
             return;
         }
-        Wallet.Initialize();
+        Wallet.Initialize(walletStartAmount);
     }
 }
