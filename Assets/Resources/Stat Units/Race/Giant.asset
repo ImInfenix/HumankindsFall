@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de9e8c1568867244bb3c508a017b768c, type: 3}
+  m_Name: Giant
+  m_EditorClassIdentifier: 
+  race: 5
+  maxLife: 25
+  maxMana: 0
+  mana: 0
+  armor: 0
+  moveSpeed: 0.2
+  attackSpeed: 0.1
+  damage: 5
+  unitNames:
+  - Klinus
+  - Erym
+  - Slazsag
+  - Kivog
+  - Dlamkos
+  unitSprite: {fileID: -8514668936453070484, guid: 586ac7b43b3059540a8d13455100998a,
+    type: 3}
+  warriorSprite: {fileID: -5855572774118078500, guid: 48b12f57062c8cd4493d359fb17e3a12,
+    type: 3}
+  mageSprite: {fileID: -6950304053032081439, guid: 7f286e8ffa7bb574f86f7b3019ee0c4f,
+    type: 3}
+  tankSprite: {fileID: -8597123855551577579, guid: 586ac7b43b3059540a8d13455100998a,
+    type: 3}
+  bowmanSprite: {fileID: -6513909809183491939, guid: 382254a5d4e2a7d46aa38ff1921f12f6,
+    type: 3}
+  healerSprite: {fileID: -4125467054850562526, guid: b6da4972c6fc41844929d5bebd729749,
+    type: 3}
+  supportSprite: {fileID: -4125467054850562526, guid: b6da4972c6fc41844929d5bebd729749,
+    type: 3}
+  berserkerSprite: {fileID: 3410284346342496746, guid: cac443a2804cd9e4f87850737bbb32b8,
+    type: 3}
+  assassinSprite: {fileID: -6513909809183491939, guid: 382254a5d4e2a7d46aa38ff1921f12f6,
+    type: 3}
+  soldierSprite: {fileID: -8514668936453070484, guid: 586ac7b43b3059540a8d13455100998a,
+    type: 3}

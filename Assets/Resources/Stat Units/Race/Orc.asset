@@ -17,7 +17,7 @@ MonoBehaviour:
   maxMana: 0
   mana: 0
   armor: 0
-  moveSpeed: 0
+  moveSpeed: -0.1
   attackSpeed: 0
   damage: 2
   unitNames:
@@ -26,4 +26,23 @@ MonoBehaviour:
   - Zovak
   - Rhul
   - Agvur
-  unitSprite: {fileID: 21300000, guid: 09d067041c81d534f9552bbd1b5f76c8, type: 3}
+  unitSprite: {fileID: -5706596571513104164, guid: 75fa7c54ddc291845bf47c6b80bf642c,
+    type: 3}
+  warriorSprite: {fileID: -4928994181875168258, guid: 619af164554cb4a479f56fcac3445487,
+    type: 3}
+  mageSprite: {fileID: -2576748812284309898, guid: 619af164554cb4a479f56fcac3445487,
+    type: 3}
+  tankSprite: {fileID: 4217182896280857003, guid: 75fa7c54ddc291845bf47c6b80bf642c,
+    type: 3}
+  bowmanSprite: {fileID: 6211927434488055067, guid: 619af164554cb4a479f56fcac3445487,
+    type: 3}
+  healerSprite: {fileID: 966562577831943443, guid: 75fa7c54ddc291845bf47c6b80bf642c,
+    type: 3}
+  supportSprite: {fileID: 6781190906818467777, guid: 619af164554cb4a479f56fcac3445487,
+    type: 3}
+  berserkerSprite: {fileID: -431800362255891804, guid: 619af164554cb4a479f56fcac3445487,
+    type: 3}
+  assassinSprite: {fileID: 2793919009957314835, guid: 619af164554cb4a479f56fcac3445487,
+    type: 3}
+  soldierSprite: {fileID: -5706596571513104164, guid: 75fa7c54ddc291845bf47c6b80bf642c,
+    type: 3}

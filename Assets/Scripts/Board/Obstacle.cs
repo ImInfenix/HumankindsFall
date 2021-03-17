@@ -59,7 +59,7 @@ public class Obstacle : MonoBehaviour
     private void updatePosition()
     {
         currentPosition = currentCell.TileMapPosition;
-        worldPosition = new Vector3(currentCell.WorldPosition.x+ paddingLeft, currentCell.WorldPosition.y + paddingBot, 0);  //placement a changer (problème = point d'ancrage au centre alors qu'on veut les placer avec le point d'ancrage en centre bas
+        worldPosition = new Vector3(currentCell.WorldPosition.x+ paddingLeft, currentCell.WorldPosition.y + paddingBot, 0);
         transform.position = worldPosition;
     }  
     

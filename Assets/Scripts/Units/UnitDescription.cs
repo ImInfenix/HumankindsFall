@@ -39,7 +39,7 @@ public class UnitDescription
         this.unitRace = unitRace;
         this.unitClass = unitClass;
         this.abilityName = abilityName;
-        sprite = unitRace.unitSprite;
+        sprite = unitRace.getSprite(unitClass.clas); 
         if (id == null)
             this.id = GetNewId();
         else this.id = (uint) id;

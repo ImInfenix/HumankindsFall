@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de9e8c1568867244bb3c508a017b768c, type: 3}
+  m_Name: Octopus
+  m_EditorClassIdentifier: 
+  race: 3
+  maxLife: 0
+  maxMana: 0
+  mana: 0
+  armor: 0
+  moveSpeed: 0
+  attackSpeed: 0
+  damage: 5
+  unitNames:
+  - C'thulhu
+  - Cthylulbh
+  - Xibbed
+  - Gricn'gno
+  - Shiothroxz
+  unitSprite: {fileID: 5014925145051207573, guid: d441c44cbde3668469ef7c6bf32ccead,
+    type: 3}
+  warriorSprite: {fileID: -845671412585875310, guid: d441c44cbde3668469ef7c6bf32ccead,
+    type: 3}
+  mageSprite: {fileID: -5232962937916053866, guid: d441c44cbde3668469ef7c6bf32ccead,
+    type: 3}
+  tankSprite: {fileID: -845671412585875310, guid: d441c44cbde3668469ef7c6bf32ccead,
+    type: 3}
+  bowmanSprite: {fileID: -5232962937916053866, guid: d441c44cbde3668469ef7c6bf32ccead,
+    type: 3}
+  healerSprite: {fileID: -5323118506111613818, guid: d441c44cbde3668469ef7c6bf32ccead,
+    type: 3}
+  supportSprite: {fileID: -5323118506111613818, guid: d441c44cbde3668469ef7c6bf32ccead,
+    type: 3}
+  berserkerSprite: {fileID: -4557307861747338638, guid: d441c44cbde3668469ef7c6bf32ccead,
+    type: 3}
+  assassinSprite: {fileID: -4557307861747338638, guid: d441c44cbde3668469ef7c6bf32ccead,
+    type: 3}
+  soldierSprite: {fileID: 5014925145051207573, guid: d441c44cbde3668469ef7c6bf32ccead,
+    type: 3}

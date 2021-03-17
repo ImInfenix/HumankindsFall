@@ -154,11 +154,11 @@ public class Unit : MonoBehaviour
         classIcon.sprite = classStat.classIconSprite;
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-        if (raceStats.race != Race.Human)
-            spriteRenderer.sprite = raceStats.unitSprite;
+        //if (raceStats.race != Race.Human)
+        spriteRenderer.sprite = raceStats.getSprite(classStat.clas);//spriteRenderer.sprite = Resources.Load<Sprite>("Textures/Unit Sprites/" + raceStats.race.ToString() + "/" + classStat.clas.ToString());   // spriteRenderer.sprite = raceStats.unitSprite;
 
-        else
-            spriteRenderer.sprite = Resources.Load<Sprite>("Textures/Unit Sprites/Humans/" + classStat.clas.ToString());
+        // else
+        //      spriteRenderer.sprite = Resources.Load<Sprite>("Textures/Unit Sprites/Humans/" + classStat.clas.ToString());
 
         //canAttack = true;
         //hasTarget = false;

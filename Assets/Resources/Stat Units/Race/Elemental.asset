@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de9e8c1568867244bb3c508a017b768c, type: 3}
+  m_Name: Elemental
+  m_EditorClassIdentifier: 
+  race: 4
+  maxLife: 20
+  maxMana: 0
+  mana: 0
+  armor: 0
+  moveSpeed: 0
+  attackSpeed: -0.2
+  damage: 2
+  unitNames:
+  - Gliss
+  - Aqualis
+  - Stratos
+  - Vexus
+  - Duster
+  unitSprite: {fileID: 9036399302747413655, guid: 75a6831676e9b914caa0d1b8248b8c91,
+    type: 3}
+  warriorSprite: {fileID: -6183570790091957818, guid: 75a6831676e9b914caa0d1b8248b8c91,
+    type: 3}
+  mageSprite: {fileID: 7336399372187010669, guid: 75a6831676e9b914caa0d1b8248b8c91,
+    type: 3}
+  tankSprite: {fileID: -6183570790091957818, guid: 75a6831676e9b914caa0d1b8248b8c91,
+    type: 3}
+  bowmanSprite: {fileID: -7339533501470664506, guid: 75a6831676e9b914caa0d1b8248b8c91,
+    type: 3}
+  healerSprite: {fileID: 4799119503133408509, guid: 75a6831676e9b914caa0d1b8248b8c91,
+    type: 3}
+  supportSprite: {fileID: 4799119503133408509, guid: 75a6831676e9b914caa0d1b8248b8c91,
+    type: 3}
+  berserkerSprite: {fileID: 7336399372187010669, guid: 75a6831676e9b914caa0d1b8248b8c91,
+    type: 3}
+  assassinSprite: {fileID: -7339533501470664506, guid: 75a6831676e9b914caa0d1b8248b8c91,
+    type: 3}
+  soldierSprite: {fileID: 7702638074590927934, guid: 75a6831676e9b914caa0d1b8248b8c91,
+    type: 3}
