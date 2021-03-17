@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RunCombatButton : MonoBehaviour
+public class CombatButton : MonoBehaviour
 {
     public void RunCombat()
     {
@@ -10,6 +10,14 @@ public class RunCombatButton : MonoBehaviour
         {
             GameManager.instance.ConfirmPlacement();
             gameObject.SetActive(false);
+        }
+    }
+
+    public void ExitCombat()
+    {
+        if (GameManager.instance.gamestate == GameManager.GameState.Resolution)
+        {
+            GameManager.instance.EnterMap();
         }
     }
 }

@@ -10,6 +10,8 @@ public class LevelDescription : MonoBehaviour
     private const string BattleScenesFolder = "Scenes/BattleScenes";
 
     [SerializeField]
+    private string placeName;
+    [SerializeField]
     private TMP_Text Title;
     [SerializeField]
     private TMP_Text Description;
@@ -32,7 +34,12 @@ public class LevelDescription : MonoBehaviour
 
     public void ChangeTitle(string text)
     {
-        Title.text = text.Substring(0, text.Length - 1);
+        Title.text = text;
+    }
+
+    public void ChangeName(string text)
+    {
+        placeName = text;
     }
 
     public void ChangeDescription(string description)
@@ -48,8 +55,7 @@ public class LevelDescription : MonoBehaviour
     //Il faudra que la scène ait le même nom que le niveau
     public void LoadBattle()
     {
-        string s = $"{BattleScenesFolder}/{Title.text}";
-        SceneManager.LoadScene(s);
+        GameManager.instance.EnterBattle(placeName);
     }
 
 }

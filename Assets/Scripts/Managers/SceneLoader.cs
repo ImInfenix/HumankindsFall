@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -21,15 +22,26 @@ public class SceneLoader : MonoBehaviour
 
     private void OnSceneLoaded(Scene loadedScene, LoadSceneMode loadMode)
     {
-        if (GameManager.instance.gamestate == GameManager.GameState.Placement)
-            GameManager.instance.EnterNewCombatLevel();
+        if (GameManager.instance.gamestate == GameManager.GameState.Placement || GameManager.instance.gamestate == GameManager.GameState.Shopping)
+            GameManager.instance.EnterNewLevel();
     }
 
     public static void LoadMapScene()
     {
         SceneManager.LoadScene("Map", LoadSceneMode.Single);
     }
-    
+
+    public static void LoadShopScene()
+    {
+        SceneManager.LoadScene("Shop", LoadSceneMode.Single);
+    }
+
+    public static void LoadBattle(string battleName)
+    {
+        Marker.Add(battleName);
+        SceneManager.LoadScene(battleName, LoadSceneMode.Single);
+    }
+
     public static void LoadNextScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);

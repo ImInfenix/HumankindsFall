@@ -8,4 +8,9 @@ public class InGameMenuNavigation : MonoBehaviour
     {
         GameManager.instance.EnterMap();
     }
+
+    public void GoToShop()
+    {
+        GameManager.instance.EnterShop();
+    }
 }

@@ -8,13 +8,15 @@ public class MainMenuNavigation : MonoBehaviour
 
     public void NewGame()
     {
-        SceneLoader.LoadNextScene();
+        CheckForPlayerExistence();
+        GameManager.instance.EnterMap();
     }
 
     public void ContinueGame()
     {
+        CheckForPlayerExistence();
         SavingSystem.RetrieveDataFromDisk();
-        SceneLoader.LoadNextScene();
+        GameManager.instance.EnterMap();
     }
 
     public void Leave()
@@ -27,5 +29,11 @@ public class MainMenuNavigation : MonoBehaviour
     {
         if (!SavingSystem.GameSaveExists())
             continueButton.SetActive(false);
+    }
+
+    public void CheckForPlayerExistence()
+    {
+        if (Player.instance != null)
+            Destroy(Player.instance.gameObject);
     }
 }

@@ -19,7 +19,10 @@ public class Wallet : MonoBehaviour
 
     public void FillFields()
     {
-        amountDisplay = GameObject.Find("Wallet_GUI").GetComponent<TMP_Text>();
+        GameObject wallet = GameObject.Find("Wallet_GUI");
+        if (wallet == null)
+            return;
+        amountDisplay = wallet.GetComponent<TMP_Text>();
         UpdateGUI();
     }
 
@@ -46,6 +49,8 @@ public class Wallet : MonoBehaviour
 
     public void UpdateGUI()
     {
+        if (amountDisplay == null)
+            return;
         amountDisplay.text = amount.ToString();
     }
 }

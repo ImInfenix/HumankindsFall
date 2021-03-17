@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class Marker : MonoBehaviour
 {
+    public static List<string> finishedLevels;
+
     [SerializeField]
     private List<Marker> Neighbours;
     [SerializeField]
@@ -28,17 +30,24 @@ public class Marker : MonoBehaviour
     public void Awake()
     {
         if (!isAccessible)
-            this.gameObject.SetActive(false);
+            gameObject.SetActive(false);
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = RedFlag;
         eachLine = new List<string>();
         string AllFile = descriptionTextFile.text;
         eachLine.AddRange(AllFile.Split("\n"[0]));
     }
+
+    private void Start()
+    {
+        if (finishedLevels != null && finishedLevels.Contains(descriptionTextFile.name))
+            FinishLevel();
+    }
+
     public void FinishLevel()
     {
         spriteRenderer.sprite = GreenFlag;
-        foreach(Marker marker in Neighbours)
+        foreach (Marker marker in Neighbours)
         {
             marker.Unlock();
         }
@@ -47,24 +56,24 @@ public class Marker : MonoBehaviour
     public void Unlock()
     {
         if (!isAccessible)
-            this.gameObject.SetActive(true);
-
-    }
-
-    public void Update()
-    {
-        if (Input.GetKeyDown("space"))
-            FinishLevel();
+            gameObject.SetActive(true);
     }
 
     public void OnMouseDown()
     {
         levelDescription.ChangeDescription(eachLine[1]);
         levelDescription.ChangeTitle(eachLine[0]);
+        levelDescription.ChangeName(descriptionTextFile.name);
         levelDescription.ChangeImage(sprite);
         levelDescription.Show();
-        FinishLevel();
     }
 
-    
+    public static void Add(string level)
+    {
+        if (finishedLevels == null)
+            finishedLevels = new List<string>();
+
+        if (!finishedLevels.Contains(level))
+            finishedLevels.Add(level);
+    }
 }
