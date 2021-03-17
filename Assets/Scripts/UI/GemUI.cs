@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class GemUI : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUpHandler
+public class GemUI : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler
 {
     Vector3 startPosition;
     Transform startParent;
     GemSlot gemSlot;
+    Gem currentGem;
+
+    bool isDragging;
 
     Inventory inventory;
 
@@ -16,13 +19,20 @@ public class GemUI : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerU
     private void Start()
     {
         inventory = Player.instance.Inventory;
+        currentGem = transform.parent.gameObject.GetComponent<Gem>();
+        isDragging = false;
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        startPosition = gameObject.transform.position;
-        startParent = transform.parent.parent;
-        gameObject.transform.parent.SetParent(GameObject.Find("InventoryGems").transform);
+        if (eventData.button == PointerEventData.InputButton.Left)
+        {
+            startPosition = gameObject.transform.position;
+            startParent = transform.parent.parent;
+            gameObject.transform.parent.SetParent(GameObject.Find("InventoryGems").transform);
+            Tooltip.HideTooltip_Static();
+            isDragging = true;
+        }
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -39,7 +49,7 @@ public class GemUI : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerU
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        if (GemSlot == null)
+        if (GemSlot == null && eventData.button == PointerEventData.InputButton.Left)
         {
             //get the gem slot under the mouse pointer
             PointerEventData pointerData = new PointerEventData(EventSystem.current)
@@ -69,7 +79,7 @@ public class GemUI : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerU
             else
             {
                 gameObject.transform.position = slotUnderMouse.transform.position;
-                slotUnderMouse.Gem = transform.parent.gameObject.GetComponent<Gem>();
+                slotUnderMouse.Gem = currentGem;
 
                 if (GemSlot != null)
                     GemSlot.Gem = null;
@@ -91,5 +101,16 @@ public class GemUI : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerU
 
             transform.parent.SetParent(startParent);
         }
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (!isDragging)
+            Tooltip.ShowTooltip_Static(currentGem.ToString());
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        Tooltip.HideTooltip_Static();
     }
 }
