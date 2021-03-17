@@ -22,6 +22,7 @@ public class Marker : MonoBehaviour
     private Sprite sprite;
     [SerializeField]
     private TextAsset descriptionTextFile;
+
     private List<string> eachLine;
 
     public void Awake()

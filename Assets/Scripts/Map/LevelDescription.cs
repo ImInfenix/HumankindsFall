@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class LevelDescription : MonoBehaviour
 {
+    private const string BattleScenesFolder = "Scenes/BattleScenes";
 
     [SerializeField]
     private TMP_Text Title;
@@ -31,7 +32,7 @@ public class LevelDescription : MonoBehaviour
 
     public void ChangeTitle(string text)
     {
-        Title.text = text;
+        Title.text = text.Substring(0, text.Length - 1);
     }
 
     public void ChangeDescription(string description)
@@ -47,7 +48,8 @@ public class LevelDescription : MonoBehaviour
     //Il faudra que la scène ait le même nom que le niveau
     public void LoadBattle()
     {
-        SceneManager.LoadScene(Title.text);
+        string s = $"{BattleScenesFolder}/{Title.text}";
+        SceneManager.LoadScene(s);
     }
 
 }

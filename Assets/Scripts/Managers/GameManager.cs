@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     private List<Unit> units;
-    public enum GameState { Placement, Combat, Resolution, Shopping };
+    public enum GameState { Placement, Combat, Resolution, Shopping, Map };
     public GameState gamestate { get; private set; }
 
     public GameState startingGameState = GameState.Placement;
@@ -68,6 +68,12 @@ public class GameManager : MonoBehaviour
     {
         gamestate = GameState.Placement;
         Player.instance.InitiateForNewScene();
+    }
+
+    public void EnterMap()
+    {
+        gamestate = GameState.Map;
+        SceneLoader.LoadMapScene();
     }
 
     public void Update()

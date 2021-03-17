@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(GameManager))]
 public class SceneLoader : MonoBehaviour
 {
+
+
     private static SceneLoader instance;
 
     public void Initialize()
@@ -19,10 +21,15 @@ public class SceneLoader : MonoBehaviour
 
     private void OnSceneLoaded(Scene loadedScene, LoadSceneMode loadMode)
     {
-        if (loadMode == LoadSceneMode.Single)
+        if (GameManager.instance.gamestate == GameManager.GameState.Placement)
             GameManager.instance.EnterNewCombatLevel();
     }
 
+    public static void LoadMapScene()
+    {
+        SceneManager.LoadScene("Map", LoadSceneMode.Single);
+    }
+    
     public static void LoadNextScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
