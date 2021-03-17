@@ -40,13 +40,20 @@ public class UnitDescriptionDisplay : MonoBehaviour
         {
             actualSlot.Unselect();
         }
+
+        if(actualSlot == slot)
+        {
+            UnselectActualSlot();
+            return;
+        }
+
         actualSlot = slot;
         slot.Select();
         UpdateDescription();
 
         Player.instance.Inventory.Show();
 
-        if(shopSystem != null)
+        if (shopSystem != null)
         {
             if (actualSlot == null)
                 shopSystem.SetShopToNoneMode();
@@ -125,7 +132,9 @@ public class UnitDescriptionDisplay : MonoBehaviour
         SetUnitStats(stats);
 
         string[] gems = currentDescription.GetGems();
-        GenerateSlots(gems);
+
+        if ((GameManager.instance.gamestate != GameManager.GameState.Shopping))
+            GenerateSlots(gems);
     }
 
     public void GenerateSlots(string[] unitGems)
@@ -139,7 +148,7 @@ public class UnitDescriptionDisplay : MonoBehaviour
         int nbGemsSlotsPerLine = numberOfGemsSlots;
 
         float y = 0.5f;
-        
+
         if (numberOfGemsSlots > 5)
             nbGemsSlotsPerLine = 5;
 

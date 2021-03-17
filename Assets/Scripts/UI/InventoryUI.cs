@@ -79,6 +79,7 @@ public class InventoryUI : MonoBehaviour
 
         ShowDescription();
         ShowSlots();
+        ShowGemsSlots();
     }
 
     public void Hide()
@@ -86,16 +87,15 @@ public class InventoryUI : MonoBehaviour
         IsDisplayed = false;
 
         HideDescription();
+        HideGemsSlots();
 
         switch (GameManager.instance.gamestate)
         {
             case GameManager.GameState.Placement:
                 ShowSlots();
-                ShowGemsSlots();
                 break;
             case GameManager.GameState.Combat:
                 HideSlots();
-                HideGemsSlots();
                 break;
             case GameManager.GameState.Resolution:
                 ShowSlots();

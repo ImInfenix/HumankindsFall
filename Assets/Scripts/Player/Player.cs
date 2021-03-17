@@ -43,6 +43,7 @@ public class Player : MonoBehaviour
         SaveFile saveFile = SavingSystem.RetrieveData();
 
         Inventory.Initialize(saveFile?.GetAllUnits());
+        Marker.finishedLevels = new List<string>();
         if (saveFile != null)
         {
             Wallet.Initialize(saveFile.walletAmount);
