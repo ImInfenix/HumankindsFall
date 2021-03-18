@@ -127,7 +127,7 @@ public class SpellHandler : MonoBehaviour
 
             if (race.getNumber() < 3 && race.getRace() == Race.Demon)
             {
-                demonSpell.SetActive(true);
+                demonSpell.SetActive(false);
             }
 
         }
