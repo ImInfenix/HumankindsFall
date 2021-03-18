@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
         gamestate = startingGameState;
 
         GetComponent<SceneLoader>().Initialize();
+        GetComponentInChildren<PauseMenu>(true).Initialize();
     }
 
     /// <summary>
@@ -117,6 +118,8 @@ public class GameManager : MonoBehaviour
 
         }
 
+        if (Input.GetKeyDown(KeyCode.Escape))
+            PauseMenu.ChangeState();
     }
 
     private void CombatResolution(string resolution)
