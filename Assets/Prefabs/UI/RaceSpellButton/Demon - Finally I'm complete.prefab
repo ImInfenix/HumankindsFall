@@ -164,5 +164,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   board: {fileID: 0}
   cooldownImage: {fileID: 4716373113554522738}
+  demonKing: {fileID: 8687746227296491367, guid: ed2919fd352527a429f53d6f88691869,
+    type: 3}
   race: 7
   range: 0

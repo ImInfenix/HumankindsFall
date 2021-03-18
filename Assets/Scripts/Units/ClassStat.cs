@@ -12,7 +12,8 @@ public enum Class
     Support,
     Berserker,
     Assassin,
-    Soldier
+    Soldier,
+    DemonKing
 }
 
 [CreateAssetMenu(fileName = "New UnitClassStat", menuName = "Class Stat Units")]

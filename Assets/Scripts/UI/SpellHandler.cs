@@ -93,13 +93,14 @@ public class SpellHandler : MonoBehaviour
                     case (Race.Ratman):
                         ratmanSpell.SetActive(true);
                         break;
-                    case (Race.Demon):
-                        demonSpell.SetActive(true);
-                        break;
                 }
             }
+            if (race.getNumber() >= 3 && race.getRace() == Race.Demon)
+            {
+                demonSpell.SetActive(true);
+            }
 
-            if (race.getNumber() < 2)
+                if (race.getNumber() < 2)
             {
                 switch (race.getRace())
                 {
@@ -121,10 +122,12 @@ public class SpellHandler : MonoBehaviour
                     case (Race.Ratman):
                         ratmanSpell.SetActive(true);
                         break;
-                    case (Race.Demon):
-                        demonSpell.SetActive(true);
-                        break;
                 }
+            }
+
+            if (race.getNumber() < 3 && race.getRace() == Race.Demon)
+            {
+                demonSpell.SetActive(false);
             }
 
         }

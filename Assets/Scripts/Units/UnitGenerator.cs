@@ -52,18 +52,29 @@ public static class UnitGenerator
 
         int randomClassIndex;
 
-        if (race != Race.Human)
+        if (race != Race.Human && race != Race.Ratman)
         {
             do
             {
                 randomClassIndex = Random.Range(0, classes.Length);
-            } while (classes[randomClassIndex].clas == Class.Soldier);
+            } while (classes[randomClassIndex].clas == Class.Soldier || classes[randomClassIndex].clas == Class.DemonKing);
         
         }
-
+        else if(race == Race.Ratman)
+        {
+            do
+            {
+                randomClassIndex = Random.Range(0, classes.Length);
+            } while (classes[randomClassIndex].clas == Class.Soldier || classes[randomClassIndex].clas == Class.DemonKing || classes[randomClassIndex].clas == Class.Mage || classes[randomClassIndex].clas == Class.Bowman || classes[randomClassIndex].clas == Class.Healer);
+        }
         else
-            randomClassIndex = Random.Range(0, classes.Length);
-
+        {
+            do
+            {
+                randomClassIndex = Random.Range(0, classes.Length);
+            } while (classes[randomClassIndex].clas == Class.DemonKing);
+        }
+            
         return classes[randomClassIndex];
     }
 

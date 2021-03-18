@@ -110,11 +110,11 @@ public class RaceCount
             case Race.Demon:
                 if (lvl == 0)
                 {
-                    def = "Finally I'm complete\n<b>Spell</b>\nSummon the demon king on the target cell, he has less life but more damage\n (2) -50% hp, + 30% damages";
+                    def = "Finally I'm complete\n<b>Spell</b>\nSummon the demon king on the target cell, he has less life but more damage\n (3) -50% hp, + 30% damages";
                 }
                 if (lvl == 1)
                 {
-                    def = "Finally I'm complete\n<b>Spell</b>\nSummon the demon king on the target cell, he has less life but more damage\n <b>(2) -50% hp, + 30% damages</b>";
+                    def = "Finally I'm complete\n<b>Spell</b>\nSummon the demon king on the target cell, he has less life but more damage\n <b>(3) -50% hp, + 30% damages</b>";
                 }
                 break;
         }

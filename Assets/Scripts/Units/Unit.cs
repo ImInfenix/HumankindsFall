@@ -104,7 +104,7 @@ public class Unit : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(isRandomUnit)
+        if(isRandomUnit && classStat.clas != Class.DemonKing)
             GenerateRaceAndClass();
 
         InitializeUnit();
@@ -114,6 +114,7 @@ public class Unit : MonoBehaviour
 
     public void InitializeUnit()
     {
+        board = FindObjectOfType<Board>();
         //if the ability name exists
         if (abilityName != null && abilityName != "")
         {
@@ -156,7 +157,8 @@ public class Unit : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         //if (raceStats.race != Race.Human)
-        spriteRenderer.sprite = raceStats.getSprite(classStat.clas);//spriteRenderer.sprite = Resources.Load<Sprite>("Textures/Unit Sprites/" + raceStats.race.ToString() + "/" + classStat.clas.ToString());   // spriteRenderer.sprite = raceStats.unitSprite;
+        if(classStat.clas != Class.DemonKing)
+            spriteRenderer.sprite = raceStats.getSprite(classStat.clas);//spriteRenderer.sprite = Resources.Load<Sprite>("Textures/Unit Sprites/" + raceStats.race.ToString() + "/" + classStat.clas.ToString());   // spriteRenderer.sprite = raceStats.unitSprite;
 
         // else
         //      spriteRenderer.sprite = Resources.Load<Sprite>("Textures/Unit Sprites/Humans/" + classStat.clas.ToString());
@@ -167,13 +169,25 @@ public class Unit : MonoBehaviour
 
         if (currentCell == null)
         {
-            if (!isPlacedUnit)
+            if (!isPlacedUnit && classStat.clas != Class.DemonKing)
             {
                 Cell startCell = board.GetCell(new Vector3Int(initialPos.x, initialPos.y, 0));
                 occupyNewCell(startCell);
                 updatePosition();
             }
+            else if(classStat.clas == Class.DemonKing)
+            {
+                Vector3 mousePos;
+                mousePos = Input.mousePosition;
+                mousePos = Camera.main.ScreenToWorldPoint(mousePos);
 
+                Vector3Int tileCoordinate = board.GetTilemap().WorldToCell(mousePos);
+
+                Cell newCell = board.GetCell(tileCoordinate);
+                
+                occupyNewCell(newCell);
+                updatePosition();
+            }
             else
             {
                 Vector3Int tileCoordinate = board.GetTilemap().WorldToCell(transform.position);
