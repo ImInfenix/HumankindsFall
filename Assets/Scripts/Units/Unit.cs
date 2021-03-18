@@ -28,6 +28,7 @@ public class Unit : MonoBehaviour
     [SerializeField] private string unitName;
     [SerializeField] private bool isTargetable;
     [SerializeField] private bool stuned = false;
+    [SerializeField] private bool poisonned = false;
 
 
     private bool moving;
@@ -37,11 +38,15 @@ public class Unit : MonoBehaviour
     private bool healer2 = false;
     private bool healer3 = false;
     private bool orcSpell = false;
-    public bool giantSpell = false;
+    private bool giantSpell = false;
+    private bool ratmanSpell = false;
     private int cptHealer = 0;
     private float saveArmor;
     private Unit healTarget = null;
     private bool canChangeColor = true;
+    private float poisonTime;
+    public float poisonDamageInterval = 1.0f;
+    public int poisonDamage = 2;
 
     [Header("POSITION")]
     public Board board;
@@ -278,6 +283,8 @@ public class Unit : MonoBehaviour
 
             path = PathfindingTool.createPathTarget(this);
         }
+
+        
     }
 
     private void ApplyAttackGemsEffect()
@@ -380,12 +387,19 @@ public class Unit : MonoBehaviour
                     float damageGiant = damage*1.15f;
                     targetUnit.takeDamage((int)damageGiant);
                     targetUnit.activateStun(2);
+                    giantSpell = false;
                 }
             else
             {
                 int rand = Random.Range(1, 101);
                 if (rand <= accuracy)
                     targetUnit.takeOrcDamage(damage);
+            }
+
+            if(ratmanSpell == true)
+            {
+                ratmanSpell = false;
+                targetUnit.activatePoison(5);
             }
 
             ApplyAttackGemsEffect();
@@ -438,7 +452,7 @@ public class Unit : MonoBehaviour
                 }
             }
 
-            giantSpell = false;
+            
         }
        
     }
@@ -501,6 +515,19 @@ public class Unit : MonoBehaviour
         Destroy(projectile);
 
         yield return null;
+    }
+
+    IEnumerator PoisonDamage()
+    {
+        float poisonCounter = 0;
+        while (poisonCounter < poisonTime)
+        {
+            takeDamage(poisonDamage);
+            yield return new WaitForSeconds(poisonDamageInterval);
+            poisonCounter += poisonDamageInterval;
+        }
+        poisonned = false;
+        Debug.Log("end");
     }
 
     public void occupyNewCell(Cell newCell)
@@ -1000,4 +1027,16 @@ public class Unit : MonoBehaviour
         takeDamage(damage);
 
     }
+    public void activateRatmanSpell()
+    {
+        ratmanSpell = true;
+    }
+
+    public void activatePoison(float time)
+    {
+        poisonned = true;
+        poisonTime = time;
+        StartCoroutine(PoisonDamage());
+    }
+
 }

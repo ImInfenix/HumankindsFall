@@ -188,7 +188,11 @@ public class Spell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
         {
             affectedAllyUnit = PathfindingTool.unitsInRadius(currentCell, range, "UnitAlly");
             affectedEnemyUnit = PathfindingTool.unitsInRadius(currentCell, range, "UnitEnemy");
-        }       
+        }
+        else
+        {
+            affectedAllyUnit = GameManager.instance.getUnit();
+        }
         bool launched = false;
 
         switch (race)
@@ -285,7 +289,18 @@ public class Spell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
                 break;
 
             case (Race.Ratman):
-                launched = true;
+                foreach (Unit unit in affectedAllyUnit)
+                {
+                    if (unit != null)
+                    {
+                        if (unit.CompareTag("UnitAlly") && unit.getRace() == Race.Ratman)
+                        {
+                            unit.activateRatmanSpell();
+                            launched = true;
+                        }
+                        
+                    }
+                }
                 if (launched == true)
                 {
                     onCooldown = true;

@@ -169,4 +169,9 @@ public class GameManager : MonoBehaviour
         }
         return target;
     }
+
+    public List<Unit> getUnit()
+    {
+        return units;
+    }
 }
