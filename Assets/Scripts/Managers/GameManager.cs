@@ -135,6 +135,7 @@ public class GameManager : MonoBehaviour
         }
 
         SpellHandler.instance.HideSpells();
+        SpellHandler.instance.gameObject.SetActive(false);
         HealthbarHandler.HideAll();
         Player.instance.Inventory.Hide();
     }
