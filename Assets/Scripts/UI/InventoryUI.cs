@@ -125,11 +125,13 @@ public class InventoryUI : MonoBehaviour
 
     public void ShowGemsSlots()
     {
-        GemsSlots.gameObject.SetActive(true);
+        if (GemsSlots != null)
+            GemsSlots.gameObject?.SetActive(true);
     }
 
     public void HideGemsSlots()
     {
-        GemsSlots.gameObject.SetActive(false);
+        if (GemsSlots != null)
+            GemsSlots.gameObject?.SetActive(false);
     }
 }
