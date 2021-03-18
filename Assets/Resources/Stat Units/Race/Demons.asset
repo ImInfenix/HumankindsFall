@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de9e8c1568867244bb3c508a017b768c, type: 3}
+  m_Name: Demons
+  m_EditorClassIdentifier: 
+  race: 7
+  maxLife: 10
+  maxMana: 0
+  mana: 0
+  armor: 0
+  moveSpeed: 0
+  attackSpeed: 0
+  damage: 5
+  unitNames:
+  - Xastroth
+  - Goggan
+  - Estrath
+  - Trallminar
+  - Trokumoch
+  unitSprite: {fileID: 8338566649644805602, guid: a9c51961d09080d4fa1eaf5b0a2ab4f1,
+    type: 3}
+  warriorSprite: {fileID: 3837138753575550992, guid: a9c51961d09080d4fa1eaf5b0a2ab4f1,
+    type: 3}
+  mageSprite: {fileID: 3837138753575550992, guid: a9c51961d09080d4fa1eaf5b0a2ab4f1,
+    type: 3}
+  tankSprite: {fileID: 3837138753575550992, guid: a9c51961d09080d4fa1eaf5b0a2ab4f1,
+    type: 3}
+  bowmanSprite: {fileID: 3837138753575550992, guid: a9c51961d09080d4fa1eaf5b0a2ab4f1,
+    type: 3}
+  healerSprite: {fileID: 3837138753575550992, guid: a9c51961d09080d4fa1eaf5b0a2ab4f1,
+    type: 3}
+  supportSprite: {fileID: 3837138753575550992, guid: a9c51961d09080d4fa1eaf5b0a2ab4f1,
+    type: 3}
+  berserkerSprite: {fileID: 3837138753575550992, guid: a9c51961d09080d4fa1eaf5b0a2ab4f1,
+    type: 3}
+  assassinSprite: {fileID: 3837138753575550992, guid: a9c51961d09080d4fa1eaf5b0a2ab4f1,
+    type: 3}
+  soldierSprite: {fileID: 8338566649644805602, guid: a9c51961d09080d4fa1eaf5b0a2ab4f1,
+    type: 3}

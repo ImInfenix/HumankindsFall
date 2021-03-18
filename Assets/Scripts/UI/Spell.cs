@@ -15,6 +15,7 @@ public class Spell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
     private Cell targetCell;
     public Board board;
     public Image cooldownImage;
+    public GameObject demonKing;
     private RaceCount elemental;
 
     [Header ("Select Spell Race")]
@@ -61,7 +62,7 @@ public class Spell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
                 break;
             case (Race.Demon):
                 definition = "Summon the demon king on the target cell, he has less life but more damage";
-                cooldown = 5;
+                cooldown = 60;
                 break;
         }
     }
@@ -310,6 +311,17 @@ public class Spell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
                 break;
 
             case (Race.Demon):
+                if(currentCell.GetIsOccupied() == false && currentCell.GetIsObstacle() == false)
+                {
+                    Instantiate(demonKing);
+                    launched = true;
+                }
+                if (launched == true)
+                {
+                    onCooldown = true;
+                    cooldownImage.fillAmount = 1;
+                    activated = false;
+                }
                 break;
         }
     }
