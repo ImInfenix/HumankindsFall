@@ -10,6 +10,8 @@ public enum Race
     Octopus,
     Elemental,
     Giant,
+    Ratman,
+    Demon
 }
 
 [CreateAssetMenu(fileName = "New UnitRaceStat", menuName = "Race Stat Units")]

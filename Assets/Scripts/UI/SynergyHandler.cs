@@ -20,6 +20,8 @@ public class SynergyHandler : MonoBehaviour
     private Button octopusButton;
     private Button elementalButton;
     private Button giantButton;
+    private Button ratmanButton;
+    private Button demonButton;
 
     private Button mageButton;
     private Button warriorButton;
@@ -35,6 +37,8 @@ public class SynergyHandler : MonoBehaviour
     private RaceCount octopus = new RaceCount(Race.Octopus, 0);
     private RaceCount elementals = new RaceCount(Race.Elemental, 0);
     private RaceCount giants = new RaceCount(Race.Giant, 0);
+    private RaceCount ratmen = new RaceCount(Race.Ratman, 0);
+    private RaceCount demons = new RaceCount(Race.Demon, 0);
 
     private ClassCount mages = new ClassCount(Class.Mage, 0);
     private ClassCount warriors = new ClassCount(Class.Warrior, 0);
@@ -69,6 +73,8 @@ public class SynergyHandler : MonoBehaviour
         rc.Add(octopus);
         rc.Add(elementals);
         rc.Add(giants);
+        rc.Add(ratmen);
+        rc.Add(demons);
 
         cc.Add(mages);
         cc.Add(warriors);
@@ -98,6 +104,14 @@ public class SynergyHandler : MonoBehaviour
         giantButton = Instantiate(ButtonSynergy, GetComponent<RectTransform>());
         giantButton.GetComponent<SynergyButton>().setTooltipDef(giants.getString());
         giantButton.gameObject.SetActive(false);
+
+        ratmanButton = Instantiate(ButtonSynergy, GetComponent<RectTransform>());
+        ratmanButton.GetComponent<SynergyButton>().setTooltipDef(ratmen.getString());
+        ratmanButton.gameObject.SetActive(false);
+
+        demonButton = Instantiate(ButtonSynergy, GetComponent<RectTransform>());
+        demonButton.GetComponent<SynergyButton>().setTooltipDef(demons.getString());
+        demonButton.gameObject.SetActive(false);
 
 
         mageButton = Instantiate(ButtonSynergy, GetComponent<RectTransform>());
@@ -304,7 +318,42 @@ public class SynergyHandler : MonoBehaviour
                             }
                         }
                         break;
-                        
+
+                    case Race.Ratman:
+                        if (ratmanButton)
+                        {
+                            ratmanButton.GetComponentInChildren<TextMeshProUGUI>().text = " Ratman : " + r.getNumber();
+                            ratmanButton.gameObject.SetActive(true);
+                            if (r.getNumber() >= 2)
+                            {
+                                ratmanButton.GetComponent<SynergyButton>().addOutline(colorLvlMax);
+                                boldRace(ratmen, ratmanButton, 1);
+                            }
+                            else
+                            {
+                                ratmanButton.GetComponent<SynergyButton>().hideOutline();
+                                boldRace(ratmen, ratmanButton, 0);
+                            }
+                        }
+                        break;
+
+                    case Race.Demon:
+                        if (demonButton)
+                        {
+                            demonButton.GetComponentInChildren<TextMeshProUGUI>().text = " Demon : " + r.getNumber();
+                            demonButton.gameObject.SetActive(true);
+                            if (r.getNumber() >= 2)
+                            {
+                                demonButton.GetComponent<SynergyButton>().addOutline(colorLvlMax);
+                                boldRace(demons, demonButton, 1);
+                            }
+                            else
+                            {
+                                demonButton.GetComponent<SynergyButton>().hideOutline();
+                                boldRace(demons, demonButton, 0);
+                            }
+                        }
+                        break;
                 }
             }
             else
@@ -588,6 +637,10 @@ public class SynergyHandler : MonoBehaviour
         elementalButton.gameObject.SetActive(false);
 
         giantButton.gameObject.SetActive(false);
+
+        ratmanButton.gameObject.SetActive(false);
+
+        demonButton.gameObject.SetActive(false);
 
         mageButton.gameObject.SetActive(false);
 

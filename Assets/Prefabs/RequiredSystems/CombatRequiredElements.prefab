@@ -818,7 +818,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.03, y: 0}
   m_AnchorMax: {x: 0.207, y: 1}
-  m_AnchoredPosition: {x: 1463.0177, y: 0}
+  m_AnchoredPosition: {x: 1463.0176, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1570760050
@@ -1002,7 +1002,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0.32336426, y: -0.107788086}
+  m_AnchoredPosition: {x: 0.3232422, y: -0.107788086}
   m_SizeDelta: {x: 638.5908, y: 195.10901}
   m_Pivot: {x: 1, y: 0}
 --- !u!222 &1731252107
@@ -1087,6 +1087,10 @@ MonoBehaviour:
   elementalSpell: {fileID: 7496784388365278125, guid: c3b6395da54d6cb428a619e1d0b2dc8a,
     type: 3}
   giantSpell: {fileID: 7100038805924735380, guid: 68ec0dcab5176304598a3d75b7ec27dc,
+    type: 3}
+  ratmanSpell: {fileID: 5206605057156717805, guid: 0cac5f56cca31184082501715d175348,
+    type: 3}
+  demonSpell: {fileID: 4377145929567258715, guid: 929c85dc378961042bfc58c2e3785391,
     type: 3}
 --- !u!1 &643332371005190983
 GameObject:

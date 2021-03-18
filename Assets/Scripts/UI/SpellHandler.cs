@@ -13,6 +13,8 @@ public class SpellHandler : MonoBehaviour
     public GameObject octopusSpell;
     public GameObject elementalSpell;
     public GameObject giantSpell;
+    public GameObject ratmanSpell;
+    public GameObject demonSpell;
 
     private List<RaceCount> rc = new List<RaceCount>();
 
@@ -43,6 +45,13 @@ public class SpellHandler : MonoBehaviour
 
         giantSpell = Instantiate(giantSpell, GetComponent<RectTransform>());
         giantSpell.SetActive(false);
+
+        ratmanSpell = Instantiate(ratmanSpell, GetComponent<RectTransform>());
+        ratmanSpell.SetActive(false);
+
+        demonSpell = Instantiate(demonSpell, GetComponent<RectTransform>());
+        demonSpell.SetActive(false);
+
     }
 
     void Start()
@@ -81,6 +90,12 @@ public class SpellHandler : MonoBehaviour
                     case (Race.Giant):
                         giantSpell.SetActive(true);
                         break;
+                    case (Race.Ratman):
+                        ratmanSpell.SetActive(true);
+                        break;
+                    case (Race.Demon):
+                        demonSpell.SetActive(true);
+                        break;
                 }
             }
 
@@ -103,6 +118,12 @@ public class SpellHandler : MonoBehaviour
                     case (Race.Giant):
                         giantSpell.SetActive(false);
                         break;
+                    case (Race.Ratman):
+                        ratmanSpell.SetActive(true);
+                        break;
+                    case (Race.Demon):
+                        demonSpell.SetActive(true);
+                        break;
                 }
             }
 
@@ -112,7 +133,6 @@ public class SpellHandler : MonoBehaviour
 
     public void HideSpells()
     {
-
         orcSpell.SetActive(false);
 
         skeletonSpell.SetActive(false);
@@ -122,5 +142,9 @@ public class SpellHandler : MonoBehaviour
         elementalSpell.SetActive(false);
 
         giantSpell.SetActive(false);
+
+        ratmanSpell.SetActive(false);
+
+        demonSpell.SetActive(false);
     }
 }
