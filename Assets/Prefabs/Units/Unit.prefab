@@ -627,12 +627,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   raceStats: {fileID: 11400000, guid: 5d54e759c0ac4f14b8c1c172e4cad577, type: 2}
   classStat: {fileID: 11400000, guid: 1bfdba91039434f47a5db49ef4005d27, type: 2}
+  maxLife: 0
   currentLife: 0
+  incrementStamina: 0
+  armor: 0
+  initialArmor: 0
+  moveSpeed: 0
+  attackSpeed: 0
+  accuracy: 0
+  damage: 0
+  range: 0
+  power: 0
+  unitName: 
+  isTargetable: 0
+  stuned: 0
+  giantSpell: 0
   board: {fileID: 0}
+  worldPosition: {x: 0, y: 0, z: 0}
   currentPosition: {x: 0, y: 0, z: 0}
   initialPos: {x: 0, y: 0, z: 0}
   isRandomUnit: 1
+  isPlacedUnit: 0
   abilityName: 
+  ability: {fileID: 0}
   id: 0
   healthBar: {fileID: 97388024288105356}
   classIcon: {fileID: 6468773289891199087}

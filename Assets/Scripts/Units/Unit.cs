@@ -41,6 +41,7 @@ public class Unit : MonoBehaviour
     private int cptHealer = 0;
     private float saveArmor;
     private Unit healTarget = null;
+    private bool canChangeColor = true;
 
     [Header("POSITION")]
     public Board board;
@@ -378,7 +379,7 @@ public class Unit : MonoBehaviour
                 {
                     float damageGiant = damage*1.15f;
                     targetUnit.takeDamage((int)damageGiant);
-                    targetUnit.activateStun(5);
+                    targetUnit.activateStun(2);
                 }
             else
             {
@@ -590,7 +591,13 @@ public class Unit : MonoBehaviour
         //if this is the last animation playing, set the color back to normal
         takingDamageCount--;
         if (takingDamageCount == 0)
-            spriteRenderer.color = baseColor;
+        {
+            if (stuned == false)
+                spriteRenderer.color = baseColor;
+            if(stuned == true)
+                spriteRenderer.color = new Color(104f / 255f, 104f / 255f, 104f / 255f, 1f); 
+        }
+          
     }
 
     private void OnDrawGizmosSelected()
@@ -973,12 +980,14 @@ public class Unit : MonoBehaviour
     public void activateStun(float time)
     {
         stuned = true;
+        spriteRenderer.color = new Color(104f / 255f, 104f / 255f, 104f / 255f,1f);
         Invoke("endStun", time);
     }
 
     private void endStun()
     {
         stuned = false;
+        spriteRenderer.color = Color.white;
     }
 
 
