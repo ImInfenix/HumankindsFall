@@ -5,10 +5,28 @@ using UnityEngine;
 public class MainMenuNavigation : MonoBehaviour
 {
     public GameObject continueButton;
+    public GameObject newGameConfirm;
 
     public void NewGame()
     {
+        if(!SavingSystem.GameSaveExists())
+        {
+            NewGameConfirm();
+            return;
+        }
+
+        newGameConfirm.SetActive(true);
+    }
+
+    public void CloseConfirm()
+    {
+        newGameConfirm.gameObject.SetActive(false);
+    }
+
+    public void NewGameConfirm()
+    {
         CheckForPlayerExistence();
+        SavingSystem.DeleteData();
         GameManager.instance.EnterMap();
     }
 
@@ -29,6 +47,7 @@ public class MainMenuNavigation : MonoBehaviour
     {
         if (!SavingSystem.GameSaveExists())
             continueButton.SetActive(false);
+        newGameConfirm.gameObject.SetActive(false);
     }
 
     public void CheckForPlayerExistence()
