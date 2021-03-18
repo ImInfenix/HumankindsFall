@@ -99,11 +99,11 @@ public class RaceCount
             case Race.Ratman:
                 if (lvl == 0)
                 {
-                    def = "Poisonous bite\n<b>Spell</b>\nThe next attack of all ratmen poisons the enemy for 5 seconds\n (2) 2 damage/seconde";
+                    def = "Poisonous bite\n<b>Spell</b>\nThe next attack of all ratmen poisons the enemy for 5 seconds\n (2) 2 damage /seconde";
                 }
                 if (lvl == 1)
                 {
-                    def = "Poisonous bite\n<b>Spell</b>\nThe next attack of all ratmen poisons the enemy for 5 seconds\n <b>(2) 2 damage/seconde</b>";
+                    def = "Poisonous bite\n<b>Spell</b>\nThe next attack of all ratmen poisons the enemy for 5 seconds\n <b>(2) 2 damage /seconde</b>";
                 }
                 break;
 
