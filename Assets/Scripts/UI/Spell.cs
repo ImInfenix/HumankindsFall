@@ -313,7 +313,8 @@ public class Spell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
             case (Race.Demon):
                 if(currentCell.GetIsOccupied() == false && currentCell.GetIsObstacle() == false)
                 {
-                    Instantiate(demonKing);
+                    demonKing = Instantiate(demonKing);
+                    HealthbarHandler.ShowBars();
                     launched = true;
                 }
                 if (launched == true)

@@ -84,17 +84,18 @@ public class Unit : MonoBehaviour
     [Header("UI")]
     public uint id;
 
-    private void Awake()
-    {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-    }
-
     [SerializeField] private HealthbarHandler healthBar;
+    [SerializeField] private StatusHandler status;
     [SerializeField] private Image classIcon;
     [SerializeField] private SpriteRenderer circleSprite;
     private GameObject projectileGameObject;
 
     private List<Gem> gems = new List<Gem>();
+
+    private void Awake()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
 
     public int MaxLife { get => maxLife; set => maxLife = value; }
     public float CurrentLife { get => currentLife; set => currentLife = value; }
@@ -541,7 +542,7 @@ public class Unit : MonoBehaviour
             poisonCounter += poisonDamageInterval;
         }
         poisonned = false;
-        Debug.Log("end");
+        status.setPoison(false);
     }
 
     public void occupyNewCell(Cell newCell)
@@ -995,6 +996,7 @@ public class Unit : MonoBehaviour
 
     public void activateOrcSpell(float accuracyLost, float time)
     {
+        status.setOrcUp(true);
         orcSpell = true;
         accuracy -= accuracyLost;
         Invoke("endOrcSpell", time);
@@ -1002,12 +1004,14 @@ public class Unit : MonoBehaviour
 
     private void endOrcSpell()
     {
+        status.setOrcUp(false);
         orcSpell = false;
         accuracy = 100;
     }
 
     public void activateSkeletonSpell(float armorLost, float time)
     {
+        status.setBreakShield(true);
         saveArmor = armor;
         armor -= (armorLost*armor);
         Invoke("endSkeletonSpell", time);
@@ -1015,6 +1019,7 @@ public class Unit : MonoBehaviour
 
     private void endSkeletonSpell()
     {
+        status.setBreakShield(false);
         armor = saveArmor;
     }
 
@@ -1048,6 +1053,7 @@ public class Unit : MonoBehaviour
 
     public void activatePoison(float time)
     {
+        status.setPoison(true);
         poisonned = true;
         poisonTime = time;
         StartCoroutine(PoisonDamage());

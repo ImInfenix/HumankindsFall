@@ -120,14 +120,14 @@ public class SpellHandler : MonoBehaviour
                         giantSpell.SetActive(false);
                         break;
                     case (Race.Ratman):
-                        ratmanSpell.SetActive(true);
+                        ratmanSpell.SetActive(false);
                         break;
                 }
             }
 
             if (race.getNumber() < 3 && race.getRace() == Race.Demon)
             {
-                demonSpell.SetActive(false);
+                demonSpell.SetActive(true);
             }
 
         }

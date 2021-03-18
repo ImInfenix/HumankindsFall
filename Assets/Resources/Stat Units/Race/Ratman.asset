@@ -20,7 +20,12 @@ MonoBehaviour:
   moveSpeed: -0.2
   attackSpeed: -0.1
   damage: 1
-  unitNames: []
+  unitNames:
+  - Zrom
+  - Djahz
+  - Kvat
+  - Torcec
+  - Kvemvin
   unitSprite: {fileID: 7214412808309684259, guid: 57b6e22374c208e4ea97ff08231c02d2,
     type: 3}
   warriorSprite: {fileID: 8086092557472624939, guid: 57b6e22374c208e4ea97ff08231c02d2,
