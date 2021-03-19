@@ -195,9 +195,14 @@ public class InventorySlot : MonoBehaviour, IDragHandler, IPointerClickHandler
         if (Status != SlotState.Used)
         {
             if (unitDescriptionDisplay != null)
+            {
                 unitDescriptionDisplay.UnselectActualSlot();
+            }
             return;
         }
+
+        if (GemSlot.selectedGemSlot)
+            GemSlot.selectedGemSlot.UnselectSlot();
 
         unitDescriptionDisplay.ChangeActualSlot(this);
     }

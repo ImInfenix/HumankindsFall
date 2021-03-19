@@ -25,6 +25,8 @@ public class UnitDescriptionDisplay : MonoBehaviour
     [HideInInspector]
     public ShopSystem shopSystem;
 
+    private GameObject gemsUIGameObject;
+
     public void Awake()
     {
         actualSlot = null;
@@ -32,6 +34,8 @@ public class UnitDescriptionDisplay : MonoBehaviour
         currentGems = new List<Gem>();
         currentGemsDisplayed = new List<GameObject>();
         UpdateDescription();
+
+        gemsUIGameObject = GameObject.Find("GemsSlots");
     }
 
     public void ChangeActualSlot(InventorySlot slot)
@@ -56,11 +60,20 @@ public class UnitDescriptionDisplay : MonoBehaviour
         if (shopSystem != null)
         {
             if (actualSlot == null)
+            {
                 shopSystem.SetShopToNoneMode();
+                gemsUIGameObject.SetActive(true);
+            }
             else if (actualSlot.GetSlotType() == InventorySlot.SlotType.Inventory)
+            {
                 shopSystem.SetShopToSellMode();
+                gemsUIGameObject.SetActive(false);
+            }
             else
+            {
                 shopSystem.SetShopToBuyMode();
+                gemsUIGameObject.SetActive(false);
+            }
         }
     }
 
@@ -72,6 +85,7 @@ public class UnitDescriptionDisplay : MonoBehaviour
         actualSlot.Unselect();
         actualSlot = null;
         UpdateDescription();
+        gemsUIGameObject.SetActive(true);
 
         Player.instance.Inventory.Hide();
 

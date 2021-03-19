@@ -2,11 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System.Linq;
+using UnityEngine.UI;
 
 public class ShopSystem : MonoBehaviour
 {
     [SerializeField]
     List<InventorySlot> rewardSlots;
+    
+    [SerializeField]
+    List<GemSlot> gemSlots;
+
+    [SerializeField]
+    GemsInventory gemsInventory;
 
     [SerializeField]
     private UnitDescriptionDisplay unitDescriptionDisplay;
@@ -18,6 +26,8 @@ public class ShopSystem : MonoBehaviour
 
     enum ShopMode { None, Buy, Sell }
     ShopMode shopMode;
+
+    public GemsInventory GemsInventory { get => gemsInventory; }
 
     private void Awake()
     {
@@ -42,6 +52,20 @@ public class ShopSystem : MonoBehaviour
             unitsToSell.Add(newUnit);
         }
 
+        foreach (GemSlot gemSlot in gemSlots)
+        {
+            GameObject[] existingGems = Resources.LoadAll("Gems", typeof(GameObject)).Cast<GameObject>().ToArray();
+
+            int randomGemIndex = Random.Range(0, existingGems.Length);
+            GameObject newGem = Instantiate(existingGems[randomGemIndex], gemSlot.transform.position, Quaternion.identity, gemSlot.transform);
+            gemSlot.Gem = newGem.GetComponent<Gem>();
+            newGem.GetComponentInChildren<Image>().rectTransform.sizeDelta *= 2;
+            GemUI gemUI = newGem.GetComponentInChildren<GemUI>();
+            gemUI.DisableDrag();
+            gemUI.GemSlot = gemSlot;
+            gemUI.GemSlot.IsShop = true;
+        }
+
         Player.instance.Inventory.inventoryUI.UpdateGUI();
     }
 
@@ -62,10 +86,22 @@ public class ShopSystem : MonoBehaviour
 
     private void Sell()
     {
-        if (unitDescriptionDisplay.GetSelectedSlotType() != InventorySlot.SlotType.Inventory)
+        bool isUnit = (unitDescriptionDisplay.GetSelectedSlotType() == InventorySlot.SlotType.Inventory);
+        bool isGem = (GemSlot.selectedGemSlot != null);
+
+        if (!isUnit && !isGem)
             return;
 
-        Player.instance.Inventory.RemoveFromInventory(unitDescriptionDisplay.GetActualSlot().GetCurrentUnitDescription());
+        if (isUnit && !isGem)
+        {
+            Player.instance.Inventory.RemoveFromInventory(unitDescriptionDisplay.GetActualSlot().GetCurrentUnitDescription());
+        }
+
+        else if (!isUnit && isGem)
+        {
+            Player.instance.Inventory.RemoveGem(GemSlot.selectedGemSlot.Gem);
+            GemsInventory.UpdateDisplay();
+        }
 
         Player.instance.Wallet.Earn(5);
 
@@ -74,17 +110,31 @@ public class ShopSystem : MonoBehaviour
 
     private void Buy()
     {
-        if (unitDescriptionDisplay.GetSelectedSlotType() != InventorySlot.SlotType.Shop)
+        bool isUnit = (unitDescriptionDisplay.GetSelectedSlotType() == InventorySlot.SlotType.Shop);
+        bool isGem = (GemSlot.selectedGemSlot != null);
+
+        if (!isUnit && !isGem)
             return;
 
         if (!Player.instance.Wallet.Pay(20))
             return;
 
+        if (isUnit && !isGem)
+        {
+            Player.instance.Inventory.AddUnitInInventory(unitDescriptionDisplay.GetActualSlot().GetCurrentUnitDescription(), true);
 
-        Player.instance.Inventory.AddUnitInInventory(unitDescriptionDisplay.GetActualSlot().GetCurrentUnitDescription(), true);
+            unitDescriptionDisplay.GetActualSlot().ClearSlot();
+            unitDescriptionDisplay.UnselectActualSlot();
+        }
 
-        unitDescriptionDisplay.GetActualSlot().ClearSlot();
-        unitDescriptionDisplay.UnselectActualSlot();
+        else if (!isUnit && isGem)
+        {
+            Player.instance.Inventory.AddGem(GemSlot.selectedGemSlot.Gem);
+            GemsInventory.UpdateDisplay();
+            Gem selectedGem = GemSlot.selectedGemSlot.Gem;
+            GemSlot.selectedGemSlot.UnselectSlot();
+            Destroy(selectedGem.gameObject);
+        }
 
         SavingSystem.SaveData();
     }

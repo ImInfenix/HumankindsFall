@@ -5,27 +5,33 @@ using UnityEngine.EventSystems;
 
 public class GemUI : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler
 {
-    Vector3 startPosition;
-    Transform startParent;
-    GemSlot gemSlot;
-    Gem currentGem;
+    private Vector3 startPosition;
+    private Transform startParent;
+    private GemSlot gemSlot;
+    private Gem currentGem;
 
-    bool isDragging;
+    private bool isDragging;
+    private bool canDrag;
 
-    Inventory inventory;
+    private Inventory inventory;
 
     public GemSlot GemSlot { get => gemSlot; set => gemSlot = value; }
+
+    private void Awake()
+    {
+        currentGem = transform.parent.gameObject.GetComponent<Gem>();
+        isDragging = false;
+        canDrag = true;
+    }
 
     private void Start()
     {
         inventory = Player.instance.Inventory;
-        currentGem = transform.parent.gameObject.GetComponent<Gem>();
-        isDragging = false;
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (eventData.button == PointerEventData.InputButton.Left && GemSlot == null)
+        if (eventData.button == PointerEventData.InputButton.Left && GemSlot == null && canDrag)
         {
             startPosition = gameObject.transform.position;
             startParent = transform.parent.parent;
@@ -33,11 +39,14 @@ public class GemUI : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerU
             Tooltip.HideTooltip_Static();
             isDragging = true;
         }
+
+        else if (!canDrag)
+            SelectSlot();
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (GemSlot == null)
+        if (GemSlot == null && canDrag)
         {
             Vector3 mousePos;
             mousePos = Input.mousePosition;
@@ -49,7 +58,7 @@ public class GemUI : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerU
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        if (GemSlot == null && eventData.button == PointerEventData.InputButton.Left)
+        if (GemSlot == null && eventData.button == PointerEventData.InputButton.Left && canDrag)
         {
             isDragging = false;
 
@@ -113,5 +122,24 @@ public class GemUI : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerU
     public void OnPointerExit(PointerEventData eventData)
     {
         Tooltip.HideTooltip_Static();
+    }
+
+    public void DisableDrag()
+    {
+        canDrag = false;
+    }
+
+    public void SelectSlot()
+    {
+        if (GemSlot.selectedGemSlot != null && GemSlot.selectedGemSlot == gemSlot)
+        {
+            gemSlot.UnselectSlot();
+            return;
+        }
+
+        if (GemSlot.selectedGemSlot)
+            GemSlot.selectedGemSlot.UnselectSlot();
+
+        gemSlot.SelectSlot();
     }
 }

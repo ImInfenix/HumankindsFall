@@ -8,8 +8,14 @@ public class GemsInventory : MonoBehaviour
     [SerializeField] private GameObject gemSlotGameObject;
     private int heightOffset = 1;
     private int widthOffset = 1;
+    private ShopSystem shopSystem;
 
     private Inventory inventory;
+
+    private void Awake()
+    {
+        shopSystem = FindObjectOfType<ShopSystem>();
+    }
 
     private void Start()
     {
@@ -43,6 +49,14 @@ public class GemsInventory : MonoBehaviour
             GameObject newGem = Instantiate(gemGameObject, position, Quaternion.identity, transform);
 
             newGemSlot.GetComponent<GemSlot>().Gem = newGem.GetComponent<Gem>();
+
+            if (shopSystem)
+            {
+                GemUI gemUI = newGem.GetComponentInChildren<GemUI>();
+                gemUI.DisableDrag();
+                gemUI.GemSlot = newGemSlot.GetComponent<GemSlot>();
+                gemUI.GemSlot.FindShopSystem();
+            }
 
             count++;
             count %= 3;
