@@ -138,6 +138,7 @@ public class GameManager : MonoBehaviour
         }
 
         SpellHandler.instance.HideSpells();
+        SpellHandler.instance.gameObject.SetActive(false);
         HealthbarHandler.HideAll();
         Player.instance.Inventory.Hide();
     }
@@ -171,5 +172,10 @@ public class GameManager : MonoBehaviour
             }
         }
         return target;
+    }
+
+    public List<Unit> getUnit()
+    {
+        return units;
     }
 }

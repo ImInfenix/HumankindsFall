@@ -1,5 +1,121 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &389816087408927473
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 99158032749487991}
+  - component: {fileID: 6106625731837808051}
+  - component: {fileID: 3579624682555419571}
+  - component: {fileID: 5014591500002131989}
+  - component: {fileID: 8996403339242620978}
+  m_Layer: 0
+  m_Name: Status
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &99158032749487991
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 389816087408927473}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5850640082687011111}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 38.44, y: 2.782}
+  m_SizeDelta: {x: 43.267464, y: 8.402958}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &6106625731837808051
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 389816087408927473}
+  m_CullTransparentMesh: 0
+--- !u!114 &3579624682555419571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 389816087408927473}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!114 &5014591500002131989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 389816087408927473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 3
+  m_StartCorner: 0
+  m_StartAxis: 0
+  m_CellSize: {x: 10, y: 10}
+  m_Spacing: {x: 2, y: 0}
+  m_Constraint: 0
+  m_ConstraintCount: 2
+--- !u!114 &8996403339242620978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 389816087408927473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e756b48d1df78d4fbd17302fd48a597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poison: {fileID: 2107541129057840739, guid: 83a59343675fd354c8194b8f32c68228, type: 3}
+  breakShield: {fileID: 8597223052622753109, guid: b4428153a844794498268bc3498db3f3,
+    type: 3}
+  OrcUp: {fileID: 5144565974947930664, guid: 2eff4e7bdd5581a4392852daa909b8a2, type: 3}
 --- !u!1 &782722755744261470
 GameObject:
   m_ObjectHideFlags: 0
@@ -29,6 +145,7 @@ Transform:
   m_Children:
   - {fileID: 4233425336044641238}
   - {fileID: 7592215090375360039}
+  - {fileID: 99158032749487991}
   m_Father: {fileID: 2050961307454330070}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -627,14 +744,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   raceStats: {fileID: 11400000, guid: 5d54e759c0ac4f14b8c1c172e4cad577, type: 2}
   classStat: {fileID: 11400000, guid: 1bfdba91039434f47a5db49ef4005d27, type: 2}
+  maxLife: 0
   currentLife: 0
+  incrementStamina: 0
+  armor: 0
+  initialArmor: 0
+  moveSpeed: 0
+  attackSpeed: 0
+  accuracy: 0
+  damage: 0
+  range: 0
+  power: 0
+  unitName: 
+  isTargetable: 0
+  stuned: 0
+  poisonned: 0
+  poisonDamageInterval: 1
+  poisonDamage: 2
   board: {fileID: 0}
+  worldPosition: {x: 0, y: 0, z: 0}
   currentPosition: {x: 0, y: 0, z: 0}
   initialPos: {x: 0, y: 0, z: 0}
   isRandomUnit: 1
+  isPlacedUnit: 0
   abilityName: 
+  ability: {fileID: 0}
   id: 0
   healthBar: {fileID: 97388024288105356}
+  status: {fileID: 8996403339242620978}
   classIcon: {fileID: 6468773289891199087}
   circleSprite: {fileID: 2859675798935787553}
 --- !u!61 &-6404775025605529892

@@ -15,6 +15,7 @@ public class Spell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
     private Cell targetCell;
     public Board board;
     public Image cooldownImage;
+    public GameObject demonKing;
     private RaceCount elemental;
 
     [Header ("Select Spell Race")]
@@ -54,6 +55,14 @@ public class Spell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
             case (Race.Giant):
                 definition = "Choose a giant unit, his next attack will deal 15% more damage and stun the enemy for 2 seconds";
                 cooldown = 5;
+                break;
+            case (Race.Ratman):
+                definition = "The next attack of all ratmen poisons the enemy dealing 2 damage/seconde for 5 seconds";
+                cooldown = 5;
+                break;
+            case (Race.Demon):
+                definition = "Summon the demon king on the target cell, he has less life but more damage";
+                cooldown = 60;
                 break;
         }
     }
@@ -122,7 +131,7 @@ public class Spell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if(onCooldown == false && GameManager.instance.gamestate == GameManager.GameState.Combat)
+        if (onCooldown == false && GameManager.instance.gamestate == GameManager.GameState.Combat && race != Race.Ratman)
         {
             if (activated == true)
             {
@@ -133,7 +142,12 @@ public class Spell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
             {
                 activated = true;
             }
-        }                 
+        }
+
+        if (onCooldown == false && GameManager.instance.gamestate == GameManager.GameState.Combat && race == Race.Ratman)
+        {
+            ActivateSpell();
+        }
     }
 
     private void ActivateArea(Cell center)
@@ -168,8 +182,18 @@ public class Spell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
 
     private void ActivateSpell()
     {
-        List<Unit> affectedAllyUnit = PathfindingTool.unitsInRadius(currentCell, range, "UnitAlly");
-        List<Unit> affectedEnemyUnit = PathfindingTool.unitsInRadius(currentCell, range, "UnitEnemy");
+        List<Unit> affectedAllyUnit = new List<Unit>();
+        List<Unit> affectedEnemyUnit = new List<Unit>(); 
+
+        if (race != Race.Ratman)
+        {
+            affectedAllyUnit = PathfindingTool.unitsInRadius(currentCell, range, "UnitAlly");
+            affectedEnemyUnit = PathfindingTool.unitsInRadius(currentCell, range, "UnitEnemy");
+        }
+        else
+        {
+            affectedAllyUnit = GameManager.instance.getUnit();
+        }
         bool launched = false;
 
         switch (race)
@@ -256,6 +280,42 @@ public class Spell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
                             launched = true;
                         }
                     }
+                }
+                if (launched == true)
+                {
+                    onCooldown = true;
+                    cooldownImage.fillAmount = 1;
+                    activated = false;
+                }
+                break;
+
+            case (Race.Ratman):
+                foreach (Unit unit in affectedAllyUnit)
+                {
+                    if (unit != null)
+                    {
+                        if (unit.CompareTag("UnitAlly") && unit.getRace() == Race.Ratman)
+                        {
+                            unit.activateRatmanSpell();
+                            launched = true;
+                        }
+                        
+                    }
+                }
+                if (launched == true)
+                {
+                    onCooldown = true;
+                    cooldownImage.fillAmount = 1;
+                    activated = false;
+                }
+                break;
+
+            case (Race.Demon):
+                if(currentCell.GetIsOccupied() == false && currentCell.GetIsObstacle() == false)
+                {
+                    demonKing = Instantiate(demonKing);
+                    HealthbarHandler.ShowBars();
+                    launched = true;
                 }
                 if (launched == true)
                 {

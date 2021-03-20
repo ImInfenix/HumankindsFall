@@ -28,6 +28,7 @@ public class Unit : MonoBehaviour
     [SerializeField] private string unitName;
     [SerializeField] private bool isTargetable;
     [SerializeField] private bool stuned = false;
+    [SerializeField] private bool poisonned = false;
 
 
     private bool moving;
@@ -37,10 +38,15 @@ public class Unit : MonoBehaviour
     private bool healer2 = false;
     private bool healer3 = false;
     private bool orcSpell = false;
-    public bool giantSpell = false;
+    private bool giantSpell = false;
+    private bool ratmanSpell = false;
     private int cptHealer = 0;
     private float saveArmor;
     private Unit healTarget = null;
+    private bool canChangeColor = true;
+    private float poisonTime;
+    public float poisonDamageInterval = 1.0f;
+    public int poisonDamage = 2;
 
     [Header("POSITION")]
     public Board board;
@@ -78,17 +84,18 @@ public class Unit : MonoBehaviour
     [Header("UI")]
     public uint id;
 
-    private void Awake()
-    {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-    }
-
     [SerializeField] private HealthbarHandler healthBar;
+    [SerializeField] private StatusHandler status;
     [SerializeField] private Image classIcon;
     [SerializeField] private SpriteRenderer circleSprite;
     private GameObject projectileGameObject;
 
     private List<Gem> gems = new List<Gem>();
+
+    private void Awake()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
 
     public int MaxLife { get => maxLife; set => maxLife = value; }
     public float CurrentLife { get => currentLife; set => currentLife = value; }
@@ -103,7 +110,7 @@ public class Unit : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(isRandomUnit)
+        if(isRandomUnit && classStat.clas != Class.DemonKing)
             GenerateRaceAndClass();
 
         InitializeUnit();
@@ -113,6 +120,7 @@ public class Unit : MonoBehaviour
 
     public void InitializeUnit()
     {
+        board = FindObjectOfType<Board>();
         //if the ability name exists
         if (abilityName != null && abilityName != "")
         {
@@ -155,7 +163,8 @@ public class Unit : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         //if (raceStats.race != Race.Human)
-        spriteRenderer.sprite = raceStats.getSprite(classStat.clas);//spriteRenderer.sprite = Resources.Load<Sprite>("Textures/Unit Sprites/" + raceStats.race.ToString() + "/" + classStat.clas.ToString());   // spriteRenderer.sprite = raceStats.unitSprite;
+        if(classStat.clas != Class.DemonKing)
+            spriteRenderer.sprite = raceStats.getSprite(classStat.clas);//spriteRenderer.sprite = Resources.Load<Sprite>("Textures/Unit Sprites/" + raceStats.race.ToString() + "/" + classStat.clas.ToString());   // spriteRenderer.sprite = raceStats.unitSprite;
 
         // else
         //      spriteRenderer.sprite = Resources.Load<Sprite>("Textures/Unit Sprites/Humans/" + classStat.clas.ToString());
@@ -166,13 +175,25 @@ public class Unit : MonoBehaviour
 
         if (currentCell == null)
         {
-            if (!isPlacedUnit)
+            if (!isPlacedUnit && classStat.clas != Class.DemonKing)
             {
                 Cell startCell = board.GetCell(new Vector3Int(initialPos.x, initialPos.y, 0));
                 occupyNewCell(startCell);
                 updatePosition();
             }
+            else if(classStat.clas == Class.DemonKing)
+            {
+                Vector3 mousePos;
+                mousePos = Input.mousePosition;
+                mousePos = Camera.main.ScreenToWorldPoint(mousePos);
 
+                Vector3Int tileCoordinate = board.GetTilemap().WorldToCell(mousePos);
+
+                Cell newCell = board.GetCell(tileCoordinate);
+                
+                occupyNewCell(newCell);
+                updatePosition();
+            }
             else
             {
                 Vector3Int tileCoordinate = board.GetTilemap().WorldToCell(transform.position);
@@ -277,6 +298,8 @@ public class Unit : MonoBehaviour
 
             path = PathfindingTool.createPathTarget(this);
         }
+
+        
     }
 
     private void ApplyAttackGemsEffect()
@@ -378,13 +401,20 @@ public class Unit : MonoBehaviour
                 {
                     float damageGiant = damage*1.15f;
                     targetUnit.takeDamage((int)damageGiant);
-                    targetUnit.activateStun(5);
+                    targetUnit.activateStun(2);
+                    giantSpell = false;
                 }
             else
             {
                 int rand = Random.Range(1, 101);
                 if (rand <= accuracy)
                     targetUnit.takeOrcDamage(damage);
+            }
+
+            if(ratmanSpell == true)
+            {
+                ratmanSpell = false;
+                targetUnit.activatePoison(5);
             }
 
             ApplyAttackGemsEffect();
@@ -437,7 +467,7 @@ public class Unit : MonoBehaviour
                 }
             }
 
-            giantSpell = false;
+            
         }
        
     }
@@ -500,6 +530,19 @@ public class Unit : MonoBehaviour
         Destroy(projectile);
 
         yield return null;
+    }
+
+    IEnumerator PoisonDamage()
+    {
+        float poisonCounter = 0;
+        while (poisonCounter < poisonTime)
+        {
+            takeDamage(poisonDamage);
+            yield return new WaitForSeconds(poisonDamageInterval);
+            poisonCounter += poisonDamageInterval;
+        }
+        poisonned = false;
+        status.setPoison(false);
     }
 
     public void occupyNewCell(Cell newCell)
@@ -590,7 +633,13 @@ public class Unit : MonoBehaviour
         //if this is the last animation playing, set the color back to normal
         takingDamageCount--;
         if (takingDamageCount == 0)
-            spriteRenderer.color = baseColor;
+        {
+            if (stuned == false)
+                spriteRenderer.color = baseColor;
+            if(stuned == true)
+                spriteRenderer.color = new Color(104f / 255f, 104f / 255f, 104f / 255f, 1f); 
+        }
+          
     }
 
     private void OnDrawGizmosSelected()
@@ -953,6 +1002,7 @@ public class Unit : MonoBehaviour
 
     public void activateOrcSpell(float accuracyLost, float time)
     {
+        status.setOrcUp(true);
         orcSpell = true;
         accuracy -= accuracyLost;
         Invoke("endOrcSpell", time);
@@ -960,12 +1010,14 @@ public class Unit : MonoBehaviour
 
     private void endOrcSpell()
     {
+        status.setOrcUp(false);
         orcSpell = false;
         accuracy = 100;
     }
 
     public void activateSkeletonSpell(float armorLost, float time)
     {
+        status.setBreakShield(true);
         saveArmor = armor;
         armor -= (armorLost*armor);
         Invoke("endSkeletonSpell", time);
@@ -973,18 +1025,21 @@ public class Unit : MonoBehaviour
 
     private void endSkeletonSpell()
     {
+        status.setBreakShield(false);
         armor = saveArmor;
     }
 
     public void activateStun(float time)
     {
         stuned = true;
+        spriteRenderer.color = new Color(104f / 255f, 104f / 255f, 104f / 255f,1f);
         Invoke("endStun", time);
     }
 
     private void endStun()
     {
         stuned = false;
+        spriteRenderer.color = Color.white;
     }
 
 
@@ -997,4 +1052,17 @@ public class Unit : MonoBehaviour
         takeDamage(damage);
 
     }
+    public void activateRatmanSpell()
+    {
+        ratmanSpell = true;
+    }
+
+    public void activatePoison(float time)
+    {
+        status.setPoison(true);
+        poisonned = true;
+        poisonTime = time;
+        StartCoroutine(PoisonDamage());
+    }
+
 }
