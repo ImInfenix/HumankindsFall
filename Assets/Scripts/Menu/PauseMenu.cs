@@ -6,7 +6,12 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
     public static PauseMenu instance;
-    public static bool isGamePause { get; private set; }
+    public static bool isGamePaused { get; private set; }
+
+    [SerializeField]
+    private GameObject menuContent;
+    [SerializeField]
+    private OptionsMenu optionsMenu;
 
     public void Initialize()
     {
@@ -41,20 +46,32 @@ public class PauseMenu : MonoBehaviour
     public void ShowMenu()
     {
         instance.gameObject.SetActive(true);
-        isGamePause = true;
+        optionsMenu.Hide();
+        isGamePaused = true;
         Time.timeScale = 0;
     }
 
     public void HideMenu()
     {
         instance.gameObject.SetActive(false);
-        isGamePause = false;
+        isGamePaused = false;
         Time.timeScale = 1;
+    }
+
+    public void ShowMainContent()
+    {
+        menuContent.gameObject.SetActive(true);
+    }
+
+    public void HideMainContent()
+    {
+        menuContent.gameObject.SetActive(false);
     }
 
     public void OptionsButton()
     {
-
+        HideMainContent();
+        optionsMenu.Show();
     }
 
     public void MenuButton()

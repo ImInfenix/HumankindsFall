@@ -208,6 +208,9 @@ public class CameraMover : MonoBehaviour
     }
     public void Update()
     {
+        if (PauseMenu.isGamePaused)
+            return;
+
         moveCamera();
         ZoomCamera();
         printData();
