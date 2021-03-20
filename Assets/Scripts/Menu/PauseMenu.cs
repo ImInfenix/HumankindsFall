@@ -29,7 +29,33 @@ public class PauseMenu : MonoBehaviour
 
     public static void ChangeState()
     {
-        instance.gameObject.SetActive(!instance.gameObject.activeSelf);
+        bool newState = !instance.gameObject.activeSelf;
+
+        if (newState)
+            instance.ShowMenu();
+        else
+            instance.HideMenu();
+    }
+
+    public void ShowMenu()
+    {
+        instance.gameObject.SetActive(true);
+    }
+
+    public void HideMenu()
+    {
+        instance.gameObject.SetActive(false);
+    }
+
+    public void OptionsButton()
+    {
+
+    }
+
+    public void MenuButton()
+    {
+        HideMenu();
+        SceneLoader.LoadMenu();
     }
 
     private void OnDestroy()
