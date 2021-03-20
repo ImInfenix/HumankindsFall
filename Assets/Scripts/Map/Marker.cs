@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class Marker : MonoBehaviour
 {
@@ -61,6 +61,9 @@ public class Marker : MonoBehaviour
 
     public void OnMouseDown()
     {
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
+
         levelDescription.ChangeDescription(eachLine[1]);
         levelDescription.ChangeTitle(eachLine[0]);
         levelDescription.ChangeName(descriptionTextFile.name);

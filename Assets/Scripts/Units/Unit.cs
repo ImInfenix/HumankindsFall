@@ -624,6 +624,9 @@ public class Unit : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
+
         if (GameManager.instance.gamestate != GameManager.GameState.Placement)
             return;
 
@@ -652,6 +655,9 @@ public class Unit : MonoBehaviour
 
     private void OnMouseUp()
     {
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
+
         if (GameManager.instance.gamestate != GameManager.GameState.Placement)
             return;
 
