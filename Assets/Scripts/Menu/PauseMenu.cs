@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
     public static PauseMenu instance;
+    public static bool isGamePause { get; private set; }
 
     public void Initialize()
     {
@@ -19,7 +20,7 @@ public class PauseMenu : MonoBehaviour
         if (mode != LoadSceneMode.Single)
             return;
 
-        gameObject?.SetActive(false);
+        HideMenu();
     }
 
     private void OnEnable()
@@ -40,11 +41,15 @@ public class PauseMenu : MonoBehaviour
     public void ShowMenu()
     {
         instance.gameObject.SetActive(true);
+        isGamePause = true;
+        Time.timeScale = 0;
     }
 
     public void HideMenu()
     {
         instance.gameObject.SetActive(false);
+        isGamePause = false;
+        Time.timeScale = 1;
     }
 
     public void OptionsButton()
