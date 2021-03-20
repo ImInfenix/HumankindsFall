@@ -19,7 +19,7 @@ public class PauseMenu : MonoBehaviour
         if (mode != LoadSceneMode.Single)
             return;
 
-        gameObject.SetActive(false);
+        gameObject?.SetActive(false);
     }
 
     private void OnEnable()
@@ -34,6 +34,7 @@ public class PauseMenu : MonoBehaviour
 
     private void OnDestroy()
     {
+        if (instance == this) instance = null;
         SceneManager.sceneLoaded -= OnNewSceneLoaded;
     }
 }

@@ -3828,6 +3828,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1728214435669634450, guid: 85ed2434bf7766e4c920413ade69af70,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1916477016714681621, guid: 85ed2434bf7766e4c920413ade69af70,
         type: 3}
       propertyPath: m_Name
@@ -3893,6 +3898,11 @@ PrefabInstance:
       propertyPath: startingGameState
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 9050624727449732064, guid: 85ed2434bf7766e4c920413ade69af70,
+        type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1612221263}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85ed2434bf7766e4c920413ade69af70, type: 3}
 --- !u!1 &1018267194
