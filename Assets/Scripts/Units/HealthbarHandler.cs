@@ -15,7 +15,8 @@ public class HealthbarHandler : MonoBehaviour
     [SerializeField] private GameObject classIconGameObject;
     private Vector3 classIconOffset = new Vector3(0.3f, 0.14f, 0);
 
-    public Camera attachedCamera;
+    [SerializeField]
+    private Canvas canvas;
 
     private void Awake()
     {
@@ -27,27 +28,9 @@ public class HealthbarHandler : MonoBehaviour
         gameObject.transform.GetChild(0).gameObject.SetActive(false);
     }
 
-    void OnEnable()
-    {
-        attachedCamera = Camera.main;
-        UpdatePosition();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        UpdatePosition();
-    }
-
     private void OnDestroy()
     {
         healthbarHandlers.Remove(this);
-    }
-
-    private void UpdatePosition()
-    {
-        //transform.GetChild(0).transform.position = attachedCamera.WorldToScreenPoint(transform.parent.position + barsOffset);
-        //transform.GetChild(1).transform.position = attachedCamera.WorldToScreenPoint(transform.parent.position + classIconOffset);
     }
 
     public void SetHealth(float health, int maxHealth)
@@ -104,5 +87,15 @@ public class HealthbarHandler : MonoBehaviour
     public void HideClassIcon()
     {
         transform.GetChild(1).gameObject.SetActive(false);
+    }
+
+    public void OnDragNDropStarts()
+    {
+        canvas.sortingOrder = 10;
+    }
+
+    public void OnDragNDropEnds()
+    {
+        canvas.sortingOrder = 4;
     }
 }

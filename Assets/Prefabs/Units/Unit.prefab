@@ -369,7 +369,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 1575234587
-  m_SortingOrder: 5
+  m_SortingOrder: 4
   m_TargetDisplay: 0
 --- !u!114 &8759493541032351604
 MonoBehaviour:
@@ -426,7 +426,7 @@ MonoBehaviour:
   healthSlider: {fileID: 2775902829914204738}
   staminaSlider: {fileID: 3751454102309057999}
   classIconGameObject: {fileID: 0}
-  attachedCamera: {fileID: 0}
+  canvas: {fileID: 1565143286635935140}
 --- !u!1 &5312309690352340306
 GameObject:
   m_ObjectHideFlags: 0
