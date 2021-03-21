@@ -9,6 +9,7 @@ public class SaveFile
     public uint unitGeneratorId;
     public List<string> finishedLevels;
     public List<UnitDescriptionForSerialization> units;
+    public string[] gems;
 
     public void SetUnitsToSave(List<UnitDescription> unitsToSave)
     {

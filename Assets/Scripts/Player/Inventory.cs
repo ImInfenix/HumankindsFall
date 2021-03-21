@@ -22,9 +22,6 @@ public class Inventory : MonoBehaviour
     {
         unitsInInventory = new Dictionary<uint, UnitDescription>();
         gemsInInventory = new List<Gem>();
-
-        //TEST GEMS
-        GenerateGems();
     }
 
     public void Initialize(List<UnitDescription> units = null)
@@ -122,6 +119,11 @@ public class Inventory : MonoBehaviour
     public List<Gem> GetAllGems()
     {
         return gemsInInventory;
+    }
+
+    public void SetAllGems(List<Gem> gems)
+    {
+        gemsInInventory = gems;
     }
 
     public void AddGem(Gem gem)

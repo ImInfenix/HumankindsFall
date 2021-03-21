@@ -49,8 +49,24 @@ public class Player : MonoBehaviour
             Wallet.Initialize(saveFile.walletAmount);
             UnitDescription.currentId = saveFile.unitGeneratorId;
             Marker.finishedLevels = saveFile.finishedLevels;
+            Inventory.SetAllGems(GenerateGemsFromNames(saveFile.gems));
             return;
         }
         Wallet.Initialize(walletStartAmount);
+    }
+
+    private List<Gem> GenerateGemsFromNames(string[] gems)
+    {
+        List<Gem> gemsToReturn = new List<Gem>();
+
+        foreach(string gem in gems)
+        {
+            GameObject gemGameObject = Resources.Load("Gems/" + gem) as GameObject;
+            GameObject newGem = Instantiate(gemGameObject);
+            gemsToReturn.Add(newGem.GetComponent<Gem>());
+            Destroy(newGem);
+        }
+
+        return gemsToReturn;
     }
 }

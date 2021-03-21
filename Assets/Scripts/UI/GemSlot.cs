@@ -45,8 +45,6 @@ public class GemSlot : MonoBehaviour
         if (unitDescriptionDisplay != null)
             unitDescriptionDisplay.UnselectActualSlot();
 
-        //POURQUOI IL DEVIENT NULL ?
-        print(shopSystem);
         if (shopSystem)
         {
             if (isShop)

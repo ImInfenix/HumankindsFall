@@ -81,6 +81,7 @@ public class SavingSystem
         saveFile.SetUnitsToSave(GetAllUnitsToSave());
         saveFile.walletAmount = (int)Player.instance?.Wallet?.GetAmount();
         saveFile.unitGeneratorId = UnitDescription.currentId;
+        saveFile.gems = GetAllGemsToSave();
         return saveFile;
     }
 
@@ -91,5 +92,20 @@ public class SavingSystem
         units.AddRange(Player.instance.Inventory.GetAllUnits());
 
         return units;
+    }
+
+    static string[] GetAllGemsToSave()
+    {
+        List<Gem> gems = Player.instance.Inventory.GetAllGems();
+        string[] gemsToReturn = new string[gems.Count];
+
+        int i = 0;
+        foreach(Gem gem in gems)
+        {
+            gemsToReturn[i] = gem.GetType().ToString();
+            i++;
+        }
+
+        return gemsToReturn;
     }
 }

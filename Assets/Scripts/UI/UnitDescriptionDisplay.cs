@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class UnitDescriptionDisplay : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class UnitDescriptionDisplay : MonoBehaviour
     private GameObject GemSlot;
     [SerializeField]
     private GameObject UnitGemsZone;
+    [SerializeField]
+    private Button ResetGemsButton;
 
     private UnitDescription currentDescription;
     private InventorySlot actualSlot;
@@ -147,8 +150,28 @@ public class UnitDescriptionDisplay : MonoBehaviour
 
         string[] gems = currentDescription.GetGems();
 
-        if ((GameManager.instance.gamestate != GameManager.GameState.Shopping))
-            GenerateSlots(gems);
+
+        //destroy previously displayed slots
+        foreach (GameObject slot in gemSlots)
+        {
+            Destroy(slot);
+        }
+
+        gemSlots = new List<GameObject>();
+        currentGems = new List<Gem>();
+
+        if (ResetGemsButton)
+        {
+            if (GameManager.instance.gamestate == GameManager.GameState.Placement)
+            {
+                GenerateSlots(gems);
+                print(GameManager.instance.gamestate);
+                ResetGemsButton.gameObject.SetActive(true);
+            }
+
+            else
+                ResetGemsButton.gameObject.SetActive(false);
+        }
     }
 
     public void GenerateSlots(string[] unitGems)
@@ -171,15 +194,6 @@ public class UnitDescriptionDisplay : MonoBehaviour
 
         float baseX = 0 - (nbGemsSlotsPerLine - 1) * widthOffset / 2;
         float x = baseX;
-
-        //destroy previous displayed slots
-        foreach (GameObject slot in gemSlots)
-        {
-            Destroy(slot);
-        }
-
-        gemSlots = new List<GameObject>();
-        currentGems = new List<Gem>();
 
         //create gem slots
         for (int i = 1; i <= numberOfGemsSlots; i++)

@@ -509,7 +509,7 @@ GameObject:
   - component: {fileID: 1570760052}
   - component: {fileID: 1570760055}
   m_Layer: 0
-  m_Name: Button
+  m_Name: ResetGemsButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2355,6 +2355,11 @@ PrefabInstance:
       propertyPath: UnitGemsZone
       value: 
       objectReference: {fileID: 2231666390276301111}
+    - target: {fileID: 3617695967850640919, guid: eb5c2b42615f3bf47a85fb76fc049d57,
+        type: 3}
+      propertyPath: ResetGemsButton
+      value: 
+      objectReference: {fileID: 1570760052}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb5c2b42615f3bf47a85fb76fc049d57, type: 3}
 --- !u!224 &2231666390655119513 stripped
