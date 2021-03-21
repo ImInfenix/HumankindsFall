@@ -673,6 +673,9 @@ public class Unit : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if (PauseMenu.isGamePaused || EventSystem.current.IsPointerOverGameObject())
+            return;
+
         if (GameManager.instance.gamestate != GameManager.GameState.Placement)
             return;
 
@@ -697,10 +700,14 @@ public class Unit : MonoBehaviour
         moving = true;
 
         spriteRenderer.sortingOrder = 10;
+        healthBar.OnDragNDropStarts();
     }
 
     private void OnMouseUp()
     {
+        if (PauseMenu.isGamePaused)
+            return;
+
         if (GameManager.instance.gamestate != GameManager.GameState.Placement)
             return;
 
@@ -731,6 +738,8 @@ public class Unit : MonoBehaviour
                 }
 
                 moving = false;
+
+                healthBar.OnDragNDropEnds();
 
                 InventorySlot slotUnderMouse = InventorySlot.GetSlotUnderMouse();
                 if (slotUnderMouse != null)

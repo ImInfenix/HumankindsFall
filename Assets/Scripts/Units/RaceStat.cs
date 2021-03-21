@@ -44,33 +44,24 @@ public class RaceStat : ScriptableObject
         {
             case (Class.Warrior):
                 return warriorSprite;
-                break;
             case (Class.Mage):
                 return mageSprite;
-                break;
             case (Class.Tank):
                 return tankSprite;
-                break;
             case (Class.Bowman):
                 return bowmanSprite;
-                break;
             case (Class.Healer):
                 return healerSprite;
-                break;
             case (Class.Support):
                 return supportSprite;
             case (Class.Berserker):
                 return berserkerSprite;
-                break;
             case (Class.Assassin):
                 return assassinSprite;
-                break;
             case (Class.Soldier):
                 return soldierSprite;
-                break;
             default:
                 return unitSprite;
-                break;
         }
     }
 }

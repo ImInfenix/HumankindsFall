@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
         gamestate = startingGameState;
 
         GetComponent<SceneLoader>().Initialize();
+        GetComponentInChildren<PauseMenu>(true).Initialize();
     }
 
     /// <summary>
@@ -60,6 +61,7 @@ public class GameManager : MonoBehaviour
         ActivateClassSynergy();
         SpellHandler.instance.ActivateRaceSynergy();
         Player.instance.Inventory.Hide();
+        TimeButtonHandler.instance.ShowTimeButton();
         HealthbarHandler.ShowBars();
         Player.instance.Inventory.inventoryUI.rewardSystem.RegisterCombatParticipants();
     }
@@ -117,6 +119,8 @@ public class GameManager : MonoBehaviour
 
         }
 
+        if (Input.GetKeyDown(KeyCode.Escape) && gamestate != GameState.Menu)
+            PauseMenu.ChangeState();
     }
 
     private void CombatResolution(string resolution)
@@ -137,6 +141,7 @@ public class GameManager : MonoBehaviour
         SpellHandler.instance.HideSpells();
         SpellHandler.instance.gameObject.SetActive(false);
         HealthbarHandler.HideAll();
+        TimeButtonHandler.instance.HideTimeButton();
         Player.instance.Inventory.Hide();
     }
 

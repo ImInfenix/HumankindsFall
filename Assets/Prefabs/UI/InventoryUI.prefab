@@ -209,7 +209,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UnitsSlots: {fileID: 3617695966942718994}
-  CurrentUnitDescription: {fileID: 3617695967850640918}
+  GemsSlots: {fileID: 0}
+  CurrentUnitDescription: {fileID: 3617695967850640919}
   rewardSystem: {fileID: 3086761820516269074}
   slots:
   - {fileID: 7099641062222053156}
@@ -769,6 +770,9 @@ MonoBehaviour:
   UnitName: {fileID: 3617695967305637003}
   UnitStats: {fileID: 3617695968669363842}
   UnitExperience: {fileID: 1777167203703440185}
+  GemSlot: {fileID: 0}
+  UnitGemsZone: {fileID: 0}
+  shopSystem: {fileID: 0}
 --- !u!1 &3617695967914172270
 GameObject:
   m_ObjectHideFlags: 0
