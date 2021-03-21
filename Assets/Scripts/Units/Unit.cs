@@ -673,7 +673,7 @@ public class Unit : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (EventSystem.current.IsPointerOverGameObject())
+        if (PauseMenu.isGamePaused)
             return;
 
         if (GameManager.instance.gamestate != GameManager.GameState.Placement)
@@ -704,7 +704,7 @@ public class Unit : MonoBehaviour
 
     private void OnMouseUp()
     {
-        if (EventSystem.current.IsPointerOverGameObject())
+        if (PauseMenu.isGamePaused)
             return;
 
         if (GameManager.instance.gamestate != GameManager.GameState.Placement)

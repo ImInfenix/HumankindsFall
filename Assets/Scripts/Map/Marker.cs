@@ -61,7 +61,7 @@ public class Marker : MonoBehaviour
 
     public void OnMouseDown()
     {
-        if (EventSystem.current.IsPointerOverGameObject())
+        if (PauseMenu.isGamePaused)
             return;
 
         levelDescription.ChangeDescription(eachLine[1]);
