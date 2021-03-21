@@ -16,7 +16,7 @@ public class MachineGunGem : Gem
 
     public override void InitGemEffect()
     {
-        unit.AttackSpeed *= 0.75f;
+        unit.AttackSpeed *= 1.25f;
     }
 
     void Awake()

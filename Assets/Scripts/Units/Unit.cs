@@ -293,7 +293,7 @@ public class Unit : MonoBehaviour
 
             else if (path == null)
             {
-                StartCoroutine(UnitWaitForSeconds(moveSpeed));
+                StartCoroutine(UnitWaitForSeconds(1/moveSpeed));
             }
 
             path = PathfindingTool.createPathTarget(this);
@@ -340,7 +340,7 @@ public class Unit : MonoBehaviour
             occupyNewCell(cell);
             //StopCoroutine(MoveAnimation(cell));
             StartCoroutine(MoveAnimation(cell));
-            yield return new WaitForSeconds(MoveSpeed);
+            yield return new WaitForSeconds(1/MoveSpeed);
             //ensure that the unit is at the center of the current cell before it can start acting again
             updatePosition();
             isActing = false;
@@ -349,7 +349,7 @@ public class Unit : MonoBehaviour
         else
         {
             path = null;
-            yield return new WaitForSeconds(MoveSpeed);
+            yield return new WaitForSeconds(1/MoveSpeed);
         }
     }
 
@@ -359,7 +359,7 @@ public class Unit : MonoBehaviour
         float speed = 0.1f;
 
         //if the unit is moving too fast, inscrease the animation speed
-        if (MoveSpeed <= 0.2)
+        if (1/MoveSpeed <= 0.2)
             speed = 0.2f;
 
         //set the maximum number of movement in the animation
@@ -431,7 +431,7 @@ public class Unit : MonoBehaviour
                 ability.updateAbility(IncrementStamina);
             }
 
-            yield return new WaitForSeconds(AttackSpeed);
+            yield return new WaitForSeconds(1/AttackSpeed);
             isActing = false;
 
             cptHealer++;
@@ -485,9 +485,9 @@ public class Unit : MonoBehaviour
 
         //set the animation time to be fast, and faster than the attack speed
         float animationTime = 0.3f;
-        if (AttackSpeed <= 0.3f)
+        if (1/AttackSpeed <= 0.3f)
         {
-            animationTime = 2 * AttackSpeed / 3;
+            animationTime = 2 * (1/AttackSpeed) / 3;
         }
 
         yield return new WaitForSeconds(0.2f);
@@ -504,7 +504,7 @@ public class Unit : MonoBehaviour
         float speed = 0.06f;
 
         //if the unit is attacking too fast, inscrease the animation speed
-        if (AttackSpeed <= 0.2f)
+        if (1/AttackSpeed <= 0.2f)
             speed = 0.15f;
 
         //set the maximum number of refresh of the projectile animation
@@ -903,7 +903,7 @@ public class Unit : MonoBehaviour
             case Class.Bowman:
                 if (nb >= 2)
                 {
-                    attackSpeed -= attackSpeed/4;
+                    attackSpeed += attackSpeed/4;
                 }
                 break;
 
