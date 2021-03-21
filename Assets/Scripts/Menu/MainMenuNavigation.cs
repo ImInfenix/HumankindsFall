@@ -6,6 +6,7 @@ public class MainMenuNavigation : MonoBehaviour
 {
     public GameObject continueButton;
     public GameObject newGameConfirm;
+    public GameObject creditsContent;
 
     public void NewGame()
     {
@@ -54,5 +55,15 @@ public class MainMenuNavigation : MonoBehaviour
     {
         if (Player.instance != null)
             Destroy(Player.instance.gameObject);
+    }
+
+    public void ShowCredits()
+    {
+        creditsContent.SetActive(true);
+    }
+
+    public void HideCredits()
+    {
+        creditsContent.SetActive(false);
     }
 }
