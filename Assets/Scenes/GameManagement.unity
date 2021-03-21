@@ -1098,6 +1098,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 95732958753780125, guid: 85ed2434bf7766e4c920413ade69af70,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1116610759328297368, guid: 85ed2434bf7766e4c920413ade69af70,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1916477016714681621, guid: 85ed2434bf7766e4c920413ade69af70,
         type: 3}
       propertyPath: m_Name
@@ -1158,6 +1168,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4831860023801029659, guid: 85ed2434bf7766e4c920413ade69af70,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6322463883460540440, guid: 85ed2434bf7766e4c920413ade69af70,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85ed2434bf7766e4c920413ade69af70, type: 3}
 --- !u!1 &731789019
@@ -1214,6 +1234,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1746759713, guid: 1ea72ca18e933a54bb70c20132f56984, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 519420031}
     - target: {fileID: 2231666390249727116, guid: 1ea72ca18e933a54bb70c20132f56984,
         type: 3}
       propertyPath: m_RootOrder

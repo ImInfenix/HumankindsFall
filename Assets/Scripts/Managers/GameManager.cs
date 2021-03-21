@@ -61,6 +61,7 @@ public class GameManager : MonoBehaviour
         ActivateClassSynergy();
         SpellHandler.instance.ActivateRaceSynergy();
         Player.instance.Inventory.Hide();
+        TimeButtonHandler.instance.ShowTimeButton();
         HealthbarHandler.ShowBars();
         Player.instance.Inventory.inventoryUI.rewardSystem.RegisterCombatParticipants();
     }
@@ -140,6 +141,7 @@ public class GameManager : MonoBehaviour
         SpellHandler.instance.HideSpells();
         SpellHandler.instance.gameObject.SetActive(false);
         HealthbarHandler.HideAll();
+        TimeButtonHandler.instance.HideTimeButton();
         Player.instance.Inventory.Hide();
     }
 
