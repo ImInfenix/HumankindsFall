@@ -46,8 +46,8 @@ public class HealthbarHandler : MonoBehaviour
 
     private void UpdatePosition()
     {
-        transform.GetChild(0).transform.position = attachedCamera.WorldToScreenPoint(transform.parent.position + barsOffset);
-        transform.GetChild(1).transform.position = attachedCamera.WorldToScreenPoint(transform.parent.position + classIconOffset);
+        //transform.GetChild(0).transform.position = attachedCamera.WorldToScreenPoint(transform.parent.position + barsOffset);
+        //transform.GetChild(1).transform.position = attachedCamera.WorldToScreenPoint(transform.parent.position + classIconOffset);
     }
 
     public void SetHealth(float health, int maxHealth)
