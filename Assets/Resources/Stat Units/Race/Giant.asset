@@ -17,8 +17,8 @@ MonoBehaviour:
   maxMana: 0
   mana: 0
   armor: 0
-  moveSpeed: 0.2
-  attackSpeed: 0.1
+  moveSpeed: -0.2
+  attackSpeed: -0.2
   damage: 5
   unitNames:
   - Klinus
