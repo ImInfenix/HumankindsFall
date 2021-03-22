@@ -9,7 +9,7 @@ public class DeadlyShot : Ability
     private void Start()
     {
         castStaminaThreshold = 400;
-        basePower = 30;
+        BasePower = 30;
 
         projectileGameObject = Resources.Load("Ability Prefabs/DeadlyShot") as GameObject;
     }

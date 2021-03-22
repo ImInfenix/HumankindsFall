@@ -22,7 +22,7 @@ public class Unit : MonoBehaviour
     [SerializeField] private float moveSpeed;
     [SerializeField] private float attackSpeed;
     [SerializeField] private float accuracy;
-    [SerializeField] private int damage;
+    [SerializeField] private float damage;
     [SerializeField] private int range;
     [SerializeField] private int power;
     [SerializeField] private string unitName;
@@ -103,9 +103,10 @@ public class Unit : MonoBehaviour
     public float Armor { get => armor; set => armor = value; }
     public float MoveSpeed { get => moveSpeed; set => moveSpeed = value; }
     public float AttackSpeed { get => attackSpeed; set => attackSpeed = value; }
-    public int Damage { get => damage; set => damage = value; }
+    public float Damage { get => damage; set => damage = value; }
     public int Range { get => range; set => range = value; }
     public int Power { get => power; set => power = value; }
+    public Ability Ability { get => ability; set => ability = value; }
 
     // Start is called before the first frame update
     void Start()
@@ -127,8 +128,8 @@ public class Unit : MonoBehaviour
             //load the ability class and add a component to the unit
             var abilityType = System.Type.GetType(abilityName);
             gameObject.AddComponent(abilityType);
-            ability = gameObject.GetComponent<Ability>();
-            ability.setUnit(this);
+            Ability = gameObject.GetComponent<Ability>();
+            Ability.setUnit(this);
         }
 
         else
@@ -268,7 +269,7 @@ public class Unit : MonoBehaviour
         //if the unit is not following a path yet and has a target cell different from their current cell
         if (isAbilityActivated && abilityName != null && abilityName != "")
         {
-            ability.castAbility();
+            Ability.castAbility();
         }
 
         if (!isActing)
@@ -428,7 +429,7 @@ public class Unit : MonoBehaviour
 
             if (abilityName != null && abilityName != "")
             {
-                ability.updateAbility(IncrementStamina);
+                Ability.updateAbility(IncrementStamina);
             }
 
             yield return new WaitForSeconds(1/AttackSpeed);
@@ -596,7 +597,7 @@ public class Unit : MonoBehaviour
         }
     }
 
-    public void takeDamage(int damage)
+    public void takeDamage(float damage)
     {
         CurrentLife -= damage/armor ;
         checkDeath();
@@ -604,7 +605,7 @@ public class Unit : MonoBehaviour
         StartCoroutine(ChangeColorAnimation(damageColor, 0.4f));
     }
 
-    public void takeOrcDamage(int damage)
+    public void takeOrcDamage(float damage)
     {
         currentLife -= damage;
         checkDeath();
@@ -612,7 +613,7 @@ public class Unit : MonoBehaviour
         StartCoroutine(ChangeColorAnimation(damageColor, 0.4f));
     }
 
-    public void heal(int heal)
+    public void heal(float heal)
     {
         CurrentLife += heal;
         if (CurrentLife > MaxLife)
@@ -873,11 +874,11 @@ public class Unit : MonoBehaviour
             case Class.Mage:
                 if(nb >= 2 && nb < 4)
                 {
-                    ability.mageSynergy(1);
+                    Ability.mageSynergy(1);
                 }
                 if(nb >= 4)
                 {
-                    ability.mageSynergy(2);
+                    Ability.mageSynergy(2);
                 }
                 break;
 

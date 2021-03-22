@@ -6,22 +6,26 @@ public class VampireGem : Gem
 {
     public override void AbilityGemEffect()
     {
-        
+
     }
 
     public override void AttackGemEffect()
     {
-        unit.heal(Mathf.RoundToInt(0.2f * unit.Damage));
+        unit.heal(0.2f * unit.Damage);
     }
 
     public override void InitGemEffect()
     {
-        
+
     }
 
-    void Awake()
+    public override void InitializeDescription()
+    {
+        gemDescription = "À chaque attaque, l'unité se soigne de 20% de sa valeur d'attaque.";
+    }
+
+    public override void InitializeName()
     {
         gemName = "Gemme du vampire";
-        gemDescription = "À chaque attaque, l'unité se soigne de 20% de sa valeur d'attaque.";
     }
 }

@@ -2,31 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RubyGem : Gem
+public class DragonClawGem : Gem
 {
     public override void AbilityGemEffect()
     {
-        
+
     }
 
     public override void AttackGemEffect()
     {
-        
+
     }
 
     public override void InitGemEffect()
     {
-        unit.MaxLife += 20;
-        unit.MaxLife = Mathf.RoundToInt(unit.MaxLife * 1.2f);
+        unit.Damage *= 1.10f;
     }
 
     public override void InitializeDescription()
     {
-        gemDescription = "Augmente les PV max de 20, puis de 20%.";
+        gemDescription = "Augmente les dégats d'attaque de 10%.";
     }
 
     public override void InitializeName()
     {
-        gemName = "Gemme de rubis";
+        gemName = "Gemme griffe de dragon";
     }
 }

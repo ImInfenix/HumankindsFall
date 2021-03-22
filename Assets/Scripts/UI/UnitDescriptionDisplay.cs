@@ -165,7 +165,6 @@ public class UnitDescriptionDisplay : MonoBehaviour
             if (GameManager.instance.gamestate == GameManager.GameState.Placement)
             {
                 GenerateSlots(gems);
-                print(GameManager.instance.gamestate);
                 ResetGemsButton.gameObject.SetActive(true);
             }
 

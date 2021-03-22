@@ -10,7 +10,7 @@ public class HealZone : Ability
         castStaminaThreshold = 500;
         castRange = 0;
         areaOfEffect = 2;
-        basePower = 30;
+        BasePower = 30;
     }
     override public void castAbility()
     {

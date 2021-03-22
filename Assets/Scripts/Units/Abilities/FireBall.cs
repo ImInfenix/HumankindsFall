@@ -13,7 +13,7 @@ public class FireBall : Ability
         castStaminaThreshold = 800;
         castRange = 4;
         areaOfEffect = 1;
-        basePower = 35;
+        BasePower = 35;
 
         projectileGameObject = Resources.Load("Ability Prefabs/Fireball") as GameObject;
     }

@@ -19,9 +19,13 @@ public class MachineGunGem : Gem
         unit.AttackSpeed *= 1.25f;
     }
 
-    void Awake()
+    public override void InitializeDescription()
+    {
+        gemDescription = "Augmente la vitesse d'attaque de 25% (PAN PAN PAN).";
+    }
+
+    public override void InitializeName()
     {
         gemName = "Gemme Machine Gun";
-        gemDescription = "Augmente la vitesse d'attaque de 25% (PAN PAN PAN).";
     }
 }

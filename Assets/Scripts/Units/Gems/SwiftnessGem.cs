@@ -2,31 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RubyGem : Gem
+public class SwiftnessGem : Gem
 {
     public override void AbilityGemEffect()
     {
-        
+
     }
 
     public override void AttackGemEffect()
     {
-        
+
     }
 
     public override void InitGemEffect()
     {
-        unit.MaxLife += 20;
-        unit.MaxLife = Mathf.RoundToInt(unit.MaxLife * 1.2f);
+        unit.MoveSpeed *= 1.25f;
     }
 
     public override void InitializeDescription()
     {
-        gemDescription = "Augmente les PV max de 20, puis de 20%.";
+        gemDescription = "Augmente la vitesse de déplacement de 25%.";
     }
 
     public override void InitializeName()
     {
-        gemName = "Gemme de rubis";
+        gemName = "Gemme de célérité";
     }
 }

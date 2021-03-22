@@ -10,8 +10,10 @@ abstract public class Ability : MonoBehaviour
     [SerializeField] protected int castStaminaThreshold;
     protected int castRange;
     protected int areaOfEffect;
-    protected int basePower;
-    protected int currentPower;
+    private float basePower;
+    protected float currentPower;
+
+    public float BasePower { get => basePower; set => basePower = value; }
 
     public void setUnit(Unit unit)
     {
@@ -38,7 +40,7 @@ abstract public class Ability : MonoBehaviour
 
     private void updateCurrentPower()
     {
-        currentPower = basePower + unit.Power;
+        currentPower = BasePower + unit.Power;
     }
     
     public void mageSynergy(int lvl)

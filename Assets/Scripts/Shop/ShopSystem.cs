@@ -59,7 +59,7 @@ public class ShopSystem : MonoBehaviour
             int randomGemIndex = Random.Range(0, existingGems.Length);
             GameObject newGem = Instantiate(existingGems[randomGemIndex], gemSlot.transform.position, Quaternion.identity, gemSlot.transform);
             gemSlot.Gem = newGem.GetComponent<Gem>();
-            newGem.GetComponentInChildren<Image>().rectTransform.sizeDelta *= 2;
+            newGem.GetComponentInChildren<Image>().rectTransform.sizeDelta *= 3;
             GemUI gemUI = newGem.GetComponentInChildren<GemUI>();
             gemUI.DisableDrag();
             gemUI.GemSlot = gemSlot;
