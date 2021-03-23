@@ -28,6 +28,7 @@ abstract public class Ability : MonoBehaviour
         {
             currentStamina -= castStaminaThreshold;
             castAbility();
+            print(currentPower);
         }
 
         unit.getHealthbar().SetStamina(currentStamina, castStaminaThreshold);

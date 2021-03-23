@@ -6,7 +6,7 @@ public class CircularAttack : Ability
 {
     private GameObject animationGameObject;
 
-    private void Start()
+    private void Awake()
     {
         castStaminaThreshold = 800;
         castRange = 0;
@@ -27,7 +27,6 @@ public class CircularAttack : Ability
 
         foreach (Unit unit in listUnitsHitProv)
             unit.takeDamage(currentPower);
-
 
         unit.setIsAbilityActivated(false);
     }

@@ -8,7 +8,7 @@ public class FireBall : Ability
 
     private int basicRange;
 
-    private void Start()
+    private void Awake()
     {
         castStaminaThreshold = 800;
         castRange = 4;

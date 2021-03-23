@@ -6,7 +6,7 @@ public class DeadlyShot : Ability
 {
     [SerializeField] private GameObject projectileGameObject;
 
-    private void Start()
+    private void Awake()
     {
         castStaminaThreshold = 400;
         BasePower = 30;

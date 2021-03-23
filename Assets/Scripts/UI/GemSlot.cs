@@ -33,7 +33,9 @@ public class GemSlot : MonoBehaviour
 
     public void FindShopSystem()
     {
-        shopSystem = GameObject.Find("ShopSystem").GetComponent<ShopSystem>();
+        GameObject shopSystemGameObject = GameObject.Find("ShopSystem");
+        if (shopSystemGameObject != null)
+            shopSystem = shopSystemGameObject.GetComponent<ShopSystem>();
     }
 
     public void SelectSlot()

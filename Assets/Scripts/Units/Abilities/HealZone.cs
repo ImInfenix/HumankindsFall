@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class HealZone : Ability
 {
-
-    private void Start()
+    private void Awake()
     {
         castStaminaThreshold = 500;
         castRange = 0;
