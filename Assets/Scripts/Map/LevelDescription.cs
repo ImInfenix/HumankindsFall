@@ -1,16 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class LevelDescription : MonoBehaviour
 {
-    private const string BattleScenesFolder = "Scenes/BattleScenes";
-
     [SerializeField]
-    private string placeName;
+    private string sceneToLoadName;
     [SerializeField]
     private TMP_Text Title;
     [SerializeField]
@@ -25,11 +20,11 @@ public class LevelDescription : MonoBehaviour
 
     public void Hide()
     {
-        this.gameObject.SetActive(false);
+        gameObject.SetActive(false);
     }
     public void Show()
     {
-        this.gameObject.SetActive(true);
+        gameObject.SetActive(true);
     }
 
     public void ChangeTitle(string text)
@@ -39,7 +34,7 @@ public class LevelDescription : MonoBehaviour
 
     public void ChangeName(string text)
     {
-        placeName = text;
+        sceneToLoadName = text;
     }
 
     public void ChangeDescription(string description)
@@ -52,10 +47,9 @@ public class LevelDescription : MonoBehaviour
         image.sprite = newImage;
     }
 
-    //Il faudra que la scène ait le même nom que le niveau
     public void LoadBattle()
     {
-        GameManager.instance.EnterBattle(placeName);
+        GameManager.instance.EnterBattle(sceneToLoadName);
     }
 
 }

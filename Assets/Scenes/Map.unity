@@ -220,6 +220,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3715987373865777901, guid: 6f128a6d492d075408abb1695627d782,
         type: 3}
+      propertyPath: combatPreview
+      value: 
+      objectReference: {fileID: 11400000, guid: 50a38fe4fd3442c4cb3976add041d948,
+        type: 2}
+    - target: {fileID: 3715987373865777901, guid: 6f128a6d492d075408abb1695627d782,
+        type: 3}
       propertyPath: levelDescription
       value: 
       objectReference: {fileID: 2095747038}
@@ -654,7 +660,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36.2
+  m_fontSize: 36.25
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1428,6 +1434,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3715987373865777901, guid: 6f128a6d492d075408abb1695627d782,
         type: 3}
+      propertyPath: combatPreview
+      value: 
+      objectReference: {fileID: 11400000, guid: fc8058c71869a06458e1ef3b0208c19b,
+        type: 2}
+    - target: {fileID: 3715987373865777901, guid: 6f128a6d492d075408abb1695627d782,
+        type: 3}
       propertyPath: levelDescription
       value: 
       objectReference: {fileID: 2095747038}
@@ -2117,6 +2129,12 @@ PrefabInstance:
       propertyPath: isAccessible
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3715987373865777901, guid: 6f128a6d492d075408abb1695627d782,
+        type: 3}
+      propertyPath: combatPreview
+      value: 
+      objectReference: {fileID: 11400000, guid: 81968b98bbee8514b8e63d851ebe3f2b,
+        type: 2}
     - target: {fileID: 3715987373865777901, guid: 6f128a6d492d075408abb1695627d782,
         type: 3}
       propertyPath: levelDescription
@@ -2998,6 +3016,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3715987373865777901, guid: 6f128a6d492d075408abb1695627d782,
         type: 3}
+      propertyPath: combatPreview
+      value: 
+      objectReference: {fileID: 11400000, guid: 2102a93e11cab49438d80314e848d71b,
+        type: 2}
+    - target: {fileID: 3715987373865777901, guid: 6f128a6d492d075408abb1695627d782,
+        type: 3}
       propertyPath: levelDescription
       value: 
       objectReference: {fileID: 2095747038}
@@ -3102,6 +3126,12 @@ PrefabInstance:
       propertyPath: isAccessible
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3715987373865777901, guid: 6f128a6d492d075408abb1695627d782,
+        type: 3}
+      propertyPath: combatPreview
+      value: 
+      objectReference: {fileID: 11400000, guid: 9f81c0155bc594041bc938f59f5f6d42,
+        type: 2}
     - target: {fileID: 3715987373865777901, guid: 6f128a6d492d075408abb1695627d782,
         type: 3}
       propertyPath: levelDescription
