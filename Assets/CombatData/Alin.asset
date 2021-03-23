@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneName: Alin
   descriptionTextFile: {fileID: 4900000, guid: dcc4ec9e01417de458f9d2a56038148d, type: 3}
+  ennemiesCount: 5

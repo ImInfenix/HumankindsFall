@@ -8,4 +8,7 @@ public class CombatPreviewData : ScriptableObject
     [Header("Scene")]
     public string sceneName;
     public TextAsset descriptionTextFile;
+
+    [Header("Combat")]
+    public int ennemiesCount;
 }
