@@ -10,6 +10,7 @@ abstract public class Ability : MonoBehaviour
     [SerializeField] protected int castStaminaThreshold;
     protected int castRange;
     protected int areaOfEffect;
+    protected float duration;
     private float basePower;
     protected float currentPower;
     protected bool canGenerateStamina = true;

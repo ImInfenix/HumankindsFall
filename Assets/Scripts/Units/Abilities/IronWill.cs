@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class IronWill : Ability
 {
-    int duration;
-
     private void Awake()
     {
         castStaminaThreshold = 700;

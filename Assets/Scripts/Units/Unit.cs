@@ -108,6 +108,7 @@ public class Unit : MonoBehaviour
     public int Power { get => power; set => power = value; }
     public Ability Ability { get => ability; set => ability = value; }
     public StatusHandler Status { get => status; set => status = value; }
+    public bool Poisonned { get => poisonned; set => poisonned = value; }
 
     // Start is called before the first frame update
     void Start()
@@ -416,7 +417,7 @@ public class Unit : MonoBehaviour
             if(ratmanSpell == true)
             {
                 ratmanSpell = false;
-                targetUnit.activatePoison(5);
+                targetUnit.activatePoison(5, poisonDamage);
             }
 
             ApplyAttackGemsEffect();
@@ -534,8 +535,9 @@ public class Unit : MonoBehaviour
         yield return null;
     }
 
-    IEnumerator PoisonDamage()
+    IEnumerator PoisonDamage(float poisonDamage)
     {
+        Poisonned = true;
         float poisonCounter = 0;
         while (poisonCounter < poisonTime)
         {
@@ -543,7 +545,7 @@ public class Unit : MonoBehaviour
             yield return new WaitForSeconds(poisonDamageInterval);
             poisonCounter += poisonDamageInterval;
         }
-        poisonned = false;
+        Poisonned = false;
         Status.setPoison(false);
     }
 
@@ -1062,12 +1064,12 @@ public class Unit : MonoBehaviour
         ratmanSpell = true;
     }
 
-    public void activatePoison(float time)
+    public void activatePoison(float time, float damage)
     {
         Status.setPoison(true);
-        poisonned = true;
+        Poisonned = true;
         poisonTime = time;
-        StartCoroutine(PoisonDamage());
+        StartCoroutine(PoisonDamage(damage));
     }
 
 }
