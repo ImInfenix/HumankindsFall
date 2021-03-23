@@ -7,6 +7,7 @@ public class StatusHandler : MonoBehaviour
     public GameObject poison;
     public GameObject breakShield;
     public GameObject OrcUp;
+    public GameObject shieldUp;
 
     private void Awake()
     {
@@ -18,6 +19,9 @@ public class StatusHandler : MonoBehaviour
 
         OrcUp = Instantiate(OrcUp, GetComponent<RectTransform>());
         OrcUp.SetActive(false);
+
+        shieldUp = Instantiate(shieldUp, GetComponent<RectTransform>());
+        shieldUp.SetActive(false);
     }
 
     public void setPoison(bool b)
@@ -33,5 +37,10 @@ public class StatusHandler : MonoBehaviour
     public void setOrcUp(bool b)
     {
         OrcUp.SetActive(b);
+    }
+
+    public void setShieldUp(bool b)
+    {
+        shieldUp.SetActive(b);
     }
 }

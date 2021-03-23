@@ -86,6 +86,8 @@ MonoBehaviour:
   breakShield: {fileID: 8597223052622753109, guid: b4428153a844794498268bc3498db3f3,
     type: 3}
   OrcUp: {fileID: 5144565974947930664, guid: 2eff4e7bdd5581a4392852daa909b8a2, type: 3}
+  shieldUp: {fileID: 1831447964174093759, guid: 0a9afb4d8ed4fc548b7d3e943adf2ee7,
+    type: 3}
 --- !u!1 &782722755744261470
 GameObject:
   m_ObjectHideFlags: 0

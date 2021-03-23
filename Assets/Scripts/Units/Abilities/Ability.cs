@@ -12,6 +12,7 @@ abstract public class Ability : MonoBehaviour
     protected int areaOfEffect;
     private float basePower;
     protected float currentPower;
+    protected bool canGenerateStamina = true;
 
     public float BasePower { get => basePower; set => basePower = value; }
 
@@ -23,15 +24,17 @@ abstract public class Ability : MonoBehaviour
 
     public void updateAbility(float incrementStamina)
     {
-        currentStamina += incrementStamina;
-        if (currentStamina >= castStaminaThreshold && !unit.getIsAbilityActivated())
+        if (canGenerateStamina)
         {
-            currentStamina -= castStaminaThreshold;
-            castAbility();
-            print(currentPower);
-        }
+            currentStamina += incrementStamina;
+            if (currentStamina >= castStaminaThreshold && !unit.getIsAbilityActivated())
+            {
+                currentStamina -= castStaminaThreshold;
+                castAbility();
+            }
 
-        unit.getHealthbar().SetStamina(currentStamina, castStaminaThreshold);
+            unit.getHealthbar().SetStamina(currentStamina, castStaminaThreshold);
+        }
     }
 
     virtual public void castAbility()

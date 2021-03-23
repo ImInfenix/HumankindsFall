@@ -107,6 +107,7 @@ public class Unit : MonoBehaviour
     public int Range { get => range; set => range = value; }
     public int Power { get => power; set => power = value; }
     public Ability Ability { get => ability; set => ability = value; }
+    public StatusHandler Status { get => status; set => status = value; }
 
     // Start is called before the first frame update
     void Start()
@@ -543,7 +544,7 @@ public class Unit : MonoBehaviour
             poisonCounter += poisonDamageInterval;
         }
         poisonned = false;
-        status.setPoison(false);
+        Status.setPoison(false);
     }
 
     public void occupyNewCell(Cell newCell)
@@ -1006,7 +1007,7 @@ public class Unit : MonoBehaviour
 
     public void activateOrcSpell(float accuracyLost, float time)
     {
-        status.setOrcUp(true);
+        Status.setOrcUp(true);
         orcSpell = true;
         accuracy -= accuracyLost;
         Invoke("endOrcSpell", time);
@@ -1014,14 +1015,14 @@ public class Unit : MonoBehaviour
 
     private void endOrcSpell()
     {
-        status.setOrcUp(false);
+        Status.setOrcUp(false);
         orcSpell = false;
         accuracy = 100;
     }
 
     public void activateSkeletonSpell(float armorLost, float time)
     {
-        status.setBreakShield(true);
+        Status.setBreakShield(true);
         saveArmor = armor;
         armor -= (armorLost*armor);
         Invoke("endSkeletonSpell", time);
@@ -1029,7 +1030,7 @@ public class Unit : MonoBehaviour
 
     private void endSkeletonSpell()
     {
-        status.setBreakShield(false);
+        Status.setBreakShield(false);
         armor = saveArmor;
     }
 
@@ -1063,7 +1064,7 @@ public class Unit : MonoBehaviour
 
     public void activatePoison(float time)
     {
-        status.setPoison(true);
+        Status.setPoison(true);
         poisonned = true;
         poisonTime = time;
         StartCoroutine(PoisonDamage());
