@@ -69,6 +69,8 @@ public class Marker : MonoBehaviour
         if (PauseMenu.isGamePaused)
             return;
 
+        Tooltip.HideTooltip_Static();
+
         levelDescription.ChangeDescription(eachLine[1]);
         levelDescription.ChangeTitle(eachLine[0]);
         levelDescription.ChangeName(combatPreview.sceneName);
@@ -83,5 +85,10 @@ public class Marker : MonoBehaviour
 
         if (!finishedLevels.Contains(level))
             finishedLevels.Add(level);
+    }
+
+    public CombatPreviewData GetCombatPreviewData()
+    {
+        return combatPreview;
     }
 }
