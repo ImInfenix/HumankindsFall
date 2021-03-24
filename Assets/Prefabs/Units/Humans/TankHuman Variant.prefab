@@ -40,7 +40,7 @@ PrefabInstance:
     - target: {fileID: 8989652109084296323, guid: a6174ec89c726864784767fadff71602,
         type: 3}
       propertyPath: m_Name
-      value: TankHuman
+      value: TankHuman Variant
       objectReference: {fileID: 0}
     - target: {fileID: 8989652109084296324, guid: a6174ec89c726864784767fadff71602,
         type: 3}
@@ -48,6 +48,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 42018a24085cb4d4c8be447bb7074853,
         type: 2}
+    - target: {fileID: 8989652109084296324, guid: a6174ec89c726864784767fadff71602,
+        type: 3}
+      propertyPath: abilityName
+      value: IronWill
+      objectReference: {fileID: 0}
     - target: {fileID: 8989652109084296325, guid: a6174ec89c726864784767fadff71602,
         type: 3}
       propertyPath: m_Size.x

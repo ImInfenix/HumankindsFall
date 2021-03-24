@@ -272,7 +272,8 @@ public class Unit : MonoBehaviour
     {
         canMove = false;
 
-        //if the unit is not following a path yet and has a target cell different from their current cell
+        //if the unit has an ability and is currently following the ability's behavior
+        //currently useless because no ability uses different behavior
         if (isAbilityActivated && abilityName != null && abilityName != "")
         {
             Ability.castAbility();
@@ -827,6 +828,14 @@ public class Unit : MonoBehaviour
         }
     }
 
+    public void ApplyAbilityGemsEffects()
+    {
+        foreach (Gem gem in gems)
+        {
+            gem.AbilityGemEffect();
+        }
+    }
+
     public Sprite GetSprite()
     {
         return spriteRenderer.sprite;
@@ -908,6 +917,7 @@ public class Unit : MonoBehaviour
                 {
                     maxLife += maxLife/2;
                     currentLife = maxLife;
+                    healthBar.SetHealth(currentLife, maxLife);
                 }
                 break;
 
@@ -998,13 +1008,13 @@ public class Unit : MonoBehaviour
         }
     }
 
-    private void startInvisibility()
+    public void startInvisibility()
     {
         isTargetable = false;
         baseColor.a = 0.5f;
         spriteRenderer.color = baseColor;
     }
-    private void stopInvisibility()
+    public void stopInvisibility()
     {
         if(isTargetable == false)
         {

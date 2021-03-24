@@ -22,7 +22,6 @@ public class IronWill : Ability
     IEnumerator BoostArmor()
     {
         canGenerateStamina = false;
-        unit.setIsAbilityActivated(true);
         unit.Status.setShieldUp(true);
 
         float baseArmor = unit.Armor;
@@ -36,7 +35,6 @@ public class IronWill : Ability
         unit.Armor -= armorAugmentation;
 
         unit.Status.setShieldUp(false);
-        unit.setIsAbilityActivated(false);
         canGenerateStamina = true;
     }
 }

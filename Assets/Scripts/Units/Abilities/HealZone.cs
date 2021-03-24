@@ -15,8 +15,6 @@ public class HealZone : Ability
     {
         base.castAbility();
 
-        unit.setIsAbilityActivated(true);
-
         List<Unit> listUnitsHealProv = PathfindingTool.unitsInRadius(unit.currentCell, areaOfEffect, unit.tag);
 
         foreach (Unit unit in listUnitsHealProv)
@@ -24,7 +22,5 @@ public class HealZone : Ability
             if (unit.classStat.clas != Class.Healer)
                 unit.heal(currentPower);
         }
-
-        unit.setIsAbilityActivated(false);
     }
 }

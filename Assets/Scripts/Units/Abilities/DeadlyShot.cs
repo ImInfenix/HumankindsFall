@@ -17,8 +17,6 @@ public class DeadlyShot : Ability
     {
         base.castAbility();
 
-        unit.setIsAbilityActivated(true);
-
         GameObject[] listEnemyUnits = GameObject.FindGameObjectsWithTag(unit.getTargetTag());
 
         if (listEnemyUnits.Length > 0)
@@ -38,8 +36,6 @@ public class DeadlyShot : Ability
 
             StartCoroutine(ProjectileAnimation(targetUnit));
         }
-
-        unit.setIsAbilityActivated(false);
     }
 
     IEnumerator ProjectileAnimation(Unit targetUnit)

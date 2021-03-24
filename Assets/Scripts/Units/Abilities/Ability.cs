@@ -5,7 +5,7 @@ using UnityEngine;
 abstract public class Ability : MonoBehaviour
 {
     protected Unit unit;
-    protected float currentStamina;
+    [SerializeField] protected float currentStamina;
 
     [SerializeField] protected int castStaminaThreshold;
     protected int castRange;
@@ -41,6 +41,7 @@ abstract public class Ability : MonoBehaviour
     virtual public void castAbility()
     {
         updateCurrentPower();
+        unit.ApplyAbilityGemsEffects();
     }
 
     private void updateCurrentPower()

@@ -19,15 +19,11 @@ public class CircularAttack : Ability
     {
         base.castAbility();
 
-        unit.setIsAbilityActivated(true);
-
         List<Unit> listUnitsHitProv = PathfindingTool.unitsInRadius(unit.currentCell, areaOfEffect, unit.getTargetTag());
 
         Instantiate(animationGameObject, transform.position, Quaternion.identity, transform);
 
         foreach (Unit unit in listUnitsHitProv)
             unit.takeDamage(currentPower);
-
-        unit.setIsAbilityActivated(false);
     }
 }

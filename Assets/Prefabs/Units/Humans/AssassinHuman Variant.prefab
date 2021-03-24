@@ -24,6 +24,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: d6714f3932b6ea8438f08d08fc772aca,
         type: 2}
+    - target: {fileID: 2720397800951172357, guid: 049abbfc15d17fe4a920d7065f9db2c1,
+        type: 3}
+      propertyPath: abilityName
+      value: PoisonousDecoction
+      objectReference: {fileID: 0}
     - target: {fileID: 2720397800951172359, guid: 049abbfc15d17fe4a920d7065f9db2c1,
         type: 3}
       propertyPath: m_RootOrder

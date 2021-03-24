@@ -21,8 +21,6 @@ public class FireBall : Ability
     {
         base.castAbility();
 
-        unit.setIsAbilityActivated(true);
-
         basicRange = unit.Range;
         unit.Range = castRange;
 
@@ -45,15 +43,12 @@ public class FireBall : Ability
             }
         }
 
-        //print("maxTargetTouch : " + maxTargetTouch);
-
         if (bestTargetCell != null)
         {
             List<Cell> listCellsTouched = PathfindingTool.cellsInRadius(bestTargetCell, areaOfEffect);
             StartCoroutine(ProjectileAnimation(bestTargetCell, listCellsTouched));
             unit.Range = basicRange;
         }
-        unit.setIsAbilityActivated(false);
     }
     
     IEnumerator ProjectileAnimation(Cell targetCell, List<Cell> listCells)
@@ -95,8 +90,6 @@ public class FireBall : Ability
         {
             unit.takeDamage(currentPower);
         }
-
-        print(currentPower);
 
         //color all hit tiles in red for a short duration, then set the color back to normal
         GameObject.Find("Board").GetComponent<Board>().StartSetColorForSeconds(listCells);
