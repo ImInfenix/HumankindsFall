@@ -96,6 +96,8 @@ public class FireBall : Ability
             unit.takeDamage(currentPower);
         }
 
+        print(currentPower);
+
         //color all hit tiles in red for a short duration, then set the color back to normal
         GameObject.Find("Board").GetComponent<Board>().StartSetColorForSeconds(listCells);
     }

@@ -12,7 +12,7 @@ public class Cell
     private int numberOfUnits = 0;
 
     private Vector2Int _boardSize;
-    private Unit currentUnit = null;
+    private List<Unit> currentUnits = new List<Unit>();
 
     public Vector3 WorldPosition { get { return _worldPosition; } }
     private Vector3 _worldPosition;
@@ -78,12 +78,21 @@ public class Cell
 
     public void SetCurrentUnit(Unit unit)
     {
-        currentUnit = unit;
+        currentUnits.Add(unit);
+    }
+
+    public void RemoveCurrentUnit(Unit unit)
+    {
+        currentUnits.Remove(unit);
     }
 
     public Unit GetCurrentUnit()
     {
-        return currentUnit;
+        if (currentUnits.Count > 0)
+            return currentUnits[currentUnits.Count - 1];
+
+        else
+            return null;
     }
 
     public Cell[] GetAllNeighbours()

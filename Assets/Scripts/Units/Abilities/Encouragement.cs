@@ -31,7 +31,6 @@ public class Encouragement : Ability
 
         foreach (Unit unit in units)
         {
-            print("boost");
             float baseAttackSpeed = unit.AttackSpeed;
             float newAttackSpeed = unit.AttackSpeed * (1 + currentPower/100);
             unit.AttackSpeed = newAttackSpeed;
@@ -39,7 +38,7 @@ public class Encouragement : Ability
 
             float baseDamage = unit.Damage;
             float newDamage = unit.Damage * (1 + currentPower / 200);
-            unit.Damage = newAttackSpeed;
+            unit.Damage = newDamage;
             float damageIncrement = newDamage - baseDamage;
 
             unit.Status.setEncouraged(true);

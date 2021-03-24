@@ -431,6 +431,7 @@ MonoBehaviour:
   staminaSlider: {fileID: 3751454102309057999}
   classIconGameObject: {fileID: 0}
   canvas: {fileID: 1565143286635935140}
+  Fill: {fileID: 9138834066921539083}
 --- !u!1 &5312309690352340306
 GameObject:
   m_ObjectHideFlags: 0

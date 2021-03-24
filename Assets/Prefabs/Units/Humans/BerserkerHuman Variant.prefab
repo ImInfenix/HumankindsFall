@@ -94,10 +94,15 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 05e0f59ed5918e3409f54db558235b4a,
         type: 2}
+    - target: {fileID: 2071874534920697835, guid: 2b5ffb7f780e09e42a84254035fefaca,
+        type: 3}
+      propertyPath: abilityName
+      value: RageAttack
+      objectReference: {fileID: 0}
     - target: {fileID: 2071874534920697836, guid: 2b5ffb7f780e09e42a84254035fefaca,
         type: 3}
       propertyPath: m_Name
-      value: BerserkerHuman
+      value: BerserkerHuman Variant
       objectReference: {fileID: 0}
     - target: {fileID: 7094294727080899898, guid: 2b5ffb7f780e09e42a84254035fefaca,
         type: 3}

@@ -213,6 +213,7 @@ public class Unit : MonoBehaviour
             //it should target enemy units
             targetTag = ennemyTag;
             circleSprite.color = new Color(0, 0, 1);
+            healthBar.SetHealthColor(new Color(0, 0, 1));
         }
 
         else
@@ -232,6 +233,8 @@ public class Unit : MonoBehaviour
         {
             Gem gemProv = gemTransform.GetComponent<Gem>();
             gemProv.setUnit(this);
+            if (isPlacedUnit)
+                gems.Add(gemProv);
         }
     }
 
@@ -555,7 +558,7 @@ public class Unit : MonoBehaviour
         if (currentCell != null)
         {
             currentCell.DecreaseNumberOfUnits();
-            currentCell.SetCurrentUnit(null);
+            currentCell.RemoveCurrentUnit(this);
         }
 
         currentCell = newCell;
@@ -755,6 +758,7 @@ public class Unit : MonoBehaviour
     {
 
         currentCell.DecreaseNumberOfUnits();
+        currentCell.RemoveCurrentUnit(this);
         GameManager.instance?.RemoveUnit(this);
     }
 
@@ -866,6 +870,11 @@ public class Unit : MonoBehaviour
     public void setTargetUnit(Unit unit)
     {
         targetUnit = unit;
+    }
+
+    public Unit getTargetUnit()
+    {
+        return targetUnit;
     }
 
     public void ActivateClass(Class c, int nb)

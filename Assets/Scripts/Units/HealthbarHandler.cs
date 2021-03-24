@@ -18,6 +18,9 @@ public class HealthbarHandler : MonoBehaviour
     [SerializeField]
     private Canvas canvas;
 
+    [SerializeField]
+    private Image Fill;
+
     private void Awake()
     {
         if (healthbarHandlers == null)
@@ -97,5 +100,10 @@ public class HealthbarHandler : MonoBehaviour
     public void OnDragNDropEnds()
     {
         canvas.sortingOrder = 4;
+    }
+
+    public void SetHealthColor(Color color)
+    {
+        Fill.color = color;
     }
 }

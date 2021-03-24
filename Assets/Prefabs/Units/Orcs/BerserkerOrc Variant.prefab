@@ -15,6 +15,11 @@ PrefabInstance:
         type: 2}
     - target: {fileID: 5029460658548166024, guid: 770baa5400b7972498ff097d634e1e60,
         type: 3}
+      propertyPath: abilityName
+      value: RageAttack
+      objectReference: {fileID: 0}
+    - target: {fileID: 5029460658548166024, guid: 770baa5400b7972498ff097d634e1e60,
+        type: 3}
       propertyPath: isPlacedUnit
       value: 1
       objectReference: {fileID: 0}
