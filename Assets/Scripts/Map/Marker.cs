@@ -23,7 +23,7 @@ public class Marker : MonoBehaviour
     [SerializeField]
     private Sprite sprite;
     [SerializeField]
-    private TextAsset descriptionTextFile;
+    private CombatPreviewData combatPreview;
 
     private List<string> eachLine;
 
@@ -33,14 +33,19 @@ public class Marker : MonoBehaviour
             gameObject.SetActive(false);
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = RedFlag;
+        ReadDescription();
+    }
+
+    private void ReadDescription()
+    {
         eachLine = new List<string>();
-        string AllFile = descriptionTextFile.text;
+        string AllFile = combatPreview.descriptionTextFile.text;
         eachLine.AddRange(AllFile.Split("\n"[0]));
     }
 
     private void Start()
     {
-        if (finishedLevels != null && finishedLevels.Contains(descriptionTextFile.name))
+        if (finishedLevels != null && finishedLevels.Contains(combatPreview.descriptionTextFile.name))
             FinishLevel();
     }
 
@@ -64,9 +69,11 @@ public class Marker : MonoBehaviour
         if (PauseMenu.isGamePaused)
             return;
 
+        Tooltip.HideTooltip_Static();
+
         levelDescription.ChangeDescription(eachLine[1]);
         levelDescription.ChangeTitle(eachLine[0]);
-        levelDescription.ChangeName(descriptionTextFile.name);
+        levelDescription.ChangeName(combatPreview.sceneName);
         levelDescription.ChangeImage(sprite);
         levelDescription.Show();
     }
@@ -78,5 +85,10 @@ public class Marker : MonoBehaviour
 
         if (!finishedLevels.Contains(level))
             finishedLevels.Add(level);
+    }
+
+    public CombatPreviewData GetCombatPreviewData()
+    {
+        return combatPreview;
     }
 }

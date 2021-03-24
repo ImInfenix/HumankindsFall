@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 4e19ed58b6b8c564c98328797a1cea0c
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - combatPreviewData: {instanceID: 0}
+  - ennemyTile: {fileID: 11400000, guid: 1026c097256d45a4bafe9b5456f8837f, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
