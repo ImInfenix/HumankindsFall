@@ -22,5 +22,5 @@ MonoBehaviour:
   incrementStamina: 100
   projectile: {fileID: 0}
   abilities:
-  - CircularAttack
+  - RageAttack
   classIconSprite: {fileID: 21300000, guid: 8607bb631fb111942a254effe872c10d, type: 3}
