@@ -71,7 +71,7 @@ PrefabInstance:
     - target: {fileID: 7410805368768034947, guid: 916f27df40bc25d469be15a8ca8682ca,
         type: 3}
       propertyPath: abilityName
-      value: CircularAttack
+      value: IronWill
       objectReference: {fileID: 0}
     - target: {fileID: 7410805368768034948, guid: 916f27df40bc25d469be15a8ca8682ca,
         type: 3}

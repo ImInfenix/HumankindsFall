@@ -45,7 +45,7 @@ abstract public class Ability : MonoBehaviour
 
     private void updateCurrentPower()
     {
-        currentPower = BasePower + unit.Power;
+        currentPower = BasePower * unit.Power;
     }
     
     public void mageSynergy(int lvl)

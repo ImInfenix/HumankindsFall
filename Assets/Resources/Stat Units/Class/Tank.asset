@@ -22,6 +22,6 @@ MonoBehaviour:
   incrementStamina: 100
   projectile: {fileID: 0}
   abilities:
-  - CircularAttack
+  - IronWill
   classIconSprite: {fileID: -3995321456776435769, guid: 7bcbfa039553fa543bf7c8cd86ad6b82,
     type: 3}

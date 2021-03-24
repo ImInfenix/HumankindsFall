@@ -41,7 +41,7 @@ PrefabInstance:
     - target: {fileID: 3523396355726647773, guid: 36710b169424fd94fb81af81e3d7948b,
         type: 3}
       propertyPath: abilityName
-      value: CircularAttack
+      value: Encouragement
       objectReference: {fileID: 0}
     - target: {fileID: 3523396355726647775, guid: 36710b169424fd94fb81af81e3d7948b,
         type: 3}

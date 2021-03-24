@@ -73,6 +73,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 1bfdba91039434f47a5db49ef4005d27,
         type: 2}
+    - target: {fileID: 4863992304005667783, guid: c37df5a017f7be947a6d221bfd7fe1cb,
+        type: 3}
+      propertyPath: abilityName
+      value: CircularAttack
+      objectReference: {fileID: 0}
     - target: {fileID: 5801701228811747048, guid: c37df5a017f7be947a6d221bfd7fe1cb,
         type: 3}
       propertyPath: m_AnchorMax.x

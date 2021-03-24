@@ -22,5 +22,5 @@ MonoBehaviour:
   incrementStamina: 100
   projectile: {fileID: 0}
   abilities:
-  - CircularAttack
+  - PoisonousDecoction
   classIconSprite: {fileID: 21300000, guid: cade90605d3382949ab97eb38e2d0a51, type: 3}

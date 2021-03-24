@@ -27,7 +27,10 @@ public class GemSlot : MonoBehaviour
 
     private void Awake()
     {
-        unitDescriptionDisplay = GameObject.Find("CurrentUnitDescription").GetComponent<UnitDescriptionDisplay>();
+        GameObject unitDescriptionDisplayGameObject = GameObject.Find("CurrentUnitDescription");
+        if (unitDescriptionDisplayGameObject)
+            unitDescriptionDisplay = unitDescriptionDisplayGameObject.GetComponent<UnitDescriptionDisplay>();
+
         FindShopSystem();
     }
 

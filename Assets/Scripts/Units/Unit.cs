@@ -145,6 +145,7 @@ public class Unit : MonoBehaviour
         Armor = raceStats.armor + classStat.armor;
         initialArmor = armor;
         accuracy = 100;
+        Power = 1;
           
         MoveSpeed = raceStats.moveSpeed + classStat.moveSpeed;
         AttackSpeed = raceStats.attackSpeed + classStat.attackSpeed;
@@ -610,10 +611,7 @@ public class Unit : MonoBehaviour
 
     public void takeOrcDamage(float damage)
     {
-        currentLife -= damage;
-        checkDeath();
-        healthBar.SetHealth(currentLife);
-        StartCoroutine(ChangeColorAnimation(damageColor, 0.4f));
+        takeDamage(damage * armor);
     }
 
     public void heal(float heal)
@@ -1071,5 +1069,4 @@ public class Unit : MonoBehaviour
         poisonTime = time;
         StartCoroutine(PoisonDamage(damage));
     }
-
 }

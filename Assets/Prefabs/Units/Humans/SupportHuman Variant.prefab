@@ -13,6 +13,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 8adc5db5eb237d341bfb796766ea1c6e,
         type: 2}
+    - target: {fileID: 2934980295952424408, guid: 0e978941849949d4dadd8bb8b4241b2b,
+        type: 3}
+      propertyPath: abilityName
+      value: Encouragement
+      objectReference: {fileID: 0}
     - target: {fileID: 2934980295952424409, guid: 0e978941849949d4dadd8bb8b4241b2b,
         type: 3}
       propertyPath: m_Sprite
@@ -77,7 +82,7 @@ PrefabInstance:
     - target: {fileID: 2934980295952424415, guid: 0e978941849949d4dadd8bb8b4241b2b,
         type: 3}
       propertyPath: m_Name
-      value: SupportHuman
+      value: SupportHuman Variant
       objectReference: {fileID: 0}
     - target: {fileID: 4303385959396505847, guid: 0e978941849949d4dadd8bb8b4241b2b,
         type: 3}

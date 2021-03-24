@@ -18,9 +18,10 @@ MonoBehaviour:
   moveSpeed: 1.2
   attackSpeed: 1
   damage: 6
-  range: 1
+  range: 2
   incrementStamina: 120
-  projectile: {fileID: 0}
+  projectile: {fileID: 3144628240142601262, guid: 90f4b5268b4c3944b8f783910b864353,
+    type: 3}
   abilities:
-  - CircularAttack
+  - Encouragement
   classIconSprite: {fileID: 21300000, guid: 011e46ed68bca544ca2661bd92ad582a, type: 3}
