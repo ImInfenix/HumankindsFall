@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class RageAttack : Ability
 {
+    private GameObject animationGameObject;
+
     private void Awake()
     {
         castStaminaThreshold = 400;
         BasePower = 30;
         castRange = 1;
+
+        animationGameObject = Resources.Load("Ability Prefabs/RageAttack") as GameObject;
     }
 
     public override void castAbility()
@@ -23,6 +27,8 @@ public class RageAttack : Ability
             currentPower += currentPower * damageTakenPourcentage;
 
             targets[0].takeDamage(currentPower);
+
+            Instantiate(animationGameObject, transform.position, Quaternion.identity, transform);
         }
     }
 }
