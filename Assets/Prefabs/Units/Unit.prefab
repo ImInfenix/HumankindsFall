@@ -754,6 +754,8 @@ MonoBehaviour:
   status: {fileID: 8996403339242620978}
   classIcon: {fileID: 6468773289891199087}
   circleSprite: {fileID: 2859675798935787553}
+  classic: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  outline: {fileID: 2100000, guid: 53085e7b4fa173a40ac84d215da607e0, type: 2}
 --- !u!61 &-6404775025605529892
 BoxCollider2D:
   m_ObjectHideFlags: 0

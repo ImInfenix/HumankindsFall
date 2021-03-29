@@ -160,6 +160,42 @@ public class Spell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
                 if (cell != null)
                 {
                     cell.SetColor(Color.red); //new Color(Color.red.r, Color.red.g, Color.red.b,0.9f)
+                    if (cell.GetCurrentUnit() != null)
+                    {
+                        switch (race)
+                        {
+                            case (Race.Orc):
+                                if (cell.GetCurrentUnit().getRace() == Race.Orc)
+                                    cell.GetCurrentUnit().activateOutline();
+                                break;
+
+                            case (Race.Skeleton):
+                                if (cell.GetCurrentUnit().getRace() == Race.Human)
+                                    cell.GetCurrentUnit().activateOutline();
+                                break;
+
+                            case (Race.Octopus):
+                                if (cell.GetCurrentUnit().getRace() == Race.Human)
+                                    cell.GetCurrentUnit().activateOutline();
+                                break;
+
+                            case (Race.Elemental):
+                                if (cell.GetCurrentUnit().getRace() == Race.Human)
+                                    cell.GetCurrentUnit().activateOutline();
+                                break;
+
+                            case (Race.Giant):
+                                if (cell.GetCurrentUnit().getRace() == Race.Giant)
+                                    cell.GetCurrentUnit().activateOutline();
+                                break;
+
+                            case (Race.Ratman):                                
+                                break;
+
+                            case (Race.Demon):
+                                break;
+                        }
+                    }                        
                 }
             }
         }
@@ -175,6 +211,8 @@ public class Spell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
                 if (cell != null)
                 {
                     cell.SetColor(Color.white);
+                    if (cell.GetCurrentUnit() != null)
+                        cell.GetCurrentUnit().desactivateOutline();
                 }
             }
         }

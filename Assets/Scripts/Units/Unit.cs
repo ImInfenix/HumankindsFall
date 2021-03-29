@@ -92,6 +92,10 @@ public class Unit : MonoBehaviour
 
     private List<Gem> gems = new List<Gem>();
 
+    [Header("Material")]
+    public Material classic;
+    public Material outline;
+
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -124,6 +128,7 @@ public class Unit : MonoBehaviour
     public void InitializeUnit()
     {
         board = FindObjectOfType<Board>();
+        spriteRenderer.material = classic;
         //if the ability name exists
         if (abilityName != null && abilityName != "")
         {
@@ -1087,5 +1092,15 @@ public class Unit : MonoBehaviour
         Poisonned = true;
         poisonTime = time;
         StartCoroutine(PoisonDamage(damage));
+    }
+
+    public void activateOutline()
+    {
+        spriteRenderer.material = outline;
+    }
+
+    public void desactivateOutline()
+    {
+        spriteRenderer.material = classic;
     }
 }

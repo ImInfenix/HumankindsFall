@@ -134,3 +134,6 @@ MonoBehaviour:
   type: 1
   play: {fileID: 21300000, guid: 42b37067224ad8d409b63faa1f14de1c, type: 3}
   pause: {fileID: 21300000, guid: 4f97b9a063895ef41b9436982acdd0b6, type: 3}
+  speed05: {fileID: 21300000, guid: fdc2fe141add2bc4e94c1a8efcaa9817, type: 3}
+  speed1: {fileID: 21300000, guid: c4410838fc195df41af43fface31c3a2, type: 3}
+  speed2: {fileID: 21300000, guid: e4cce9205dbc01b4abe5ed10df79b7b4, type: 3}

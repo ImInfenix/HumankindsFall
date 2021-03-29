@@ -9,8 +9,8 @@ public class TimeButtonHandler : MonoBehaviour
     public GameObject playPause;
     public GameObject speed;
 
-    public int time;
-    private int saveTime;
+    public float time;
+    private float saveTime;
 
     private void Awake()
     {
@@ -45,7 +45,7 @@ public class TimeButtonHandler : MonoBehaviour
 
     public void PlayPause()
     {
-        if (time == 1 || time == 2)
+        if (time == 1 || time == 2 || time == 0.5f)
         {
             Time.timeScale = 0;
             time = 0;
