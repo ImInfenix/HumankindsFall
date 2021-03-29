@@ -17,6 +17,7 @@ public class Spell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
     public Image cooldownImage;
     public GameObject demonKing;
     private RaceCount elemental;
+    private List<Unit> outlinedUnit;
 
     [Header ("Select Spell Race")]
     public Race race;
@@ -31,6 +32,7 @@ public class Spell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
         activated = false;
         onCooldown = false;
         board = FindObjectOfType<Board>();
+        outlinedUnit = new List<Unit>();
 
         //Initialize tooltips def
         switch(race)
@@ -82,6 +84,11 @@ public class Spell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
 
             if(targetCell != currentCell)
             {
+                foreach(Unit u in outlinedUnit)
+                {
+                    u.desactivateOutline();
+                }
+                outlinedUnit.Clear();
                 DesactivateArea(currentCell);
                 ActivateArea(targetCell);
                 currentCell = targetCell;
@@ -166,27 +173,42 @@ public class Spell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
                         {
                             case (Race.Orc):
                                 if (cell.GetCurrentUnit().getRace() == Race.Orc)
+                                {
                                     cell.GetCurrentUnit().activateOutline();
+                                    outlinedUnit.Add(cell.GetCurrentUnit());
+                                }                                   
                                 break;
 
                             case (Race.Skeleton):
                                 if (cell.GetCurrentUnit().getRace() == Race.Human)
+                                {
                                     cell.GetCurrentUnit().activateOutline();
+                                    outlinedUnit.Add(cell.GetCurrentUnit());
+                                }
                                 break;
 
                             case (Race.Octopus):
                                 if (cell.GetCurrentUnit().getRace() == Race.Human)
+                                {
                                     cell.GetCurrentUnit().activateOutline();
+                                    outlinedUnit.Add(cell.GetCurrentUnit());
+                                }
                                 break;
 
                             case (Race.Elemental):
                                 if (cell.GetCurrentUnit().getRace() == Race.Human)
+                                {
                                     cell.GetCurrentUnit().activateOutline();
+                                    outlinedUnit.Add(cell.GetCurrentUnit());
+                                }
                                 break;
 
                             case (Race.Giant):
                                 if (cell.GetCurrentUnit().getRace() == Race.Giant)
+                                {
                                     cell.GetCurrentUnit().activateOutline();
+                                    outlinedUnit.Add(cell.GetCurrentUnit());
+                                }
                                 break;
 
                             case (Race.Ratman):                                
