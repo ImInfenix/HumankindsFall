@@ -65,7 +65,7 @@ public static class UnitGenerator
             do
             {
                 randomClassIndex = Random.Range(0, classes.Length);
-            } while (classes[randomClassIndex].clas == Class.Soldier || classes[randomClassIndex].clas == Class.DemonKing || classes[randomClassIndex].clas == Class.Mage || classes[randomClassIndex].clas == Class.Bowman || classes[randomClassIndex].clas == Class.Healer);
+            } while (classes[randomClassIndex].clas == Class.Soldier || classes[randomClassIndex].clas == Class.DemonKing || classes[randomClassIndex].clas == Class.Mage || classes[randomClassIndex].clas == Class.Bowman || classes[randomClassIndex].clas == Class.Healer || classes[randomClassIndex].clas == Class.Support);
         }
         else
         {
