@@ -24,12 +24,12 @@ public class Unit : MonoBehaviour
     [SerializeField] private float accuracy;
     [SerializeField] private float damage;
     [SerializeField] private int range;
-    [SerializeField] private int power;
+    [SerializeField] private float power;
     [SerializeField] private string unitName;
     [SerializeField] private bool isTargetable;
     [SerializeField] private bool stuned = false;
     [SerializeField] private bool poisonned = false;
-
+    private uint level;
 
     private bool moving;
     private bool canMove;
@@ -109,10 +109,11 @@ public class Unit : MonoBehaviour
     public float AttackSpeed { get => attackSpeed; set => attackSpeed = value; }
     public float Damage { get => damage; set => damage = value; }
     public int Range { get => range; set => range = value; }
-    public int Power { get => power; set => power = value; }
+    public float Power { get => power; set => power = value; }
     public Ability Ability { get => ability; set => ability = value; }
     public StatusHandler Status { get => status; set => status = value; }
     public bool Poisonned { get => poisonned; set => poisonned = value; }
+    public uint Level { get => level; set => level = value; }
 
     // Start is called before the first frame update
     void Start()
@@ -145,16 +146,16 @@ public class Unit : MonoBehaviour
         if (classStat.classIconSprite == null)
             healthBar.HideClassIcon();
 
-        MaxLife = raceStats.maxLife + classStat.maxLife;
+        MaxLife = raceStats.maxLife + classStat.maxLife + 10 * (int)(Level - 1);
         IncrementStamina = classStat.incrementStamina;
-        Armor = raceStats.armor + classStat.armor;
+        Armor = raceStats.armor + classStat.armor + 0.05f * (Level - 1);
         initialArmor = armor;
         accuracy = 100;
-        Power = 1;
+        Power = 1 + 0.05f * (Level - 1);
           
         MoveSpeed = raceStats.moveSpeed + classStat.moveSpeed;
-        AttackSpeed = raceStats.attackSpeed + classStat.attackSpeed;
-        Damage = raceStats.damage + classStat.damage;
+        AttackSpeed = raceStats.attackSpeed + classStat.attackSpeed + 0.05f * (Level - 1);
+        Damage = raceStats.damage + classStat.damage + 1 * (Level - 1);
         Range = classStat.range;
 
         isTargetable = true;
@@ -271,6 +272,7 @@ public class Unit : MonoBehaviour
         classStat = newDescription.GetClass();
         abilityName = newDescription.GetAbilityName();
         id = newDescription.GetId();
+        level = newDescription.GetLevel();
     }
 
     public void UpdateUnit()

@@ -13,6 +13,8 @@ public class UnitDescriptionDisplay : MonoBehaviour
     [SerializeField]
     private TMP_Text UnitExperience;
     [SerializeField]
+    private TMP_Text UnitLevel;
+    [SerializeField]
     private GameObject GemSlot;
     [SerializeField]
     private GameObject UnitGemsZone;
@@ -116,6 +118,17 @@ public class UnitDescriptionDisplay : MonoBehaviour
         UnitExperience.text = "";
     }
 
+    public void SetUnitLevel(uint level)
+    {
+        if (actualSlot.GetSlotType() == InventorySlot.SlotType.Inventory)
+        {
+            UnitLevel.text = $"Level: {level}";
+            return;
+        }
+
+        UnitLevel.text = "";
+    }
+
     public void UpdateDescription()
     {
         if (actualSlot == null)
@@ -130,19 +143,19 @@ public class UnitDescriptionDisplay : MonoBehaviour
 
         SetUnitName(currentDescription.GetUnitName());
         SetUnitExperience(currentDescription.GetExperience());
+        SetUnitLevel(currentDescription.GetLevel());
         ClassStat classe = currentDescription.GetClass();
         RaceStat race = currentDescription.GetRace();
 
         int maxLife = classe.maxLife + race.maxLife;
-        int maxMana = race.maxMana;
         int armor = classe.armor + race.armor;
         float atakSpeed = classe.attackSpeed + race.attackSpeed;
 
         string stats =
             "Class : " + classe.name + "\n" +
             "Race : " + race.name + "\n" +
+            "Ability : " + currentDescription.GetAbilityName() +"\n" +
             "PV : " + maxLife + "\n" +
-            "Mana : " + maxMana + "\n" +
             "Armor : " + armor + "\n" +
             "Attack Speed : " + atakSpeed;
         ;

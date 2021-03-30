@@ -127,12 +127,18 @@ public class InventoryUI : MonoBehaviour
     public void ShowGemsSlots()
     {
         if (GemsSlots != null)
+        {
             GemsSlots.gameObject?.SetActive(true);
+            SynergyHandler.instance.gameObject.SetActive(false);
+        }
     }
 
     public void HideGemsSlots()
     {
         if (GemsSlots != null)
+        {
             GemsSlots.gameObject?.SetActive(false);
+            SynergyHandler.instance.gameObject.SetActive(true);
+        }
     }
 }

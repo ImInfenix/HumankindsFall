@@ -12,6 +12,7 @@ public class UnitDescription
     private readonly string abilityName;
     private readonly uint id;
     private uint experience;
+    private uint level;
     private string[] gems;
 
     public UnitDescription(Unit unit)
@@ -22,7 +23,7 @@ public class UnitDescription
         abilityName = unit.GetAbilityName();
         unitName = unit.GetName();
         id = unit.id;
-        experience = 0;
+        level = unit.Level;
         gems = unit.GetGems();
     }
 
@@ -33,7 +34,7 @@ public class UnitDescription
     /// <param name="unitRace"></param>
     /// <param name="unitClass"></param>
     /// <param name="abilityName"></param>
-    public UnitDescription(string name, RaceStat unitRace, ClassStat unitClass, string abilityName, string unitTag, uint? id = null, uint experience = 0, string[] gems = null)
+    public UnitDescription(string name, RaceStat unitRace, ClassStat unitClass, string abilityName, string unitTag, uint? id = null, uint experience = 0, uint level = 1, string[] gems = null)
     {
         unitName = name;
         this.unitRace = unitRace;
@@ -45,6 +46,7 @@ public class UnitDescription
         else this.id = (uint) id;
         this.experience = experience;
         this.gems = gems;
+        this.level = level;
     }
 
     public string GetUnitName()
@@ -97,6 +99,22 @@ public class UnitDescription
     public void EarnExperience(uint experienceAmount)
     {
         experience += experienceAmount;
+
+        if (experience >= 10)
+        {
+            experience -= 10;
+            IncreaseLevel();
+        }
+    }
+
+    public uint GetLevel()
+    {
+        return level;
+    }
+
+    public void IncreaseLevel()
+    {
+        level++;
     }
 
     public string[] GetGems()
