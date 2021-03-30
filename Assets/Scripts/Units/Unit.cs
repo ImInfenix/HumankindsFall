@@ -714,6 +714,8 @@ public class Unit : MonoBehaviour
 
         spriteRenderer.sortingOrder = 10;
         healthBar.OnDragNDropStarts();
+
+        board.ShowAllyTiles();
     }
 
     private void OnMouseUp()
@@ -724,6 +726,7 @@ public class Unit : MonoBehaviour
         if (GameManager.instance.gamestate != GameManager.GameState.Placement)
             return;
 
+        board.HideAllyTiles();
 
         if (CompareTag(allyTag))
         {
