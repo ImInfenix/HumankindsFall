@@ -384,6 +384,16 @@ public class SynergyHandler : MonoBehaviour
                         if(giantButton)
                             giantButton.gameObject.SetActive(false);
                         break;
+
+                    case Race.Ratman:
+                        if (giantButton)
+                            ratmanButton.gameObject.SetActive(false);
+                        break;
+
+                    case Race.Demon:
+                        if (giantButton)
+                            demonButton.gameObject.SetActive(false);
+                        break;
                 }
             }
                 
