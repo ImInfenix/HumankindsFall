@@ -15,9 +15,15 @@ public class AudioManager : MonoBehaviour
     private AudioClip mainMusic;
     [SerializeField]
     private AudioClip shopMusic;
+    [SerializeField]
+    private AudioClip battleMusic;
+    [SerializeField]
+    private AudioClip finalBattleMusic;
 
     private AudioSource musicAudioSource;
     private AudioSource effectsAudioSource;
+
+    private List<AudioSource> sourcesBeingDeleted;
 
     public void Initialize()
     {
@@ -28,6 +34,8 @@ public class AudioManager : MonoBehaviour
         }    
 
         instance = this;
+
+        sourcesBeingDeleted = new List<AudioSource>();
 
         musicAudioSource = CreateNewSource(null);
 
@@ -49,8 +57,21 @@ public class AudioManager : MonoBehaviour
         instance.PlayMusic(instance.shopMusic, doHardTransition);
     }
 
+    public static void PlayBattleMusic(bool doHardTransition = false)
+    {
+        instance.PlayMusic(instance.battleMusic, doHardTransition);
+    }
+
+    public static void PlayFinalBattleMusic(bool doHardTransition = false)
+    {
+        instance.PlayMusic(instance.finalBattleMusic, doHardTransition);
+    }
+
     private void PlayMusic(AudioClip music, bool doHardTransition = false)
     {
+        if (musicAudioSource.clip == music)
+            return;
+
         AudioSource oldSource = musicAudioSource;
         musicAudioSource = CreateNewSource(music);
 
@@ -65,6 +86,8 @@ public class AudioManager : MonoBehaviour
         }
 
         StopAllCoroutines();
+        foreach (AudioSource source in sourcesBeingDeleted)
+            Destroy(source);
         StartCoroutine(EndMusic(oldSource, smoothTransitionDelay));
         StartCoroutine(StartMusic(musicAudioSource, smoothTransitionDelay));
     }
@@ -92,6 +115,8 @@ public class AudioManager : MonoBehaviour
     {
         float elapsedTime = 0;
 
+        sourcesBeingDeleted.Add(source);
+
         while (elapsedTime < smoothDelay)
         {
             yield return null;
@@ -99,6 +124,7 @@ public class AudioManager : MonoBehaviour
             source.volume = OptionsMenu.musicVolume * transitionCurve.Evaluate(1 - elapsedTime / smoothDelay);
         }
 
+        sourcesBeingDeleted.Remove(source);
         Destroy(source);
     }
 

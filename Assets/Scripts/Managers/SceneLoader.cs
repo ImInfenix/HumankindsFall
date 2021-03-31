@@ -9,8 +9,6 @@ public class SceneLoader : MonoBehaviour
 {
     private static SceneLoader instance;
 
-    private string currentSceneName;
-
     public void Initialize()
     {
         if (instance != null)
@@ -27,13 +25,23 @@ public class SceneLoader : MonoBehaviour
 
         if(loadMode == LoadSceneMode.Single)
         {
-            if (loadedScene.name == "Shop")
-                AudioManager.PlayShopMusic();
-            else if (currentSceneName == "Shop")
-                AudioManager.PlayMainMusic();
+            PickMusic(loadedScene.name);
         }
+    }
 
-        currentSceneName = loadedScene.name;
+    private void PickMusic(string newSceneName)
+    {
+        if (newSceneName == "Shop")
+            AudioManager.PlayShopMusic();
+        else if (newSceneName != "MainMenu" && newSceneName != "Map")
+        {
+            if (newSceneName == "Vertmont")
+                AudioManager.PlayFinalBattleMusic();
+            else
+                AudioManager.PlayBattleMusic();
+        }
+        else
+            AudioManager.PlayMainMusic();
     }
 
     public static void LoadMenu()

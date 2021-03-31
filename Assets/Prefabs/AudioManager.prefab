@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58a83ac946006bd4981805ba21eadecf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  smoothTransitionDelay: 3
+  smoothTransitionDelay: 2
   transitionCurve:
     serializedVersion: 2
     m_Curve:
@@ -70,3 +70,5 @@ MonoBehaviour:
     m_RotationOrder: 4
   mainMusic: {fileID: 8300000, guid: c98eda894bc38da42a2564b84dd01b96, type: 3}
   shopMusic: {fileID: 8300000, guid: 2e1c70dad9ee92549a801ab20aa0fef3, type: 3}
+  battleMusic: {fileID: 8300000, guid: a95022729d1798a4595eb4b12ad8295c, type: 3}
+  finalBattleMusic: {fileID: 8300000, guid: cb47d85284503a241a8bcdcef228862c, type: 3}
