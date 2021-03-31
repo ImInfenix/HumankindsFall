@@ -110,4 +110,9 @@ public class AudioManager : MonoBehaviour
             source.volume = OptionsMenu.musicVolume * transitionCurve.Evaluate(elapsedTime / smoothDelay);
         }
     }
+
+    public static void SetMusicVolume(float volume)
+    {
+        instance.musicAudioSource.volume = volume;
+    }
 }
