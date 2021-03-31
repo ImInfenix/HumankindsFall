@@ -17,6 +17,7 @@ public class AudioManager : MonoBehaviour
     private AudioClip shopMusic;
 
     private AudioSource musicAudioSource;
+    private AudioSource effectsAudioSource;
 
     public void Initialize()
     {
@@ -29,6 +30,8 @@ public class AudioManager : MonoBehaviour
         instance = this;
 
         musicAudioSource = CreateNewSource(null);
+
+        effectsAudioSource = CreateNewSource(null);
         musicAudioSource.loop = false;
 
         PlayMainMusic(true);
@@ -74,10 +77,10 @@ public class AudioManager : MonoBehaviour
         return audioSource;
     }
 
-    //private void PlayEffect(AudioClip effect)
-    //{
-    //    audioSource.PlayOneShot(effect, OptionsMenu.effectsVolume);
-    //}
+    public static void PlayEffect(AudioClip effect)
+    {
+        instance.effectsAudioSource.PlayOneShot(effect, OptionsMenu.effectsVolume);
+    }
 
     private void OnDestroy()
     {
