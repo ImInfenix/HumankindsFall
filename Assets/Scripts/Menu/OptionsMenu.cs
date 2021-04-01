@@ -37,6 +37,7 @@ public class OptionsMenu : MonoBehaviour
     public void OnMusicVolumeChanged(float newValue)
     {
         musicVolume = newValue;
+        AudioManager.SetMusicVolume(newValue);
     }
 
     public void OnEffectsVolumeChanged(float newValue)
