@@ -319,6 +319,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Desert
       objectReference: {fileID: 0}
+    - target: {fileID: 3715987373865777901, guid: 6f128a6d492d075408abb1695627d782,
+        type: 3}
+      propertyPath: levelDescription
+      value: 
+      objectReference: {fileID: 2095747038}
     - target: {fileID: 3715987373865777902, guid: 6f128a6d492d075408abb1695627d782,
         type: 3}
       propertyPath: m_RootOrder
