@@ -13,6 +13,9 @@ public class GameManager : MonoBehaviour
 
     public GameState startingGameState = GameState.Placement;
 
+    [SerializeField]
+    private GameObject audioManagerPrefab;
+
     private void Awake()
     {
         //Singleton creation
@@ -31,6 +34,8 @@ public class GameManager : MonoBehaviour
         gamestate = startingGameState;
 
         GetComponent<SceneLoader>().Initialize();
+
+        Instantiate(audioManagerPrefab).GetComponent<AudioManager>().Initialize();
         GetComponentInChildren<PauseMenu>(true).Initialize();
     }
 
