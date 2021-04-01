@@ -9,6 +9,8 @@ public class IronWill : Ability
         castStaminaThreshold = 700;
         BasePower = 30;
         duration = 5;
+
+        soundEffect = Resources.Load("SoundEffects/armor-up-modified") as AudioClip;
     }
 
     public override void castAbility()
@@ -21,6 +23,7 @@ public class IronWill : Ability
 
     IEnumerator BoostArmor()
     {
+        playSound();
         canGenerateStamina = false;
         unit.Status.setShieldUp(true);
 

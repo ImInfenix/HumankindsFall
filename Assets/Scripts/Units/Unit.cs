@@ -59,6 +59,7 @@ public class Unit : MonoBehaviour
     private float startPosX;
     private float startPosY;
 
+    AudioClip standardAttackSound;
 
     //private Vector3Int targetPos;
     private Unit targetUnit = null;
@@ -99,6 +100,7 @@ public class Unit : MonoBehaviour
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        standardAttackSound = Resources.Load("SoundEffects/sword-pierces-armor") as AudioClip;
     }
 
     public int MaxLife { get => maxLife; set => maxLife = value; }
@@ -488,6 +490,11 @@ public class Unit : MonoBehaviour
     //move the sprite toward the target for a short time
     IEnumerator AttackAnimation()
     {
+        if (standardAttackSound != null)
+        {
+            AudioManager.PlayEffect(standardAttackSound);
+        }
+
         //get the position where the sprite will be placed during the attack
         Vector3 targetWorldPosition = targetUnit.getCell().WorldPosition;
         Vector3 attackDirection = targetWorldPosition - worldPosition;

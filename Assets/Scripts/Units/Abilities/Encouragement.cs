@@ -13,6 +13,8 @@ public class Encouragement : Ability
         BasePower = 20;
         duration = 5;
         boostedUnits = new List<(Unit, float, float)>();
+        
+        soundEffect = Resources.Load("SoundEffects/drums-of-war-call") as AudioClip;
     }
 
     public override void castAbility()
@@ -28,6 +30,8 @@ public class Encouragement : Ability
     IEnumerator BoostUnit(List<Unit> units)
     {
         RemoveUnitsBoost();
+
+        playSound();
 
         foreach (Unit unit in units)
         {

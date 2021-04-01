@@ -9,6 +9,7 @@ public class PoisonousDecoction : Ability
         BasePower = 1;
         duration = 10;
         castStaminaThreshold = 650;
+        soundEffect = Resources.Load("SoundEffects/dagger-woosh") as AudioClip;
     }
     public override void castAbility()
     {
@@ -31,6 +32,7 @@ public class PoisonousDecoction : Ability
                 }
             }
 
+            playSound();
             targetUnit.activatePoison(currentPower * duration, unit.poisonDamage * currentPower);
         }
     }

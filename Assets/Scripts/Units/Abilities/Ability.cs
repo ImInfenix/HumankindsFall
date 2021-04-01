@@ -15,6 +15,8 @@ abstract public class Ability : MonoBehaviour
     protected float currentPower;
     protected bool canGenerateStamina = true;
 
+    protected AudioClip soundEffect;
+
     public float BasePower { get => basePower; set => basePower = value; }
 
     public void setUnit(Unit unit)
@@ -60,5 +62,13 @@ abstract public class Ability : MonoBehaviour
             currentStamina = castStaminaThreshold / 2;
         }
         unit.getHealthbar().SetStamina(currentStamina, castStaminaThreshold);
+    }
+
+    protected void playSound()
+    {
+        if (soundEffect != null)
+        {
+            AudioManager.PlayEffect(soundEffect);
+        }
     }
 }

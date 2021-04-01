@@ -11,6 +11,10 @@ public class DeadlyShot : Ability
         castStaminaThreshold = 400;
         BasePower = 30;
 
+        
+
+        soundEffect = Resources.Load("SoundEffects/bow-released") as AudioClip;
+
         projectileGameObject = Resources.Load("Ability Prefabs/DeadlyShot") as GameObject;
     }
     override public void castAbility()
@@ -34,6 +38,7 @@ public class DeadlyShot : Ability
                 }
             }
 
+            playSound();
             StartCoroutine(ProjectileAnimation(targetUnit));
         }
     }
