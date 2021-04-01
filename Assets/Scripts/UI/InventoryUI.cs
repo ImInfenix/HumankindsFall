@@ -70,7 +70,8 @@ public class InventoryUI : MonoBehaviour
             return;
         }
 
-        Show();
+        IsDisplayed = true;
+        ShowGemsSlots();
     }
 
     public void Show()
@@ -87,7 +88,9 @@ public class InventoryUI : MonoBehaviour
         IsDisplayed = false;
 
         HideDescription();
-        HideGemsSlots();
+
+        if (GameManager.instance.gamestate != GameManager.GameState.Shopping)
+            HideGemsSlots();
 
         switch (GameManager.instance.gamestate)
         {
@@ -98,6 +101,9 @@ public class InventoryUI : MonoBehaviour
                 HideSlots();
                 break;
             case GameManager.GameState.Resolution:
+                ShowSlots();
+                break;
+            case GameManager.GameState.Shopping:
                 ShowSlots();
                 break;
         }
@@ -129,7 +135,8 @@ public class InventoryUI : MonoBehaviour
         if (GemsSlots != null)
         {
             GemsSlots.gameObject?.SetActive(true);
-            SynergyHandler.instance.gameObject.SetActive(false);
+            if (SynergyHandler.instance != null)
+                SynergyHandler.instance.gameObject.SetActive(false);
         }
     }
 
@@ -138,7 +145,8 @@ public class InventoryUI : MonoBehaviour
         if (GemsSlots != null)
         {
             GemsSlots.gameObject?.SetActive(false);
-            SynergyHandler.instance.gameObject.SetActive(true);
+            if (SynergyHandler.instance != null)
+                SynergyHandler.instance.gameObject.SetActive(true);
         }
     }
 }

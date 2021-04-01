@@ -57,7 +57,8 @@ public class GemSlot : MonoBehaviour
             else
                 shopSystem.SetShopToSellMode();
 
-            unitDescriptionDisplay.gameObject.SetActive(false);
+            if (unitDescriptionDisplay != null)
+                unitDescriptionDisplay.gameObject.SetActive(false);
         }        
     }
 

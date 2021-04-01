@@ -29,7 +29,7 @@ public class Unit : MonoBehaviour
     [SerializeField] private bool isTargetable;
     [SerializeField] private bool stuned = false;
     [SerializeField] private bool poisonned = false;
-    private uint level;
+    private uint level = 1;
 
     private bool moving;
     private bool canMove;
