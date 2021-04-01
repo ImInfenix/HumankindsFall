@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -213,6 +213,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: -8793625291917413168, guid: 57473b633c94a8243ae915fe0f1ceab3,
         type: 3}
+    - target: {fileID: 3715987373865777901, guid: 6f128a6d492d075408abb1695627d782,
+        type: 3}
+      propertyPath: classic
+      value: 
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 3715987373865777901, guid: 6f128a6d492d075408abb1695627d782,
+        type: 3}
+      propertyPath: outline
+      value: 
+      objectReference: {fileID: 2100000, guid: 09763b9454ddfe5468accbf674210df4, type: 2}
     - target: {fileID: 3715987373865777901, guid: 6f128a6d492d075408abb1695627d782,
         type: 3}
       propertyPath: isAccessible
@@ -525,7 +535,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20.2
+  m_fontSize: 17.35
   m_fontSizeBase: 17
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1065,7 +1075,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40.75
+  m_fontSize: 31.65
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1379,6 +1389,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6781190906818467777, guid: 57473b633c94a8243ae915fe0f1ceab3,
         type: 3}
+    - target: {fileID: 3715987373865777901, guid: 6f128a6d492d075408abb1695627d782,
+        type: 3}
+      propertyPath: classic
+      value: 
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 3715987373865777901, guid: 6f128a6d492d075408abb1695627d782,
+        type: 3}
+      propertyPath: outline
+      value: 
+      objectReference: {fileID: 2100000, guid: 09763b9454ddfe5468accbf674210df4, type: 2}
     - target: {fileID: 3715987373865777901, guid: 6f128a6d492d075408abb1695627d782,
         type: 3}
       propertyPath: isAccessible
@@ -2206,6 +2226,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7614699122904390950, guid: 57473b633c94a8243ae915fe0f1ceab3,
         type: 3}
+    - target: {fileID: 3715987373865777901, guid: 6f128a6d492d075408abb1695627d782,
+        type: 3}
+      propertyPath: classic
+      value: 
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 3715987373865777901, guid: 6f128a6d492d075408abb1695627d782,
+        type: 3}
+      propertyPath: outline
+      value: 
+      objectReference: {fileID: 2100000, guid: 09763b9454ddfe5468accbf674210df4, type: 2}
     - target: {fileID: 3715987373865777901, guid: 6f128a6d492d075408abb1695627d782,
         type: 3}
       propertyPath: isAccessible
@@ -3094,6 +3124,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3715987373865777901, guid: 6f128a6d492d075408abb1695627d782,
         type: 3}
+      propertyPath: classic
+      value: 
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 3715987373865777901, guid: 6f128a6d492d075408abb1695627d782,
+        type: 3}
+      propertyPath: outline
+      value: 
+      objectReference: {fileID: 2100000, guid: 09763b9454ddfe5468accbf674210df4, type: 2}
+    - target: {fileID: 3715987373865777901, guid: 6f128a6d492d075408abb1695627d782,
+        type: 3}
       propertyPath: isAccessible
       value: 0
       objectReference: {fileID: 0}
@@ -3204,6 +3244,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6258367583306725175, guid: 57473b633c94a8243ae915fe0f1ceab3,
         type: 3}
+    - target: {fileID: 3715987373865777901, guid: 6f128a6d492d075408abb1695627d782,
+        type: 3}
+      propertyPath: classic
+      value: 
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 3715987373865777901, guid: 6f128a6d492d075408abb1695627d782,
+        type: 3}
+      propertyPath: outline
+      value: 
+      objectReference: {fileID: 2100000, guid: 09763b9454ddfe5468accbf674210df4, type: 2}
     - target: {fileID: 3715987373865777901, guid: 6f128a6d492d075408abb1695627d782,
         type: 3}
       propertyPath: isAccessible
