@@ -180,7 +180,7 @@ public class SynergyHandler : MonoBehaviour
         {
             foreach (RaceCount r in rc)
             {
-                if (r.getRace() == u.getRace())
+                if (r.getRace() == u.getRace() && u.getClass() != Class.DemonKing)
                 {
                     r.setNumber(r.getNumber() + 1);
                 }
