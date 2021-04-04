@@ -46,6 +46,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingGameState: 0
+  audioManagerPrefab: {fileID: 2720675212864378156, guid: 733332c23ab30574e8a792bdf69b55c0,
+    type: 3}
 --- !u!114 &123746214530932905
 MonoBehaviour:
   m_ObjectHideFlags: 0

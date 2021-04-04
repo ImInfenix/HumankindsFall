@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
 public class SavingSystem
@@ -11,14 +12,19 @@ public class SavingSystem
     private static string DocumentsPath { get { return Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments); } }
     private static string MyGamesPath { get { return $"{DocumentsPath}\\My Games"; } }
     private static string GamePath { get { return $"{MyGamesPath}\\Humankind's Fall"; } }
-    private static string SaveFilePath { get { return $"{GamePath}\\game.json"; } }
+    private static string SaveFilePath { get { return $"{GamePath}\\game.sav"; } }
 
     public static void SaveData()
     {
         CheckDirectory(GamePath);
         try
         {
-            File.WriteAllLines($"{SaveFilePath}", GetGameInformations());
+            SaveFile save = CreateSaveData();
+            BinaryFormatter bf = new BinaryFormatter();
+
+            FileStream stream = new FileStream(SaveFilePath, FileMode.Create);
+            bf.Serialize(stream, save);
+            stream.Close();
         }
         catch (Exception e)
         {
@@ -45,7 +51,12 @@ public class SavingSystem
 
         try
         {
-            gameFileContent = JsonUtility.FromJson<SaveFile>(File.ReadAllText(SaveFilePath));
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream stream = new FileStream(SaveFilePath, FileMode.Open);
+
+            gameFileContent = bf.Deserialize(stream) as SaveFile;
+
+            stream.Close();
         }
         catch (Exception e)
         {
@@ -58,15 +69,6 @@ public class SavingSystem
     {
         if (File.Exists(SaveFilePath))
             File.Delete(SaveFilePath);
-    }
-
-    private static IEnumerable<string> GetGameInformations()
-    {
-        List<string> dataToSave = new List<string>();
-
-        dataToSave.Add(JsonUtility.ToJson(CreateSaveData(), true));
-
-        return dataToSave;
     }
 
     static void CheckDirectory(string path)
