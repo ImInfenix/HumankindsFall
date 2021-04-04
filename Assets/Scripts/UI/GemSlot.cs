@@ -67,6 +67,6 @@ public class GemSlot : MonoBehaviour
         selectedImage.gameObject.SetActive(false);
         selectedGemSlot = null;
         IsSelected = false;
-        shopSystem.SetShopToNoneMode();
+        shopSystem.SetShopToNoneMode();   
     }
 }

@@ -78,9 +78,19 @@ public class InventoryUI : MonoBehaviour
     {
         IsDisplayed = true;
 
-        ShowDescription();
-        ShowSlots();
-        ShowGemsSlots();
+        if (GameManager.instance.gamestate != GameManager.GameState.Shopping)
+        {
+            ShowDescription();
+            ShowSlots();
+            ShowGemsSlots();
+        }
+
+        else
+        {
+            ShowDescription();
+            ShowSlots();
+            HideGemsSlots();
+        }
     }
 
     public void Hide()
@@ -91,6 +101,9 @@ public class InventoryUI : MonoBehaviour
 
         if (GameManager.instance.gamestate != GameManager.GameState.Shopping)
             HideGemsSlots();
+
+        else
+            ShowGemsSlots();
 
         switch (GameManager.instance.gamestate)
         {

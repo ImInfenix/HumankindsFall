@@ -189,12 +189,12 @@ public class UnitDescriptionDisplay : MonoBehaviour
     public void GenerateSlots(string[] unitGems)
     {
         //number of gems slots should be the unit level
-        int numberOfGemsSlots = 5;
+        uint numberOfGemsSlots = currentDescription.GetLevel();
 
         float widthOffset = 0.8f;
         float heightOffset = -0.8f;
 
-        int nbGemsSlotsPerLine = numberOfGemsSlots;
+        uint nbGemsSlotsPerLine = numberOfGemsSlots;
 
         float y = 0.5f;
 
