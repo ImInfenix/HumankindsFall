@@ -29,4 +29,9 @@ public class PlacementTilemapReader : MonoBehaviour
 
         combatPreviewData.ennemiesCount = ennemiesCount;
     }
+
+    public CombatPreviewData GetData()
+    {
+        return combatPreviewData;
+    }
 }
