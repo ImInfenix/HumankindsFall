@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class IronWill : Ability
 {
+    private GameObject animationGameObject;
+
     private void Awake()
     {
         castStaminaThreshold = 700;
         BasePower = 30;
         duration = 5;
+
+        animationGameObject = Resources.Load("Ability Prefabs/IronWill") as GameObject;
     }
 
     public override void castAbility()
@@ -29,6 +33,8 @@ public class IronWill : Ability
         unit.Armor = boostedArmor;
 
         float armorAugmentation = boostedArmor - baseArmor;
+
+        Instantiate(animationGameObject, transform.position, Quaternion.identity, transform);
 
         yield return new WaitForSeconds(duration);
 
