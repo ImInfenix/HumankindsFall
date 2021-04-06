@@ -3363,9 +3363,33 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2231666390492017983}
     m_Modifications:
+    - target: {fileID: 742191359, guid: eb5c2b42615f3bf47a85fb76fc049d57, type: 3}
+      propertyPath: m_fontSize
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 742191359, guid: eb5c2b42615f3bf47a85fb76fc049d57, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0.8679245
+      objectReference: {fileID: 0}
+    - target: {fileID: 742191359, guid: eb5c2b42615f3bf47a85fb76fc049d57, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.8679245
+      objectReference: {fileID: 0}
+    - target: {fileID: 742191359, guid: eb5c2b42615f3bf47a85fb76fc049d57, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0.8679245
+      objectReference: {fileID: 0}
+    - target: {fileID: 742191359, guid: eb5c2b42615f3bf47a85fb76fc049d57, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 742191359, guid: eb5c2b42615f3bf47a85fb76fc049d57, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4292730333
+      objectReference: {fileID: 0}
     - target: {fileID: 750421693, guid: eb5c2b42615f3bf47a85fb76fc049d57, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 786388612, guid: eb5c2b42615f3bf47a85fb76fc049d57, type: 3}
       propertyPath: m_Color.a
@@ -3402,6 +3426,34 @@ PrefabInstance:
     - target: {fileID: 1570760050, guid: eb5c2b42615f3bf47a85fb76fc049d57, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1570760051, guid: eb5c2b42615f3bf47a85fb76fc049d57, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 137.0459
+      objectReference: {fileID: 0}
+    - target: {fileID: 1570760051, guid: eb5c2b42615f3bf47a85fb76fc049d57, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 32.47218
+      objectReference: {fileID: 0}
+    - target: {fileID: 1570760051, guid: eb5c2b42615f3bf47a85fb76fc049d57, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1570760051, guid: eb5c2b42615f3bf47a85fb76fc049d57, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -246.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 1570760053, guid: eb5c2b42615f3bf47a85fb76fc049d57, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1570760053, guid: eb5c2b42615f3bf47a85fb76fc049d57, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1570760053, guid: eb5c2b42615f3bf47a85fb76fc049d57, type: 3}
+      propertyPath: m_Color.r
+      value: 0.49056602
       objectReference: {fileID: 0}
     - target: {fileID: 1570760055, guid: eb5c2b42615f3bf47a85fb76fc049d57, type: 3}
       propertyPath: GemsInventory
@@ -3661,12 +3713,12 @@ PrefabInstance:
     - target: {fileID: 4247307235109501533, guid: eb5c2b42615f3bf47a85fb76fc049d57,
         type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5618751133481111942, guid: eb5c2b42615f3bf47a85fb76fc049d57,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 6054800863456419953, guid: eb5c2b42615f3bf47a85fb76fc049d57,
         type: 3}

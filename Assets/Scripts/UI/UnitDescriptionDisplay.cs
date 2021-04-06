@@ -175,7 +175,10 @@ public class UnitDescriptionDisplay : MonoBehaviour
 
         if (ResetGemsButton)
         {
-            if (GameManager.instance.gamestate == GameManager.GameState.Placement)
+            if (GameManager.instance.gamestate == GameManager.GameState.Placement ||
+                    (GameManager.instance.gamestate == GameManager.GameState.Shopping ||
+                     GameManager.instance.gamestate == GameManager.GameState.Resolution) &&
+                     actualSlot.GetSlotType() == InventorySlot.SlotType.Inventory)
             {
                 GenerateSlots(gems);
                 ResetGemsButton.gameObject.SetActive(true);
