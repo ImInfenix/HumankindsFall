@@ -36,7 +36,7 @@ public class HealthbarHandler : MonoBehaviour
         healthbarHandlers.Remove(this);
     }
 
-    public void SetHealth(float health, int maxHealth)
+    public void SetHealth(float health, float maxHealth)
     {
         healthSlider.maxValue = maxHealth;
         healthSlider.value = health;

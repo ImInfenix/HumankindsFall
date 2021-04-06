@@ -58,86 +58,86 @@ public class ClassCount
             case Class.Warrior:
                 if (lvl == 0)
                 {
-                    def = "Warriors up their attack\n (2) +25% attack\n (4) +50% attack";
+                    def = "Warriors up their attack\n (2) +15% attack\n (4) +30% attack";
                 }
                 if (lvl == 1)
                 {
-                    def = "Warriors up their attack\n <b>(2) +25% attack</b>\n (4) +50% attack";
+                    def = "Warriors up their attack\n <b>(2) +15% attack</b>\n (4) +30% attack";
                 }
                 if (lvl == 2)
                 {
-                    def = "Warriors up their attack\n (2) +25% attack\n <b>(4) +50% attack</b>";
+                    def = "Warriors up their attack\n (2) +15% attack\n <b>(4) +30% attack</b>";
                 }                
                 break;
 
             case Class.Tank:
                 if (lvl == 0)
                 {
-                    def = "Tanks increase their max health\n (2) +50% max health";
+                    def = "Tanks increase their max health\n (2) 40% max health";
                 }
                 if (lvl == 1)
                 {
-                    def = "Tanks increase their max health\n <b>(2) +50% max health</b>";
+                    def = "Tanks increase their max health\n <b>(2) +40% max health</b>";
                 }
                 break;
 
             case Class.Bowman:
                 if (lvl == 0)
                 {
-                    def = "Bowmans increase their attack speed\n (2) +25% attack speed";
+                    def = "Bowmans increase their attack speed\n (2) +20% attack speed";
                 }
                 if (lvl == 1)
                 {
-                    def = "Bowmans increase their attack speed\n <b>(2) +25% attack speed</b>";
+                    def = "Bowmans increase their attack speed\n <b>(2) +20% attack speed</b>";
                 }
                 break;
 
             case Class.Healer:
                 if (lvl == 0)
                 {
-                    def = "Healers heals the ally with the lowest health for 15% of his max health\n (1) Every 5 attacks\n (2) Every 3 attacks\n (3) Every 2 attacks";
+                    def = "Healers heals the ally with the lowest health for 10% of his max health\n (1) Every 5 attacks\n (2) Every 3 attacks\n (3) Every 2 attacks";
                 }
                 if (lvl == 1)
                 {
-                    def = "Healers heals the ally with the lowest health for 15% of his max health\n <b>(1) Every 5 attacks</b>\n (2) Every 3 attacks\n (3) Every 2 attacks";
+                    def = "Healers heals the ally with the lowest health for 10% of his max health\n <b>(1) Every 5 attacks</b>\n (2) Every 3 attacks\n (3) Every 2 attacks";
                 }
                 if (lvl == 2)
                 {
-                    def = "Healers heals the ally with the lowest health for 15% of his max health\n (1) Every 5 attacks\n <b>(2) Every 3 attacks</b>\n (3) Every 2 attacks";
+                    def = "Healers heals the ally with the lowest health for 10% of his max health\n (1) Every 5 attacks\n <b>(2) Every 3 attacks</b>\n (3) Every 2 attacks";
                 }
                 if (lvl == 3)
                 {
-                    def = "Healers heals the ally with the lowest health for 15% of his max health\n (1) Every 5 attacks\n (2) Every 3 attacks\n <b>(3) Every 2 attacks</b>";
+                    def = "Healers heals the ally with the lowest health for 10% of his max health\n (1) Every 5 attacks\n (2) Every 3 attacks\n <b>(3) Every 2 attacks</b>";
                 }                
                 break;
 
             case Class.Support:
                 if (lvl == 0)
                 {
-                    def = "Units near supports gain armor\n (2) 20% armor\n (3) 30% armor\n (4) 50% armor";
+                    def = "Units near supports gain armor\n (2) 10% armor\n (3) 20% armor\n (4) 40% armor";
                 }
                 if (lvl == 1)
                 {
-                    def = "Units near supports gain armor\n <b>(2) 20% armor</b>\n (3) 30% armor\n (4) 50% armor";
+                    def = "Units near supports gain armor\n <b>(2) 10% armor</b>\n (3) 20% armor\n (4) 40% armor";
                 }
                 if (lvl == 2)
                 {
-                    def = "Units near supports gain armor\n (2) 20% armor\n <b>(3) 30% armor</b>\n (4) 50% armor";
+                    def = "Units near supports gain armor\n (2) 10% armor\n <b>(3) 20% armor</b>\n (4) 40% armor";
                 }
                 if (lvl == 3)
                 {
-                    def = "Units near supports gain armor\n (2) 20% armor\n (3) 30% armor\n <b>(4) 50% armor</b>";
+                    def = "Units near supports gain armor\n (2) 10% armor\n (3) 20% armor\n <b>(4) 40% armor</b>";
                 }                
                 break;
 
             case Class.Berserker:
                 if (lvl == 0)
                 {
-                    def = "Berserkers gain attack and armor when their is no unit around\n (2) +50% attack, +25% armor";
+                    def = "Berserkers gain attack and armor when their is no unit around\n (2) +20% attack, +10% armor";
                 }
                 if (lvl == 1)
                 {
-                    def = "Berserkers gain attack and armor when their is no unit around\n <b>(2) +50% attack, +25% armor</b>";
+                    def = "Berserkers gain attack and armor when their is no unit around\n <b>(2) +20% attack, +10% armor</b>";
                 }                
                 break;
 

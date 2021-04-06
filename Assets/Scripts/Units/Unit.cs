@@ -14,7 +14,7 @@ public class Unit : MonoBehaviour
     public ClassStat classStat;
 
     [Header ("STATS")]
-    [SerializeField] private int maxLife;
+    [SerializeField] private float maxLife;
     [SerializeField] private float currentLife;
     [SerializeField] private float incrementStamina;
     [SerializeField] private float armor;
@@ -101,7 +101,7 @@ public class Unit : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    public int MaxLife { get => maxLife; set => maxLife = value; }
+    public float MaxLife { get => maxLife; set => maxLife = value; }
     public float CurrentLife { get => currentLife; set => currentLife = value; }
     public float IncrementStamina { get => incrementStamina; set => incrementStamina = value; }
     public float Armor { get => armor; set => armor = value; }
@@ -457,7 +457,7 @@ public class Unit : MonoBehaviour
                 {
                     Unit target = GameManager.instance.searchHealTarget();
                     if (target != null)
-                        target.heal((target.getMaxlife() / 20) * 3);
+                        target.heal(target.getMaxlife()*0.1f);
                     cptHealer = 0;
                 }
             }
@@ -778,7 +778,7 @@ public class Unit : MonoBehaviour
         return isTargetable;
     }
 
-    public int getMaxlife()
+    public float getMaxlife()
     {
         return maxLife;
     }
@@ -914,18 +914,18 @@ public class Unit : MonoBehaviour
             case Class.Warrior:
                 if (nb >= 2 && nb < 4)
                 {
-                    damage += damage/4;
+                    damage += damage*0.15f;
                 }
                 if (nb >= 4)
                 {
-                    damage += damage/2;
+                    damage += damage*0.3f;
                 }
                 break;
 
             case Class.Tank:
                 if(nb >= 2)
                 {
-                    maxLife += maxLife/2;
+                    maxLife += maxLife*0.4f;
                     currentLife = maxLife;
                     healthBar.SetHealth(currentLife, maxLife);
                 }
@@ -934,7 +934,7 @@ public class Unit : MonoBehaviour
             case Class.Bowman:
                 if (nb >= 2)
                 {
-                    attackSpeed += attackSpeed/4;
+                    attackSpeed -= attackSpeed*0.2f;
                 }
                 break;
 
@@ -981,8 +981,8 @@ public class Unit : MonoBehaviour
                 {
                     if(board.isOccupiedNeighbour(currentCell) == false)
                     {
-                        damage += damage / 2;
-                        armor += initialArmor / 4;
+                        damage += damage*0.2f;
+                        armor += initialArmor*0.1f;
                     }
                 }
                 break;
@@ -1004,15 +1004,15 @@ public class Unit : MonoBehaviour
         {
             if (lvl == 1)
             {
-                armor += initialArmor / 5;
+                armor += initialArmor * 0.1f;
             }
             if (lvl == 2)
             {
-                armor += (initialArmor / 10) * 3;
+                armor += initialArmor * 0.2f;
             }
             if (lvl == 3)
             {
-                armor += initialArmor / 2;
+                armor += initialArmor * 0.4f;
             }
             supportBuff = true;
         }
