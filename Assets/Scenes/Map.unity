@@ -223,7 +223,7 @@ PrefabInstance:
         type: 3}
       propertyPath: sprite
       value: 
-      objectReference: {fileID: -8793625291917413168, guid: 57473b633c94a8243ae915fe0f1ceab3,
+      objectReference: {fileID: 3495024762126540896, guid: 57473b633c94a8243ae915fe0f1ceab3,
         type: 3}
     - target: {fileID: 3715987373865777901, guid: 6f128a6d492d075408abb1695627d782,
         type: 3}
@@ -353,6 +353,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Desert
       objectReference: {fileID: 0}
+    - target: {fileID: 3715987373865777901, guid: 6f128a6d492d075408abb1695627d782,
+        type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: -6081955857890346679, guid: 57473b633c94a8243ae915fe0f1ceab3,
+        type: 3}
     - target: {fileID: 3715987373865777901, guid: 6f128a6d492d075408abb1695627d782,
         type: 3}
       propertyPath: combatPreview
@@ -928,6 +934,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3715987373865777901, guid: 6f128a6d492d075408abb1695627d782,
         type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 6211927434488055067, guid: 57473b633c94a8243ae915fe0f1ceab3,
+        type: 3}
+    - target: {fileID: 3715987373865777901, guid: 6f128a6d492d075408abb1695627d782,
+        type: 3}
       propertyPath: isAccessible
       value: 1
       objectReference: {fileID: 0}
@@ -1026,6 +1038,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Foret
       objectReference: {fileID: 0}
+    - target: {fileID: 3715987373865777901, guid: 6f128a6d492d075408abb1695627d782,
+        type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: -1108611937756690309, guid: 619af164554cb4a479f56fcac3445487,
+        type: 3}
     - target: {fileID: 3715987373865777901, guid: 6f128a6d492d075408abb1695627d782,
         type: 3}
       propertyPath: combatPreview
@@ -1346,6 +1364,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3715987373865777901, guid: 6f128a6d492d075408abb1695627d782,
         type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 2447081592485647585, guid: 619af164554cb4a479f56fcac3445487,
+        type: 3}
+    - target: {fileID: 3715987373865777901, guid: 6f128a6d492d075408abb1695627d782,
+        type: 3}
       propertyPath: combatPreview
       value: 
       objectReference: {fileID: 11400000, guid: 3b9d13a44f48cdf4db19078b0e435b9e,
@@ -1439,6 +1463,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Marecage
       objectReference: {fileID: 0}
+    - target: {fileID: 3715987373865777901, guid: 6f128a6d492d075408abb1695627d782,
+        type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: -845671412585875310, guid: d441c44cbde3668469ef7c6bf32ccead,
+        type: 3}
     - target: {fileID: 3715987373865777901, guid: 6f128a6d492d075408abb1695627d782,
         type: 3}
       propertyPath: combatPreview
@@ -2059,6 +2089,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3715987373865777901, guid: 6f128a6d492d075408abb1695627d782,
         type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: -76496821168886394, guid: a9c51961d09080d4fa1eaf5b0a2ab4f1,
+        type: 3}
+    - target: {fileID: 3715987373865777901, guid: 6f128a6d492d075408abb1695627d782,
+        type: 3}
       propertyPath: combatPreview
       value: 
       objectReference: {fileID: 11400000, guid: 36c17fcac53ea27438de27aae110ea3c,
@@ -2290,6 +2326,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3715987373865777901, guid: 6f128a6d492d075408abb1695627d782,
         type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 6258367583306725175, guid: 619af164554cb4a479f56fcac3445487,
+        type: 3}
+    - target: {fileID: 3715987373865777901, guid: 6f128a6d492d075408abb1695627d782,
+        type: 3}
       propertyPath: combatPreview
       value: 
       objectReference: {fileID: 11400000, guid: a6340270abe7a8746a575adab29f453b,
@@ -2444,6 +2486,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3715987373865777901, guid: 6f128a6d492d075408abb1695627d782,
         type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: -6952491683928879425, guid: 619af164554cb4a479f56fcac3445487,
+        type: 3}
+    - target: {fileID: 3715987373865777901, guid: 6f128a6d492d075408abb1695627d782,
+        type: 3}
       propertyPath: combatPreview
       value: 
       objectReference: {fileID: 11400000, guid: cc6a32a5d88d6d342bbe0ecde2e241b4,
@@ -2453,6 +2501,21 @@ PrefabInstance:
       propertyPath: levelDescription
       value: 
       objectReference: {fileID: 2095747038}
+    - target: {fileID: 3715987373865777901, guid: 6f128a6d492d075408abb1695627d782,
+        type: 3}
+      propertyPath: Neighbours.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3715987373865777901, guid: 6f128a6d492d075408abb1695627d782,
+        type: 3}
+      propertyPath: Neighbours.Array.data[0]
+      value: 
+      objectReference: {fileID: 720267550}
+    - target: {fileID: 3715987373865777901, guid: 6f128a6d492d075408abb1695627d782,
+        type: 3}
+      propertyPath: Neighbours.Array.data[1]
+      value: 
+      objectReference: {fileID: 2092913470}
     - target: {fileID: 3715987373865777902, guid: 6f128a6d492d075408abb1695627d782,
         type: 3}
       propertyPath: m_RootOrder
@@ -3186,7 +3249,7 @@ PrefabInstance:
         type: 3}
       propertyPath: sprite
       value: 
-      objectReference: {fileID: 7614699122904390950, guid: 57473b633c94a8243ae915fe0f1ceab3,
+      objectReference: {fileID: -7635276782882317071, guid: a9c51961d09080d4fa1eaf5b0a2ab4f1,
         type: 3}
     - target: {fileID: 3715987373865777901, guid: 6f128a6d492d075408abb1695627d782,
         type: 3}
@@ -3666,6 +3729,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Nord
       objectReference: {fileID: 0}
+    - target: {fileID: 3715987373865777901, guid: 6f128a6d492d075408abb1695627d782,
+        type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: -1264932348664778487, guid: 57b6e22374c208e4ea97ff08231c02d2,
+        type: 3}
     - target: {fileID: 3715987373865777901, guid: 6f128a6d492d075408abb1695627d782,
         type: 3}
       propertyPath: combatPreview
@@ -4251,6 +4320,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3715987373865777901, guid: 6f128a6d492d075408abb1695627d782,
         type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: -5323118506111613818, guid: d441c44cbde3668469ef7c6bf32ccead,
+        type: 3}
+    - target: {fileID: 3715987373865777901, guid: 6f128a6d492d075408abb1695627d782,
+        type: 3}
       propertyPath: combatPreview
       value: 
       objectReference: {fileID: 11400000, guid: 476936e1a36b61f49aaf6e4051c370ed,
@@ -4344,6 +4419,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Detroit
       objectReference: {fileID: 0}
+    - target: {fileID: 3715987373865777901, guid: 6f128a6d492d075408abb1695627d782,
+        type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: -431800362255891804, guid: 57473b633c94a8243ae915fe0f1ceab3,
+        type: 3}
     - target: {fileID: 3715987373865777901, guid: 6f128a6d492d075408abb1695627d782,
         type: 3}
       propertyPath: isAccessible
