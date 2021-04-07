@@ -14,8 +14,22 @@ public class OptionsMenu : MonoBehaviour
     [SerializeField]
     private Slider effectsSlider;
 
-    public static float musicVolume = 1f;
-    public static float effectsVolume = 1f;
+    private const string musicKey = "MusicVolume";
+    private const string effectsKey = "EffectsVolume";
+
+    public static float musicVolume = 1;
+    public static float effectsVolume = 1;
+
+    public static void Init()
+    {
+        if (PlayerPrefs.HasKey(musicKey))
+            musicVolume = PlayerPrefs.GetFloat(musicKey);
+        else musicVolume = 1;
+
+        if (PlayerPrefs.HasKey(effectsKey))
+            effectsVolume = PlayerPrefs.GetFloat(effectsKey);
+        else effectsVolume = 1;
+    }
 
     public void Show()
     {
@@ -43,5 +57,11 @@ public class OptionsMenu : MonoBehaviour
     public void OnEffectsVolumeChanged(float newValue)
     {
         effectsVolume = newValue;
+    }
+
+    private void OnDestroy()
+    {
+        PlayerPrefs.SetFloat(musicKey, musicVolume);
+        PlayerPrefs.SetFloat(effectsKey, effectsVolume);
     }
 }
