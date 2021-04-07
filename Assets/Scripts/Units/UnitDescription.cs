@@ -100,9 +100,9 @@ public class UnitDescription
     {
         experience += experienceAmount;
 
-        if (experience >= 10)
+        if (experience >= 5)
         {
-            experience -= 10;
+            experience -= 5;
             IncreaseLevel();
         }
     }

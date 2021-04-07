@@ -725,7 +725,28 @@ public class Unit : MonoBehaviour
 
             else
             {
-                string unitStats = string.Format("{0} \n HP : {1}/{2} \n Ability : {3} \n Stamina : {4}/{5} \n Stamina per hit : {6} \n Damage : {7} \n Attack Speed : {8} \n Move Speed : {9} \n Power : {10} \n Armor : {11} \n Range : {12} \n Accuracy : {13}%",
+                string unitStats;
+
+                if (ability == null)
+                {
+                    abilityName = "None";
+                    unitStats = string.Format("{0} \n HP : {1}/{2} \n Ability : {3} \n Damage : {4} \n Attack Speed : {5} \n Move Speed : {6} \n Power : {7} \n Armor : {8} \n Range : {9} \n Accuracy : {10}%",
+                    unitName,
+                    currentLife,
+                    maxLife,
+                    abilityName,
+                    damage,
+                    attackSpeed,
+                    moveSpeed,
+                    power,
+                    armor,
+                    range,
+                    accuracy);
+                }
+
+                else
+                {
+                    unitStats = string.Format("{0} \n HP : {1}/{2} \n Ability : {3} \n Stamina : {4}/{5} \n Stamina per hit : {6} \n Damage : {7} \n Attack Speed : {8} \n Move Speed : {9} \n Power : {10} \n Armor : {11} \n Range : {12} \n Accuracy : {13}%",
                     unitName,
                     currentLife,
                     maxLife,
@@ -740,6 +761,9 @@ public class Unit : MonoBehaviour
                     armor,
                     range,
                     accuracy);
+                }
+
+                
                 Tooltip.ShowTooltip_Static(unitStats);
             }
         }
