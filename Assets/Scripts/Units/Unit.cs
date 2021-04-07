@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -30,6 +30,7 @@ public class Unit : MonoBehaviour
     [SerializeField] private bool stuned = false;
     [SerializeField] private bool poisonned = false;
 
+    
 
     private bool moving;
     private bool canMove;
