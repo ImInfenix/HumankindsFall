@@ -13,13 +13,11 @@ MonoBehaviour:
   m_Name: Demons
   m_EditorClassIdentifier: 
   race: 7
-  maxLife: 10
-  maxMana: 0
-  mana: 0
-  armor: 0
+  maxLife: 15
+  armor: -0.1
   moveSpeed: 0
   attackSpeed: 0
-  damage: 5
+  damage: 3
   unitNames:
   - Xastroth
   - Goggan

@@ -148,7 +148,7 @@ public class UnitDescriptionDisplay : MonoBehaviour
         RaceStat race = currentDescription.GetRace();
 
         int maxLife = classe.maxLife + race.maxLife;
-        int armor = classe.armor + race.armor;
+        float armor = classe.armor + race.armor;
         float atakSpeed = classe.attackSpeed + race.attackSpeed;
 
         string stats =

@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ba64e6d5dd11e449bb0e8bd6d5fc7c8, type: 3}
   m_Name: Bowman
   m_EditorClassIdentifier: 
-  clas: 3
-  maxLife: 80
+  clas: 0
+  maxLife: 75
   armor: 1
   moveSpeed: 2
   attackSpeed: 1.1
   damage: 8
-  range: 3
+  range: 2
   incrementStamina: 100
   projectile: {fileID: 3144628240142601262, guid: 90f4b5268b4c3944b8f783910b864353,
     type: 3}

@@ -14,12 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   race: 3
   maxLife: 0
-  maxMana: 0
-  mana: 0
-  armor: 0
+  armor: -0.1
   moveSpeed: 0
   attackSpeed: 0
-  damage: 5
+  damage: 3
   unitNames:
   - C'thulhu
   - Cthylulbh

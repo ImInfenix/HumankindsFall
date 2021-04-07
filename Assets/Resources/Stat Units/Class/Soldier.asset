@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Soldier
   m_EditorClassIdentifier: 
   clas: 8
-  maxLife: 100
+  maxLife: 110
   armor: 1
   moveSpeed: 2
-  attackSpeed: 1.1
+  attackSpeed: 1
   damage: 8
   range: 1
   incrementStamina: 0

@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Tank
   m_EditorClassIdentifier: 
   clas: 2
-  maxLife: 150
-  armor: 1
-  moveSpeed: 1.2
+  maxLife: 110
+  armor: 1.1
+  moveSpeed: 2
   attackSpeed: 1
-  damage: 7
+  damage: 6
   range: 1
   incrementStamina: 100
   projectile: {fileID: 0}

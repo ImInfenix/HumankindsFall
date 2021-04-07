@@ -13,13 +13,15 @@ MonoBehaviour:
   m_Name: DemonKing
   m_EditorClassIdentifier: 
   clas: 9
-  maxLife: 30
+  maxLife: 43
   armor: 1
   moveSpeed: 2
   attackSpeed: 1
-  damage: 20
+  damage: 14
   range: 1
   incrementStamina: 75
   projectile: {fileID: 0}
-  abilities: []
-  classIconSprite: {fileID: 0}
+  abilities:
+  - CircularAttack
+  classIconSprite: {fileID: -6099609738351878970, guid: 7bcbfa039553fa543bf7c8cd86ad6b82,
+    type: 3}

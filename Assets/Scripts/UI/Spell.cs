@@ -38,32 +38,32 @@ public class Spell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
         switch(race)
         {
             case (Race.Orc):
-                definition = "For 5 seconds, orc in spell area ignore enemy defense but they lose 10% accuracy";
-                cooldown = 5;
+                definition = "For 5 seconds, orc in spell area ignore 30% of enemy defense but they lose 10% accuracy";
+                cooldown = 10;
                 break;
             case (Race.Skeleton):
                 definition = "Ennemis in spell area loose 25% armor for 5 seconds";
-                cooldown = 5;
+                cooldown = 10;
                 break;
             case (Race.Octopus):
                 definition = "Stun the target for 5 seconds";
-                cooldown = 5;
+                cooldown = 15;
                 break;
             case (Race.Elemental):
                 elemental = SynergyHandler.instance.getElementals();
                 definition = "Deal "+ elemental.getNumber()*10+" damage to enemy target";
-                cooldown = 5;
+                cooldown = 10;
                 break;
             case (Race.Giant):
                 definition = "Choose a giant unit, his next attack will deal 15% more damage and stun the enemy for 2 seconds";
-                cooldown = 5;
+                cooldown = 8;
                 break;
             case (Race.Ratman):
                 definition = "The next attack of all ratmen poisons the enemy dealing 2 damage/seconde for 5 seconds";
-                cooldown = 5;
+                cooldown = 10;
                 break;
             case (Race.Demon):
-                definition = "Summon the demon king on the target cell, he has less life but more damage";
+                definition = "Summon the demon king on the target cell, he has less life but more damage (based on warrior's stats)";
                 cooldown = 60;
                 break;
         }

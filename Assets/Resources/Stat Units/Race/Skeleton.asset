@@ -13,13 +13,11 @@ MonoBehaviour:
   m_Name: Skeleton
   m_EditorClassIdentifier: 
   race: 2
-  maxLife: 10
-  maxMana: 0
-  mana: 0
+  maxLife: 0
   armor: 0
-  moveSpeed: 0
-  attackSpeed: 0.1
-  damage: 1
+  moveSpeed: -0.1
+  attackSpeed: 0.2
+  damage: -1
   unitNames:
   - Michel
   - Bernard

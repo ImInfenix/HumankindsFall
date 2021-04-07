@@ -144,11 +144,11 @@ public class ClassCount
             case Class.Assassin:
                 if (lvl == 0)
                 {
-                    def = "At start of combat, assassins jump on the farthest unit\n (1) They gain invisibility for 5 seconds at start of combat";
+                    def = "At start of combat, assassins gain invisibility for 5 seconds\n (1) Their first attack is 30% stronger";
                 }
                 if (lvl == 1)
                 {
-                    def = "At start of combat, assassins jump on the farthest unit\n <b>(1) They gain invisibility for 5 seconds at start of combat</b>";
+                    def = "At start of combat, assassins gain invisibility for 5 seconds\n <b>(1) Their first attack is 30% stronger</b>";
                 }               
                 break;
         }

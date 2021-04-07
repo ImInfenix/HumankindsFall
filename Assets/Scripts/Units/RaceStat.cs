@@ -20,9 +20,7 @@ public class RaceStat : ScriptableObject
     public Race race;
 
     public int maxLife;
-    public int maxMana;
-    public int mana;
-    public int armor;
+    public float armor;
     public float moveSpeed;
     public float attackSpeed;
     public int damage;

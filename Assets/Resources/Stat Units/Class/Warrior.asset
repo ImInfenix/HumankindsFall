@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Warrior
   m_EditorClassIdentifier: 
   clas: 0
-  maxLife: 125
+  maxLife: 100
   armor: 1
-  moveSpeed: 1.2
+  moveSpeed: 2
   attackSpeed: 1
   damage: 10
   range: 1

@@ -10,23 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: de9e8c1568867244bb3c508a017b768c, type: 3}
-  m_Name: Elemental
+  m_Name: Elementals
   m_EditorClassIdentifier: 
   race: 4
-  maxLife: 20
-  maxMana: 0
-  mana: 0
-  armor: 0
+  maxLife: 10
+  armor: 0.1
   moveSpeed: 0
-  attackSpeed: 0.2
-  damage: 2
+  attackSpeed: 0
+  damage: 1
   unitNames:
   - Gliss
   - Aqualis
   - Stratos
   - Vexus
   - Duster
-  unitSprite: {fileID: 9036399302747413655, guid: 75a6831676e9b914caa0d1b8248b8c91,
+  unitSprite: {fileID: -7693005759913572392, guid: 75a6831676e9b914caa0d1b8248b8c91,
     type: 3}
   warriorSprite: {fileID: -6183570790091957818, guid: 75a6831676e9b914caa0d1b8248b8c91,
     type: 3}
@@ -44,5 +42,5 @@ MonoBehaviour:
     type: 3}
   assassinSprite: {fileID: -7339533501470664506, guid: 75a6831676e9b914caa0d1b8248b8c91,
     type: 3}
-  soldierSprite: {fileID: 7702638074590927934, guid: 75a6831676e9b914caa0d1b8248b8c91,
+  soldierSprite: {fileID: -7693005759913572392, guid: 75a6831676e9b914caa0d1b8248b8c91,
     type: 3}

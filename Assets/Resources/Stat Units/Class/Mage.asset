@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Mage
   m_EditorClassIdentifier: 
   clas: 1
-  maxLife: 70
+  maxLife: 80
   armor: 1
   moveSpeed: 2
-  attackSpeed: 0.6
-  damage: 12
+  attackSpeed: 0.9
+  damage: 7
   range: 2
   incrementStamina: 200
   projectile: {fileID: 3756010517097857206, guid: 28de22995b20a354ba2da0a6e56df8ef,

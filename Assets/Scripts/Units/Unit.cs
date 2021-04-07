@@ -37,6 +37,7 @@ public class Unit : MonoBehaviour
     private bool healer1 = false;
     private bool healer2 = false;
     private bool healer3 = false;
+    private bool assassin = false;
     private bool orcSpell = false;
     private bool giantSpell = false;
     private bool ratmanSpell = false;
@@ -409,7 +410,8 @@ public class Unit : MonoBehaviour
 
             StartCoroutine(AttackAnimation());
 
-            if (orcSpell == false)
+            if (orcSpell == false && assassin == false)
+            { 
                 if (giantSpell == false)
                     targetUnit.takeDamage(damage);
                 else
@@ -419,6 +421,12 @@ public class Unit : MonoBehaviour
                     targetUnit.activateStun(2);
                     giantSpell = false;
                 }
+            }
+            else if(assassin == true)
+            {
+                targetUnit.takeDamage(damage*1.3f);
+                assassin = false;
+            }
             else
             {
                 int rand = Random.Range(1, 101);
@@ -622,7 +630,7 @@ public class Unit : MonoBehaviour
 
     public void takeOrcDamage(float damage)
     {
-        takeDamage(damage * armor);
+        takeDamage(damage / (0.7f *armor));
     }
 
     public void heal(float heal)
@@ -990,6 +998,7 @@ public class Unit : MonoBehaviour
             case Class.Assassin:
                 if(nb >= 1)
                 {
+                    assassin = true;
                     startInvisibility();
 
                     Invoke("stopInvisibility", 5);

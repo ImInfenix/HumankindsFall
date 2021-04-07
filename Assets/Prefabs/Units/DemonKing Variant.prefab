@@ -57,13 +57,13 @@ PrefabInstance:
         type: 3}
       propertyPath: classStat
       value: 
-      objectReference: {fileID: 11400000, guid: 58701b034331132438529f629f2a93ac,
+      objectReference: {fileID: 11400000, guid: da6dac25286b9c547aa052638b0603e6,
         type: 2}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}
       propertyPath: raceStats
       value: 
-      objectReference: {fileID: 11400000, guid: 88fb7b529a19d9848a153de168f9a616,
+      objectReference: {fileID: 11400000, guid: 8541015ca34c9f04eb436865c1e96bce,
         type: 2}
     - target: {fileID: 6462263672407878669, guid: 7e4adf9f1c9ba8b4bbc2b536052db9ff,
         type: 3}

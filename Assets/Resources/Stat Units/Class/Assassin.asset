@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Assassin
   m_EditorClassIdentifier: 
   clas: 7
-  maxLife: 100
+  maxLife: 90
   armor: 1
-  moveSpeed: 2
-  attackSpeed: 1
-  damage: 10
+  moveSpeed: 1.8
+  attackSpeed: 1.2
+  damage: 12
   range: 1
   incrementStamina: 100
   projectile: {fileID: 0}

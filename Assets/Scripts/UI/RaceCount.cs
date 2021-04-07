@@ -44,11 +44,11 @@ public class RaceCount
             case Race.Orc:
                 if(lvl == 0)
                 {
-                    def = "Extrem brutality\n<b>Spell</b>\nOrc's attack ignore defense but they lose accuracy\n (2) 5 secondes, -10% accuracy";
+                    def = "Extrem brutality\n<b>Spell</b>\nOrc's attack ignore 30% of defense but they lose accuracy\n (2) 5 secondes, -10% accuracy";
                 }
                if(lvl == 1)
                 {
-                    def = "Extrem brutality\n<b>Spell</b>\nOrc's attack ignore defense but they lose accuracy\n <b>(2) 5 secondes, -10% accuracy</b>";
+                    def = "Extrem brutality\n<b>Spell</b>\nOrc's attack ignore 30% of defense but they lose accuracy\n <b>(2) 5 secondes, -10% accuracy</b>";
                 }
                 break;
 

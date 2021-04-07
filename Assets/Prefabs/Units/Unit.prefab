@@ -723,7 +723,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   raceStats: {fileID: 11400000, guid: 5d54e759c0ac4f14b8c1c172e4cad577, type: 2}
-  classStat: {fileID: 11400000, guid: 1bfdba91039434f47a5db49ef4005d27, type: 2}
+  classStat: {fileID: 11400000, guid: 46305e174b5c5ca4096562c848011bf1, type: 2}
   maxLife: 0
   currentLife: 0
   incrementStamina: 0
