@@ -101,6 +101,8 @@ MonoBehaviour:
   spriteRenderer: {fileID: 3715987373865777903}
   GreenFlag: {fileID: 21300000, guid: 8b69d0bd588520547932449d6b0989a6, type: 3}
   RedFlag: {fileID: 21300000, guid: bbe849a1b3831304abe5e51003139db5, type: 3}
+  classic: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  outline: {fileID: 2100000, guid: 09763b9454ddfe5468accbf674210df4, type: 2}
   levelDescription: {fileID: 0}
   sprite: {fileID: -1560368227321105025, guid: 57473b633c94a8243ae915fe0f1ceab3, type: 3}
   combatPreview: {fileID: 0}
