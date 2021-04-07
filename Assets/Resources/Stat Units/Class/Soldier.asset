@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Soldier
   m_EditorClassIdentifier: 
   clas: 8
-  maxLife: 110
+  maxLife: 100
   armor: 1
   moveSpeed: 2
   attackSpeed: 1
-  damage: 8
+  damage: 6
   range: 1
   incrementStamina: 0
   projectile: {fileID: 0}

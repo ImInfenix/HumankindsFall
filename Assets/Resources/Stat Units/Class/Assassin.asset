@@ -15,7 +15,7 @@ MonoBehaviour:
   clas: 7
   maxLife: 90
   armor: 1
-  moveSpeed: 1.8
+  moveSpeed: 2.2
   attackSpeed: 1.2
   damage: 12
   range: 1

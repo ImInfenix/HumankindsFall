@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   race: 5
   maxLife: 20
-  armor: 0.1
+  armor: -0.1
   moveSpeed: 0.1
   attackSpeed: -0.1
   damage: 3
