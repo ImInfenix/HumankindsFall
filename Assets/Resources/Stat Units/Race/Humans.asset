@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   race: 1
   maxLife: 15
-  armor: 0.1
+  armor: 0.05
   moveSpeed: 0
   attackSpeed: 0
-  damage: 2
+  damage: 1
   unitNames:
   - Jean
   - Jacques
