@@ -684,22 +684,43 @@ public class Unit : MonoBehaviour
         }
     }
 
-    private void OnMouseDown()
+    private void OnMouseOver()
     {
-        if (PauseMenu.isGamePaused || EventSystem.current.IsPointerOverGameObject())
-            return;
-
-        if (GameManager.instance.gamestate != GameManager.GameState.Placement)
-            return;
-
-        if (CompareTag(allyTag))
+        //on left click
+        if (Input.GetMouseButtonDown(0))
         {
-            if (Input.GetMouseButtonDown(0) && canMove)
+            if (PauseMenu.isGamePaused || EventSystem.current.IsPointerOverGameObject())
+                return;
+
+            if (GameManager.instance.gamestate != GameManager.GameState.Placement)
+                return;
+
+            if (CompareTag(allyTag) && canMove)
             {
                 PrepareForDragNDrop();
             }
         }
 
+        //on right click
+        else if (Input.GetMouseButtonDown(1))
+        {
+            //if tooltip already active
+            if (Tooltip.GetIsActive())
+                Tooltip.HideTooltip_Static();
+
+            else
+            {
+                string unitStats = string.Format("{0} : \n Ability : {1} \n HP : {2}/{3} \n Damage : {4} \n Attack Speed : {5} \n Move Speed : {6} \n Power : {7} \n Armor : {8} \n Range : {9} \n Accuracy : {10}%",
+                    unitName, abilityName, currentLife, maxLife, damage, attackSpeed, moveSpeed, power, armor, range, accuracy);
+                Tooltip.ShowTooltip_Static(unitStats);
+            }
+        }
+    }
+
+    private void OnMouseExit()
+    {
+        if (Tooltip.GetIsActive())
+            Tooltip.HideTooltip_Static();
     }
 
     public void PrepareForDragNDrop()

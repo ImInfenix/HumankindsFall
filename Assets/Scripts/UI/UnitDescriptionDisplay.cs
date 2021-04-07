@@ -152,13 +152,10 @@ public class UnitDescriptionDisplay : MonoBehaviour
         float atakSpeed = classe.attackSpeed + race.attackSpeed;
 
         string stats =
-            "Class : " + classe.name + "\n" +
-            "Race : " + race.name + "\n" +
-            "Ability : " + currentDescription.GetAbilityName() +"\n" +
-            "PV : " + maxLife + "\n" +
-            "Armor : " + armor + "\n" +
-            "Attack Speed : " + atakSpeed;
-        ;
+            "Class : " + classe.name + "\n\n" +
+            "Race : " + race.name + "\n\n" +
+            "Ability : " + currentDescription.GetAbilityName() + "\n"
+            ;
         SetUnitStats(stats);
 
         string[] gems = currentDescription.GetGems();

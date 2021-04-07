@@ -13,6 +13,8 @@ public class Tooltip : MonoBehaviour
     private RectTransform rectTransform;
     public Canvas canvas;
 
+    private static bool isActive;
+
     private void Awake()
     {
         instance = this;
@@ -21,10 +23,13 @@ public class Tooltip : MonoBehaviour
         tooltipText = transform.Find("Text").GetComponent<TextMeshProUGUI>();
         rectTransform = transform.GetComponent<RectTransform>();
         gameObject.SetActive(false);
+        isActive = false;
     }
+
     private void ShowTooltip(string def)
     {
         gameObject.SetActive(true);
+        isActive = true;
 
         tooltipText.SetText(def);
         tooltipText.ForceMeshUpdate();
@@ -38,6 +43,7 @@ public class Tooltip : MonoBehaviour
     private void HideTooltip()
     {
         gameObject.SetActive(false);
+        isActive = false;
     }
 
     private void Update()
@@ -57,5 +63,10 @@ public class Tooltip : MonoBehaviour
     public static void HideTooltip_Static()
     {
         instance.HideTooltip();
+    }
+
+    public static bool GetIsActive()
+    {
+        return isActive;
     }
 }
