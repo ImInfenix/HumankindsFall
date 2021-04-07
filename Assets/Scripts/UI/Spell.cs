@@ -86,7 +86,8 @@ public class Spell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
             {
                 foreach(Unit u in outlinedUnit)
                 {
-                    u.desactivateOutline();
+                    if(u != null)
+                        u.desactivateOutline();
                 }
                 outlinedUnit.Clear();
                 DesactivateArea(currentCell);
