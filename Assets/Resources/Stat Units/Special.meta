@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Resources/Stat Units/Special.meta
 guid: 74e254d9d92ca9d42bcd37ee1b2ea430
+=======
+guid: 8b87eb3da00ecf94599661c495958a9c
+>>>>>>> dev:Assets/Scripts/UI/Encyclopedia.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

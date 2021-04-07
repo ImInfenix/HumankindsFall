@@ -33,14 +33,16 @@ public class Cell
     private Cell _bottomLeft;
 
     private bool _isColored;
+    private Board _board;
 
-    public Cell(Vector3Int positionInBoard, Vector3 worldPosition, UnityEngine.Tilemaps.Tile associatedTileInTilemap, Vector2Int boardSize)
+    public Cell(Vector3Int positionInBoard, Vector3 worldPosition, UnityEngine.Tilemaps.Tile associatedTileInTilemap, Vector2Int boardSize, Board board)
     {
         _tileMapPosition = positionInBoard;
         _worldPosition = worldPosition;
         _type = new TileType(associatedTileInTilemap);
         _boardSize = boardSize;
         _isColored = false;
+        _board = board;
     }
 
     public Vector3Int TileMapPositionOffset()
@@ -153,6 +155,4 @@ public class Cell
 
         _isColored = false;
     }
-
-
 }

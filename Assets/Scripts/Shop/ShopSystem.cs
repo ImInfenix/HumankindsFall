@@ -100,6 +100,7 @@ public class ShopSystem : MonoBehaviour
         else if (!isUnit && isGem)
         {
             Player.instance.Inventory.RemoveGem(GemSlot.selectedGemSlot.Gem);
+            GemSlot.selectedGemSlot.UnselectSlot();
             GemsInventory.UpdateDisplay();
         }
 

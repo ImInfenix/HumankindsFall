@@ -7,8 +7,6 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(GameManager))]
 public class SceneLoader : MonoBehaviour
 {
-
-
     private static SceneLoader instance;
 
     public void Initialize()
@@ -24,6 +22,26 @@ public class SceneLoader : MonoBehaviour
     {
         if (GameManager.instance.gamestate == GameManager.GameState.Placement || GameManager.instance.gamestate == GameManager.GameState.Shopping)
             GameManager.instance.EnterNewLevel();
+
+        if(loadMode == LoadSceneMode.Single)
+        {
+            PickMusic(loadedScene.name);
+        }
+    }
+
+    private void PickMusic(string newSceneName)
+    {
+        if (newSceneName == "Shop")
+            AudioManager.PlayShopMusic();
+        else if (newSceneName != "MainMenu" && newSceneName != "Map")
+        {
+            if (newSceneName == "Vertmont")
+                AudioManager.PlayFinalBattleMusic();
+            else
+                AudioManager.PlayBattleMusic();
+        }
+        else
+            AudioManager.PlayMainMusic();
     }
 
     public static void LoadMenu()

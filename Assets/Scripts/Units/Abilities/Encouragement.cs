@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Encouragement : Ability
 {
-    List<(Unit boostedUnit, float incrementAttackSpeed, float incrementDamage)> boostedUnits;
+    private List<(Unit boostedUnit, float incrementAttackSpeed, float incrementDamage)> boostedUnits;
+    private GameObject animationGameObject;
 
     private void Awake()
     {
@@ -13,6 +14,8 @@ public class Encouragement : Ability
         BasePower = 20;
         duration = 5;
         boostedUnits = new List<(Unit, float, float)>();
+
+        animationGameObject = Resources.Load("Ability Prefabs/Encouragement") as GameObject;
     }
 
     public override void castAbility()
@@ -21,6 +24,8 @@ public class Encouragement : Ability
 
         List<Unit> unitsInRange = PathfindingTool.unitsInRadius(unit.currentCell, areaOfEffect, unit.tag);
         unitsInRange.Remove(unit);
+
+        Instantiate(animationGameObject, transform.position, Quaternion.identity, transform);
 
         StartCoroutine(BoostUnit(unitsInRange));
     }

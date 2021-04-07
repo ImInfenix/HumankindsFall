@@ -19,6 +19,10 @@ public class Marker : MonoBehaviour
     [SerializeField]
     private Sprite RedFlag;
     [SerializeField]
+    private Material classic;
+    [SerializeField]
+    private Material outline;
+    [SerializeField]
     private LevelDescription levelDescription;
     [SerializeField]
     private Sprite sprite;
@@ -33,6 +37,7 @@ public class Marker : MonoBehaviour
             gameObject.SetActive(false);
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = RedFlag;
+        spriteRenderer.material = outline;
         ReadDescription();
     }
 
@@ -52,6 +57,7 @@ public class Marker : MonoBehaviour
     public void FinishLevel()
     {
         spriteRenderer.sprite = GreenFlag;
+        spriteRenderer.material = classic;
         foreach (Marker marker in Neighbours)
         {
             marker.Unlock();

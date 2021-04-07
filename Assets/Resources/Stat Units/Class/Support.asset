@@ -20,7 +20,7 @@ MonoBehaviour:
   damage: 6
   range: 2
   incrementStamina: 120
-  projectile: {fileID: 5449787608139611714, guid: ad6b0911955074740842071bd7aedd7c,
+  projectile: {fileID: 8249471572864078965, guid: ad6b0911955074740842071bd7aedd7c,
     type: 3}
   abilities:
   - Encouragement

@@ -141,7 +141,7 @@ public class Board : MonoBehaviour
                 int currentIndex = j * boardSize.x + i;
                 Vector3Int currentTilePosition = tilesPositions[currentIndex];
                 Tile associatedTileInTilemap = (Tile)tilemap.GetTile(currentTilePosition);
-                board[i, j] = new Cell(currentTilePosition, tilemap.CellToWorld(currentTilePosition), associatedTileInTilemap, Size);
+                board[i, j] = new Cell(currentTilePosition, tilemap.CellToWorld(currentTilePosition), associatedTileInTilemap, Size, this);
             }
         }
     }
@@ -233,5 +233,21 @@ public class Board : MonoBehaviour
             }
         }
         return false;
+    }
+
+    public void ShowAllyTiles()
+    {
+        foreach (Cell cell in allyCellsList)
+        {
+            SetTileColour(new Color(1, 1, 1, 0.25f), cell.TileMapPosition);
+        }
+    }
+
+    public void HideAllyTiles()
+    {
+        foreach (Cell cell in allyCellsList)
+        {
+            SetTileColour(new Color(1, 1, 1, 1), cell.TileMapPosition);
+        }
     }
 }

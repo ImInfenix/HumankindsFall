@@ -180,7 +180,7 @@ public class SynergyHandler : MonoBehaviour
         {
             foreach (RaceCount r in rc)
             {
-                if (r.getRace() == u.getRace())
+                if (r.getRace() == u.getRace() && u.getClass() != Class.DemonKing)
                 {
                     r.setNumber(r.getNumber() + 1);
                 }
@@ -383,6 +383,16 @@ public class SynergyHandler : MonoBehaviour
                     case Race.Giant:
                         if(giantButton)
                             giantButton.gameObject.SetActive(false);
+                        break;
+
+                    case Race.Ratman:
+                        if (giantButton)
+                            ratmanButton.gameObject.SetActive(false);
+                        break;
+
+                    case Race.Demon:
+                        if (giantButton)
+                            demonButton.gameObject.SetActive(false);
                         break;
                 }
             }
