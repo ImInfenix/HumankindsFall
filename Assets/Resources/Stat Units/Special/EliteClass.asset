@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: EliteClass
   m_EditorClassIdentifier: 
   clas: 0
-  maxLife: 300
+  maxLife: 250
   armor: 1
   moveSpeed: 1.2
   attackSpeed: 1
