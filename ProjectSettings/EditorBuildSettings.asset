@@ -57,7 +57,7 @@ EditorBuildSettings:
     path: Assets/Scenes/BattleScenes/Oasis.unity
     guid: 557ab5c3d26729640be7fb98452c45cd
   - enabled: 1
-    path: "Assets/Scenes/BattleScenes/Rivi\xE8re.unity"
+    path: Assets/Scenes/BattleScenes/Riviere.unity
     guid: 6a7146f0548b76f4887b5edaff496096
   - enabled: 1
     path: Assets/Scenes/BattleScenes/Sanctuaire.unity
