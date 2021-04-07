@@ -11,6 +11,7 @@ public class PoisonousDecoction : Ability
         BasePower = 1;
         duration = 10;
         castStaminaThreshold = 650;
+        soundEffect = Resources.Load("SoundEffects/dagger-woosh") as AudioClip;
 
         projectileGameObject = Resources.Load("Ability Prefabs/PoisonousDecoction") as GameObject;
     }
@@ -35,6 +36,7 @@ public class PoisonousDecoction : Ability
                 }
             }
 
+            playSound();
             targetUnit.activatePoison(currentPower * duration, unit.poisonDamage * currentPower);
 
             StartCoroutine(ProjectileAnimation(targetUnit, projectileGameObject));
