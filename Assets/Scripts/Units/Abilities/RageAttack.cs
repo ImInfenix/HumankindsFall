@@ -12,6 +12,8 @@ public class RageAttack : Ability
         BasePower = 30;
         castRange = 1;
 
+        soundEffect = Resources.Load("SoundEffects/swift-sword-strike") as AudioClip;
+
         animationGameObject = Resources.Load("Ability Prefabs/RageAttack") as GameObject;
     }
 
@@ -26,6 +28,7 @@ public class RageAttack : Ability
             float damageTakenPourcentage = 1 - (unit.CurrentLife / unit.MaxLife);
             currentPower += currentPower * damageTakenPourcentage;
 
+            playSound();
             targets[0].takeDamage(currentPower);
 
             Instantiate(animationGameObject, transform.position, Quaternion.identity, transform);

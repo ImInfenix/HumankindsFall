@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -60,6 +60,7 @@ public class Unit : MonoBehaviour
     private float startPosX;
     private float startPosY;
 
+    AudioClip standardAttackSound;
 
     //private Vector3Int targetPos;
     private Unit targetUnit = null;
@@ -100,6 +101,7 @@ public class Unit : MonoBehaviour
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        standardAttackSound = Resources.Load("SoundEffects/sword-pierces-armor") as AudioClip;
     }
 
     public float MaxLife { get => maxLife; set => maxLife = value; }
@@ -153,7 +155,7 @@ public class Unit : MonoBehaviour
         initialArmor = armor;
         accuracy = 100;
         Power = 1 + 0.05f * (Level - 1);
-          
+
         MoveSpeed = raceStats.moveSpeed + classStat.moveSpeed;
         AttackSpeed = raceStats.attackSpeed + classStat.attackSpeed + 0.05f * (Level - 1);
         Damage = raceStats.damage + classStat.damage + 1 * (Level - 1);
@@ -201,7 +203,7 @@ public class Unit : MonoBehaviour
                 Vector3Int tileCoordinate = board.GetTilemap().WorldToCell(mousePos);
 
                 Cell newCell = board.GetCell(tileCoordinate);
-                
+
                 occupyNewCell(newCell);
                 updatePosition();
             }
@@ -315,7 +317,7 @@ public class Unit : MonoBehaviour
             path = PathfindingTool.createPathTarget(this);
         }
 
-        
+
     }
 
     private void ApplyAttackGemsEffect()
@@ -403,7 +405,7 @@ public class Unit : MonoBehaviour
 
     //attack the current target
     IEnumerator AttackTarget()
-    {        
+    {
         if(stuned == false)
         {
             isActing = true;
@@ -490,14 +492,19 @@ public class Unit : MonoBehaviour
                 }
             }
 
-            
+
         }
-       
+
     }
 
     //move the sprite toward the target for a short time
     IEnumerator AttackAnimation()
     {
+        if (standardAttackSound != null)
+        {
+            AudioManager.PlayEffect(standardAttackSound);
+        }
+
         //get the position where the sprite will be placed during the attack
         Vector3 targetWorldPosition = targetUnit.getCell().WorldPosition;
         Vector3 attackDirection = targetWorldPosition - worldPosition;
@@ -658,9 +665,9 @@ public class Unit : MonoBehaviour
             if (stuned == false)
                 spriteRenderer.color = baseColor;
             if(stuned == true)
-                spriteRenderer.color = new Color(104f / 255f, 104f / 255f, 104f / 255f, 1f); 
+                spriteRenderer.color = new Color(104f / 255f, 104f / 255f, 104f / 255f, 1f);
         }
-          
+
     }
 
     private void OnDrawGizmosSelected()

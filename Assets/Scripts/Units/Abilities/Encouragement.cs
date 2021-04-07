@@ -15,6 +15,8 @@ public class Encouragement : Ability
         duration = 5;
         boostedUnits = new List<(Unit, float, float)>();
 
+        soundEffect = Resources.Load("SoundEffects/drums-of-war-call") as AudioClip;
+
         animationGameObject = Resources.Load("Ability Prefabs/Encouragement") as GameObject;
     }
 
@@ -33,6 +35,8 @@ public class Encouragement : Ability
     IEnumerator BoostUnit(List<Unit> units)
     {
         RemoveUnitsBoost();
+
+        playSound();
 
         foreach (Unit unit in units)
         {

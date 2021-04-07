@@ -13,11 +13,15 @@ public class CircularAttack : Ability
         areaOfEffect = 1;
         BasePower = 35;
 
+        soundEffect = Resources.Load("SoundEffects/long-hit-swoosh") as AudioClip;
+
         animationGameObject = Resources.Load("Ability Prefabs/CircularAttack") as GameObject;
     }
     override public void castAbility()
     {
         base.castAbility();
+
+        playSound();
 
         List<Unit> listUnitsHitProv = PathfindingTool.unitsInRadius(unit.currentCell, areaOfEffect, unit.getTargetTag());
 

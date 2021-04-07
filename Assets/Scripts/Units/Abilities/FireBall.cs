@@ -15,6 +15,8 @@ public class FireBall : Ability
         areaOfEffect = 1;
         BasePower = 35;
 
+        soundEffect = Resources.Load("SoundEffects/arcade-chiptune-explosion") as AudioClip;
+
         projectileGameObject = Resources.Load("Ability Prefabs/Fireball") as GameObject;
     }
     override public void castAbility()
@@ -83,6 +85,7 @@ public class FireBall : Ability
         }
 
         Destroy(projectile);
+        playSound();
 
         List<Unit> listUnitsTouch = PathfindingTool.unitsInRadius(targetCell, areaOfEffect, unit.getTargetTag());
 

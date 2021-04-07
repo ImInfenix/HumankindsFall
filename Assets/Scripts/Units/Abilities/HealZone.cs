@@ -12,6 +12,7 @@ public class HealZone : Ability
         castRange = 0;
         areaOfEffect = 2;
         BasePower = 30;
+        soundEffect = Resources.Load("SoundEffects/magic-glitter-shot") as AudioClip;
 
         animationGameObject = Resources.Load("Ability Prefabs/HealZone") as GameObject;
     }
@@ -21,6 +22,7 @@ public class HealZone : Ability
 
         List<Unit> listUnitsHealProv = PathfindingTool.unitsInRadius(unit.currentCell, areaOfEffect, unit.tag);
 
+        playSound();
         Instantiate(animationGameObject, transform.position, Quaternion.identity, transform);
 
         foreach (Unit unit in listUnitsHealProv)

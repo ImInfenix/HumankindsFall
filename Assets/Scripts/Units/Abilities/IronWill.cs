@@ -12,6 +12,7 @@ public class IronWill : Ability
         BasePower = 30;
         duration = 5;
 
+        soundEffect = Resources.Load("SoundEffects/armor-up-modified") as AudioClip;
         animationGameObject = Resources.Load("Ability Prefabs/IronWill") as GameObject;
     }
 
@@ -25,6 +26,7 @@ public class IronWill : Ability
 
     IEnumerator BoostArmor()
     {
+        playSound();
         canGenerateStamina = false;
         unit.Status.setShieldUp(true);
 
