@@ -934,7 +934,7 @@ public class Unit : MonoBehaviour
             case Class.Bowman:
                 if (nb >= 2)
                 {
-                    attackSpeed -= attackSpeed*0.2f;
+                    attackSpeed += attackSpeed*0.2f;
                 }
                 break;
 
