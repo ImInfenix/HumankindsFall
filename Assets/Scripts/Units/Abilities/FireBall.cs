@@ -10,10 +10,10 @@ public class FireBall : Ability
 
     private void Awake()
     {
-        castStaminaThreshold = 800;
+        castStaminaThreshold = 750;
         castRange = 4;
         areaOfEffect = 1;
-        BasePower = 35;
+        BasePower = 25;
 
         soundEffect = Resources.Load("SoundEffects/arcade-chiptune-explosion") as AudioClip;
 
