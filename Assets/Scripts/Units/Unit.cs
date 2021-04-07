@@ -710,8 +710,21 @@ public class Unit : MonoBehaviour
 
             else
             {
-                string unitStats = string.Format("{0} : \n Ability : {1} \n HP : {2}/{3} \n Damage : {4} \n Attack Speed : {5} \n Move Speed : {6} \n Power : {7} \n Armor : {8} \n Range : {9} \n Accuracy : {10}%",
-                    unitName, abilityName, currentLife, maxLife, damage, attackSpeed, moveSpeed, power, armor, range, accuracy);
+                string unitStats = string.Format("{0} \n HP : {1}/{2} \n Ability : {3} \n Stamina : {4}/{5} \n Stamina per hit : {6} \n Damage : {7} \n Attack Speed : {8} \n Move Speed : {9} \n Power : {10} \n Armor : {11} \n Range : {12} \n Accuracy : {13}%",
+                    unitName,
+                    currentLife,
+                    maxLife,
+                    abilityName,
+                    ability.CurrentStamina,
+                    ability.CastStaminaThreshold,
+                    IncrementStamina,
+                    damage,
+                    attackSpeed,
+                    moveSpeed,
+                    power,
+                    armor,
+                    range,
+                    accuracy);
                 Tooltip.ShowTooltip_Static(unitStats);
             }
         }
