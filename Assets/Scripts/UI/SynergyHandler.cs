@@ -342,7 +342,7 @@ public class SynergyHandler : MonoBehaviour
                         {
                             demonButton.GetComponentInChildren<TextMeshProUGUI>().text = " Demon : " + r.getNumber();
                             demonButton.gameObject.SetActive(true);
-                            if (r.getNumber() >= 2)
+                            if (r.getNumber() >= 3)
                             {
                                 demonButton.GetComponent<SynergyButton>().addOutline(colorLvlMax);
                                 boldRace(demons, demonButton, 1);
