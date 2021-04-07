@@ -21,14 +21,47 @@ EditorBuildSettings:
     path: Assets/Scenes/BattleScenes/Alin.unity
     guid: 699a9766b909ee448822de3c55c5a0f3
   - enabled: 1
+    path: Assets/Scenes/BattleScenes/Boimort.unity
+    guid: 87a20f6355140de479e9f887c927e57d
+  - enabled: 1
+    path: Assets/Scenes/BattleScenes/Campement.unity
+    guid: 46c4cd50680c10a41a91da9c3325fab9
+  - enabled: 1
+    path: Assets/Scenes/BattleScenes/Canyon.unity
+    guid: d108bb4e43f796a49876449a17218221
+  - enabled: 1
+    path: Assets/Scenes/BattleScenes/Chitil.unity
+    guid: 1890782e5cc33c14bb66aba38a598e79
+  - enabled: 1
+    path: Assets/Scenes/BattleScenes/Desert.unity
+    guid: 16b16e38aa9dadd4c9bacbc4bf591683
+  - enabled: 1
     path: Assets/Scenes/BattleScenes/Detroit.unity
     guid: 2c0ac7c4434a05040af8105825ad8aa4
+  - enabled: 1
+    path: Assets/Scenes/BattleScenes/Foret.unity
+    guid: e82c134cd5e73d445aa7fcf3223f899b
   - enabled: 1
     path: Assets/Scenes/BattleScenes/Gator.unity
     guid: 0b0d3aa619656f646a654e900d4d1475
   - enabled: 1
+    path: Assets/Scenes/BattleScenes/Lacvi.unity
+    guid: 98f43ab50445d5148b85644e60a48ec6
+  - enabled: 1
+    path: Assets/Scenes/BattleScenes/Marecage.unity
+    guid: 6a4906b1dd867fd45a1e4146defd208d
+  - enabled: 1
+    path: Assets/Scenes/BattleScenes/Nord.unity
+    guid: 0b437ee61a464ea4c81726a224e95481
+  - enabled: 1
     path: Assets/Scenes/BattleScenes/Oasis.unity
     guid: 557ab5c3d26729640be7fb98452c45cd
+  - enabled: 1
+    path: Assets/Scenes/BattleScenes/Riviere.unity
+    guid: 6a7146f0548b76f4887b5edaff496096
+  - enabled: 1
+    path: Assets/Scenes/BattleScenes/Sanctuaire.unity
+    guid: cc817b2bb01e35f44a68ca629f4c22c2
   - enabled: 1
     path: Assets/Scenes/BattleScenes/Vertmont.unity
     guid: 609734f3a27d0584f9927b53a82a3e94

@@ -692,22 +692,56 @@ public class Unit : MonoBehaviour
         }
     }
 
-    private void OnMouseDown()
+    private void OnMouseOver()
     {
-        if (PauseMenu.isGamePaused || EventSystem.current.IsPointerOverGameObject())
-            return;
-
-        if (GameManager.instance.gamestate != GameManager.GameState.Placement)
-            return;
-
-        if (CompareTag(allyTag))
+        //on left click
+        if (Input.GetMouseButtonDown(0))
         {
-            if (Input.GetMouseButtonDown(0) && canMove)
+            if (PauseMenu.isGamePaused || EventSystem.current.IsPointerOverGameObject())
+                return;
+
+            if (GameManager.instance.gamestate != GameManager.GameState.Placement)
+                return;
+
+            if (CompareTag(allyTag) && canMove)
             {
                 PrepareForDragNDrop();
             }
         }
 
+        //on right click
+        else if (Input.GetMouseButtonDown(1))
+        {
+            //if tooltip already active
+            if (Tooltip.GetIsActive())
+                Tooltip.HideTooltip_Static();
+
+            else
+            {
+                string unitStats = string.Format("{0} \n HP : {1}/{2} \n Ability : {3} \n Stamina : {4}/{5} \n Stamina per hit : {6} \n Damage : {7} \n Attack Speed : {8} \n Move Speed : {9} \n Power : {10} \n Armor : {11} \n Range : {12} \n Accuracy : {13}%",
+                    unitName,
+                    currentLife,
+                    maxLife,
+                    abilityName,
+                    ability.CurrentStamina,
+                    ability.CastStaminaThreshold,
+                    IncrementStamina,
+                    damage,
+                    attackSpeed,
+                    moveSpeed,
+                    power,
+                    armor,
+                    range,
+                    accuracy);
+                Tooltip.ShowTooltip_Static(unitStats);
+            }
+        }
+    }
+
+    private void OnMouseExit()
+    {
+        if (Tooltip.GetIsActive())
+            Tooltip.HideTooltip_Static();
     }
 
     public void PrepareForDragNDrop()

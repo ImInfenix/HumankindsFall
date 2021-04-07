@@ -16,6 +16,8 @@ abstract public class Ability : MonoBehaviour
     protected bool canGenerateStamina = true;
 
     public float BasePower { get => basePower; set => basePower = value; }
+    public float CurrentStamina { get => currentStamina; }
+    public int CastStaminaThreshold { get => castStaminaThreshold; }
 
     public void setUnit(Unit unit)
     {
