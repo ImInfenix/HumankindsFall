@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
         units = new List<Unit>();
         gamestate = startingGameState;
 
+        OptionsMenu.Init();
         GetComponent<SceneLoader>().Initialize();
 
         Instantiate(audioManagerPrefab).GetComponent<AudioManager>().Initialize();
