@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class HealZone : Ability
 {
+    private GameObject animationGameObject;
+
     private void Awake()
     {
         castStaminaThreshold = 500;
@@ -11,6 +13,8 @@ public class HealZone : Ability
         areaOfEffect = 2;
         BasePower = 30;
         soundEffect = Resources.Load("SoundEffects/magic-glitter-shot") as AudioClip;
+
+        animationGameObject = Resources.Load("Ability Prefabs/HealZone") as GameObject;
     }
     override public void castAbility()
     {
@@ -19,6 +23,7 @@ public class HealZone : Ability
         List<Unit> listUnitsHealProv = PathfindingTool.unitsInRadius(unit.currentCell, areaOfEffect, unit.tag);
 
         playSound();
+        Instantiate(animationGameObject, transform.position, Quaternion.identity, transform);
 
         foreach (Unit unit in listUnitsHealProv)
         {

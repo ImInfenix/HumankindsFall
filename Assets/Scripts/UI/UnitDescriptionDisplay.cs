@@ -13,6 +13,8 @@ public class UnitDescriptionDisplay : MonoBehaviour
     [SerializeField]
     private TMP_Text UnitExperience;
     [SerializeField]
+    private TMP_Text UnitLevel;
+    [SerializeField]
     private GameObject GemSlot;
     [SerializeField]
     private GameObject UnitGemsZone;
@@ -116,6 +118,17 @@ public class UnitDescriptionDisplay : MonoBehaviour
         UnitExperience.text = "";
     }
 
+    public void SetUnitLevel(uint level)
+    {
+        if (actualSlot.GetSlotType() == InventorySlot.SlotType.Inventory)
+        {
+            UnitLevel.text = $"Level: {level}";
+            return;
+        }
+
+        UnitLevel.text = "";
+    }
+
     public void UpdateDescription()
     {
         if (actualSlot == null)
@@ -130,22 +143,19 @@ public class UnitDescriptionDisplay : MonoBehaviour
 
         SetUnitName(currentDescription.GetUnitName());
         SetUnitExperience(currentDescription.GetExperience());
+        SetUnitLevel(currentDescription.GetLevel());
         ClassStat classe = currentDescription.GetClass();
         RaceStat race = currentDescription.GetRace();
 
         int maxLife = classe.maxLife + race.maxLife;
-        int maxMana = race.maxMana;
         int armor = classe.armor + race.armor;
         float atakSpeed = classe.attackSpeed + race.attackSpeed;
 
         string stats =
-            "Class : " + classe.name + "\n" +
-            "Race : " + race.name + "\n" +
-            "PV : " + maxLife + "\n" +
-            "Mana : " + maxMana + "\n" +
-            "Armor : " + armor + "\n" +
-            "Attack Speed : " + atakSpeed;
-        ;
+            "Class : " + classe.name + "\n\n" +
+            "Race : " + race.name + "\n\n" +
+            "Ability : " + currentDescription.GetAbilityName() + "\n"
+            ;
         SetUnitStats(stats);
 
         string[] gems = currentDescription.GetGems();
@@ -162,7 +172,10 @@ public class UnitDescriptionDisplay : MonoBehaviour
 
         if (ResetGemsButton)
         {
-            if (GameManager.instance.gamestate == GameManager.GameState.Placement)
+            if (GameManager.instance.gamestate == GameManager.GameState.Placement ||
+                    (GameManager.instance.gamestate == GameManager.GameState.Shopping ||
+                     GameManager.instance.gamestate == GameManager.GameState.Resolution) &&
+                     actualSlot.GetSlotType() == InventorySlot.SlotType.Inventory)
             {
                 GenerateSlots(gems);
                 ResetGemsButton.gameObject.SetActive(true);
@@ -176,12 +189,12 @@ public class UnitDescriptionDisplay : MonoBehaviour
     public void GenerateSlots(string[] unitGems)
     {
         //number of gems slots should be the unit level
-        int numberOfGemsSlots = 5;
+        uint numberOfGemsSlots = currentDescription.GetLevel();
 
         float widthOffset = 0.8f;
         float heightOffset = -0.8f;
 
-        int nbGemsSlotsPerLine = numberOfGemsSlots;
+        uint nbGemsSlotsPerLine = numberOfGemsSlots;
 
         float y = 0.5f;
 

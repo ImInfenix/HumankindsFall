@@ -24,13 +24,12 @@ public class Unit : MonoBehaviour
     [SerializeField] private float accuracy;
     [SerializeField] private float damage;
     [SerializeField] private int range;
-    [SerializeField] private int power;
+    [SerializeField] private float power;
     [SerializeField] private string unitName;
     [SerializeField] private bool isTargetable;
     [SerializeField] private bool stuned = false;
     [SerializeField] private bool poisonned = false;
-
-    
+    private uint level = 1;
 
     private bool moving;
     private bool canMove;
@@ -112,10 +111,11 @@ public class Unit : MonoBehaviour
     public float AttackSpeed { get => attackSpeed; set => attackSpeed = value; }
     public float Damage { get => damage; set => damage = value; }
     public int Range { get => range; set => range = value; }
-    public int Power { get => power; set => power = value; }
+    public float Power { get => power; set => power = value; }
     public Ability Ability { get => ability; set => ability = value; }
     public StatusHandler Status { get => status; set => status = value; }
     public bool Poisonned { get => poisonned; set => poisonned = value; }
+    public uint Level { get => level; set => level = value; }
 
     // Start is called before the first frame update
     void Start()
@@ -148,16 +148,16 @@ public class Unit : MonoBehaviour
         if (classStat.classIconSprite == null)
             healthBar.HideClassIcon();
 
-        MaxLife = raceStats.maxLife + classStat.maxLife;
+        MaxLife = raceStats.maxLife + classStat.maxLife + 10 * (int)(Level - 1);
         IncrementStamina = classStat.incrementStamina;
-        Armor = raceStats.armor + classStat.armor;
+        Armor = raceStats.armor + classStat.armor + 0.05f * (Level - 1);
         initialArmor = armor;
         accuracy = 100;
-        Power = 1;
-          
+        Power = 1 + 0.05f * (Level - 1);
+
         MoveSpeed = raceStats.moveSpeed + classStat.moveSpeed;
-        AttackSpeed = raceStats.attackSpeed + classStat.attackSpeed;
-        Damage = raceStats.damage + classStat.damage;
+        AttackSpeed = raceStats.attackSpeed + classStat.attackSpeed + 0.05f * (Level - 1);
+        Damage = raceStats.damage + classStat.damage + 1 * (Level - 1);
         Range = classStat.range;
 
         isTargetable = true;
@@ -202,7 +202,7 @@ public class Unit : MonoBehaviour
                 Vector3Int tileCoordinate = board.GetTilemap().WorldToCell(mousePos);
 
                 Cell newCell = board.GetCell(tileCoordinate);
-                
+
                 occupyNewCell(newCell);
                 updatePosition();
             }
@@ -274,6 +274,7 @@ public class Unit : MonoBehaviour
         classStat = newDescription.GetClass();
         abilityName = newDescription.GetAbilityName();
         id = newDescription.GetId();
+        level = newDescription.GetLevel();
     }
 
     public void UpdateUnit()
@@ -315,7 +316,7 @@ public class Unit : MonoBehaviour
             path = PathfindingTool.createPathTarget(this);
         }
 
-        
+
     }
 
     private void ApplyAttackGemsEffect()
@@ -403,7 +404,7 @@ public class Unit : MonoBehaviour
 
     //attack the current target
     IEnumerator AttackTarget()
-    {        
+    {
         if(stuned == false)
         {
             isActing = true;
@@ -483,9 +484,9 @@ public class Unit : MonoBehaviour
                 }
             }
 
-            
+
         }
-       
+
     }
 
     //move the sprite toward the target for a short time
@@ -656,9 +657,9 @@ public class Unit : MonoBehaviour
             if (stuned == false)
                 spriteRenderer.color = baseColor;
             if(stuned == true)
-                spriteRenderer.color = new Color(104f / 255f, 104f / 255f, 104f / 255f, 1f); 
+                spriteRenderer.color = new Color(104f / 255f, 104f / 255f, 104f / 255f, 1f);
         }
-          
+
     }
 
     private void OnDrawGizmosSelected()
@@ -690,22 +691,56 @@ public class Unit : MonoBehaviour
         }
     }
 
-    private void OnMouseDown()
+    private void OnMouseOver()
     {
-        if (PauseMenu.isGamePaused || EventSystem.current.IsPointerOverGameObject())
-            return;
-
-        if (GameManager.instance.gamestate != GameManager.GameState.Placement)
-            return;
-
-        if (CompareTag(allyTag))
+        //on left click
+        if (Input.GetMouseButtonDown(0))
         {
-            if (Input.GetMouseButtonDown(0) && canMove)
+            if (PauseMenu.isGamePaused || EventSystem.current.IsPointerOverGameObject())
+                return;
+
+            if (GameManager.instance.gamestate != GameManager.GameState.Placement)
+                return;
+
+            if (CompareTag(allyTag) && canMove)
             {
                 PrepareForDragNDrop();
             }
         }
 
+        //on right click
+        else if (Input.GetMouseButtonDown(1))
+        {
+            //if tooltip already active
+            if (Tooltip.GetIsActive())
+                Tooltip.HideTooltip_Static();
+
+            else
+            {
+                string unitStats = string.Format("{0} \n HP : {1}/{2} \n Ability : {3} \n Stamina : {4}/{5} \n Stamina per hit : {6} \n Damage : {7} \n Attack Speed : {8} \n Move Speed : {9} \n Power : {10} \n Armor : {11} \n Range : {12} \n Accuracy : {13}%",
+                    unitName,
+                    currentLife,
+                    maxLife,
+                    abilityName,
+                    ability.CurrentStamina,
+                    ability.CastStaminaThreshold,
+                    IncrementStamina,
+                    damage,
+                    attackSpeed,
+                    moveSpeed,
+                    power,
+                    armor,
+                    range,
+                    accuracy);
+                Tooltip.ShowTooltip_Static(unitStats);
+            }
+        }
+    }
+
+    private void OnMouseExit()
+    {
+        if (Tooltip.GetIsActive())
+            Tooltip.HideTooltip_Static();
     }
 
     public void PrepareForDragNDrop()
@@ -720,6 +755,8 @@ public class Unit : MonoBehaviour
 
         spriteRenderer.sortingOrder = 10;
         healthBar.OnDragNDropStarts();
+
+        board.ShowAllyTiles();
     }
 
     private void OnMouseUp()
@@ -730,6 +767,7 @@ public class Unit : MonoBehaviour
         if (GameManager.instance.gamestate != GameManager.GameState.Placement)
             return;
 
+        board.HideAllyTiles();
 
         if (CompareTag(allyTag))
         {

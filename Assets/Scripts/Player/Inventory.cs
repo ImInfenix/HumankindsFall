@@ -28,6 +28,9 @@ public class Inventory : MonoBehaviour
     {
         if(units == null)
         {
+            //generate one random gem
+            AddGem(GenerateRandomGem());
+
             for (int i = 0; i < startingUnitCount; i++)
             {
                 AddRandomUnit();
@@ -154,5 +157,17 @@ public class Inventory : MonoBehaviour
             gemsInInventory.Add(newGem.GetComponent<Gem>());
             Destroy(newGem);
         }
+    }
+
+    public Gem GenerateRandomGem()
+    {
+        GameObject[] existingGems = Resources.LoadAll("Gems", typeof(GameObject)).Cast<GameObject>().ToArray();
+
+        int randomGemIndex = UnityEngine.Random.Range(0, existingGems.Length);
+        GameObject newGem = Instantiate(existingGems[randomGemIndex]);
+        Gem gem = newGem.GetComponent<Gem>();
+        Destroy(newGem);
+
+        return gem;
     }
 }
