@@ -88,11 +88,11 @@ public class RaceCount
             case Race.Giant:
                 if (lvl == 0)
                 {
-                    def = "Titanic impact\n<b>Spell</b>\nChoose a giant unit, his next attack will be powerful and stun the enemy for 2 seconds\n (2) + 15 damages";
+                    def = "Titanic impact\n<b>Spell</b>\nChoose a giant unit, his next attack will be powerful and stun the enemy for 2 seconds\n (2) + 15% damages";
                 }
                 if (lvl == 1)
                 {
-                    def = "Titanic impact\n<b>Spell</b>\nChoose a giant unit, his next attack will be powerful and stun the enemy for 2 seconds\n <b>(2) + 15 damages</b>";
+                    def = "Titanic impact\n<b>Spell</b>\nChoose a giant unit, his next attack will be powerful and stun the enemy for 2 seconds\n <b>(2) + 15% damages</b>";
                 }                
                 break;
 
