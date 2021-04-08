@@ -18,6 +18,7 @@ public class Spell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
     public GameObject demonKing;
     private RaceCount elemental;
     private List<Unit> outlinedUnit;
+    public Outline outline;
 
     [Header ("Select Spell Race")]
     public Race race;
@@ -33,7 +34,7 @@ public class Spell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
         onCooldown = false;
         board = FindObjectOfType<Board>();
         outlinedUnit = new List<Unit>();
-
+        outline.enabled = false;
         //Initialize tooltips def
         switch(race)
         {
@@ -98,6 +99,7 @@ public class Spell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
             //Press Left Click = launch
             if(Input.GetMouseButtonDown(0))
             {
+                outline.enabled = false;
                 DesactivateArea(currentCell);
                 if (currentCell != null)
                 {                   
@@ -112,6 +114,7 @@ public class Spell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
             //Press Right Click = cancel
             if (Input.GetMouseButtonDown(1))
             {
+                outline.enabled = false;
                 DesactivateArea(currentCell);
                 activated = false;
             }
@@ -149,6 +152,7 @@ public class Spell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
             else
             {
                 activated = true;
+                outline.enabled = true;
             }
         }
 
@@ -228,7 +232,7 @@ public class Spell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
     {
         if (center != null)
         {
-            List<Cell> affectedCells = PathfindingTool.cellsInRadius(center, range);
+            List<Cell> affectedCells = PathfindingTool.cellsInRadius(center, range);            
             foreach (Cell cell in affectedCells)
             {
                 if (cell != null)

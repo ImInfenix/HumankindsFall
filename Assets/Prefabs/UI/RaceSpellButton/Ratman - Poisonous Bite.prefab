@@ -86,6 +86,7 @@ GameObject:
   - component: {fileID: 7440627800356450558}
   - component: {fileID: 8815998495052196174}
   - component: {fileID: 8727102430634760497}
+  - component: {fileID: -8709670853254727019}
   m_Layer: 5
   m_Name: Ratman - Poisonous Bite
   m_TagString: Untagged
@@ -166,5 +167,21 @@ MonoBehaviour:
   cooldownImage: {fileID: 2186034713808606721}
   demonKing: {fileID: 8687746227296491367, guid: ed2919fd352527a429f53d6f88691869,
     type: 3}
+  outline: {fileID: -8709670853254727019}
   race: 6
   range: 0
+--- !u!114 &-8709670853254727019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5206605057156717805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 0, b: 0, a: 1}
+  m_EffectDistance: {x: -5, y: -5}
+  m_UseGraphicAlpha: 0
