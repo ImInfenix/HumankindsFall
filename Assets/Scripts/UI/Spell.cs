@@ -73,6 +73,7 @@ public class Spell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
     // Update is called once per frame
     void Update()
     {
+        updateElementalText();
         if(activated == true)
         {            
             Vector3 mousePos;
@@ -389,6 +390,15 @@ public class Spell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
                     activated = false;
                 }
                 break;
+        }
+    }
+
+    public void updateElementalText()
+    {
+        if(race == Race.Elemental)
+        {
+            elemental = SynergyHandler.instance.getElementals();
+            definition = "Deal " + elemental.getNumber() * 10 + " damage to enemy target";
         }
     }
 }
