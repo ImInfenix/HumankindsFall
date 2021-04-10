@@ -11,7 +11,7 @@ public class CheatCodes : MonoBehaviour
             SceneLoader.LoadMenu();
         }
 
-        else if (Input.GetKeyDown(KeyCode.T))
+        else if (Input.GetKeyDown(KeyCode.PageDown))
         {
             Inventory inventory = Player.instance.Inventory;
             inventory.GenerateGems();

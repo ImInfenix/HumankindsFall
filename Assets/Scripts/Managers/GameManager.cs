@@ -170,11 +170,12 @@ public class GameManager : MonoBehaviour
 
     public Unit searchHealTarget()
     {
-        Unit target = units[0];
+        Unit target = null;
         foreach (Unit unit in units)
         {
             if (unit.CompareTag("UnitAlly"))
             {
+                target = unit;
                 if (unit.CurrentLife <= target.CurrentLife && unit.CurrentLife > 0)
                     target = unit;
             }
