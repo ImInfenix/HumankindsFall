@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System.Text;
 
 public class UnitDescriptionDisplay : MonoBehaviour
 {
@@ -147,14 +148,22 @@ public class UnitDescriptionDisplay : MonoBehaviour
         ClassStat classe = currentDescription.GetClass();
         RaceStat race = currentDescription.GetRace();
 
-        int maxLife = classe.maxLife + race.maxLife;
-        float armor = classe.armor + race.armor;
-        float atakSpeed = classe.attackSpeed + race.attackSpeed;
+        //get ability name and add space before every capital letter
+        string abilityName = currentDescription.GetAbilityName();
+        StringBuilder abilityNameWithSpaces = new StringBuilder(abilityName.Length * 2);
+        abilityNameWithSpaces.Append(abilityName[0]);
+        for (int i = 1; i < abilityName.Length; i++)
+        {
+            if (char.IsUpper(abilityName[i]) && abilityName[i - 1] != ' ')
+                abilityNameWithSpaces.Append(' ');
+            abilityNameWithSpaces.Append(abilityName[i]);
+        }
+
 
         string stats =
             "Class : " + classe.name + "\n\n" +
             "Race : " + race.name + "\n\n" +
-            "Ability : " + currentDescription.GetAbilityName() + "\n"
+            "Ability : " + abilityNameWithSpaces + "\n"
             ;
         SetUnitStats(stats);
 

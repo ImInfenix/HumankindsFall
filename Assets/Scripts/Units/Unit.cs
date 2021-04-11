@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -747,11 +748,21 @@ public class Unit : MonoBehaviour
 
                 else
                 {
+                    //add space between capital letters in ability name
+                    StringBuilder abilityNameWithSpaces = new StringBuilder(abilityName.Length * 2);
+                    abilityNameWithSpaces.Append(abilityName[0]);
+                    for (int i = 1; i < abilityName.Length; i++)
+                    {
+                        if (char.IsUpper(abilityName[i]) && abilityName[i - 1] != ' ')
+                            abilityNameWithSpaces.Append(' ');
+                        abilityNameWithSpaces.Append(abilityName[i]);
+                    }
+
                     unitStats = string.Format("{0} \n HP : {1}/{2} \n Ability : {3} \n Stamina : {4}/{5} \n Stamina per hit : {6} \n Damage : {7} \n Attack Speed : {8} \n Move Speed : {9} \n Power : {10} \n Armor : {11} \n Range : {12} \n Accuracy : {13}%",
                     unitName,
                     currentLife,
                     maxLife,
-                    abilityName,
+                    abilityNameWithSpaces,
                     ability.CurrentStamina,
                     ability.CastStaminaThreshold,
                     IncrementStamina,
