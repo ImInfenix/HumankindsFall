@@ -51,7 +51,13 @@ public class Tooltip : MonoBehaviour
         RectTransform cnvs = canvas.GetComponent<RectTransform>();
         Vector2 offSet = new Vector2(cnvs.sizeDelta.x / 2f, cnvs.sizeDelta.y / 2f);
         Vector2 viewPort = Camera.main.ScreenToViewportPoint(Input.mousePosition);
-        Vector2 position = new Vector2(cnvs.sizeDelta.x * viewPort.x - rectTransform.rect.width / 2 + 45 , cnvs.sizeDelta.y * viewPort.y + rectTransform.rect.height / 2 - 50);
+        float xPos = cnvs.sizeDelta.x * viewPort.x - rectTransform.rect.width / 2 + 45;
+        if (xPos < 0)
+            xPos += backgroundRectTransform.rect.width;
+        float yPos = cnvs.sizeDelta.y * viewPort.y + rectTransform.rect.height / 2 - 50;
+        if (yPos + backgroundRectTransform.rect.height > cnvs.sizeDelta.y)
+            yPos -= backgroundRectTransform.rect.height;
+        Vector2 position = new Vector2(xPos, yPos);
         rectTransform.anchoredPosition = position;
     }
 

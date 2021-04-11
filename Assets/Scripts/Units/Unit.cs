@@ -712,6 +712,7 @@ public class Unit : MonoBehaviour
 
             if (CompareTag(allyTag) && canMove)
             {
+                Tooltip.HideTooltip_Static();
                 PrepareForDragNDrop();
             }
         }
