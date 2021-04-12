@@ -50,5 +50,6 @@ public class RewardSystem : MonoBehaviour
 
         Player.instance.Inventory.Hide();
         ResolutionPhaseHandler.instance.ShowExitButton();
+        ShopSystem.generateNewContent = true;
     }
 }

@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class ShopSystem : MonoBehaviour
 {
+    public static bool generateNewContent = true;
+
     [SerializeField]
     List<InventorySlot> rewardSlots;
     
@@ -22,7 +24,7 @@ public class ShopSystem : MonoBehaviour
     [SerializeField]
     private TMP_Text shopButton;
 
-    List<UnitDescription> unitsToSell;
+    static List<UnitDescription> unitsToSell;
 
     enum ShopMode { None, Buy, Sell }
     ShopMode shopMode;
@@ -31,7 +33,6 @@ public class ShopSystem : MonoBehaviour
 
     private void Awake()
     {
-        unitsToSell = new List<UnitDescription>();
         SetShopToNoneMode();
         unitDescriptionDisplay.shopSystem = this;
     }
@@ -45,11 +46,25 @@ public class ShopSystem : MonoBehaviour
     {
         gameObject.SetActive(true);
 
-        foreach (InventorySlot slot in rewardSlots)
+        if (generateNewContent)
         {
-            UnitDescription newUnit = UnitGenerator.GenerateUnit(Unit.allyTag);
-            slot.PutInSlot(newUnit);
-            unitsToSell.Add(newUnit);
+            unitsToSell = new List<UnitDescription>();
+            for(int i = 0; i < rewardSlots.Count; i++)
+            {
+                UnitDescription newUnit = UnitGenerator.GenerateUnit(Unit.allyTag);
+                unitsToSell.Add(newUnit);
+            }
+
+            generateNewContent = false;
+        }
+
+        {
+            int i = 0;
+            foreach (InventorySlot slot in rewardSlots)
+            {
+                slot.PutInSlot(unitsToSell[i]);
+                i++;
+            }
         }
 
         foreach (GemSlot gemSlot in gemSlots)
