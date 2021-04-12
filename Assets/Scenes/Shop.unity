@@ -2226,7 +2226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fb0abc9d94c6fe468276ca47c5e6b1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rewardSlots:
+  unitsToSellSlots:
   - {fileID: 852232198}
   - {fileID: 966500113}
   - {fileID: 1709700405}
@@ -3713,12 +3713,12 @@ PrefabInstance:
     - target: {fileID: 4247307235109501533, guid: eb5c2b42615f3bf47a85fb76fc049d57,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 5618751133481111942, guid: eb5c2b42615f3bf47a85fb76fc049d57,
         type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6054800863456419953, guid: eb5c2b42615f3bf47a85fb76fc049d57,
         type: 3}
