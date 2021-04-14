@@ -104,7 +104,7 @@ public class ShopSystem : MonoBehaviour
             GemsInventory.UpdateDisplay();
         }
 
-        Player.instance.Wallet.Earn(5);
+        Player.instance.Wallet.Earn(10);
 
         SavingSystem.SaveData();
     }
