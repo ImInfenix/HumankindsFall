@@ -143,14 +143,14 @@ public class ShopSystem : MonoBehaviour
     public void SetShopToBuyMode()
     {
         shopMode = ShopMode.Buy;
-        shopButton.text = "Acheter";
+        shopButton.text = "Acheter (20)";
         shopButton.transform.parent.gameObject.SetActive(true);
     }
 
     public void SetShopToSellMode()
     {
         shopMode = ShopMode.Sell;
-        shopButton.text = "Vendre";
+        shopButton.text = "Vendre (10)";
         shopButton.transform.parent.gameObject.SetActive(true);
     }
 
