@@ -146,6 +146,7 @@ public class GameManager : MonoBehaviour
 
         SpellHandler.instance.HideSpells();
         SpellHandler.instance.gameObject.SetActive(false);
+        Tooltip.HideTooltip_Static();
         HealthbarHandler.HideAll();
         TimeButtonHandler.instance.HideTimeButton();
         Player.instance.Inventory.Hide();

@@ -11,7 +11,7 @@ PrefabInstance:
         type: 3}
       propertyPath: classStat
       value: 
-      objectReference: {fileID: 11400000, guid: 05e0f59ed5918e3409f54db558235b4a,
+      objectReference: {fileID: 11400000, guid: 875fe8fa4974a48438df1273cc94a2ec,
         type: 2}
     - target: {fileID: 5029460658548166024, guid: 770baa5400b7972498ff097d634e1e60,
         type: 3}

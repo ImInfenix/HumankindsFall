@@ -130,6 +130,13 @@ public class ShopSystem : MonoBehaviour
 
         if (isUnit && !isGem)
         {
+            //earn 10 gold per gems equipped by the unit we sell
+            if (unitDescriptionDisplay.GetActualSlot().GetCurrentUnitDescription().GetGems() != null)
+            {
+                int numberOfGems = unitDescriptionDisplay.GetActualSlot().GetCurrentUnitDescription().GetGems().Length;
+                Player.instance.Wallet.Earn(numberOfGems * 10);
+            }
+
             Player.instance.Inventory.RemoveFromInventory(unitDescriptionDisplay.GetActualSlot().GetCurrentUnitDescription());
         }
 

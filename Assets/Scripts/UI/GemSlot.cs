@@ -12,10 +12,15 @@ public class GemSlot : MonoBehaviour
     [SerializeField]
     private Image selectedImage;
 
+    [SerializeField]
+    private GameObject gemsInventoryUI;
+
     private UnitDescriptionDisplay unitDescriptionDisplay;
 
     public static GemSlot selectedGemSlot;
     private bool isSelected = false;
+
+    [SerializeField]
     private bool isShop = false;
 
     private ShopSystem shopSystem;
@@ -59,7 +64,13 @@ public class GemSlot : MonoBehaviour
 
             if (unitDescriptionDisplay != null)
                 unitDescriptionDisplay.gameObject.SetActive(false);
-        }        
+        }
+
+        if (gemsInventoryUI != null)
+        {
+            gemsInventoryUI.SetActive(true);
+            SynergyHandler.instance.gameObject.SetActive(false);
+        }
     }
 
     public void UnselectSlot()
@@ -67,6 +78,14 @@ public class GemSlot : MonoBehaviour
         selectedImage.gameObject.SetActive(false);
         selectedGemSlot = null;
         IsSelected = false;
-        shopSystem.SetShopToNoneMode();   
+
+        if (shopSystem != null)
+            shopSystem.SetShopToNoneMode();
+
+        if (gemsInventoryUI != null)
+        {
+            gemsInventoryUI.SetActive(false);
+            SynergyHandler.instance.gameObject.SetActive(true);
+        }
     }
 }
