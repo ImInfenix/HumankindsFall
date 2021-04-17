@@ -106,6 +106,7 @@ public class GemUI : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerU
                 //get selected unit description, then add this gem to its gem list
                 UnitDescriptionDisplay unitDescriptionDisplay = GameObject.Find("CurrentUnitDescription").GetComponent<UnitDescriptionDisplay>();
                 unitDescriptionDisplay.AddGem(transform.parent.gameObject);
+                unitDescriptionDisplay.UpdateDescription();
 
                 //remove the gem from the inventory
                 inventory.RemoveGem(gem);

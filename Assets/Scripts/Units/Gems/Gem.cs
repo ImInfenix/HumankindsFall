@@ -8,6 +8,24 @@ abstract public class Gem : MonoBehaviour
     protected string gemName;
     protected string gemDescription;
 
+    public enum StatModified
+    {
+        None,
+        Damage,
+        Health,
+        Armor,
+        Power,
+        AttackSpeed,
+        MovementSpeed
+    }
+
+    protected StatModified statModified = StatModified.None;
+
+    public StatModified GetStatModified()
+    {
+        return statModified;
+    }
+
     public void setUnit(Unit unit)
     {
         this.unit = unit;
@@ -18,6 +36,8 @@ abstract public class Gem : MonoBehaviour
     abstract public void AbilityGemEffect();
     abstract public void InitializeName();
     abstract public void InitializeDescription();
+    abstract public void InitializeStatModified();
+    abstract public float InitGemEffect(float statToModify);
 
     public override string ToString()
     {
@@ -28,5 +48,6 @@ abstract public class Gem : MonoBehaviour
     {
         InitializeName();
         InitializeDescription();
+        InitializeStatModified();
     }
 }

@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class SwiftnessGem : Gem
 {
+    public override void InitializeStatModified()
+    {
+        statModified = StatModified.MovementSpeed;
+    }
+
     public override void AbilityGemEffect()
     {
 
@@ -17,6 +22,11 @@ public class SwiftnessGem : Gem
     public override void InitGemEffect()
     {
         unit.MoveSpeed *= 1.25f;
+    }
+
+    public override float InitGemEffect(float statToModify)
+    {
+        return statToModify * 1.25f;
     }
 
     public override void InitializeDescription()

@@ -24,5 +24,6 @@ public class ResetGemsButton : MonoBehaviour
         }
 
         CurrentUnitDesc.GetComponent<UnitDescriptionDisplay>().ClearGems();
+        CurrentUnitDesc.GetComponent<UnitDescriptionDisplay>().UpdateDescription();
     }
 }

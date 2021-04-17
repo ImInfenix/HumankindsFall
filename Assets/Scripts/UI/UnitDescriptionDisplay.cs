@@ -148,27 +148,6 @@ public class UnitDescriptionDisplay : MonoBehaviour
         ClassStat classe = currentDescription.GetClass();
         RaceStat race = currentDescription.GetRace();
 
-        //get ability name and add space before every capital letter
-        string abilityName = currentDescription.GetAbilityName();
-        StringBuilder abilityNameWithSpaces = new StringBuilder(abilityName.Length * 2);
-        abilityNameWithSpaces.Append(abilityName[0]);
-        for (int i = 1; i < abilityName.Length; i++)
-        {
-            if (char.IsUpper(abilityName[i]) && abilityName[i - 1] != ' ')
-                abilityNameWithSpaces.Append(' ');
-            abilityNameWithSpaces.Append(abilityName[i]);
-        }
-
-
-        string stats =
-            "Class : " + classe.name + "\n\n" +
-            "Race : " + race.name + "\n\n" +
-            "Ability : " + abilityNameWithSpaces + "\n"
-            ;
-        SetUnitStats(stats);
-
-        string[] gems = currentDescription.GetGems();
-
 
         //destroy previously displayed slots
         foreach (GameObject slot in gemSlots)
@@ -176,6 +155,7 @@ public class UnitDescriptionDisplay : MonoBehaviour
             Destroy(slot);
         }
 
+        string[] gems = currentDescription.GetGems();
         gemSlots = new List<GameObject>();
         currentGems = new List<Gem>();
 
@@ -193,6 +173,75 @@ public class UnitDescriptionDisplay : MonoBehaviour
             else
                 ResetGemsButton.gameObject.SetActive(false);
         }
+
+        uint level = currentDescription.GetLevel();
+        float damage = classe.damage + race.damage + 1 * (level - 1);
+        float maxLife = classe.maxLife + race.maxLife + 10 * (int)(level - 1);
+        float attackSpeed = classe.attackSpeed + race.attackSpeed + 0.05f * (level - 1);
+        float moveSpeed = classe.moveSpeed + race.moveSpeed;
+        float armor = classe.armor + race.armor;
+        float power = 1 + 0.05f * (level - 1);
+        int range = classe.range;
+        float incrementStamina = classe.incrementStamina;
+
+        if (currentGems.Count > 0)
+        {
+            foreach(Gem gem in currentGems)
+            {
+                switch(gem.GetStatModified())
+                {
+                    case Gem.StatModified.Damage:
+                        damage = gem.InitGemEffect(damage);
+                        break;
+
+                    case Gem.StatModified.Health:
+                        maxLife = gem.InitGemEffect(maxLife);
+                        break;
+
+                    case Gem.StatModified.AttackSpeed:
+                        attackSpeed = gem.InitGemEffect(attackSpeed);
+                        break;
+
+                    case Gem.StatModified.Armor:
+                        armor = gem.InitGemEffect(armor);
+                        break;
+
+                    case Gem.StatModified.MovementSpeed:
+                        moveSpeed = gem.InitGemEffect(moveSpeed);
+                        break;
+
+                    case Gem.StatModified.Power:
+                        power = gem.InitGemEffect(power);
+                        break;
+                }
+            }
+        }
+
+        //get ability name and add space before every capital letter
+        string abilityName = currentDescription.GetAbilityName();
+        StringBuilder abilityNameWithSpaces = new StringBuilder(abilityName.Length * 2);
+        abilityNameWithSpaces.Append(abilityName[0]);
+        for (int i = 1; i < abilityName.Length; i++)
+        {
+            if (char.IsUpper(abilityName[i]) && abilityName[i - 1] != ' ')
+                abilityNameWithSpaces.Append(' ');
+            abilityNameWithSpaces.Append(abilityName[i]);
+        }
+
+
+        string stats =
+            "Classe : " + classe.name + "\n" +
+            "Race : " + race.name + "\n" +
+            "Capacité : " + abilityNameWithSpaces + "\n" +
+            "Incrémentation de stamina : " + incrementStamina + "\n" +
+            "PV Max : " + maxLife + "\n" +
+            "Dégâts : " + Mathf.Round(damage * 100f) / 100f + "\n" +
+            "Vitesse d'attaque : " + Mathf.Round(attackSpeed * 100f) / 100f + "\n" +
+            "Vitesse de mouvement : " + Mathf.Round(moveSpeed * 100f) / 100f + "\n" +
+            "Armor : " + Mathf.Round(armor * 100f) / 100f + "\n" +
+            "Puissance : " + Mathf.Round(power * 100f) / 100f + "\n" +
+            "Portée : " + range + "\n";
+        SetUnitStats(stats);
     }
 
     public void GenerateSlots(string[] unitGems)
