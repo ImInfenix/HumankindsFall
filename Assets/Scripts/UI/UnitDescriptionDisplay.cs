@@ -179,7 +179,7 @@ public class UnitDescriptionDisplay : MonoBehaviour
         float maxLife = classe.maxLife + race.maxLife + 10 * (int)(level - 1);
         float attackSpeed = classe.attackSpeed + race.attackSpeed + 0.05f * (level - 1);
         float moveSpeed = classe.moveSpeed + race.moveSpeed;
-        float armor = classe.armor + race.armor;
+        float armor = classe.armor + race.armor + 0.05f * (level - 1);
         float power = 1 + 0.05f * (level - 1);
         int range = classe.range;
         float incrementStamina = classe.incrementStamina;
@@ -188,6 +188,9 @@ public class UnitDescriptionDisplay : MonoBehaviour
         {
             foreach(Gem gem in currentGems)
             {
+                if (gem.GetStatModified() == Gem.StatModified.None)
+                    gem.InitializeStatModified();
+
                 switch(gem.GetStatModified())
                 {
                     case Gem.StatModified.Damage:
@@ -233,11 +236,11 @@ public class UnitDescriptionDisplay : MonoBehaviour
             "Classe : " + classe.name + "\n" +
             "Race : " + race.name + "\n" +
             "Capacité : " + abilityNameWithSpaces + "\n" +
-            "Incrémentation de stamina : " + incrementStamina + "\n" +
+            "Stamina générée : " + incrementStamina + "\n" +
             "PV Max : " + maxLife + "\n" +
             "Dégâts : " + Mathf.Round(damage * 100f) / 100f + "\n" +
             "Vitesse d'attaque : " + Mathf.Round(attackSpeed * 100f) / 100f + "\n" +
-            "Vitesse de mouvement : " + Mathf.Round(moveSpeed * 100f) / 100f + "\n" +
+            "Vitesse de déplacement : " + Mathf.Round(moveSpeed * 100f) / 100f + "\n" +
             "Armor : " + Mathf.Round(armor * 100f) / 100f + "\n" +
             "Puissance : " + Mathf.Round(power * 100f) / 100f + "\n" +
             "Portée : " + range + "\n";

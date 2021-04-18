@@ -758,7 +758,7 @@ public class Unit : MonoBehaviour
                         abilityNameWithSpaces.Append(abilityName[i]);
                     }
 
-                    unitStats = string.Format("{0} \n HP : {1}/{2} \n Ability : {3} \n Stamina : {4}/{5} \n Stamina per hit : {6} \n Damage : {7} \n Attack Speed : {8} \n Move Speed : {9} \n Power : {10} \n Armor : {11} \n Range : {12} \n Accuracy : {13}%",
+                    unitStats = string.Format("{0} \n Race : {14} \n Classe : {15} \n PV : {1}/{2} \n Capacité : {3} \n Stamina : {4}/{5} \n Stamina générée : {6} \n Dégâts : {7} \n Vitesse d'attaque : {8} \n Vitesse de déplacement : {9} \n Puissance : {10} \n Armure : {11} \n Portée : {12} \n Précision : {13}%",
                     unitName,
                     currentLife,
                     maxLife,
@@ -766,13 +766,15 @@ public class Unit : MonoBehaviour
                     ability.CurrentStamina,
                     ability.CastStaminaThreshold,
                     IncrementStamina,
-                    damage,
-                    attackSpeed,
-                    moveSpeed,
-                    power,
-                    armor,
+                    Mathf.Round(damage * 100f) / 100f,
+                    Mathf.Round(attackSpeed * 100f) / 100f,
+                    Mathf.Round(moveSpeed * 100f) / 100f,
+                    Mathf.Round(power * 100f) / 100f,
+                    Mathf.Round(armor * 100f) / 100f,
                     range,
-                    accuracy);
+                    accuracy,
+                    raceStats.name,
+                    classStat.name);
                 }
 
                 
