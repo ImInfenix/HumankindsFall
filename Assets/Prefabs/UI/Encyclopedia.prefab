@@ -64,12 +64,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '<b>Rage Attack</b>
-
-    Class : Berserker
-
-    Deal damage to an enemy
-    in melee, based on percentage of missing life points'
+  m_text: "<b>Rage Attack</b> (Berserker)\nStamina requise : 400\nInflige des d\xE9g\xE2ts
+    \xE0 un ennemi au corps \xE0 corps. Moins le lanceur a de PV, plus l'attaque
+    est puissante"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -276,12 +273,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '<b>Encouragement</b>
-
-    Class : Support
-
-    Boost ally units on adjacent
-    tile attack speed and damage for 5 seconds'
+  m_text: "<b>Encouragement</b> (Support)\nStamina requise : 800\nAugmente les d\xE9g\xE2ts
+    et la vitesse d'attaque des alli\xE9s sur les cases adjacentes pendant 5 secondes"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -679,11 +672,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '<b>Iron Will</b>
-
-    Class : Tank
-
-    Boost unit armor for 5 seconds'
+  m_text: "<b>Iron Will</b> (Tank)\nStamina requise : 700\nAugmente l'armure de l'unit\xE9
+    pendant 5 secondes"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -816,12 +806,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '<b>Poison Decoction</b>
+  m_text: '<b>Poisonous Decoction</b> (Assassin)
 
-    Class : Assassin
+    Stamina requise : 650
 
-    Poison the enemy with
-    most life points'
+    Empoisonne
+    l''ennemi avec le plus de PV'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1376,12 +1366,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '<b>Heal Zone</b>
-
-    Class : Healer
-
-    Heal all ally units around in
-    a range of 2 tiles'
+  m_text: "<b>Heal Zone</b> (Healer)\nStamina requise : 500\nSoigne tous les alli\xE9s
+    dans un rayon de 2 cases autour du lancuer"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -7819,12 +7805,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '<b>Circular Attack</b>
-
-    Class : Warrior
-
-    Deal damage to every
-    enemies on adjacent tile'
+  m_text: "<b>Circular Attack</b> (Warrior)\nStamina requise : 800\nInflige des d\xE9g\xE2ts
+    \xE0 tous les ennemis autour"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -10415,12 +10397,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '<b>Deadly Shot</b>
-
-    Class : Bowman
-
-    Deal damage to the enemy with
-    least life points'
+  m_text: "<b>Deadly Shot</b> (Bowman)\nStamina requise : 400\nInflige des d\xE9g\xE2ts
+    \xE0 l'ennemi avec le moins de PV"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -10553,12 +10531,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '<b>Fire Ball</b>
-
-    Class : Mage
-
-    Deal damage to enemy units on
-    a tile and adjacent tiles'
+  m_text: "<b>Fire Ball</b> (Mage)\nStamina requise : 750\nInflige des d\xE9g\xE2ts
+    sur une case et ses cases adjacentes"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
