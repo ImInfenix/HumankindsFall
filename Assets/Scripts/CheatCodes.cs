@@ -6,12 +6,7 @@ public class CheatCodes : MonoBehaviour
 {
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            SceneLoader.LoadMenu();
-        }
-
-        else if (Input.GetKeyDown(KeyCode.PageDown))
+        if (Input.GetKeyDown(KeyCode.PageDown))
         {
             Inventory inventory = Player.instance.Inventory;
             inventory.GenerateGems();
