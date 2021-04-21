@@ -217,7 +217,14 @@ public class ShopSystem : MonoBehaviour
     public void SetShopToSellMode()
     {
         shopMode = ShopMode.Sell;
-        shopButton.text = "Vendre (10)";
+        int soldCount = 10;
+        if (unitDescriptionDisplay.gameObject.activeSelf
+            && unitDescriptionDisplay.GetActualSlot().GetCurrentUnitDescription().GetGems() != null)
+        {
+            int numberOfGems = unitDescriptionDisplay.GetActualSlot().GetCurrentUnitDescription().GetGems().Length;
+            soldCount += 10 * numberOfGems;
+        }
+        shopButton.text = "Vendre (" + soldCount + ")";
         shopButton.transform.parent.gameObject.SetActive(true);
     }
 
