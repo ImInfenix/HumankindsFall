@@ -8,9 +8,9 @@ public class PoisonousDecoction : Ability
 
     private void Awake()
     {
-        BasePower = 1;
+        BasePower = 2;
         duration = 10;
-        castStaminaThreshold = 650;
+        castStaminaThreshold = 650;        
         soundEffect = Resources.Load("SoundEffects/dagger-woosh") as AudioClip;
 
         projectileGameObject = Resources.Load("Ability Prefabs/PoisonousDecoction") as GameObject;

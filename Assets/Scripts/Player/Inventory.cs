@@ -170,4 +170,14 @@ public class Inventory : MonoBehaviour
 
         return gem;
     }
+
+    public GameObject GenerateRandomGemGameObject(Transform parent)
+    {
+        GameObject[] existingGems = Resources.LoadAll("Gems", typeof(GameObject)).Cast<GameObject>().ToArray();
+
+        int randomGemIndex = UnityEngine.Random.Range(0, existingGems.Length);
+        GameObject newGem = Instantiate(existingGems[randomGemIndex], parent.position, Quaternion.identity, parent);
+
+        return newGem;
+    }
 }

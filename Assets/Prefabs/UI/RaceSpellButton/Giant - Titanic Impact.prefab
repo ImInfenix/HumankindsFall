@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7100038805924735379}
   - component: {fileID: 7100038805924735378}
   - component: {fileID: 7100038805924735376}
+  - component: {fileID: 5341661192948556280}
   m_Layer: 5
   m_Name: Giant - Titanic Impact
   m_TagString: Untagged
@@ -92,8 +93,24 @@ MonoBehaviour:
   cooldownImage: {fileID: 7100038806903746683}
   demonKing: {fileID: 8687746227296491367, guid: ed2919fd352527a429f53d6f88691869,
     type: 3}
+  outline: {fileID: 5341661192948556280}
   race: 5
   range: 0
+--- !u!114 &5341661192948556280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7100038805924735380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 0, b: 0, a: 1}
+  m_EffectDistance: {x: -5, y: -5}
+  m_UseGraphicAlpha: 0
 --- !u!1 &7100038806903746685
 GameObject:
   m_ObjectHideFlags: 0

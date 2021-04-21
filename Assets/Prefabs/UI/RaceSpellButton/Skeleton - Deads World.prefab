@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8067318713431737538}
   - component: {fileID: 8067318713431737539}
   - component: {fileID: 8067318713431737541}
+  - component: {fileID: 8610170939943108511}
   m_Layer: 5
   m_Name: Skeleton - Deads World
   m_TagString: Untagged
@@ -59,7 +60,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
@@ -92,8 +93,24 @@ MonoBehaviour:
   cooldownImage: {fileID: 8067318713927813958}
   demonKing: {fileID: 8687746227296491367, guid: ed2919fd352527a429f53d6f88691869,
     type: 3}
+  outline: {fileID: 8610170939943108511}
   race: 2
   range: 2
+--- !u!114 &8610170939943108511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8067318713431737537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 1}
+  m_EffectDistance: {x: -5, y: -5}
+  m_UseGraphicAlpha: 0
 --- !u!1 &8067318713927813956
 GameObject:
   m_ObjectHideFlags: 0

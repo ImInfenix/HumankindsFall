@@ -86,6 +86,7 @@ GameObject:
   - component: {fileID: 2654185278338477603}
   - component: {fileID: 1043941868569823795}
   - component: {fileID: 4244006130285351647}
+  - component: {fileID: -6872642503917884770}
   m_Layer: 5
   m_Name: Demon - Finally I'm complete
   m_TagString: Untagged
@@ -133,7 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: 1ca7f84c0acffe2479270513cb202556, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
@@ -166,5 +167,21 @@ MonoBehaviour:
   cooldownImage: {fileID: 4716373113554522738}
   demonKing: {fileID: 8687746227296491367, guid: ed2919fd352527a429f53d6f88691869,
     type: 3}
+  outline: {fileID: -6872642503917884770}
   race: 7
   range: 0
+--- !u!114 &-6872642503917884770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4377145929567258715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 0, b: 0, a: 1}
+  m_EffectDistance: {x: -5, y: -5}
+  m_UseGraphicAlpha: 0

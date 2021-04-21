@@ -16,10 +16,14 @@ public class ResetGemsButton : MonoBehaviour
             foreach (Gem gem in currentGems)
             {
                 Player.instance.Inventory.AddGem(gem);
-                GemsInventory.GetComponent<GemsInventory>().UpdateDisplay();
+                if (GemsInventory != null)
+                {
+                    GemsInventory.GetComponent<GemsInventory>().UpdateDisplay();
+                }
             }
         }
 
         CurrentUnitDesc.GetComponent<UnitDescriptionDisplay>().ClearGems();
+        CurrentUnitDesc.GetComponent<UnitDescriptionDisplay>().UpdateDescription();
     }
 }

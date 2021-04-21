@@ -19,6 +19,11 @@ public class VampireGem : Gem
 
     }
 
+    public override float InitGemEffect(float statToModify)
+    {
+        return statToModify;
+    }
+
     public override void InitializeDescription()
     {
         gemDescription = "À chaque attaque, l'unité se soigne de 20% de sa valeur d'attaque.";
@@ -27,5 +32,10 @@ public class VampireGem : Gem
     public override void InitializeName()
     {
         gemName = "Gemme du vampire";
+    }
+
+    public override void InitializeStatModified()
+    {
+
     }
 }

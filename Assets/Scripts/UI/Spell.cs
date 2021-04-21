@@ -18,6 +18,7 @@ public class Spell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
     public GameObject demonKing;
     private RaceCount elemental;
     private List<Unit> outlinedUnit;
+    public Outline outline;
 
     [Header ("Select Spell Race")]
     public Race race;
@@ -33,7 +34,7 @@ public class Spell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
         onCooldown = false;
         board = FindObjectOfType<Board>();
         outlinedUnit = new List<Unit>();
-
+        outline.enabled = false;
         //Initialize tooltips def
         switch(race)
         {
@@ -72,6 +73,7 @@ public class Spell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
     // Update is called once per frame
     void Update()
     {
+        updateElementalText();
         if(activated == true)
         {            
             Vector3 mousePos;
@@ -98,6 +100,7 @@ public class Spell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
             //Press Left Click = launch
             if(Input.GetMouseButtonDown(0))
             {
+                outline.enabled = false;
                 DesactivateArea(currentCell);
                 if (currentCell != null)
                 {                   
@@ -112,6 +115,7 @@ public class Spell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
             //Press Right Click = cancel
             if (Input.GetMouseButtonDown(1))
             {
+                outline.enabled = false;
                 DesactivateArea(currentCell);
                 activated = false;
             }
@@ -149,6 +153,7 @@ public class Spell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
             else
             {
                 activated = true;
+                outline.enabled = true;
             }
         }
 
@@ -228,7 +233,7 @@ public class Spell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
     {
         if (center != null)
         {
-            List<Cell> affectedCells = PathfindingTool.cellsInRadius(center, range);
+            List<Cell> affectedCells = PathfindingTool.cellsInRadius(center, range);            
             foreach (Cell cell in affectedCells)
             {
                 if (cell != null)
@@ -385,6 +390,15 @@ public class Spell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
                     activated = false;
                 }
                 break;
+        }
+    }
+
+    public void updateElementalText()
+    {
+        if(race == Race.Elemental)
+        {
+            elemental = SynergyHandler.instance.getElementals();
+            definition = "Deal " + elemental.getNumber() * 10 + " damage to enemy target";
         }
     }
 }

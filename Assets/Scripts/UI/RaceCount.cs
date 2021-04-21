@@ -77,11 +77,11 @@ public class RaceCount
             case Race.Elemental:
                 if (lvl == 0)
                 {
-                    def = "Fusion of elements\n<b>Spell</b>\nDeal damage on enemy target by number of elemental on board\n (2) 10 attack per elemental";
+                    def = "Fusion of elements\n<b>Spell</b>\nDeal damage on enemy target by number of elementals on board\n (2) 10 attack per elemental";
                 }
                 if (lvl == 1)
                 {
-                    def = "Fusion of elements\n<b>Spell</b>\nDeal damage on enemy target by number of elemental on board\n <b>(2) 10 attack per elemental</b>";
+                    def = "Fusion of elements\n<b>Spell</b>\nDeal damage on enemy target by number of elementals on board\n <b>(2) 10 attack per elemental</b>";
                 }
                 break;
 

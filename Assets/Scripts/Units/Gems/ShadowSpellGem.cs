@@ -19,6 +19,11 @@ public class ShadowSpellGem : Gem
 
     }
 
+    public override float InitGemEffect(float statToModify)
+    {
+        return statToModify;
+    }
+
     public override void InitializeDescription()
     {
         gemDescription = "Après avoir utilisé sa capacité, l'unité devient invisible pendant 2 secondes.";
@@ -27,6 +32,11 @@ public class ShadowSpellGem : Gem
     public override void InitializeName()
     {
         gemName = "Gemme sort des ombres";
+    }
+
+    public override void InitializeStatModified()
+    {
+
     }
 
     private IEnumerator Invisibility()

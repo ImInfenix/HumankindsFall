@@ -5,7 +5,9 @@ using UnityEngine;
 public class RewardSystem : MonoBehaviour
 {
     [SerializeField]
-    List<InventorySlot> rewardSlots;
+    List<InventorySlot> rewardUnitSlots;
+    [SerializeField]
+    List<GemSlot> rewardGemSlots;
 
     [SerializeField]
     private UnitDescriptionDisplay unitDescriptionDisplay;
@@ -31,8 +33,16 @@ public class RewardSystem : MonoBehaviour
     {
         gameObject.SetActive(true);
         Player.instance.Wallet.Earn(10); // a terme, remplacer le 10 par niveau.getRecompense()
-        foreach (InventorySlot slot in rewardSlots)
+        foreach (InventorySlot slot in rewardUnitSlots)
             slot.PutInSlot(UnitGenerator.GenerateUnit(Unit.allyTag));
+        foreach (GemSlot gemSlot in rewardGemSlots)
+        {
+            GameObject gem = Player.instance.Inventory.GenerateRandomGemGameObject(gemSlot.transform);
+            gemSlot.Gem = gem.GetComponent<Gem>();
+            GemUI gemUI = gem.GetComponentInChildren<GemUI>();
+            gemUI.DisableDrag();
+            gemUI.GemSlot = gemSlot;            
+        }
         foreach (uint id in unitsInCombatIds)
             Player.instance.Inventory.GetUnit(id).EarnExperience(1);
 
@@ -41,14 +51,32 @@ public class RewardSystem : MonoBehaviour
 
     public void ConfirmRewardPhase()
     {
-        if (unitDescriptionDisplay.GetSelectedSlotType() != InventorySlot.SlotType.Shop)
-            return;
+        if (unitDescriptionDisplay.isActiveAndEnabled)
+        {
+            if (unitDescriptionDisplay.GetSelectedSlotType() != InventorySlot.SlotType.Shop)
+                return;
 
-        Player.instance.Inventory.AddUnitInInventory(unitDescriptionDisplay.GetActualSlot().GetCurrentUnitDescription(), true);
-        gameObject.SetActive(false);
-        SavingSystem.SaveData();
+            Player.instance.Inventory.AddUnitInInventory(unitDescriptionDisplay.GetActualSlot().GetCurrentUnitDescription(), true);
+            gameObject.SetActive(false);
+            SavingSystem.SaveData();
 
-        Player.instance.Inventory.Hide();
-        ResolutionPhaseHandler.instance.ShowExitButton();
+            Player.instance.Inventory.Hide();
+            ResolutionPhaseHandler.instance.ShowExitButton();
+            ShopSystem.generateNewContent = true;
+        }
+
+        else
+        {
+            if (!GemSlot.selectedGemSlot.IsShop)
+                return;
+
+            Player.instance.Inventory.AddGem(GemSlot.selectedGemSlot.Gem);
+            gameObject.SetActive(false);
+            SavingSystem.SaveData();
+
+            Player.instance.Inventory.Hide();
+            ResolutionPhaseHandler.instance.ShowExitButton();
+            ShopSystem.generateNewContent = true;
+        }
     }
 }

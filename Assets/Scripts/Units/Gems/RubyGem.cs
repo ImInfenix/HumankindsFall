@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class RubyGem : Gem
 {
+    public override void InitializeStatModified()
+    {
+        statModified = StatModified.Health;
+    }
+
     public override void AbilityGemEffect()
     {
         
@@ -18,6 +23,11 @@ public class RubyGem : Gem
     {
         unit.MaxLife += 20;
         unit.MaxLife = Mathf.RoundToInt(unit.MaxLife * 1.2f);
+    }
+
+    public override float InitGemEffect(float statToModify)
+    {
+        return Mathf.RoundToInt((statToModify + 20) * 1.2f);
     }
 
     public override void InitializeDescription()

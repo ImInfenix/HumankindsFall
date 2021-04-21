@@ -48,7 +48,7 @@ public class ResolutionPhaseHandler : MonoBehaviour
     /// </summary>
     public void Show()
     {
-        resolutionText.gameObject.SetActive(true);
+        gameObject.SetActive(true);
     }
     
     /// <summary>
@@ -56,7 +56,7 @@ public class ResolutionPhaseHandler : MonoBehaviour
     /// </summary>
     public void Hide()
     {
-        resolutionText.gameObject.SetActive(false);
+        gameObject.SetActive(false);
     }
     
 }

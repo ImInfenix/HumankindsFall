@@ -24,6 +24,12 @@ public class GemsInventory : MonoBehaviour
         UpdateDisplay();
     }
 
+    private void OnEnable()
+    {
+        if (inventory != null)
+            UpdateDisplay();
+    }
+
     public void UpdateDisplay()
     {
         foreach (Transform child in transform)
