@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 public class Marker : MonoBehaviour
 {
     public static List<string> finishedLevels;
+    public static string currentBattle;
 
     [SerializeField]
     private List<Marker> Neighbours;

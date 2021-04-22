@@ -63,18 +63,12 @@ public class SceneLoader : MonoBehaviour
 
     public static void LoadBattle(string battleName)
     {
-        Marker.Add(battleName);
         SceneManager.LoadScene(battleName, LoadSceneMode.Single);
     }
 
     public static void LoadNextScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-    }
-
-    public static void ReloadScene()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     private void OnDestroy()

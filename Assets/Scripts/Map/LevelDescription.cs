@@ -49,6 +49,7 @@ public class LevelDescription : MonoBehaviour
 
     public void LoadBattle()
     {
+        Marker.currentBattle = sceneToLoadName;
         GameManager.instance.EnterBattle(sceneToLoadName);
     }
 

@@ -58,5 +58,15 @@ public class ResolutionPhaseHandler : MonoBehaviour
     {
         gameObject.SetActive(false);
     }
-    
+
+    public void RetryCombat()
+    {
+        GameManager.instance.EnterBattle(Marker.currentBattle);
+    }
+
+    public void FleeCombat()
+    {
+        Marker.currentBattle = null;
+        SceneLoader.LoadMapScene();
+    }
 }

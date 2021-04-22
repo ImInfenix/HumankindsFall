@@ -17,6 +17,8 @@ public class CombatButton : MonoBehaviour
     {
         if (GameManager.instance.gamestate == GameManager.GameState.Resolution)
         {
+            Marker.Add(Marker.currentBattle);
+            Marker.currentBattle = null;
             GameManager.instance.EnterMap();
         }
     }
