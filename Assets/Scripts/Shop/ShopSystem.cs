@@ -218,12 +218,11 @@ public class ShopSystem : MonoBehaviour
     {
         shopMode = ShopMode.Sell;
         int soldCount = 10;
-        if (unitDescriptionDisplay.gameObject.activeSelf
-            && unitDescriptionDisplay.GetActualSlot().GetCurrentUnitDescription().GetGems() != null)
+        if (unitDescriptionDisplay.gameObject.activeSelf)
         {
-            int numberOfGems = unitDescriptionDisplay.GetActualSlot().GetCurrentUnitDescription().GetGems().Length;
-            soldCount += 10 * numberOfGems;
+            soldCount = GetUnitSellPrice(unitDescriptionDisplay.GetActualSlot().GetCurrentUnitDescription());
         }
+
         shopButton.text = "Vendre (" + soldCount + ")";
         shopButton.transform.parent.gameObject.SetActive(true);
     }
@@ -232,5 +231,14 @@ public class ShopSystem : MonoBehaviour
     {
         shopMode = ShopMode.None;
         shopButton.transform.parent.gameObject.SetActive(false);
+    }
+
+    public static int GetUnitSellPrice(UnitDescription unitToSell)
+    {
+        string[] gems = unitToSell.GetGems();
+        if (gems == null)
+            return 10;
+
+        return 10 * (gems.Length + 1);
     }
 }

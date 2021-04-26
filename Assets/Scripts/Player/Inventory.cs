@@ -63,7 +63,10 @@ public class Inventory : MonoBehaviour
         if(equivalentUnit == null)
         {
             if (unitsInInventory.Count >= maxElements)
+            {
+                Player.instance.Wallet.Earn(ShopSystem.GetUnitSellPrice(unit));
                 return;
+            }
 
             unitsInInventory.Add(unit.GetId(), unit);
 
@@ -82,7 +85,6 @@ public class Inventory : MonoBehaviour
         inventoryUI.UpdateGUI();
     }
 
-    //A retirer plus tard
     private void AddRandomUnit()
     {
         UnitDescription newUnit = null;
