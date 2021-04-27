@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneName: Detroit
   descriptionTextFile: {fileID: 4900000, guid: c9c07cffaaf0f7e43a4176885e38f450, type: 3}
-  ennemiesCount: 5
+  ennemiesCount: 9

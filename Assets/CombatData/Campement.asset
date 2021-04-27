@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneName: Campement
   descriptionTextFile: {fileID: 4900000, guid: 8e535a3edcbb905428640afcbfa0e339, type: 3}
-  ennemiesCount: 5
+  ennemiesCount: 3

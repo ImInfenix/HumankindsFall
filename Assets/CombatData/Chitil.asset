@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneName: Chitil
   descriptionTextFile: {fileID: 4900000, guid: 7fd24fae0ad135c4f81c4782095b481f, type: 3}
-  ennemiesCount: 5
+  ennemiesCount: 9

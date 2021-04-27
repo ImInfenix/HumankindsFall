@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneName: Boimort
   descriptionTextFile: {fileID: 4900000, guid: 03146e021670222468e534d5aec9aa83, type: 3}
-  ennemiesCount: 5
+  ennemiesCount: 7

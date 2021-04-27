@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneName: Vertmont
   descriptionTextFile: {fileID: 4900000, guid: 3421804d4d4c8fa4bb664829b165bb8c, type: 3}
-  ennemiesCount: 9
+  ennemiesCount: 11

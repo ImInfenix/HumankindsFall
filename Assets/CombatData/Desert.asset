@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneName: Desert
   descriptionTextFile: {fileID: 4900000, guid: 1c19ca21178df534ebb7bc2ef27e3ab6, type: 3}
-  ennemiesCount: 5
+  ennemiesCount: 12

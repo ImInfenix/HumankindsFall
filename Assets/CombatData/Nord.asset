@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneName: Nord
   descriptionTextFile: {fileID: 4900000, guid: 6534e7b53deb4df4983814d81fd13eea, type: 3}
-  ennemiesCount: 5
+  ennemiesCount: 8

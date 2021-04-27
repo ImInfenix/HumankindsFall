@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneName: Riviere
   descriptionTextFile: {fileID: 4900000, guid: d0272404db24eb84295333a19ed8d21d, type: 3}
-  ennemiesCount: 5
+  ennemiesCount: 10

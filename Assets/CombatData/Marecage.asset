@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneName: Marecage
   descriptionTextFile: {fileID: 4900000, guid: 3c1ecaad66d90034d91edd1984710ef8, type: 3}
-  ennemiesCount: 5
+  ennemiesCount: 6
