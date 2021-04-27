@@ -64,9 +64,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "<b>Rage Attack</b> (Berserker)\nStamina requise : 400\nInflige des d\xE9g\xE2ts
-    \xE0 un ennemi au corps \xE0 corps. Moins le lanceur a de PV, plus l'attaque
-    est puissante"
+  m_text: "<b>Attaque enrag\xE9e</b> (Berserker)\nStamina requise : 400\nInflige
+    des d\xE9g\xE2ts \xE0 un ennemi au corps \xE0 corps. Moins le lanceur a de PV,
+    plus l'attaque est puissante"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -672,8 +672,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "<b>Iron Will</b> (Tank)\nStamina requise : 700\nAugmente l'armure de l'unit\xE9
-    pendant 5 secondes"
+  m_text: "<b>Volont\xE9 de fer</b> (Tank)\nStamina requise : 700\nAugmente l'armure
+    de l'unit\xE9 pendant 5 secondes"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -806,12 +806,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '<b>Poisonous Decoction</b> (Assassin)
-
-    Stamina requise : 650
-
-    Empoisonne
-    l''ennemi avec le plus de PV'
+  m_text: "<b>D\xE9coction empoisonn\xE9e</b> (Assassin)\nStamina requise : 650\nEmpoisonne
+    l'ennemi avec le plus de PV"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -944,11 +940,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '<b>Trees</b>
-
-    Obstacle
-
-    Cannot be crossed'
+  m_text: "<b>Arbres</b>\nObstacle\nNe peut pas \xEAtre franchi"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1155,11 +1147,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '<b>Grass</b>
+  m_text: '<b>Herbe</b>
 
-    Classic land
+    Terrain classique
 
-    No effect'
+    Pas d''effet'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1366,8 +1358,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "<b>Heal Zone</b> (Healer)\nStamina requise : 500\nSoigne tous les alli\xE9s
-    dans un rayon de 2 cases autour du lancuer"
+  m_text: "<b>Soins de zone</b> (Healer)\nStamina requise : 500\nSoigne tous les
+    alli\xE9s dans un rayon de 2 cases autour du lancuer"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1682,7 +1674,7 @@ MonoBehaviour:
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 20
+  m_ScrollSensitivity: 50
   m_Viewport: {fileID: 0}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 0}
@@ -1770,8 +1762,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "<b>Orcs</b>\nUnlock a spell\nOrcs in spell area ignore defense but they
-    lose accuracy\n (2) 5 secondes, -10% accuracy"
+  m_text: "<b>Orcs</b>\nD\xE9bloque un sort\nLes orcs dans la zone d'effet  ignorent
+    la d\xE9fense mais perdent de la pr\xE9cision\n (2) 5 secondes, -10% de pr\xE9cision"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2014,7 +2006,7 @@ MonoBehaviour:
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 20
+  m_ScrollSensitivity: 50
   m_Viewport: {fileID: 0}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 0}
@@ -2176,10 +2168,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '<b>Berserkers</b>
-
-    Berserkers gain attack and armor when their is
-    no unit around\n (2) +20% attack, +10% armor'
+  m_text: "<b>Berserkers</b>\nLes berserkers gagnent de l'attaque et de l'armure
+    quand il n'y a aucune unit\xE9 autour d'eux\n(2) +20% d'attaque, +10% d'armure"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2846,10 +2836,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '<b>Supports</b>
-
-    Units near supports gain armor\n (2) 10% armor\n
-    (3) 20% armor\n (4) 40% armor'
+  m_text: "<b>Supports</b>\nLes unit\xE9s prochent des supports gagnent de l'armure\n(2)
+    10% d'armure\n(3) 20% d'armure\n(4) 40% d'armure"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3057,10 +3045,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '<b>Bowmans</b>
+  m_text: '<b>Archers</b>
 
-    Bowmans increase their attack speed\n (2) +20% attack
-    speed'
+    Les archers augmentent leur vitesse d''attaque
+
+    (2)
+    +20% de vitesse d''attaque'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3416,10 +3406,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '<b>Assassins</b>
-
-    At start of combat, assassins gain invisibility
-    for 5 seconds\n (1) Their first attack is 30% stronger'
+  m_text: "<b>Assassins</b>\nAu d\xE9but du combat, les assassins deviennent invisibles
+    pendant 5 secondes\n(1) Leur premi\xE8re attaque inflige 30% de d\xE9g\xE2ts
+    en plus"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3940,8 +3929,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "<b>Giants</b>\nUnlock a spell\nChoose a giant unit, his next attack will
-    be powerful and stun the enemy for 2 seconds\n (2) + 15% damages"
+  m_text: "<b>G\xE9ants</b>\nD\xE9bloque un sort\nS\xE9lectionnez un g\xE9ant, sa
+    prochaine attaque est plus puissante et \xE9tourdie la cible pendant  2 secondes\n
+    (2) + 15% d\xE9g\xE2ts"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4224,7 +4214,10 @@ MonoBehaviour:
       m_Calls: []
   m_text: '<b>Tanks</b>
 
-    Tanks increase their max health\n (2) +40% max health'
+    Les tanks augmentent leur vie maximum
+
+    (2) +40%
+    vie maximum'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4357,14 +4350,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '<b>Skeletons</b>
-
-    Unlock a spell
-
-    Ennemis in spell area loose
-    armor for  5 seconds
-
-    (2) -25% armor'
+  m_text: "<b>Squelettes</b>\nD\xE9bloque un sort\nLes ennemis dans la zone d'effet
+    perdent de l'armure pendant 5 secondes\n(2) -25% d'armure"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4530,7 +4517,7 @@ MonoBehaviour:
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 20
+  m_ScrollSensitivity: 50
   m_Viewport: {fileID: 0}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 0}
@@ -4692,8 +4679,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "<b>Mages</b>\nMages start the combat with more stamina\n (2) 25% of their
-    max stamina\n (4) 50% of their max stamina"
+  m_text: "<b>Mages</b>\nLes mages commencent le combat avec plus de stamina\n (2)
+    25% de leur stamina maximum\n (4) 50% de leur stamina maximum"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4901,10 +4888,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '<b>Healers</b>
-
-    Healers heals the ally with the lowest health\n (1)
-    Every 5 attacks\n (2) Every 3 attacks\n (3) Every 2 attacks'
+  m_text: "<b>Soigneurs</b>\nLes soigneurs soignent l'alli\xE9 avec le moins de vie\n(1)
+    Toutes les 5 attaques\n(2) Toutes les 3 attaques\n(3) Toutes les 2 attaques"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5037,8 +5022,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "<b>Warriors</b>\nWarriors up their attack\n (2) +15% attack\n (4) +30%
-    attack"
+  m_text: "<b>Guerriers</b>\nLes guerriers am\xE9liorent leur attaque\n (2) +15%
+    attaque\n (4) +30% attaque"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5171,7 +5156,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "<b>Octopus</b>\nUnlock a spell\nStun the target\n (2) 5 secondes"
+  m_text: "<b>Octopus</b>\nD\xE9bloque un sort\nEtourdi la cible\n (2) 5 secondes"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5378,8 +5363,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "<b>Elementals</b>\nUnlock a spell\nDeal damage on enemy target by number
-    of elementals on board\n (2) 10 attack per elementa"
+  m_text: "<b>El\xE9mentaires</b>\nD\xE9bloque un sort\nInflige des d\xE9g\xE2ts
+    \xE0 un ennemi pour chaque \xE9l\xE9mentaire en jeu\n (2) 10 attack par \xE9l\xE9mentaire"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6094,9 +6079,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Welcome to the
+  m_text: 'Bienvenue dans
 
-    <b>ENCYCLOPEDIA</b>'
+    <b>l''ENCYCLOPEDIE</b>'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f7956bb7c91705e419e4f22028f96f95, type: 2}
   m_sharedMaterial: {fileID: -8231597209328845939, guid: f7956bb7c91705e419e4f22028f96f95,
@@ -6410,8 +6395,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "<b>Demons</b>\nUnlock a spell\nSummon the demon king, he has less life
-    but more damage (based on warrior's stats)\n (2) -50% hp, + 30% damages"
+  m_text: "<b>D\xE9mons</b>\nD\xE9bloque un sort\nInvoque le roi d\xE9mon, il poss\xE8de
+    moins devie mais plus de d\xE9g\xE2ts (par rapport aux statistiques d'un guerrier)\n
+    (2) -50% vie, + 30% d\xE9g\xE2ts"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6544,8 +6530,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "<b>Ratmen</b>\nUnlock a spell\nAfter launching spell, the next attack
-    of all ratmen poisons the enemy\n (2) 2 damage /seconde"
+  m_text: "<b>Homme-Rat</b>\nD\xE9bloque un sort\nApr\xE8s avoir lanc\xE9 ce sort,
+    la prochaine attaque des hommes-rats empoisonne l'ennemi\n (2) 2 d\xE9g\xE2t
+    /seconde"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -7251,11 +7238,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '<b>Trunks</b>
-
-    Obstacle
-
-    Cannot be crossed'
+  m_text: "<b>Troncs</b>\nObstacle\nNe peut pas \xEAtre franchi"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -7462,11 +7445,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '<b>Plains</b>
+  m_text: '<b>Plaines</b>
 
-    Classic land
+    Terrain classique
 
-    No effect'
+    Pas d''effet'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -7805,8 +7788,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "<b>Circular Attack</b> (Warrior)\nStamina requise : 800\nInflige des d\xE9g\xE2ts
-    \xE0 tous les ennemis autour"
+  m_text: "<b>Attaque circulaire</b> (Warrior)\nStamina requise : 800\nInflige des
+    d\xE9g\xE2ts \xE0 tous les ennemis autour"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -7939,11 +7922,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '<b>Rocks</b>
-
-    Obstacle
-
-    Cannot be crossed'
+  m_text: "<b>Rochers</b>\nObstacle\nNe peut pas \xEAtre franchi"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -8224,11 +8203,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '<b>Rocky Desert</b>
-
-    Classic land
-
-    No effect'
+  m_text: "<b>D\xE9sert rocheux</b>\nTerrain classique\nPas d'effet"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -8726,11 +8701,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '<b>Barrels</b>
-
-    Obstacle
-
-    Cannot be crossed'
+  m_text: "<b>Barils</b>\nObstacle\nNe peut pas \xEAtre franchi"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -9295,11 +9266,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '<b>Statues</b>
-
-    Obstacle
-
-    Cannot be crossed'
+  m_text: "<b>Statues</b>\nObstacle\nNe peut pas \xEAtre franchi"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -9465,7 +9432,7 @@ MonoBehaviour:
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 20
+  m_ScrollSensitivity: 50
   m_Viewport: {fileID: 0}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 0}
@@ -9553,11 +9520,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '<b>Sand</b>
+  m_text: '<b>Sable</b>
 
-    Classic land
+    Terrain classique
 
-    No effect'
+    Pas d''effet'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -9690,11 +9657,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '<b>Water</b>
-
-    Obstacle
-
-    Cannot be crossed'
+  m_text: "<b>Eau</b>\nObstacle\nNe peut pas \xEAtre franchi"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -9975,11 +9938,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '<b>Columns</b>
-
-    Obstacle
-
-    Cannot be crossed'
+  m_text: "<b>Colonnes</b>\nObstacle\nNe peut pas \xEAtre franchi"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -10186,11 +10145,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '<b>Rock Ground</b>
+  m_text: '<b>Sol rocheux</b>
 
-    Classic land
+    Terrain classique
 
-    No effect'
+    Pas d''effet'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -10397,7 +10356,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "<b>Deadly Shot</b> (Bowman)\nStamina requise : 400\nInflige des d\xE9g\xE2ts
+  m_text: "<b>Tir mortel</b> (Bowman)\nStamina requise : 400\nInflige des d\xE9g\xE2ts
     \xE0 l'ennemi avec le moins de PV"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -10531,7 +10490,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "<b>Fire Ball</b> (Mage)\nStamina requise : 750\nInflige des d\xE9g\xE2ts
+  m_text: "<b>Boule de feul</b> (Mage)\nStamina requise : 750\nInflige des d\xE9g\xE2ts
     sur une case et ses cases adjacentes"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -10665,11 +10624,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '<b>SandRock</b>
+  m_text: '<b>Sable rocheux</b>
 
-    Classic land
+    Terrain classique
 
-    No effect'
+    Pas d''effet'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
