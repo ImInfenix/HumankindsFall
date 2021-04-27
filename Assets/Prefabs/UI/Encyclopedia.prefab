@@ -3930,8 +3930,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "<b>G\xE9ants</b>\nD\xE9bloque un sort\nS\xE9lectionnez un g\xE9ant, sa
-    prochaine attaque est plus puissante et \xE9tourdie la cible pendant  2 secondes\n
-    (2) + 15% d\xE9g\xE2ts"
+    prochaine attaque est plus puissante et \xE9tourdie la cible pendant  2 secondes\n(2)
+    + 15% d\xE9g\xE2ts"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6396,8 +6396,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "<b>D\xE9mons</b>\nD\xE9bloque un sort\nInvoque le roi d\xE9mon, il poss\xE8de
-    moins devie mais plus de d\xE9g\xE2ts (par rapport aux statistiques d'un guerrier)\n
-    (2) -50% vie, + 30% d\xE9g\xE2ts"
+    moins de vie mais inflige plus de d\xE9g\xE2ts (par rapport aux statistiques
+    d'un guerrier)\n(2) -50% vie, + 30% d\xE9g\xE2ts"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

@@ -1,9 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-
-//Class to create a hashmap<Race, int>
+﻿//Class to create a hashmap<Race, int>
 public class RaceCount
 {
     private Race r;
@@ -39,85 +34,64 @@ public class RaceCount
 
     public void initDefinition(int lvl)
     {
-        switch(r)
+        switch (r)
         {
             case Race.Orc:
-                if(lvl == 0)
-                {
-                    def = "Extrem brutality\n<b>Spell</b>\nOrc's attack ignore 30% of defense but they lose accuracy\n (2) 5 secondes, -10% accuracy";
-                }
-               if(lvl == 1)
-                {
-                    def = "Extrem brutality\n<b>Spell</b>\nOrc's attack ignore 30% of defense but they lose accuracy\n <b>(2) 5 secondes, -10% accuracy</b>";
-                }
+                def += "Brutalité extrême\n<b>Sort</b>\nLes attaques des orcs ignorent 30% Orc la défense de l'ennemi mais perdent de la précision\n";
+                if (lvl == 0)
+                    def += "(2) 5 secondes, -10% de précision";
+                else if (lvl == 1)
+                    def += "<b>(2) 5 secondes, -10% de précision</b>";
                 break;
 
             case Race.Skeleton:
+                def += "Monde des morts\n<b>Sort</b>\nLes ennemis perdent de l'armure pendant 5 secondes\n";
                 if (lvl == 0)
-                {
-                    def = "Deads world\n<b>Spell</b>\nEnnemis loose armor for 5 seconds\n (2) -25% armor";
-                }
-                if (lvl == 1)
-                {
-                    def = "Deads world\n<b>Spell</b>\nEnnemis loose armor for 5 seconds\n <b>(2) -25% armor</b>";
-                }                
+                    def += "(2) -25% d'armure";
+                else if (lvl == 1)
+                    def += "<b>(2) -25% d'armure</b>";
                 break;
 
             case Race.Octopus:
+                def = "Cage tentaculaire\n<b>Sort</b>\nEtourdi la cible\n";
                 if (lvl == 0)
-                {
-                    def = "Sprawling cage\n<b>Spell</b>\nStun the target\n (2) 5 seconds";
-                }
-                if (lvl == 1)
-                {
-                    def = "Sprawling cage\n<b>Spell</b>\nStun the target\n <b>(2) 5 seconds</b>";
-                }                
+                    def += "(2) 5 secondes";
+                else if (lvl == 1)
+                    def += "<b>(2) 5 secondes</b>";
                 break;
 
             case Race.Elemental:
+                def = "Fusion des éléments\n<b>Sort</b>\nL'ennemi ciblé subit des dégâts pour chaque élémentaire en jeu\n";
                 if (lvl == 0)
-                {
-                    def = "Fusion of elements\n<b>Spell</b>\nDeal damage on enemy target by number of elementals on board\n (2) 10 attack per elemental";
-                }
-                if (lvl == 1)
-                {
-                    def = "Fusion of elements\n<b>Spell</b>\nDeal damage on enemy target by number of elementals on board\n <b>(2) 10 attack per elemental</b>";
-                }
+                    def += "(2) 10 dégâts par élémentaire";
+                else if (lvl == 1)
+                    def += "<b>(2) 10 dégâts par élémentaire</b>";
                 break;
 
             case Race.Giant:
+                def = "Impact titanesque\n<b>Sort</b>\nSélectionnez un géant, sa prochaine attaque est plus puissante et étourdi la cible pendant 2 secondes\n";
                 if (lvl == 0)
-                {
-                    def = "Titanic impact\n<b>Spell</b>\nChoose a giant unit, his next attack will be powerful and stun the enemy for 2 seconds\n (2) + 15% damages";
-                }
-                if (lvl == 1)
-                {
-                    def = "Titanic impact\n<b>Spell</b>\nChoose a giant unit, his next attack will be powerful and stun the enemy for 2 seconds\n <b>(2) + 15% damages</b>";
-                }                
+                    def += "(2) + 15% de dégâts";
+                else if (lvl == 1)
+                    def += "<b>(2) + 15% de dégâts</b>";
                 break;
 
             case Race.Ratman:
+                def = "Morsure empoisonnées\n<b>Sort</b>\nLa prochaine attaque de tous les hommes-rats empoisonne leur cible pendant 5 secondes\n";
                 if (lvl == 0)
-                {
-                    def = "Poisonous bite\n<b>Spell</b>\nThe next attack of all ratmen poisons the enemy for 5 seconds\n (2) 2 damage /seconde";
-                }
-                if (lvl == 1)
-                {
-                    def = "Poisonous bite\n<b>Spell</b>\nThe next attack of all ratmen poisons the enemy for 5 seconds\n <b>(2) 2 damage /seconde</b>";
-                }
+                    def += "(2) 2 dégâts /seconde";
+                else if (lvl == 1)
+                    def += "<b>(2) 2 dégâts /seconde</b>";
                 break;
 
             case Race.Demon:
+                def = "Je suis enfin complet\n<b>Sort</b>\nInvoque le roi démon sur la cas ciblée, il possède moins de vie mais inflige plus de dégâts\n";
                 if (lvl == 0)
-                {
-                    def = "Finally I'm complete\n<b>Spell</b>\nSummon the demon king on the target cell, he has less life but more damage\n (3) -50% hp, + 30% damages";
-                }
+                    def += "(3) -50% de vie, + 30% de dégâts";
                 if (lvl == 1)
-                {
-                    def = "Finally I'm complete\n<b>Spell</b>\nSummon the demon king on the target cell, he has less life but more damage\n <b>(3) -50% hp, + 30% damages</b>";
-                }
+                    def += "<b>(3) -50% de vie, + 30% de dégâts</b>";
                 break;
         }
-        
+
     }
 }
