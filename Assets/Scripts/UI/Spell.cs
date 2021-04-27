@@ -39,32 +39,32 @@ public class Spell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
         switch(race)
         {
             case (Race.Orc):
-                definition = "For 5 seconds, orc in spell area ignore 30% of enemy defense but they lose 10% accuracy";
+                definition = "Pendant 5 secondes, les orcs dans la zone d'effet ignorent 30% de l'armure mais ils perdent 10% de précision";
                 cooldown = 10;
                 break;
             case (Race.Skeleton):
-                definition = "Ennemis in spell area loose 25% armor for 5 seconds";
+                definition = "Les ennemis dans la zone d'effet perdent 25% d'armure pendant 5 secondes";
                 cooldown = 10;
                 break;
             case (Race.Octopus):
-                definition = "Stun the target for 5 seconds";
+                definition = "Etourdi la cible pendant 5 secondes";
                 cooldown = 15;
                 break;
             case (Race.Elemental):
                 elemental = SynergyHandler.instance.getElementals();
-                definition = "Deal "+ elemental.getNumber()*10+" damage to enemy target";
+                definition = $"Inflige {elemental.getNumber()*10} dégâts à l'ennemi ciblé";
                 cooldown = 10;
                 break;
             case (Race.Giant):
-                definition = "Choose a giant unit, his next attack will deal 15% more damage and stun the enemy for 2 seconds";
+                definition = "Sélectionnez un géant, sa prochaine attaque est plus puissante et étourdie la cible pendant 2 secondes";
                 cooldown = 8;
                 break;
             case (Race.Ratman):
-                definition = "The next attack of all ratmen poisons the enemy dealing 2 damage/seconde for 5 seconds";
+                definition = "La prochaine attaque des hommes-rats empoisonne l'ennemi infligeant 2 dégâts/seconde pendant 5 secondes";
                 cooldown = 10;
                 break;
             case (Race.Demon):
-                definition = "Summon the demon king on the target cell, he has less life but more damage (based on warrior's stats)";
+                definition = "Invoque le roi démon, il possède moins de vie mais inflige plus de dégâts (par rapport aux statistiques d'un guerrier)";
                 cooldown = 60;
                 break;
         }
