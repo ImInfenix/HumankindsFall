@@ -1,8 +1,8 @@
 name: Build
 
 on:
-  pull_request: { branches: [master, dev] }
-  push: { branches: [master, dev] }
+  pull_request: { branches: [main, dev] }
+  push: { branches: [main, dev] }
 
 env:
   UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
