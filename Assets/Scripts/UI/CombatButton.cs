@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CombatButton : MonoBehaviour
 {
@@ -18,6 +16,7 @@ public class CombatButton : MonoBehaviour
         if (GameManager.instance.gamestate == GameManager.GameState.Resolution)
         {
             Marker.Add(Marker.currentBattle);
+            SavingSystem.SaveData();
             Marker.currentBattle = null;
             GameManager.instance.EnterMap();
         }

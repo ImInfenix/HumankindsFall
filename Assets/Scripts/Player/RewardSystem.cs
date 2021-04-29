@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class RewardSystem : MonoBehaviour
@@ -22,9 +21,9 @@ public class RewardSystem : MonoBehaviour
     public void RegisterCombatParticipants()
     {
         unitsInCombatIds = new List<uint>();
-        foreach(Unit unit in FindObjectsOfType<Unit>())
+        foreach (Unit unit in FindObjectsOfType<Unit>())
         {
-            if(unit.CompareTag(Unit.allyTag))
+            if (unit.CompareTag(Unit.allyTag))
                 unitsInCombatIds.Add(unit.id);
         }
     }
@@ -41,7 +40,7 @@ public class RewardSystem : MonoBehaviour
             gemSlot.Gem = gem.GetComponent<Gem>();
             GemUI gemUI = gem.GetComponentInChildren<GemUI>();
             gemUI.DisableDrag();
-            gemUI.GemSlot = gemSlot;            
+            gemUI.GemSlot = gemSlot;
         }
         foreach (uint id in unitsInCombatIds)
             Player.instance.Inventory.GetUnit(id).EarnExperience(1);
@@ -58,7 +57,6 @@ public class RewardSystem : MonoBehaviour
 
             Player.instance.Inventory.AddUnitInInventory(unitDescriptionDisplay.GetActualSlot().GetCurrentUnitDescription(), true);
             gameObject.SetActive(false);
-            SavingSystem.SaveData();
 
             Player.instance.Inventory.Hide();
             ResolutionPhaseHandler.instance.ShowExitButton();
