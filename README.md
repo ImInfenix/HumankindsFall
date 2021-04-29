@@ -12,9 +12,9 @@ Le jeu est disponible <a href="https://infenix.itch.io/humankinds-fall">ici</a>.
     <th>Build Status</th>
   </tr>
   <tr>
-    <td>Master</td>
+    <td>Main</td>
     <td>
-        <img src="https://github.com/ImInfenix/AutoChessLaboratoireDeJeuVideo/workflows/Build/badge.svg?branch=master"/>
+        <img src="https://github.com/ImInfenix/AutoChessLaboratoireDeJeuVideo/workflows/Build/badge.svg?branch=main"/>
     </td>
   </tr>
   <tr>
