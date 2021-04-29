@@ -47,7 +47,7 @@ public class Spell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
                 cooldown = 10;
                 break;
             case (Race.Octopus):
-                definition = "Etourdi la cible pendant 5 secondes";
+                definition = "Etourdit la cible pendant 2 secondes";
                 cooldown = 15;
                 break;
             case (Race.Elemental):
@@ -56,7 +56,7 @@ public class Spell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
                 cooldown = 10;
                 break;
             case (Race.Giant):
-                definition = "Sélectionnez un géant, sa prochaine attaque est plus puissante et étourdie la cible pendant 2 secondes";
+                definition = "Sélectionnez un géant, sa prochaine attaque est plus puissante et étourdie la cible pendant 1 secondes";
                 cooldown = 8;
                 break;
             case (Race.Ratman):
@@ -306,7 +306,7 @@ public class Spell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
                 {
                     if(unit != null)
                     {                       
-                        unit.activateStun(5);
+                        unit.activateStun(2);
                         launched = true;
                     }
                 }

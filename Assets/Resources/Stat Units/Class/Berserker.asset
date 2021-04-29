@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Berserker
   m_EditorClassIdentifier: 
   clas: 6
-  maxLife: 100
+  maxLife: 110
   armor: 0.9
   moveSpeed: 2
   attackSpeed: 0.9
-  damage: 10
+  damage: 12
   range: 1
   incrementStamina: 100
   projectile: {fileID: 0}

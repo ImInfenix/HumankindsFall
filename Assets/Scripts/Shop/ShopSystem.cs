@@ -160,7 +160,7 @@ public class ShopSystem : MonoBehaviour
         if (!isUnit && !isGem)
             return;
 
-        if (!Player.instance.Wallet.Pay(20))
+        if (!Player.instance.Wallet.Pay(30))
             return;
 
         if (isUnit && !isGem)
@@ -210,14 +210,14 @@ public class ShopSystem : MonoBehaviour
     public void SetShopToBuyMode()
     {
         shopMode = ShopMode.Buy;
-        shopButton.text = "Acheter (20)";
+        shopButton.text = "Acheter (30)";
         shopButton.transform.parent.gameObject.SetActive(true);
     }
 
     public void SetShopToSellMode()
     {
         shopMode = ShopMode.Sell;
-        int soldCount = 10;
+        int soldCount = 15;
         if (unitDescriptionDisplay.gameObject.activeSelf)
         {
             soldCount = GetUnitSellPrice(unitDescriptionDisplay.GetActualSlot().GetCurrentUnitDescription());

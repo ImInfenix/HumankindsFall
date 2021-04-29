@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: EliteClass
   m_EditorClassIdentifier: 
   clas: 0
-  maxLife: 250
+  maxLife: 350
   armor: 1
   moveSpeed: 1.2
   attackSpeed: 1
-  damage: 40
+  damage: 25
   range: 1
   incrementStamina: 120
   projectile: {fileID: 0}

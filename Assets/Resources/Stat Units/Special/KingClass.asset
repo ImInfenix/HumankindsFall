@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: KingClass
   m_EditorClassIdentifier: 
   clas: 5
-  maxLife: 350
+  maxLife: 600
   armor: 2
   moveSpeed: 1.2
   attackSpeed: 1
-  damage: 40
+  damage: 60
   range: 1
-  incrementStamina: 120
+  incrementStamina: 300
   projectile: {fileID: 0}
   abilities:
-  - CircularAttack
+  - HealZone
   classIconSprite: {fileID: 4978448650774035358, guid: 7bcbfa039553fa543bf7c8cd86ad6b82,
     type: 3}

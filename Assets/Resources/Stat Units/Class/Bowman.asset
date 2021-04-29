@@ -17,7 +17,7 @@ MonoBehaviour:
   armor: 1
   moveSpeed: 2
   attackSpeed: 1.1
-  damage: 8
+  damage: 6
   range: 3
   incrementStamina: 100
   projectile: {fileID: 3144628240142601262, guid: 90f4b5268b4c3944b8f783910b864353,

@@ -8,7 +8,7 @@ public class PoisonousDecoction : Ability
 
     private void Awake()
     {
-        BasePower = 2;
+        BasePower = 5;
         duration = 10;
         castStaminaThreshold = 650;        
         soundEffect = Resources.Load("SoundEffects/dagger-woosh") as AudioClip;

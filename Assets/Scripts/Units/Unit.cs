@@ -421,7 +421,7 @@ public class Unit : MonoBehaviour
                 {
                     float damageGiant = damage*1.15f;
                     targetUnit.takeDamage((int)damageGiant);
-                    targetUnit.activateStun(2);
+                    targetUnit.activateStun(1);
                     giantSpell = false;
                 }
             }
@@ -1092,15 +1092,15 @@ public class Unit : MonoBehaviour
         {
             if (lvl == 1)
             {
-                armor += initialArmor * 0.1f;
+                armor += initialArmor * 0.05f;
             }
             if (lvl == 2)
             {
-                armor += initialArmor * 0.2f;
+                armor += initialArmor * 0.1f;
             }
             if (lvl == 3)
             {
-                armor += initialArmor * 0.4f;
+                armor += initialArmor * 0.2f;
             }
             supportBuff = true;
         }
