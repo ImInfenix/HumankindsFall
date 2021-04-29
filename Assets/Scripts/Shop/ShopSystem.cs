@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using TMPro;
+﻿using System.Collections.Generic;
 using System.Linq;
+using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class ShopSystem : MonoBehaviour
@@ -186,7 +185,7 @@ public class ShopSystem : MonoBehaviour
                 Gem testGem = g.GetComponent<Gem>();
                 testGem.InitializeName();
                 testGem.InitializeDescription();
-                if(soldGem.ToString() == testGem.ToString())
+                if (soldGem.ToString() == testGem.ToString())
                 {
                     toDelete = i;
                     break;
@@ -237,8 +236,8 @@ public class ShopSystem : MonoBehaviour
     {
         string[] gems = unitToSell.GetGems();
         if (gems == null)
-            return 10;
+            return 15;
 
-        return 10 * (gems.Length + 1);
+        return 15 * (gems.Length + 1);
     }
 }

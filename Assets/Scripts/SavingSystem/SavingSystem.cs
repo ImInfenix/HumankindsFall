@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -102,7 +101,7 @@ public class SavingSystem
         string[] gemsToReturn = new string[gems.Count];
 
         int i = 0;
-        foreach(Gem gem in gems)
+        foreach (Gem gem in gems)
         {
             gemsToReturn[i] = gem.GetType().ToString();
             i++;
